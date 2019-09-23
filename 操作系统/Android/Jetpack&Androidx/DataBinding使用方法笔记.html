@@ -1,0 +1,836 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2019-09-23 周一 20:55 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>DataBinding使用方法笔记</title>
+<meta name="generator" content="Org mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">DataBinding使用方法笔记</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgb8210d3">Data Binding简介</a></li>
+<li><a href="#org97db062">使用</a>
+<ul>
+<li><a href="#orge2df0f1">修改项目gradle.properties</a></li>
+<li><a href="#org690155d">修改项目build.gradle</a></li>
+<li><a href="#org7ac5be4">修改build.gradle</a></li>
+<li><a href="#org83d7d15">设置布局</a></li>
+<li><a href="#org774718b">在Activity中绑定对象</a></li>
+<li><a href="#org185c59f">生成的绑定类</a></li>
+</ul>
+</li>
+<li><a href="#orgb023003">在Fragment中使用data binding。</a></li>
+<li><a href="#org5e9d6a1">绑定行为</a></li>
+<li><a href="#org69a7a90">双向绑定原理简述</a></li>
+<li><a href="#orga0da4c3">dialog使用数据绑定</a></li>
+<li><a href="#org5570814">参考资料</a></li>
+<li><a href="#org2c192aa">修订记录</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgb8210d3" class="outline-2">
+<h2 id="orgb8210d3">Data Binding简介</h2>
+<div class="outline-text-2" id="text-orgb8210d3">
+<p>
+Data Binding简化了布局中的控件和Java中对象的绑定，提高了开发效率。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org97db062" class="outline-2">
+<h2 id="org97db062">使用</h2>
+<div class="outline-text-2" id="text-org97db062">
+</div>
+<div id="outline-container-orge2df0f1" class="outline-3">
+<h3 id="orge2df0f1">修改项目gradle.properties</h3>
+<div class="outline-text-3" id="text-orge2df0f1">
+<div class="org-src-container">
+<pre class="src src-gradle">android.enableJetifier=true
+android.useAndroidX=true
+org.gradle.jvmargs=-Xmx1536m
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org690155d" class="outline-3">
+<h3 id="org690155d">修改项目build.gradle</h3>
+<div class="outline-text-3" id="text-org690155d">
+<p>
+加入
+</p>
+<div class="org-src-container">
+<pre class="src src-gradle">buildscript {
+    ext {
+        kotlinVersion = '1.3.21'
+        supportLibraryVersion = '1.1.0-alpha02'
+        ktxVersion = '1.0.1'
+    }
+}
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org7ac5be4" class="outline-3">
+<h3 id="org7ac5be4">修改build.gradle</h3>
+<div class="outline-text-3" id="text-org7ac5be4">
+<p>
+修改模块的build.gradle文件，启用Data Binding功能。在build.gradle中加入：
+</p>
+<div class="org-src-container">
+<pre class="src src-gradle">apply plugin: 'kotlin-kapt'
+
+android {
+    dataBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+    implementation <span style="color: #8b2252;">"androidx.appcompat:appcompat:$rootProject.supportLibraryVersion"</span>
+    implementation <span style="color: #8b2252;">"org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"</span>
+    implementation <span style="color: #8b2252;">"androidx.core:core-ktx:$rootProject.ktxVersion"</span>
+}
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org83d7d15" class="outline-3">
+<h3 id="org83d7d15">设置布局</h3>
+<div class="outline-text-3" id="text-org83d7d15">
+<p>
+Data Binding布局文件的根元素必须是&lt;layout&gt;，如
+</p>
+<div class="org-src-container">
+<pre class="src src-xml"><span style="color: #8b2252;">&lt;?</span><span style="color: #a020f0;">xml</span><span style="color: #8b2252;"> </span><span style="color: #8b2252;">version="1.0" encoding="utf-8"</span><span style="color: #8b2252;">?&gt;</span>
+<span style="color: #b22222;">&lt;!--</span>
+<span style="color: #b22222;">  </span><span style="color: #b22222;">~ Copyright 2018 Google LLC</span>
+<span style="color: #b22222;">  ~</span>
+<span style="color: #b22222;">  ~ Licensed under the Apache License, Version 2.0 (the "License");</span>
+<span style="color: #b22222;">  ~ you may not use this file except in compliance with the License.</span>
+<span style="color: #b22222;">  ~ You may obtain a copy of the License at</span>
+<span style="color: #b22222;">  ~</span>
+<span style="color: #b22222;">  ~     https://www.apache.org/licenses/LICENSE-2.0</span>
+<span style="color: #b22222;">  ~</span>
+<span style="color: #b22222;">  ~ Unless required by applicable law or agreed to in writing, software</span>
+<span style="color: #b22222;">  ~ distributed under the License is distributed on an "AS IS" BASIS,</span>
+<span style="color: #b22222;">  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span style="color: #b22222;">  ~ See the License for the specific language governing permissions and</span>
+<span style="color: #b22222;">  ~ limitations under the License.</span>
+<span style="color: #b22222;">  </span><span style="color: #b22222;">--&gt;</span>
+
+&lt;<span style="color: #0000ff;">layout</span> <span style="color: #483d8b;">xmlns</span>:<span style="color: #a0522d;">android</span>=<span style="color: #8b2252;">"http://schemas.android.com/apk/res/android"</span>
+    <span style="color: #483d8b;">xmlns</span>:<span style="color: #a0522d;">app</span>=<span style="color: #8b2252;">"http://schemas.android.com/apk/res-auto"</span>&gt;
+
+    &lt;<span style="color: #0000ff;">androidx.drawerlayout.widget.DrawerLayout</span>
+        <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">id</span>=<span style="color: #8b2252;">"@+id/drawer_layout"</span>
+        <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">layout_width</span>=<span style="color: #8b2252;">"match_parent"</span>
+        <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">layout_height</span>=<span style="color: #8b2252;">"match_parent"</span>
+        <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">fitsSystemWindows</span>=<span style="color: #8b2252;">"true"</span>&gt;
+
+        &lt;<span style="color: #0000ff;">LinearLayout</span>
+            <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">layout_width</span>=<span style="color: #8b2252;">"match_parent"</span>
+            <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">layout_height</span>=<span style="color: #8b2252;">"match_parent"</span>
+            <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">orientation</span>=<span style="color: #8b2252;">"vertical"</span>&gt;
+
+            &lt;<span style="color: #0000ff;">com.google.android.material.appbar.AppBarLayout</span>
+                <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">id</span>=<span style="color: #8b2252;">"@+id/appbar"</span>
+                <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">layout_width</span>=<span style="color: #8b2252;">"match_parent"</span>
+                <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">layout_height</span>=<span style="color: #8b2252;">"wrap_content"</span>
+                <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">theme</span>=<span style="color: #8b2252;">"@style/AppTheme.AppBarOverlay"</span>&gt;
+
+                &lt;<span style="color: #0000ff;">androidx.appcompat.widget.Toolbar</span>
+                    <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">id</span>=<span style="color: #8b2252;">"@+id/toolbar"</span>
+                    <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">layout_width</span>=<span style="color: #8b2252;">"match_parent"</span>
+                    <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">layout_height</span>=<span style="color: #8b2252;">"?attr/actionBarSize"</span>
+                    <span style="color: #483d8b;">app</span>:<span style="color: #a0522d;">popupTheme</span>=<span style="color: #8b2252;">"@style/AppTheme.PopupOverlay"</span>/&gt;
+
+            &lt;/<span style="color: #0000ff;">com.google.android.material.appbar.AppBarLayout</span>&gt;
+
+            &lt;<span style="color: #0000ff;">fragment</span>
+                <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">id</span>=<span style="color: #8b2252;">"@+id/garden_nav_fragment"</span>
+                <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">name</span>=<span style="color: #8b2252;">"androidx.navigation.fragment.NavHostFragment"</span>
+                <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">layout_width</span>=<span style="color: #8b2252;">"match_parent"</span>
+                <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">layout_height</span>=<span style="color: #8b2252;">"match_parent"</span>
+                <span style="color: #483d8b;">app</span>:<span style="color: #a0522d;">defaultNavHost</span>=<span style="color: #8b2252;">"true"</span>
+                <span style="color: #483d8b;">app</span>:<span style="color: #a0522d;">navGraph</span>=<span style="color: #8b2252;">"@navigation/nav_garden"</span>/&gt;
+
+        &lt;/<span style="color: #0000ff;">LinearLayout</span>&gt;
+
+        &lt;<span style="color: #0000ff;">com.google.android.material.navigation.NavigationView</span>
+            <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">id</span>=<span style="color: #8b2252;">"@+id/navigation_view"</span>
+            <span style="color: #a0522d;">style</span>=<span style="color: #8b2252;">"@style/Widget.MaterialComponents.NavigationView"</span>
+            <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">layout_width</span>=<span style="color: #8b2252;">"wrap_content"</span>
+            <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">layout_height</span>=<span style="color: #8b2252;">"match_parent"</span>
+            <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">layout_gravity</span>=<span style="color: #8b2252;">"start"</span>
+            <span style="color: #483d8b;">app</span>:<span style="color: #a0522d;">headerLayout</span>=<span style="color: #8b2252;">"@layout/nav_header"</span>
+            <span style="color: #483d8b;">app</span>:<span style="color: #a0522d;">menu</span>=<span style="color: #8b2252;">"@menu/menu_navigation"</span>/&gt;
+
+    &lt;/<span style="color: #0000ff;">androidx.drawerlayout.widget.DrawerLayout</span>&gt;
+
+&lt;/<span style="color: #0000ff;">layout</span>&gt;
+</pre>
+</div>
+<p>
+或
+</p>
+<div class="org-src-container">
+<pre class="src src-xml"><span style="color: #8b2252;">&lt;?</span><span style="color: #a020f0;">xml</span><span style="color: #8b2252;"> </span><span style="color: #8b2252;">version="1.0" encoding="utf-8"</span><span style="color: #8b2252;">?&gt;</span>
+<span style="color: #b22222;">&lt;!--</span>
+<span style="color: #b22222;">  </span><span style="color: #b22222;">~ Copyright 2018 Google LLC</span>
+<span style="color: #b22222;">  ~</span>
+<span style="color: #b22222;">  ~ Licensed under the Apache License, Version 2.0 (the "License");</span>
+<span style="color: #b22222;">  ~ you may not use this file except in compliance with the License.</span>
+<span style="color: #b22222;">  ~ You may obtain a copy of the License at</span>
+<span style="color: #b22222;">  ~</span>
+<span style="color: #b22222;">  ~     https://www.apache.org/licenses/LICENSE-2.0</span>
+<span style="color: #b22222;">  ~</span>
+<span style="color: #b22222;">  ~ Unless required by applicable law or agreed to in writing, software</span>
+<span style="color: #b22222;">  ~ distributed under the License is distributed on an "AS IS" BASIS,</span>
+<span style="color: #b22222;">  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span style="color: #b22222;">  ~ See the License for the specific language governing permissions and</span>
+<span style="color: #b22222;">  ~ limitations under the License.</span>
+<span style="color: #b22222;">  </span><span style="color: #b22222;">--&gt;</span>
+
+&lt;<span style="color: #0000ff;">layout</span> <span style="color: #483d8b;">xmlns</span>:<span style="color: #a0522d;">android</span>=<span style="color: #8b2252;">"http://schemas.android.com/apk/res/android"</span>
+    <span style="color: #483d8b;">xmlns</span>:<span style="color: #a0522d;">app</span>=<span style="color: #8b2252;">"http://schemas.android.com/apk/res-auto"</span>
+    <span style="color: #483d8b;">xmlns</span>:<span style="color: #a0522d;">tools</span>=<span style="color: #8b2252;">"http://schemas.android.com/tools"</span>&gt;
+
+    &lt;<span style="color: #0000ff;">data</span>&gt;
+
+        &lt;<span style="color: #0000ff;">variable</span>
+                <span style="color: #a0522d;">name</span>=<span style="color: #8b2252;">"hasPlantings"</span>
+                <span style="color: #a0522d;">type</span>=<span style="color: #8b2252;">"boolean"</span> /&gt;
+
+    &lt;/<span style="color: #0000ff;">data</span>&gt;
+
+    &lt;<span style="color: #0000ff;">FrameLayout</span>
+            <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">layout_width</span>=<span style="color: #8b2252;">"match_parent"</span>
+            <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">layout_height</span>=<span style="color: #8b2252;">"match_parent"</span>&gt;
+
+        &lt;<span style="color: #0000ff;">androidx.recyclerview.widget.RecyclerView</span>
+                <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">id</span>=<span style="color: #8b2252;">"@+id/garden_list"</span>
+                <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">layout_width</span>=<span style="color: #8b2252;">"match_parent"</span>
+                <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">layout_height</span>=<span style="color: #8b2252;">"match_parent"</span>
+                <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">clipToPadding</span>=<span style="color: #8b2252;">"false"</span>
+                <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">paddingLeft</span>=<span style="color: #8b2252;">"@dimen/margin_normal"</span>
+                <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">paddingRight</span>=<span style="color: #8b2252;">"@dimen/margin_normal"</span>
+                <span style="color: #483d8b;">app</span>:<span style="color: #a0522d;">isGone</span>=<span style="color: #8b2252;">"@{!hasPlantings}"</span>
+                <span style="color: #483d8b;">app</span>:<span style="color: #a0522d;">layoutManager</span>=<span style="color: #8b2252;">"androidx.recyclerview.widget.LinearLayoutManager"</span>
+                <span style="color: #483d8b;">tools</span>:<span style="color: #a0522d;">listitem</span>=<span style="color: #8b2252;">"@layout/list_item_garden_planting"</span>/&gt;
+
+        &lt;<span style="color: #0000ff;">TextView</span>
+                <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">id</span>=<span style="color: #8b2252;">"@+id/empty_garden"</span>
+                <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">layout_width</span>=<span style="color: #8b2252;">"match_parent"</span>
+                <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">layout_height</span>=<span style="color: #8b2252;">"match_parent"</span>
+                <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">gravity</span>=<span style="color: #8b2252;">"center"</span>
+                <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">text</span>=<span style="color: #8b2252;">"@string/garden_empty"</span>
+                <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">textSize</span>=<span style="color: #8b2252;">"24sp"</span>
+                <span style="color: #483d8b;">app</span>:<span style="color: #a0522d;">isGone</span>=<span style="color: #8b2252;">"@{hasPlantings}"</span>/&gt;
+
+    &lt;/<span style="color: #0000ff;">FrameLayout</span>&gt;
+
+&lt;/<span style="color: #0000ff;">layout</span>&gt;
+
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org774718b" class="outline-3">
+<h3 id="org774718b">在Activity中绑定对象</h3>
+<div class="outline-text-3" id="text-org774718b">
+<p>
+Data Binding会根据布局文件生成一个绑定类。类的名字和布局文件名相对应。比如布局文件名activity<sub>garden.xml</sub>，生成的绑定类就是ActivityGardenBinding。这个类包含在当前包的databinding子包中。它可以完成数据绑定。
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #a020f0;">package</span> com.google.samples.apps.<span style="color: #008b8b;">sunflower</span>
+
+<span style="color: #a020f0;">import</span> <span style="color: #008b8b;">android</span>.<span style="color: #008b8b;">os</span>.<span style="color: #228b22;">Bundle</span>
+<span style="color: #a020f0;">import</span> <span style="color: #008b8b;">androidx</span>.<span style="color: #008b8b;">appcompat</span>.<span style="color: #008b8b;">app</span>.<span style="color: #228b22;">AppCompatActivity</span>
+<span style="color: #a020f0;">import</span> <span style="color: #008b8b;">androidx</span>.<span style="color: #008b8b;">core</span>.<span style="color: #008b8b;">view</span>.<span style="color: #228b22;">GravityCompat</span>
+<span style="color: #a020f0;">import</span> <span style="color: #008b8b;">androidx</span>.<span style="color: #008b8b;">databinding</span>.<span style="color: #228b22;">DataBindingUtil</span>
+<span style="color: #a020f0;">import</span> <span style="color: #008b8b;">androidx</span>.<span style="color: #008b8b;">drawerlayout</span>.<span style="color: #008b8b;">widget</span>.<span style="color: #228b22;">DrawerLayout</span>
+<span style="color: #a020f0;">import</span> <span style="color: #008b8b;">androidx</span>.<span style="color: #008b8b;">navigation</span>.<span style="color: #228b22;">NavController</span>
+<span style="color: #a020f0;">import</span> <span style="color: #008b8b;">androidx</span>.<span style="color: #008b8b;">navigation</span>.<span style="color: #228b22;">Navigation</span>
+<span style="color: #a020f0;">import</span> <span style="color: #008b8b;">androidx</span>.<span style="color: #008b8b;">navigation</span>.<span style="color: #008b8b;">ui</span>.<span style="color: #228b22;">AppBarConfiguration</span>
+<span style="color: #a020f0;">import</span> androidx.navigation.ui.<span style="color: #228b22;">navigateUp</span>
+<span style="color: #a020f0;">import</span> androidx.navigation.ui.<span style="color: #228b22;">setupActionBarWithNavController</span>
+<span style="color: #a020f0;">import</span> androidx.navigation.ui.<span style="color: #228b22;">setupWithNavController</span>
+<span style="color: #a020f0;">import</span> <span style="color: #008b8b;">com</span>.<span style="color: #008b8b;">google</span>.<span style="color: #008b8b;">samples</span>.<span style="color: #008b8b;">apps</span>.<span style="color: #008b8b;">sunflower</span>.<span style="color: #008b8b;">databinding</span>.<span style="color: #228b22;">ActivityGardenBinding</span>
+
+<span style="color: #a020f0;">class</span> <span style="color: #228b22;">GardenActivity</span> : AppCompatActivity() {
+
+    <span style="color: #a020f0;">private</span> lateinit <span style="color: #228b22;">var</span> <span style="color: #0000ff;">drawerLayout</span>: DrawerLayout
+    <span style="color: #a020f0;">private</span> lateinit var appBarConfiguration: AppBarConfiguration
+    <span style="color: #a020f0;">private</span> lateinit var navController: NavController
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        <span style="color: #a020f0;">super</span>.onCreate(savedInstanceState)
+
+        val binding: ActivityGardenBinding = DataBindingUtil.setContentView(<span style="color: #a020f0;">this</span>,
+                R.layout.activity_garden)
+        drawerLayout = binding.drawerLayout
+
+        navController = Navigation.findNavController(<span style="color: #a020f0;">this</span>, R.id.garden_nav_fragment)
+        appBarConfiguration = AppBarConfiguration(navController.graph, drawerLayout)
+
+        <span style="color: #b22222;">// </span><span style="color: #b22222;">Set up ActionBar</span>
+        setSupportActionBar(binding.toolbar)
+        setupActionBarWithNavController(navController, appBarConfiguration)
+
+        <span style="color: #b22222;">// </span><span style="color: #b22222;">Set up navigation menu</span>
+        binding.navigationView.setupWithNavController(navController)
+    }
+
+    override <span style="color: #228b22;">fun</span> <span style="color: #0000ff;">onSupportNavigateUp</span>(): Boolean {
+        <span style="color: #a020f0;">return</span> navController.navigateUp(appBarConfiguration) || <span style="color: #a020f0;">super</span>.onSupportNavigateUp()
+    }
+
+    override <span style="color: #228b22;">fun</span> <span style="color: #0000ff;">onBackPressed</span>() {
+        <span style="color: #a020f0;">if</span> (drawerLayout.isDrawerOpen(<span style="color: #008b8b;">GravityCompat</span>.START)) {
+            drawerLayout.closeDrawer(<span style="color: #008b8b;">GravityCompat</span>.START)
+        } <span style="color: #a020f0;">else</span> {
+            <span style="color: #a020f0;">super</span>.onBackPressed()
+        }
+    }
+}
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org185c59f" class="outline-3">
+<h3 id="org185c59f">生成的绑定类</h3>
+<div class="outline-text-3" id="text-org185c59f">
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #a020f0;">package</span> com.google.samples.apps.sunflower.<span style="color: #008b8b;">databinding</span>;
+
+<span style="color: #a020f0;">import</span> <span style="color: #008b8b;">android</span>.<span style="color: #008b8b;">view</span>.<span style="color: #228b22;">LayoutInflater</span>;
+<span style="color: #a020f0;">import</span> <span style="color: #008b8b;">android</span>.<span style="color: #008b8b;">view</span>.<span style="color: #228b22;">View</span>;
+<span style="color: #a020f0;">import</span> <span style="color: #008b8b;">android</span>.<span style="color: #008b8b;">view</span>.<span style="color: #228b22;">ViewGroup</span>;
+<span style="color: #a020f0;">import</span> <span style="color: #008b8b;">androidx</span>.<span style="color: #008b8b;">annotation</span>.<span style="color: #228b22;">NonNull</span>;
+<span style="color: #a020f0;">import</span> <span style="color: #008b8b;">androidx</span>.<span style="color: #008b8b;">annotation</span>.<span style="color: #228b22;">Nullable</span>;
+<span style="color: #a020f0;">import</span> <span style="color: #008b8b;">androidx</span>.<span style="color: #008b8b;">appcompat</span>.<span style="color: #008b8b;">widget</span>.<span style="color: #228b22;">Toolbar</span>;
+<span style="color: #a020f0;">import</span> <span style="color: #008b8b;">androidx</span>.<span style="color: #008b8b;">databinding</span>.<span style="color: #228b22;">DataBindingComponent</span>;
+<span style="color: #a020f0;">import</span> <span style="color: #008b8b;">androidx</span>.<span style="color: #008b8b;">databinding</span>.<span style="color: #228b22;">DataBindingUtil</span>;
+<span style="color: #a020f0;">import</span> <span style="color: #008b8b;">androidx</span>.<span style="color: #008b8b;">databinding</span>.<span style="color: #228b22;">ViewDataBinding</span>;
+<span style="color: #a020f0;">import</span> <span style="color: #008b8b;">androidx</span>.<span style="color: #008b8b;">drawerlayout</span>.<span style="color: #008b8b;">widget</span>.<span style="color: #228b22;">DrawerLayout</span>;
+<span style="color: #a020f0;">import</span> <span style="color: #008b8b;">com</span>.<span style="color: #008b8b;">google</span>.<span style="color: #008b8b;">android</span>.<span style="color: #008b8b;">material</span>.<span style="color: #008b8b;">appbar</span>.<span style="color: #228b22;">AppBarLayout</span>;
+<span style="color: #a020f0;">import</span> <span style="color: #008b8b;">com</span>.<span style="color: #008b8b;">google</span>.<span style="color: #008b8b;">android</span>.<span style="color: #008b8b;">material</span>.<span style="color: #008b8b;">navigation</span>.<span style="color: #228b22;">NavigationView</span>;
+
+<span style="color: #a020f0;">public</span> <span style="color: #a020f0;">abstract</span> <span style="color: #a020f0;">class</span> <span style="color: #228b22;">ActivityGardenBinding</span> <span style="color: #a020f0;">extends</span> <span style="color: #228b22;">ViewDataBinding</span> {
+  <span style="color: #008b8b;">@NonNull</span>
+  <span style="color: #a020f0;">public</span> <span style="color: #a020f0;">final</span> <span style="color: #228b22;">AppBarLayout</span> <span style="color: #a0522d;">appbar</span>;
+
+  <span style="color: #008b8b;">@NonNull</span>
+  <span style="color: #a020f0;">public</span> <span style="color: #a020f0;">final</span> <span style="color: #228b22;">DrawerLayout</span> <span style="color: #a0522d;">drawerLayout</span>;
+
+  <span style="color: #008b8b;">@NonNull</span>
+  <span style="color: #a020f0;">public</span> <span style="color: #a020f0;">final</span> <span style="color: #228b22;">NavigationView</span> <span style="color: #a0522d;">navigationView</span>;
+
+  <span style="color: #008b8b;">@NonNull</span>
+  <span style="color: #a020f0;">public</span> <span style="color: #a020f0;">final</span> <span style="color: #228b22;">Toolbar</span> <span style="color: #a0522d;">toolbar</span>;
+
+  <span style="color: #a020f0;">protected</span> <span style="color: #0000ff;">ActivityGardenBinding</span>(<span style="color: #228b22;">DataBindingComponent</span> <span style="color: #a0522d;">_bindingComponent</span>, <span style="color: #228b22;">View</span> <span style="color: #a0522d;">_root</span>,
+      <span style="color: #228b22;">int</span> <span style="color: #a0522d;">_localFieldCount</span>, <span style="color: #228b22;">AppBarLayout</span> <span style="color: #a0522d;">appbar</span>, <span style="color: #228b22;">DrawerLayout</span> <span style="color: #a0522d;">drawerLayout</span>,
+      <span style="color: #228b22;">NavigationView</span> <span style="color: #a0522d;">navigationView</span>, <span style="color: #228b22;">Toolbar</span> <span style="color: #a0522d;">toolbar</span>) {
+    <span style="color: #a020f0;">super</span>(_bindingComponent, _root, _localFieldCount);
+    <span style="color: #a020f0;">this</span>.appbar = appbar;
+    <span style="color: #a020f0;">this</span>.drawerLayout = drawerLayout;
+    <span style="color: #a020f0;">this</span>.navigationView = navigationView;
+    <span style="color: #a020f0;">this</span>.toolbar = toolbar;
+  }
+
+  <span style="color: #008b8b;">@NonNull</span>
+  <span style="color: #a020f0;">public</span> <span style="color: #a020f0;">static</span> <span style="color: #228b22;">ActivityGardenBinding</span> <span style="color: #0000ff;">inflate</span>(<span style="color: #008b8b;">@NonNull</span> <span style="color: #228b22;">LayoutInflater</span> <span style="color: #a0522d;">inflater</span>,
+      <span style="color: #008b8b;">@Nullable</span> <span style="color: #228b22;">ViewGroup</span> <span style="color: #a0522d;">root</span>, <span style="color: #228b22;">boolean</span> <span style="color: #a0522d;">attachToRoot</span>) {
+    <span style="color: #a020f0;">return</span> inflate(inflater, root, attachToRoot, DataBindingUtil.getDefaultComponent());
+  }
+
+  <span style="color: #008b8b;">@NonNull</span>
+  <span style="color: #a020f0;">public</span> <span style="color: #a020f0;">static</span> <span style="color: #228b22;">ActivityGardenBinding</span> <span style="color: #0000ff;">inflate</span>(<span style="color: #008b8b;">@NonNull</span> <span style="color: #228b22;">LayoutInflater</span> <span style="color: #a0522d;">inflater</span>,
+      <span style="color: #008b8b;">@Nullable</span> <span style="color: #228b22;">ViewGroup</span> <span style="color: #a0522d;">root</span>, <span style="color: #228b22;">boolean</span> <span style="color: #a0522d;">attachToRoot</span>, <span style="color: #008b8b;">@Nullable</span> <span style="color: #228b22;">DataBindingComponent</span> <span style="color: #a0522d;">component</span>) {
+    <span style="color: #a020f0;">return</span> DataBindingUtil.&lt;<span style="color: #228b22;">ActivityGardenBinding</span>&gt;inflate(inflater, <span style="color: #008b8b;">com</span>.<span style="color: #008b8b;">google</span>.<span style="color: #008b8b;">samples</span>.<span style="color: #008b8b;">apps</span>.<span style="color: #008b8b;">sunflower</span>.R.layout.activity_garden, root, attachToRoot, component);
+  }
+
+  <span style="color: #008b8b;">@NonNull</span>
+  <span style="color: #a020f0;">public</span> <span style="color: #a020f0;">static</span> <span style="color: #228b22;">ActivityGardenBinding</span> <span style="color: #0000ff;">inflate</span>(<span style="color: #008b8b;">@NonNull</span> <span style="color: #228b22;">LayoutInflater</span> <span style="color: #a0522d;">inflater</span>) {
+    <span style="color: #a020f0;">return</span> inflate(inflater, DataBindingUtil.getDefaultComponent());
+  }
+
+  <span style="color: #008b8b;">@NonNull</span>
+  <span style="color: #a020f0;">public</span> <span style="color: #a020f0;">static</span> <span style="color: #228b22;">ActivityGardenBinding</span> <span style="color: #0000ff;">inflate</span>(<span style="color: #008b8b;">@NonNull</span> <span style="color: #228b22;">LayoutInflater</span> <span style="color: #a0522d;">inflater</span>,
+      <span style="color: #008b8b;">@Nullable</span> <span style="color: #228b22;">DataBindingComponent</span> <span style="color: #a0522d;">component</span>) {
+    <span style="color: #a020f0;">return</span> DataBindingUtil.&lt;<span style="color: #228b22;">ActivityGardenBinding</span>&gt;inflate(inflater, <span style="color: #008b8b;">com</span>.<span style="color: #008b8b;">google</span>.<span style="color: #008b8b;">samples</span>.<span style="color: #008b8b;">apps</span>.<span style="color: #008b8b;">sunflower</span>.R.layout.activity_garden, <span style="color: #008b8b;">null</span>, <span style="color: #008b8b;">false</span>, component);
+  }
+
+  <span style="color: #a020f0;">public</span> <span style="color: #a020f0;">static</span> <span style="color: #228b22;">ActivityGardenBinding</span> <span style="color: #0000ff;">bind</span>(<span style="color: #008b8b;">@NonNull</span> <span style="color: #228b22;">View</span> <span style="color: #a0522d;">view</span>) {
+    <span style="color: #a020f0;">return</span> bind(view, DataBindingUtil.getDefaultComponent());
+  }
+
+  <span style="color: #a020f0;">public</span> <span style="color: #a020f0;">static</span> <span style="color: #228b22;">ActivityGardenBinding</span> <span style="color: #0000ff;">bind</span>(<span style="color: #008b8b;">@NonNull</span> <span style="color: #228b22;">View</span> <span style="color: #a0522d;">view</span>,
+      <span style="color: #008b8b;">@Nullable</span> <span style="color: #228b22;">DataBindingComponent</span> <span style="color: #a0522d;">component</span>) {
+    <span style="color: #a020f0;">return</span> (<span style="color: #228b22;">ActivityGardenBinding</span>)bind(component, view, <span style="color: #008b8b;">com</span>.<span style="color: #008b8b;">google</span>.<span style="color: #008b8b;">samples</span>.<span style="color: #008b8b;">apps</span>.<span style="color: #008b8b;">sunflower</span>.R.layout.activity_garden);
+  }
+}
+</pre>
+</div>
+
+<p>
+可以看到，绑定类为每个具名（定义了android:id属性）控件生成了一个成员，成员名就是将控件id转换为驼峰命名法。此外，绑定类定义了5个公开方法，它们都是静态的：
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #008b8b;">@NonNull</span>
+<span style="color: #a020f0;">public</span> <span style="color: #a020f0;">static</span> <span style="color: #228b22;">ActivityGardenBinding</span> <span style="color: #0000ff;">inflate</span>(<span style="color: #008b8b;">@NonNull</span> <span style="color: #228b22;">LayoutInflater</span> <span style="color: #a0522d;">inflater</span>,
+    <span style="color: #008b8b;">@Nullable</span> <span style="color: #228b22;">ViewGroup</span> <span style="color: #a0522d;">root</span>, <span style="color: #228b22;">boolean</span> <span style="color: #a0522d;">attachToRoot</span>) {
+  <span style="color: #a020f0;">return</span> inflate(inflater, root, attachToRoot, DataBindingUtil.getDefaultComponent());
+}
+
+<span style="color: #008b8b;">@NonNull</span>
+<span style="color: #a020f0;">public</span> <span style="color: #a020f0;">static</span> <span style="color: #228b22;">ActivityGardenBinding</span> <span style="color: #0000ff;">inflate</span>(<span style="color: #008b8b;">@NonNull</span> <span style="color: #228b22;">LayoutInflater</span> <span style="color: #a0522d;">inflater</span>,
+    <span style="color: #008b8b;">@Nullable</span> <span style="color: #228b22;">ViewGroup</span> <span style="color: #a0522d;">root</span>, <span style="color: #228b22;">boolean</span> <span style="color: #a0522d;">attachToRoot</span>, <span style="color: #008b8b;">@Nullable</span> <span style="color: #228b22;">DataBindingComponent</span> <span style="color: #a0522d;">component</span>) {
+  <span style="color: #a020f0;">return</span> DataBindingUtil.&lt;<span style="color: #228b22;">ActivityGardenBinding</span>&gt;inflate(inflater, <span style="color: #008b8b;">com</span>.<span style="color: #008b8b;">google</span>.<span style="color: #008b8b;">samples</span>.<span style="color: #008b8b;">apps</span>.<span style="color: #008b8b;">sunflower</span>.R.layout.activity_garden, root, attachToRoot, component);
+}
+
+<span style="color: #008b8b;">@NonNull</span>
+<span style="color: #a020f0;">public</span> <span style="color: #a020f0;">static</span> <span style="color: #228b22;">ActivityGardenBinding</span> <span style="color: #0000ff;">inflate</span>(<span style="color: #008b8b;">@NonNull</span> <span style="color: #228b22;">LayoutInflater</span> <span style="color: #a0522d;">inflater</span>) {
+  <span style="color: #a020f0;">return</span> inflate(inflater, DataBindingUtil.getDefaultComponent());
+}
+
+<span style="color: #008b8b;">@NonNull</span>
+<span style="color: #a020f0;">public</span> <span style="color: #a020f0;">static</span> <span style="color: #228b22;">ActivityGardenBinding</span> <span style="color: #0000ff;">inflate</span>(<span style="color: #008b8b;">@NonNull</span> <span style="color: #228b22;">LayoutInflater</span> <span style="color: #a0522d;">inflater</span>,
+    <span style="color: #008b8b;">@Nullable</span> <span style="color: #228b22;">DataBindingComponent</span> <span style="color: #a0522d;">component</span>) {
+  <span style="color: #a020f0;">return</span> DataBindingUtil.&lt;<span style="color: #228b22;">ActivityGardenBinding</span>&gt;inflate(inflater, <span style="color: #008b8b;">com</span>.<span style="color: #008b8b;">google</span>.<span style="color: #008b8b;">samples</span>.<span style="color: #008b8b;">apps</span>.<span style="color: #008b8b;">sunflower</span>.R.layout.activity_garden, <span style="color: #008b8b;">null</span>, <span style="color: #008b8b;">false</span>, component);
+}
+
+<span style="color: #a020f0;">public</span> <span style="color: #a020f0;">static</span> <span style="color: #228b22;">ActivityGardenBinding</span> <span style="color: #0000ff;">bind</span>(<span style="color: #008b8b;">@NonNull</span> <span style="color: #228b22;">View</span> <span style="color: #a0522d;">view</span>) {
+  <span style="color: #a020f0;">return</span> bind(view, DataBindingUtil.getDefaultComponent());
+}
+
+<span style="color: #a020f0;">public</span> <span style="color: #a020f0;">static</span> <span style="color: #228b22;">ActivityGardenBinding</span> <span style="color: #0000ff;">bind</span>(<span style="color: #008b8b;">@NonNull</span> <span style="color: #228b22;">View</span> <span style="color: #a0522d;">view</span>,
+    <span style="color: #008b8b;">@Nullable</span> <span style="color: #228b22;">DataBindingComponent</span> <span style="color: #a0522d;">component</span>) {
+  <span style="color: #a020f0;">return</span> (<span style="color: #228b22;">ActivityGardenBinding</span>)bind(component, view, <span style="color: #008b8b;">com</span>.<span style="color: #008b8b;">google</span>.<span style="color: #008b8b;">samples</span>.<span style="color: #008b8b;">apps</span>.<span style="color: #008b8b;">sunflower</span>.R.layout.activity_garden);
+}
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgb023003" class="outline-2">
+<h2 id="orgb023003">在Fragment中使用data binding。</h2>
+<div class="outline-text-2" id="text-orgb023003">
+<div class="org-src-container">
+<pre class="src src-java">override <span style="color: #228b22;">fun</span> <span style="color: #0000ff;">onCreateView</span>(
+    inflater: LayoutInflater, container: ViewGroup?,
+    savedInstanceState: Bundle?
+): View? {
+    <span style="color: #228b22;">val</span> <span style="color: #a0522d;">binding</span> = ClockFragmentBinding.inflate(inflater, container, <span style="color: #008b8b;">false</span>)
+    binding.timeString = <span style="color: #8b2252;">"10:00"</span>;
+    <span style="color: #a020f0;">return</span> binding.root
+}
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-xml"> &lt;<span style="color: #0000ff;">data</span>&gt;
+        <span style="color: #b22222;">&lt;!--</span><span style="color: #b22222;">java.lang.*&#21253;&#26159;&#33258;&#21160;&#23548;&#20837;&#30340;&#19981;&#38656;&#35201;&#20320;&#20877;&#27425;&#30340;&#23548;&#20837;</span><span style="color: #b22222;">--&gt;</span>
+        <span style="color: #b22222;">&lt;!--</span><span style="color: #b22222;">&#24403;&#20986;&#29616;&#20102;import&#30456;&#21516;&#30340;&#31867;&#21517;&#30340;&#26102;&#20505;&#38656;&#35201;&#20026;&#20854;&#25351;&#23450;&#22806;&#21495;alias&#21152;&#20197;&#21306;&#20998;</span><span style="color: #b22222;">--&gt;</span>
+        &lt;<span style="color: #0000ff;">import</span> <span style="color: #a0522d;">type</span>=<span style="color: #8b2252;">"com.example.administrator.databindingdemo.Student"</span>/&gt;
+        &lt;<span style="color: #0000ff;">import</span> <span style="color: #a0522d;">type</span>=<span style="color: #8b2252;">"com.example.administrator.databindingdemo.MainActivity.Presenter"</span>/&gt;
+        &lt;<span style="color: #0000ff;">variable</span>
+            <span style="color: #a0522d;">name</span>=<span style="color: #8b2252;">"student"</span>
+            <span style="color: #a0522d;">type</span>=<span style="color: #8b2252;">"Student"</span>/&gt;
+        &lt;<span style="color: #0000ff;">variable</span>
+            <span style="color: #a0522d;">name</span>=<span style="color: #8b2252;">"presenter"</span>
+            <span style="color: #a0522d;">type</span>=<span style="color: #8b2252;">"Presenter"</span>/&gt;
+        &lt;<span style="color: #0000ff;">variable</span>
+            <span style="color: #a0522d;">name</span>=<span style="color: #8b2252;">"visibility"</span>
+            <span style="color: #a0522d;">type</span>=<span style="color: #8b2252;">"Boolean"</span>/&gt;
+&lt;/<span style="color: #0000ff;">data</span>&gt;
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org5e9d6a1" class="outline-2">
+<h2 id="org5e9d6a1">绑定行为</h2>
+<div class="outline-text-2" id="text-org5e9d6a1">
+<div class="org-src-container">
+<pre class="src src-xml">&lt;<span style="color: #0000ff;">Button</span> ...
+  android:onClick=<span style="color: #8b2252;">"@{click}"</span>
+  /&gt;
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-xml">&lt;<span style="color: #0000ff;">Button</span> ...
+  android:onClick=<span style="color: #8b2252;">"@{viewModel::click}"</span>
+  /&gt;
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-xml">&lt;<span style="color: #0000ff;">Button</span> ...
+  android:onClick=<span style="color: #8b2252;">"@{() -&gt; viewModel.click()}"</span>
+  /&gt;
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org69a7a90" class="outline-2">
+<h2 id="org69a7a90">双向绑定原理简述</h2>
+<div class="outline-text-2" id="text-org69a7a90">
+<p>
+双向绑定涉及两个部分，即将业务状态的变化传递给UI，以及将用户输入信息传递给业务模型。首先我们来看业务状态是如何传递给UI的。开启dataBinding后，编译器为布局activity<sub>main.xml生成类ActivityMainBinding和它的实现类ActivityMainBindingImpl</sub>。抽象类ActivityMainBinding派生自ViewDataBinding，后者是BaseObserver的子类。ViewDataBinding有一个成员mChoreographer，它保存了主线程ActivityThread的Looper对象，业务状态的变更就是通过消息发送给主线程的，接着主线程完成对UI的更新。我们以一个例子来说明。对于下面的布局：
+</p>
+<pre class="example">
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;layout&gt;
+    &lt;data&gt;
+        &lt;variable name="text" type="java.lang.String"/&gt;
+    &lt;/data&gt;
+    &lt;androidx.constraintlayout.widget.ConstraintLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".MainActivity"&gt;
+
+        &lt;EditText
+                android:id="@+id/label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@={text}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/&gt;
+
+    &lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;
+&lt;/layout&gt;
+</pre>
+
+<p>
+当调用ActivityMainBinding.setText()时，执行的操作大致如下：
+</p>
+<div class="org-src-container">
+<pre class="src src-text">ActivityMainBindingImpl.setText()
+  ViewDataBinding.requestRebind()
+    ViewDataBinding.mChoregrapher.postFrameCallback()
+      some_native_code()
+        Choregrapher.FrameDisplayEventReceiver.onVsync()
+          Choregrapher.FrameDisplayEventReceiver.mHandler.sendMessage()
+...
+Handler.dispatchMessage()
+  Choregrapher.FrameDisplayEventReceiver.run()
+    Choregrapher.doFrame()
+      ViewDataBinding.executeBindings()
+         TextViewBindingAdapter.setText()
+           TestView.setText()
+</pre>
+</div>
+
+<p>
+这里有两个地方要注意一下。首先，Choregrapher通过Looper.myLooper()得到Looper对象，而myLooper()返回了一个线程本地对象，因此ViewDataBinding对象必须在主线程中创建。其次，Handler分派消息（Handler.dispatchMessage）的顺序为Message.callback，Handler.mCallback，Handler.handleMessage。这种分派方式提高了消息处理的灵活性。
+</p>
+
+
+<p>
+现在来考察用户输入是如何传递给业务模型的。当用户输入数据时，EditText会将信息传递给TextWatcher。双向绑定会自动建立TextWatcher对象，并注册到EditText，这个TextWatcher包含一个InverseBindingListener对象，当用户输入时，信息沿着下面的路径传递给ActivityMainBindingImpl对象。
+</p>
+<div class="org-src-container">
+<pre class="src src-text">EditText
+  TextWatcher
+    InverseBindingListener
+      ActivityMainBindingImpl
+</pre>
+</div>
+
+<p>
+因此通过ActivityMainBindingImpl对象，我们就可以直接得到用户的输入了。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orga0da4c3" class="outline-2">
+<h2 id="orga0da4c3">dialog使用数据绑定</h2>
+<div class="outline-text-2" id="text-orga0da4c3">
+<div class="org-src-container">
+<pre class="src src-kotlin"><span style="color: #a020f0;">val</span> <span style="color: #a0522d;">dialog</span> = <span style="color: #228b22;">AlertDialog.Builder</span>(context)
+<span style="color: #a020f0;">val</span> <span style="color: #a0522d;">binding</span> = <span style="color: #228b22;">DialogAddAlarmBinding.inflate</span>(
+        <span style="color: #228b22;">LayoutInflater.from</span>(context),
+        <span style="color: #008b8b;">null</span>,
+        <span style="color: #008b8b;">false</span>
+)
+dialog.setView(binding.root)
+dialog.show()
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org5570814" class="outline-2">
+<h2 id="org5570814">参考资料</h2>
+<div class="outline-text-2" id="text-org5570814">
+<ul class="org-ul">
+<li><a href="https://github.com/googlesamples/android-sunflower">Android Sunflower项目</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org2c192aa" class="outline-2">
+<h2 id="org2c192aa">修订记录</h2>
+<div class="outline-text-2" id="text-org2c192aa">
+<ul class="org-ul">
+<li>2017年02月19日 建立文档。</li>
+<li>2017年03月27日 增加事件绑定。</li>
+<li>2017年03月28日 增加双向绑定。</li>
+<li>2017年04月12日 增加ObservableField内容。</li>
+<li>2018年09月25日 修改为rst格式。</li>
+<li>2019年01月21日 增加双向绑定内容。</li>
+<li>2019年03月11日 改为org格式；增加jetpack部分；删除原Java部分。</li>
+<li>2019年05月20日 调整例子。</li>
+<li>2019年05月26日 增加双向绑定原理。</li>
+<li>2019年06月14日 增加dialog使用数据绑定的方法。</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Created: 2019-09-23 周一 20:55</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

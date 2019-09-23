@@ -1,0 +1,613 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2019-09-23 周一 21:15 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>gRPC使用笔记</title>
+<meta name="generator" content="Org mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">gRPC使用笔记</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org36f83c4">gRPC简介</a></li>
+<li><a href="#org48b908e">定义接口</a></li>
+<li><a href="#org36deb71">生成接口代码</a></li>
+<li><a href="#org5a91600">编写接口实现代码</a></li>
+<li><a href="#orgb23c26e">启动服务</a></li>
+<li><a href="#org81b54dc">编写客户端</a></li>
+<li><a href="#orgea447cf">在Android程序中使用gRPC</a></li>
+<li><a href="#org54fc086">fallback和intercepter</a></li>
+<li><a href="#orgef1fe95">试验</a></li>
+<li><a href="#org7616774">连接断开和心跳</a></li>
+<li><a href="#orgce8d60b">参考资料</a></li>
+<li><a href="#org7e120b4">修订记录</a></li>
+</ul>
+</div>
+</div>
+<p>
+本文简单介绍了使用gPRC定义服务，和使用Java实现服务、调用服务的方法。
+</p>
+
+<div id="outline-container-org36f83c4" class="outline-2">
+<h2 id="org36f83c4">gRPC简介</h2>
+<div class="outline-text-2" id="text-org36f83c4">
+<p>
+gRPC是一个基于HTTP2和protobuf的远程调用框架。gRPC支持多种语言，性能表现好。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org48b908e" class="outline-2">
+<h2 id="org48b908e">定义接口</h2>
+<div class="outline-text-2" id="text-org48b908e">
+<p>
+gRPC使用protobuf版本3定义消息和服务。关于消息的定义可以参考protobuf文档，这里介绍在gPRC中如何定义服务。在gRPC中，服务是一组接口的集合。服务具有唯一的名字。下面是一个不包含任何接口的服务定义::
+</p>
+<div class="org-src-container">
+<pre class="src src-text">service MyService {
+}
+</pre>
+</div>
+<p>
+接口定义在服务的上下文中，如::
+</p>
+<div class="org-src-container">
+<pre class="src src-text">service MyService2 {
+    rpc MyInterface(InputType) returns (OutputType) {}
+}
+</pre>
+</div>
+<p>
+上面定义了服务MyServer2，并在这个服务中定义了接口MyInterface。接口MyInterface接受一个InputType类型的对象作为输入，产生一个OutputType类型的对象作为应答。InputType和OutputType必须是已经定义的protobuf消息。在接口MyInterface中，请求和应答是1-1对应的，这样的接口叫做请求应答接口。除此以外，gRPC还支持的3类接口，分别叫做服务端流接口、客户端流接口和双向流接口。服务端流接口接受一个对象作为请求，产生一组对象作为应答，它可以定义为::
+</p>
+<div class="org-src-container">
+<pre class="src src-text">rpc MyServerSideStream(InputType) returns (stream OutputStreamElementType) {}
+</pre>
+</div>
+<p>
+客户端流接口和服务端流接口正好相反::
+</p>
+<div class="org-src-container">
+<pre class="src src-text">rpc MyClientSideStream(stream InputStreamElementType) returns (OutputType) {}
+</pre>
+</div>
+<p>
+双向流接口是二者的组合::
+</p>
+<div class="org-src-container">
+<pre class="src src-text">rpc MyBiDirectionalStream(stream InputStreamElementType) returns (stream OutputStreamElementType) {}
+</pre>
+</div>
+<p>
+从上面的几个例子可以看到，服务名、接口名和类型名全部使用驼峰法命名，这是gRPC所要求的。如果使用默认的工程目录解结构，proto文件应当位于src/main/proto目录。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org36deb71" class="outline-2">
+<h2 id="org36deb71">生成接口代码</h2>
+<div class="outline-text-2" id="text-org36deb71">
+<p>
+在build.gradle中加入::
+</p>
+<div class="org-src-container">
+<pre class="src src-gradle">compile 'io.grpc:grpc-netty-shaded:1.21.0'
+compile 'io.grpc:grpc-protobuf:1.21.0'
+compile 'io.grpc:grpc-stub:1.21.0'
+</pre>
+</div>
+<p>
+和::
+</p>
+<div class="org-src-container">
+<pre class="src src-gradle">plugins {
+    // Apply the java plugin to add support for Java
+    id 'java'
+
+    // Apply the application plugin to add support for building an application
+    id 'application'
+    id 'com.google.protobuf' version <span style="color: #8b2252;">"0.8.9"</span>
+}
+
+protobuf {
+  protoc {
+    artifact = <span style="color: #8b2252;">"com.google.protobuf:protoc:3.7.1"</span>
+  }
+  plugins {
+    grpc {
+      artifact = 'io.grpc:protoc-gen-grpc-java:1.21.0'
+    }
+  }
+  generateProtoTasks {
+    all()*.plugins {
+      grpc {}
+    }
+  }
+}
+
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org5a91600" class="outline-2">
+<h2 id="org5a91600">编写接口实现代码</h2>
+</div>
+
+
+<div id="outline-container-orgb23c26e" class="outline-2">
+<h2 id="orgb23c26e">启动服务</h2>
+</div>
+
+
+<div id="outline-container-org81b54dc" class="outline-2">
+<h2 id="org81b54dc">编写客户端</h2>
+</div>
+
+
+<div id="outline-container-orgea447cf" class="outline-2">
+<h2 id="orgea447cf">在Android程序中使用gRPC</h2>
+<div class="outline-text-2" id="text-orgea447cf">
+<p>
+加入gPRC依赖项：
+</p>
+<div class="org-src-container">
+<pre class="src src-gradle">implementation 'io.grpc:grpc-okhttp:1.22.1'
+implementation 'io.grpc:grpc-protobuf-lite:1.22.1'
+implementation 'io.grpc:grpc-stub:1.22.1'
+</pre>
+</div>
+
+<p>
+使用protobuf插件：
+</p>
+<div class="org-src-container">
+<pre class="src src-gradle">apply plugin: 'com.google.protobuf'
+
+buildscript {
+  repositories {
+    mavenCentral()
+  }
+  dependencies {
+    classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.8'
+  }
+}
+
+protobuf {
+  protoc {
+    artifact = <span style="color: #8b2252;">"com.google.protobuf:protoc:3.7.1"</span>
+  }
+  plugins {
+    grpc {
+      artifact = 'io.grpc:protoc-gen-grpc-java:1.22.1'
+    }
+  }
+  generateProtoTasks {
+    all()*.plugins {
+      grpc {}
+    }
+  }
+}
+</pre>
+</div>
+
+<p>
+将proto文件放置到src/main/proto目录下。在发送请求时，为每个请求建立一个Task类，Task类需要从
+android.os.AsyncTask派生。并持有Activity的java.lang.ref.WeakReference引用。Task需要实现三个方法：
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #008b8b;">@Override</span> <span style="color: #a020f0;">protected</span> <span style="color: #228b22;">String</span> <span style="color: #0000ff;">doInBackgroun</span>(<span style="color: #228b22;">T</span>... <span style="color: #a0522d;">params</span>);
+<span style="color: #008b8b;">@Override</span> <span style="color: #a020f0;">protected</span> <span style="color: #228b22;">void</span> <span style="color: #0000ff;">onPostExecute</span>(<span style="color: #228b22;">T</span> <span style="color: #a0522d;">result</span>);
+</pre>
+</div>
+<p>
+在doInBackground中，Task连接服务器，发送请求，将应答作为返回值。在onPostExecute中，Task处理应答。
+如果此时Activity的WeakReference可用（get()返回为null对象），根据应答更新Activity对象。
+</p>
+
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #a020f0;">package</span> io.grpc.<span style="color: #008b8b;">helloworldexample</span>;
+
+<span style="color: #a020f0;">import</span> <span style="color: #008b8b;">android</span>.<span style="color: #008b8b;">app</span>.<span style="color: #228b22;">Activity</span>;
+<span style="color: #a020f0;">import</span> <span style="color: #008b8b;">android</span>.<span style="color: #008b8b;">content</span>.<span style="color: #228b22;">Context</span>;
+<span style="color: #a020f0;">import</span> <span style="color: #008b8b;">android</span>.<span style="color: #008b8b;">os</span>.<span style="color: #228b22;">AsyncTask</span>;
+<span style="color: #a020f0;">import</span> <span style="color: #008b8b;">android</span>.<span style="color: #008b8b;">os</span>.<span style="color: #228b22;">Bundle</span>;
+<span style="color: #a020f0;">import</span> <span style="color: #008b8b;">android</span>.<span style="color: #008b8b;">support</span>.<span style="color: #008b8b;">v7</span>.<span style="color: #008b8b;">app</span>.<span style="color: #228b22;">AppCompatActivity</span>;
+<span style="color: #a020f0;">import</span> <span style="color: #008b8b;">android</span>.<span style="color: #008b8b;">text</span>.<span style="color: #228b22;">TextUtils</span>;
+<span style="color: #a020f0;">import</span> <span style="color: #008b8b;">android</span>.<span style="color: #008b8b;">text</span>.<span style="color: #008b8b;">method</span>.<span style="color: #228b22;">ScrollingMovementMethod</span>;
+<span style="color: #a020f0;">import</span> <span style="color: #008b8b;">android</span>.<span style="color: #008b8b;">view</span>.<span style="color: #228b22;">View</span>;
+<span style="color: #a020f0;">import</span> <span style="color: #008b8b;">android</span>.<span style="color: #008b8b;">view</span>.<span style="color: #008b8b;">inputmethod</span>.<span style="color: #228b22;">InputMethodManager</span>;
+<span style="color: #a020f0;">import</span> <span style="color: #008b8b;">android</span>.<span style="color: #008b8b;">widget</span>.<span style="color: #228b22;">Button</span>;
+<span style="color: #a020f0;">import</span> <span style="color: #008b8b;">android</span>.<span style="color: #008b8b;">widget</span>.<span style="color: #228b22;">EditText</span>;
+<span style="color: #a020f0;">import</span> <span style="color: #008b8b;">android</span>.<span style="color: #008b8b;">widget</span>.<span style="color: #228b22;">TextView</span>;
+<span style="color: #a020f0;">import</span> <span style="color: #008b8b;">io</span>.<span style="color: #008b8b;">grpc</span>.<span style="color: #228b22;">ManagedChannel</span>;
+<span style="color: #a020f0;">import</span> <span style="color: #008b8b;">io</span>.<span style="color: #008b8b;">grpc</span>.<span style="color: #228b22;">ManagedChannelBuilder</span>;
+<span style="color: #a020f0;">import</span> <span style="color: #008b8b;">io</span>.<span style="color: #008b8b;">grpc</span>.<span style="color: #008b8b;">examples</span>.<span style="color: #008b8b;">helloworld</span>.<span style="color: #228b22;">GreeterGrpc</span>;
+<span style="color: #a020f0;">import</span> <span style="color: #008b8b;">io</span>.<span style="color: #008b8b;">grpc</span>.<span style="color: #008b8b;">examples</span>.<span style="color: #008b8b;">helloworld</span>.<span style="color: #228b22;">HelloReply</span>;
+<span style="color: #a020f0;">import</span> <span style="color: #008b8b;">io</span>.<span style="color: #008b8b;">grpc</span>.<span style="color: #008b8b;">examples</span>.<span style="color: #008b8b;">helloworld</span>.<span style="color: #228b22;">HelloRequest</span>;
+<span style="color: #a020f0;">import</span> <span style="color: #008b8b;">java</span>.<span style="color: #008b8b;">io</span>.<span style="color: #228b22;">PrintWriter</span>;
+<span style="color: #a020f0;">import</span> <span style="color: #008b8b;">java</span>.<span style="color: #008b8b;">io</span>.<span style="color: #228b22;">StringWriter</span>;
+<span style="color: #a020f0;">import</span> <span style="color: #008b8b;">java</span>.<span style="color: #008b8b;">lang</span>.<span style="color: #008b8b;">ref</span>.<span style="color: #228b22;">WeakReference</span>;
+<span style="color: #a020f0;">import</span> <span style="color: #008b8b;">java</span>.<span style="color: #008b8b;">util</span>.<span style="color: #008b8b;">concurrent</span>.<span style="color: #228b22;">TimeUnit</span>;
+
+<span style="color: #a020f0;">public</span> <span style="color: #a020f0;">class</span> <span style="color: #228b22;">HelloworldActivity</span> <span style="color: #a020f0;">extends</span> <span style="color: #228b22;">AppCompatActivity</span> {
+  <span style="color: #a020f0;">private</span> <span style="color: #228b22;">Button</span> <span style="color: #a0522d;">sendButton</span>;
+  <span style="color: #a020f0;">private</span> <span style="color: #228b22;">EditText</span> <span style="color: #a0522d;">hostEdit</span>;
+  <span style="color: #a020f0;">private</span> <span style="color: #228b22;">EditText</span> <span style="color: #a0522d;">portEdit</span>;
+  <span style="color: #a020f0;">private</span> <span style="color: #228b22;">EditText</span> <span style="color: #a0522d;">messageEdit</span>;
+  <span style="color: #a020f0;">private</span> <span style="color: #228b22;">TextView</span> <span style="color: #a0522d;">resultText</span>;
+
+  <span style="color: #008b8b;">@Override</span>
+  <span style="color: #a020f0;">protected</span> <span style="color: #228b22;">void</span> <span style="color: #0000ff;">onCreate</span>(<span style="color: #228b22;">Bundle</span> <span style="color: #a0522d;">savedInstanceState</span>) {
+    <span style="color: #a020f0;">super</span>.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_helloworld);
+    sendButton = (<span style="color: #228b22;">Button</span>) findViewById(R.id.send_button);
+    hostEdit = (<span style="color: #228b22;">EditText</span>) findViewById(R.id.host_edit_text);
+    portEdit = (<span style="color: #228b22;">EditText</span>) findViewById(R.id.port_edit_text);
+    messageEdit = (<span style="color: #228b22;">EditText</span>) findViewById(R.id.message_edit_text);
+    resultText = (<span style="color: #228b22;">TextView</span>) findViewById(R.id.grpc_response_text);
+    resultText.setMovementMethod(<span style="color: #a020f0;">new</span> <span style="color: #228b22;">ScrollingMovementMethod</span>());
+  }
+
+  <span style="color: #a020f0;">public</span> <span style="color: #228b22;">void</span> <span style="color: #0000ff;">sendMessage</span>(<span style="color: #228b22;">View</span> <span style="color: #a0522d;">view</span>) {
+    ((<span style="color: #228b22;">InputMethodManager</span>) getSystemService(<span style="color: #008b8b;">Context</span>.INPUT_METHOD_SERVICE))
+        .hideSoftInputFromWindow(hostEdit.getWindowToken(), 0);
+    sendButton.setEnabled(<span style="color: #008b8b;">false</span>);
+    resultText.setText(<span style="color: #8b2252;">""</span>);
+    <span style="color: #a020f0;">new</span> <span style="color: #228b22;">GrpcTask</span>(<span style="color: #a020f0;">this</span>)
+        .execute(
+            hostEdit.getText().toString(),
+            messageEdit.getText().toString(),
+            portEdit.getText().toString());
+  }
+
+  <span style="color: #a020f0;">private</span> <span style="color: #a020f0;">static</span> <span style="color: #a020f0;">class</span> <span style="color: #228b22;">GrpcTask</span> <span style="color: #a020f0;">extends</span> <span style="color: #228b22;">AsyncTask</span>&lt;<span style="color: #228b22;">String</span>, <span style="color: #228b22;">Void</span>, <span style="color: #228b22;">String</span>&gt; {
+    <span style="color: #a020f0;">private</span> <span style="color: #a020f0;">final</span> <span style="color: #228b22;">WeakReference</span>&lt;<span style="color: #228b22;">Activity</span>&gt; <span style="color: #a0522d;">activityReference</span>;
+    <span style="color: #a020f0;">private</span> <span style="color: #228b22;">ManagedChannel</span> <span style="color: #a0522d;">channel</span>;
+
+    <span style="color: #a020f0;">private</span> <span style="color: #0000ff;">GrpcTask</span>(<span style="color: #228b22;">Activity</span> <span style="color: #a0522d;">activity</span>) {
+      <span style="color: #a020f0;">this</span>.activityReference = <span style="color: #a020f0;">new</span> <span style="color: #228b22;">WeakReference</span>&lt;<span style="color: #228b22;">Activity</span>&gt;(activity);
+    }
+
+    <span style="color: #008b8b;">@Override</span>
+    <span style="color: #a020f0;">protected</span> <span style="color: #228b22;">String</span> <span style="color: #0000ff;">doInBackground</span>(<span style="color: #228b22;">String</span>... <span style="color: #a0522d;">params</span>) {
+      <span style="color: #228b22;">String</span> <span style="color: #a0522d;">host</span> = params[0];
+      <span style="color: #228b22;">String</span> <span style="color: #a0522d;">message</span> = params[1];
+      <span style="color: #228b22;">String</span> <span style="color: #a0522d;">portStr</span> = params[2];
+      <span style="color: #228b22;">int</span> <span style="color: #a0522d;">port</span> = TextUtils.isEmpty(portStr) ? 0 : Integer.valueOf(portStr);
+      <span style="color: #a020f0;">try</span> {
+        channel = ManagedChannelBuilder.forAddress(host, port).usePlaintext().build();
+        <span style="color: #008b8b;">GreeterGrpc</span>.<span style="color: #228b22;">GreeterBlockingStub</span> <span style="color: #a0522d;">stub</span> = GreeterGrpc.newBlockingStub(channel);
+        <span style="color: #228b22;">HelloRequest</span> <span style="color: #a0522d;">request</span> = HelloRequest.newBuilder().setName(message).build();
+        <span style="color: #228b22;">HelloReply</span> <span style="color: #a0522d;">reply</span> = stub.sayHello(request);
+        <span style="color: #a020f0;">return</span> reply.getMessage();
+      } <span style="color: #a020f0;">catch</span> (<span style="color: #228b22;">Exception</span> <span style="color: #a0522d;">e</span>) {
+        <span style="color: #228b22;">StringWriter</span> <span style="color: #a0522d;">sw</span> = <span style="color: #a020f0;">new</span> <span style="color: #228b22;">StringWriter</span>();
+        <span style="color: #228b22;">PrintWriter</span> <span style="color: #a0522d;">pw</span> = <span style="color: #a020f0;">new</span> <span style="color: #228b22;">PrintWriter</span>(sw);
+        e.printStackTrace(pw);
+        pw.flush();
+        <span style="color: #a020f0;">return</span> String.format(<span style="color: #8b2252;">"Failed... : %n%s"</span>, sw);
+      }
+    }
+
+    <span style="color: #008b8b;">@Override</span>
+    <span style="color: #a020f0;">protected</span> <span style="color: #228b22;">void</span> <span style="color: #0000ff;">onPostExecute</span>(<span style="color: #228b22;">String</span> <span style="color: #a0522d;">result</span>) {
+      <span style="color: #a020f0;">try</span> {
+        channel.shutdown().awaitTermination(1, <span style="color: #008b8b;">TimeUnit</span>.SECONDS);
+      } <span style="color: #a020f0;">catch</span> (<span style="color: #228b22;">InterruptedException</span> <span style="color: #a0522d;">e</span>) {
+        Thread.currentThread().interrupt();
+      }
+      <span style="color: #228b22;">Activity</span> <span style="color: #a0522d;">activity</span> = activityReference.get();
+      <span style="color: #a020f0;">if</span> (activity == <span style="color: #008b8b;">null</span>) {
+        <span style="color: #a020f0;">return</span>;
+      }
+      <span style="color: #228b22;">TextView</span> <span style="color: #a0522d;">resultText</span> = (<span style="color: #228b22;">TextView</span>) activity.findViewById(R.id.grpc_response_text);
+      <span style="color: #228b22;">Button</span> <span style="color: #a0522d;">sendButton</span> = (<span style="color: #228b22;">Button</span>) activity.findViewById(R.id.send_button);
+      resultText.setText(result);
+      sendButton.setEnabled(<span style="color: #008b8b;">true</span>);
+    }
+  }
+}
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org54fc086" class="outline-2">
+<h2 id="org54fc086">fallback和intercepter</h2>
+<div class="outline-text-2" id="text-org54fc086">
+<p>
+  启动服务器时可以注册一个fallback HandlerRegistry。所有未匹配的请求会分派给fallback registry的lookupMethod(String name)方法。这个方法返回一个ServiceMethodDefinition，后者可以通过ServerServiceDefinition的方法getMethod(String name)得到。
+ServerServiceDefinition可以通过BindableService.bindService()方法得到。gRPC编译器生产的XXXImplBase类就是一个BindableService。ImplBase虽然是一个抽象类，但实现了bindService()方法。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgef1fe95" class="outline-2">
+<h2 id="orgef1fe95">试验</h2>
+<div class="outline-text-2" id="text-orgef1fe95">
+<p>
+开发一个动态加载协议的代理。项目分为4个目录：
+</p>
+<ul class="org-ul">
+<li>protocol。保存协议。</li>
+<li>client。客户端。</li>
+<li>server。服务器。提供4中类型的接口。</li>
+<li>proxy。动态代理，同时提供mock server功能。
+参数 -service-instance-table name=ip1,ip2 记录服务器示例地址。
+参数 -mock-server=a.json 将文件内容作为应答返回。a.json包含：package、service、method_name、method_type、request_type、response_type、response_content。</li>
+</ul>
+
+<p>
+公共参数：ApplicationRunner -server-address -server-port 
+</p>
+
+
+<p>
+gRPC在发送请求时会建立一个ClientCall&lt;T,U&gt;对象。Channel.newCall(MethodDescriptor, CallOptions)。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org7616774" class="outline-2">
+<h2 id="org7616774">连接断开和心跳</h2>
+<div class="outline-text-2" id="text-org7616774">
+<p>
+如果没有调用onCompleted()而知直接关闭进程，对端会抛出io.grpc.StatusRuntimeException，提示“UNAVAILABLE io exception”，并调用onError()。对于双向流，必须先调用对端onCompleted()，然后调用自身的onCompleted()。否则调用channel.shutdown().awaitTermination()会超时。
+</p>
+
+<p>
+当双向流一端失败后，另一端会立即调用onError(io.grpc.StatusRuntimeException)。因此一般情况下不需要心跳。
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-orgce8d60b" class="outline-2">
+<h2 id="orgce8d60b">参考资料</h2>
+</div>
+
+
+<div id="outline-container-org7e120b4" class="outline-2">
+<h2 id="org7e120b4">修订记录</h2>
+<div class="outline-text-2" id="text-org7e120b4">
+<ul class="org-ul">
+<li>2018年12月23日 建立文档。</li>
+<li>2019年08月05日 增加fallback部分。</li>
+<li>2019年08月05日 增加试验部分。</li>
+<li>2019年09月23日 增加断开连接部分。</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: 2019年09月23日</p>
+<p class="date">Created: 2019-09-23 周一 21:15</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

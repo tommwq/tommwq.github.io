@@ -1,0 +1,1367 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2019-09-23 周一 21:13 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org36299e1">DDD入门</a></li>
+<li><a href="#org743ed78">领域、子域和限界上下文</a></li>
+<li><a href="#orge1fab87">上下文映射图</a></li>
+<li><a href="#org92ad2ba">架构</a></li>
+<li><a href="#org1750332">实体</a></li>
+<li><a href="#orgdc86501">值对象</a></li>
+<li><a href="#orgd2c278e">领域服务</a></li>
+<li><a href="#org629448a">领域事件</a></li>
+<li><a href="#org8199602">模块</a></li>
+<li><a href="#org7696c2b">聚合</a></li>
+<li><a href="#orgc45fa78">工厂</a></li>
+<li><a href="#org1ff3f44">资源库</a></li>
+<li><a href="#orged8ef74">集成限界上下文</a></li>
+<li><a href="#org3896420">应用程序</a></li>
+<li><a href="#org47d6395">聚合与事件源：A+ES</a></li>
+</ul>
+</div>
+</div>
+<p>
+实现领域驱动设计笔记
+</p>
+
+<div id="outline-container-org36299e1" class="outline-2">
+<h2 id="org36299e1">DDD入门</h2>
+<div class="outline-text-2" id="text-org36299e1">
+<p>
+DDD方法的目标是设计出准确表达业务意图的软件。为了更好的实现业务，我们需要将具体业务抽象成一个模型，这个模型就叫做领域模型。
+领域模型包含数据和行为，并且表达了准确的业务含义。为了得到高质量的领域模型，DDD要求开发团队中引入领域专家的角色。
+领域专家是一个对业务有着深入理解的人。领域专家熟悉业务，开发者熟悉软件，但是要让他们更好的合作起来，需要找到共同语言——即所谓的
+通用语言（ubiquitous language）。通用语言包含大量的业务术语，但它不是业务语言，它是一种由团队共同建立和使用的语言。
+“通用”不是说要包含全部领域或全部内容，而是指在一个独立的业务领域内是通用的，或者说一个限界上下文（bounded context）中是通用的。
+</p>
+
+
+<p>
+具有真正业务价值的软件可以很好的符合业务战略，可以将竞争优势融合到解决方案中，这样的软件是关于业务的，不是关于技术的。为了开发出这样的软件，
+开发团队需要解决这些问题：如何确定某个需求确实能够传递真正的业务价值？如何去发现和暴露出这些业务价值？如何安排它们的优先级，并实现它们？
+DDD给出的方案是：将领域专家和开发人员聚集到一起，让软件可以反映领域专家的思维模型。
+</p>
+
+
+<p>
+在应用DDD时，我们首先希望将它应用到最重要的业务场景下。对应的模型叫做核心域（core domain）。相对次要的模型叫做支撑子域（supporting subdomain）。
+</p>
+
+
+<p>
+当然应用DDD也需要一定的条件。DDD是开发复杂软件的工具，对于简单软件，DDD就显得过于笨重的。
+在书中作者给出了一个DDD积分卡，用来评估一个软件项目是否适合DDD。这个表格总结来说，就是如果一个软件只有不到30个操作，
+并且将来几乎不会发生变化，那么不需要使用DDD。
+</p>
+
+
+<p>
+对象的主要目的应该是封装业务逻辑，而非容纳属性。如果把对象当做属性容器，代码不会反映出任何业务逻辑。这样的对象叫做“贫血对象”。
+没有人能了解贫血对象和业务之间的关系，以及代码为什么会设计成（或变成）这个样子。有人把这种情况叫做“由贫血症导致的失忆症”。
+</p>
+
+
+<p>
+下面我们考察一下“注射流感疫苗”模型的几个版本：
+版本1：随便写代码就行。 
+</p>
+<div class="org-src-container">
+<pre class="src src-java">patient.setShotType(<span style="color: #008b8b;">ShotTypes</span>.<span style="color: #228b22;">TYPE_FLU</span>);
+patient.setDose(dose);
+patient.setNurse(nurse);
+</pre>
+</div>
+
+<p>
+版本2：护士给病人注射流感疫苗。
+</p>
+<div class="org-src-container">
+<pre class="src src-java">patient.giveFluShot();
+</pre>
+</div>
+
+<p>
+版本3：护士给病人注射标准计量的流感疫苗。
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #228b22;">Vaccine</span> <span style="color: #a0522d;">vaccine</span> = vaccines.standardAdultFluDose();
+nurse.administerFluVaccine(patient, vaccine);
+</pre>
+</div>
+
+
+<p>
+贫血模型的另一个缺陷是将业务逻辑泄漏到客户代码，导致软件的可维护性降低。关于这一点，可以考察下面的例子：
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #b22222;">// </span><span style="color: #b22222;">&#36139;&#34880;&#27169;&#22411;</span>
+<span style="color: #a020f0;">public</span> <span style="color: #a020f0;">class</span> <span style="color: #228b22;">BacklongItem</span> <span style="color: #a020f0;">extends</span> <span style="color: #228b22;">Entity</span> {
+    <span style="color: #a020f0;">private</span> <span style="color: #228b22;">SprintId</span> <span style="color: #a0522d;">sprintId</span>;
+    <span style="color: #a020f0;">private</span> <span style="color: #228b22;">BacklogItemStatusType</span> <span style="color: #a0522d;">status</span>;
+
+    <span style="color: #a020f0;">public</span> <span style="color: #228b22;">void</span> <span style="color: #0000ff;">setSprintId</span>(<span style="color: #228b22;">SprintId</span> <span style="color: #a0522d;">sprintId</span>) {
+        <span style="color: #a020f0;">this</span>.sprintId = sprintId;
+    }
+
+    <span style="color: #a020f0;">public</span> <span style="color: #228b22;">void</span> <span style="color: #0000ff;">setStatus</span>(<span style="color: #228b22;">BacklogItemStatusType</span> <span style="color: #a0522d;">status</span>) {
+        <span style="color: #a020f0;">this</span>.status = status;
+    }
+}
+
+<span style="color: #b22222;">// </span><span style="color: #b22222;">&#23458;&#25143;&#20195;&#30721;</span>
+backlogItem.setSprintId(sprintId);
+backlogItem.setStatus(<span style="color: #008b8b;">BacklogItemStatusType</span>.COMMITTED);
+
+<span style="color: #b22222;">// </span><span style="color: #b22222;">&#39046;&#22495;&#27169;&#22411;</span>
+<span style="color: #a020f0;">public</span> <span style="color: #a020f0;">class</span> <span style="color: #228b22;">BacklogItem</span> <span style="color: #a020f0;">extends</span> <span style="color: #228b22;">Entity</span> {
+    <span style="color: #a020f0;">private</span> <span style="color: #228b22;">SprintId</span> <span style="color: #a0522d;">sprintId</span>;
+    <span style="color: #a020f0;">private</span> <span style="color: #228b22;">BacklogItemStatusType</span> <span style="color: #a0522d;">status</span>;
+
+    <span style="color: #a020f0;">public</span> <span style="color: #228b22;">void</span> <span style="color: #0000ff;">commitTo</span>(<span style="color: #228b22;">Sprint</span> <span style="color: #a0522d;">aSprint</span>) {
+        <span style="color: #a020f0;">if</span> (!<span style="color: #a020f0;">this</span>.isScheduledForRelease()) {
+            <span style="color: #a020f0;">throw</span> <span style="color: #a020f0;">new</span> <span style="color: #228b22;">IllegalStateException</span>(<span style="color: #8b2252;">"Must be scheduled for release to commit to sprint."</span>);
+        }
+
+        <span style="color: #a020f0;">if</span> (<span style="color: #a020f0;">this</span>.isComittedToSprint()) {
+            <span style="color: #a020f0;">if</span> (!aSprint.sprintId().equals(<span style="color: #a020f0;">this</span>.sprintId())) {
+                <span style="color: #a020f0;">this</span>.uncommitFromSprint();
+            }
+        }
+
+        <span style="color: #a020f0;">this</span>.elevateStatusWith(<span style="color: #008b8b;">BacklogItemStatus</span>.COMMITTED);
+        <span style="color: #a020f0;">this</span>.setSprintId(aSprintId.sprintId());
+        DomainEventPublisher
+            .instance()
+            .<span style="color: #a020f0;">public</span>(<span style="color: #a020f0;">new</span> <span style="color: #228b22;">BacklogItemCommitted</span>(
+                                             <span style="color: #a020f0;">this</span>.tenant(),
+                                             <span style="color: #a020f0;">this</span>.backlogItemId(),
+                                             <span style="color: #a020f0;">this</span>.sprintId()));
+    }
+}
+
+<span style="color: #b22222;">// </span><span style="color: #b22222;">&#23458;&#25143;&#20195;&#30721;</span>
+backlogItem.commitTo(sprint);
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org743ed78" class="outline-2">
+<h2 id="org743ed78">领域、子域和限界上下文</h2>
+<div class="outline-text-2" id="text-org743ed78">
+<p>
+从广义上讲，领域是一个组织所做的事情以及其中所包含的一切。在DDD中，领域被划分为几个子域。其中起着决定性作用叫核心域。非核心域的重要子域叫支撑子域。
+如果一个子域被应用到整个业务系统，它叫做通用子域。每个子域具有自己独立的限界上下文，领域模型在限界上下文中完成开发。
+</p>
+
+
+<p>
+在实施DDD个过程中，寻找子域是非常重要的一步。领域模型在子域中完成开发，如果子域划分出现问题，领域建模必然遇到困难。
+在不同上下文中可能出现同一个术语，这种情况是正常的，但是这个术语在不同上下文中的含义往往是不同的。如果你在不同上下文中看到了完全相同的对象，
+很可能意味着领域模型出现了错误。唯一的例外在于这些上下文使用了共享内核（shared kernel）。
+</p>
+
+
+<p>
+上下文并非只能包含一个领域模型，也并非只能包含领域模型。如果数据库Schema设计由领域模型驱动，Schema也应当包含在上下文中。
+如果数据库Schema是已经存在的，由其他团队负责设计的，Schema便不能和模型位于同一上下文。此外，用户界面、应用服务等，也可以位于上下文中。
+</p>
+
+
+<p>
+当我们关心的状态由于模型行为而发生改变时，系统将发布领域事件。领域事件以“名字+动词过去式”命名，如TenantProvisioned、UserPasswordChanged等。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orge1fab87" class="outline-2">
+<h2 id="orge1fab87">上下文映射图</h2>
+<div class="outline-text-2" id="text-orge1fab87">
+<p>
+不同上下文中的领域模型需要相互配合协作，这就产生了限界上下文之间的映射关系。这些关系的集合叫做上下文映射图（context map）。两个上下文之间的关系有：
+</p>
+<ul class="org-ul">
+<li>合作关系（partnership）。两个上下文要么一起成功，要么一起失败。两个团队应该在接口演化上充分合作，以保证在同一个发布中完成功能开发。</li>
+<li>共享内核（shared kernel）。通过共享模型和代码而产生一种紧密的依赖性。</li>
+<li>客户方-供应方开发（customer-supplier development）。上游团队可以独立于下游团队，但应该顾及下游团队的需求。</li>
+<li>尊奉者（conformist）。如果上游团队没有动力满足下游团队的需求，下游团队只能盲目的使用上游团队的模型。</li>
+<li>防腐层（anticorruption layer）。下游系统根据自己的领域模型建立一个独立的层，作为上游系统的委派，向下游系统提供功能。在防腐层内部，实现模型转换。</li>
+<li>开放主机服务（open host service）。让子系统通过协议访问服务。协议是公开的。</li>
+<li>发布语言（published language）。在两个上下文之间翻译模型通常需要一种公用语言。发布语言通常和开放主机服务一起使用。</li>
+<li>分离（separate way）。两个上下文没有任何关系。</li>
+<li>大泥球（big ball of mud）。系统中存在混杂在一起的模型。模型的边界是非常模糊的。</li>
+</ul>
+
+
+<p>
+这里区分上下游的方法很简单：下游子域从上游获取数据，以完成业务过程。数据传输的方式有拉和推两种。
+拉是指下游主动发起请求，上游返回下游锁要求的数据。拉的好处是编码简单。
+推是指上游主动推送数据，下游把数据缓存起来。推的好处是下游可以提供最大的自治性，并且数据更新延迟较低。
+高自治性可以降低实时依赖项。一个自治性高的设计中，上游系统的数据库不必复制到下游系统。数据库复制实际上是共享内核。
+</p>
+
+
+<p>
+在绘制上下文映射图时有一些常用的缩略语，如：
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">U</td>
+<td class="org-left">上游upstream</td>
+</tr>
+
+<tr>
+<td class="org-left">D</td>
+<td class="org-left">下游downstream</td>
+</tr>
+
+<tr>
+<td class="org-left">ACL</td>
+<td class="org-left">防腐层</td>
+</tr>
+
+<tr>
+<td class="org-left">OHS</td>
+<td class="org-left">开放主机服务</td>
+</tr>
+
+<tr>
+<td class="org-left">PL</td>
+<td class="org-left">发布语言</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org92ad2ba" class="outline-2">
+<h2 id="org92ad2ba">架构</h2>
+<div class="outline-text-2" id="text-org92ad2ba">
+<p>
+DDD的一个优势是没有对软件架构进行限制。以分层架构为例，通常，一个采用DDD的分层架构分为4层：用户接口层、应用层、领域层和基础设施层。
+每层都可以和位于其下的各层交互。用户界面层处理用户显示和用户请求。用户界面需要对用户输入进行验证，这种验证和对领域模型的验证是不同的。
+这一层不应包含业务逻辑。但是这一层可以使用领域模型在用户接口的投影：展现模型（presentation model）。
+应用层包含应用服务，应用服务和领域服务不同，应用服务不处理业务逻辑，而是进行安全认证，消息通知和控制持久化事务等。
+应用服务是轻量级的，通常的用途是：接收用户界面的输入参数，通过资源库得到聚合实例，然后执行相应的操作。
+如果采用依赖倒置原则，可以将各层的顺序调整为：基础设施层、用户接口层、应用层和领域层。
+</p>
+
+
+<p>
+在六边形架构（也叫端口与适配器或Onion）中，系统API不会直接暴露给客户，而是通过适配器将用户输入转换成系统API参数。当需要支持一个新客户时，
+只需要增加对应的适配器。系统和外部系统（如数据）的交互也通过适配器完成。在六边形架构中，领域模型位于应用程序内部，应用程序收到用户操作请求后，
+操作领域模型，完成业务动作。
+</p>
+
+
+<p>
+Thomas Erl为面向服务架构（Service-Oriented Architecture, SOA）定义了一些设计原则，包括：
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">服务契约</td>
+<td class="org-left">通过契约文档，服务阐述自身的目的与功能。</td>
+</tr>
+
+<tr>
+<td class="org-left">松耦合</td>
+<td class="org-left">服务将依赖关系最小化。</td>
+</tr>
+
+<tr>
+<td class="org-left">服务抽象</td>
+<td class="org-left">服务只发布契约，而向客户端隐藏内部逻辑。</td>
+</tr>
+
+<tr>
+<td class="org-left">服务重用性</td>
+<td class="org-left">一种服务可以被其他服务所重用。</td>
+</tr>
+
+<tr>
+<td class="org-left">服务自治性</td>
+<td class="org-left">服务自行控制环境与资源以保持独立性，这有助于保持服务的一致性和可靠性。</td>
+</tr>
+
+<tr>
+<td class="org-left">服务无状态性</td>
+<td class="org-left">服务负责消费放的状态管理，这不能和服务的自治性发生冲突。</td>
+</tr>
+
+<tr>
+<td class="org-left">服务可发现性</td>
+<td class="org-left">客户可以通过服务元数据来查找服务和理解服务。</td>
+</tr>
+
+<tr>
+<td class="org-left">服务组合型</td>
+<td class="org-left">一种服务可以由其他的服务组合而成，而不管其他服务的大小和复杂性如何。</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+如果把对象看做是资源，在使用REST（Representational State Transfer）ful HTTP接口时，看起来好像把操作转换成了CRUD。但事实并非如此，
+我们所创建的资源并非表示持久化实体，而是封装了某种行为。我们在操作这些资源时，实际上是调用这些行为。在使用DDD和RESTful HTTP时，
+可以为系统接口层建立一个限界上下文，通过适当的策略访问实际的核心模型。
+</p>
+
+
+<p>
+从资源库中查询所有需要显式的数据是困难的，特别是需要显示来自不同聚合类型与实例的数据时。传统的做法有两种：一是从不同的资源库获取聚合实例，
+然后将它们组装成一个数据传输对象（Data Transfer Object，DTO）。二是在一个查询中使用特殊的方法将不同资源库的数据组合在一起。命令和查询
+职责分离（CQRS，Command-Query Responsibility Segregation）是一种完全不同的方法，用来把领域数据映射到界面显示。在对象层面，CQRS把
+操作分为命令（Command）和查询（Query）。命令要求对象执行某种动作，因此可能改变对象的状态。查询用来获取数据，是幂等的。命令不能有返回值。
+在更高的层面看，CQRS将软件模型拆分为命令模型和查询模型。命令模型只包含对象支持的动作，查询模型用于查询模型状态。在使用数据库保存查询模型时，
+一张表应当对应一种用户界面显示类型。用户提交的命令由命令处理器接收并进行分派。根据分派方法的不同，可以把命令处理器分为3类：
+</p>
+<ul class="org-ul">
+<li>分类风格（categorized style）。多个命令处理器位于一个应用服务中，每个方法处理一种类型的命令。</li>
+<li>专属风格（dedicated style）。每个类处理一种命令。</li>
+<li>消息风格（messaging style）。使用异步消息分派给命令处理器。</li>
+</ul>
+
+<p>
+消息风格更加灵活，但是实现起来也更复杂。如果没有伸缩性的需求，可以优先采用另外两种方式。当命令处理器执行结束后，一个聚合实例被更新，同时命令模型
+将发布领域事件。领域事件会通知查询模型进行更新。同时，也会通知其他相关的聚合实例同步更新。这些聚合实例将和当前修改的示例保持最终一致性。
+对于需要幂等性，或没有通过安全检查的命令，命令处理器不会发布领域事件。为了更新查询面模型，系统建立一个特殊的事件订阅器，接收命令处理器发布的
+所有领域事件。领域事件应该包含足够充分的数据，以正确更新查询模型。更新查询模型的操作应该是同步的还是异步的？这取决于一致性约束、性能约束、
+系统的负荷、查询模型数据库的存储位置等因素。
+</p>
+
+
+
+<p>
+事件驱动架构（EDA，Event-Driven Architecture）是一种用于处理事件的生成、发现和处理等任务的软件架构。一个系统发布的领域事件将发送给另外一个系统。
+这种基于消息的系统通常呈现出一种管道和过滤器风格：
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">cat phone_numbers.txt | grep 303 | wc -l
+</pre>
+</div>
+<p>
+这种风格具有以下的基本特征：
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">特征</td>
+<td class="org-left">描述</td>
+</tr>
+
+<tr>
+<td class="org-left">管道是消息通道</td>
+<td class="org-left">过滤器通过输入管道接收消息，通过输出管道发送消息。</td>
+</tr>
+
+<tr>
+<td class="org-left">端口连接过滤器和管道</td>
+<td class="org-left">过滤器通过端口连接到输入和输出管道。端口使得六边形架构称为首选架构。</td>
+</tr>
+
+<tr>
+<td class="org-left">过滤器即处理器</td>
+<td class="org-left">过滤器可以对消息进行处理，而非简单的过滤。</td>
+</tr>
+
+<tr>
+<td class="org-left">分离处理器。</td>
+<td class="org-left">每个过滤器都是分离的组件。</td>
+</tr>
+
+<tr>
+<td class="org-left">松耦合</td>
+<td class="org-left">每个过滤器独立的参与处理过程。可以通过配置将过滤器组合起来。</td>
+</tr>
+
+<tr>
+<td class="org-left">可换性</td>
+<td class="org-left">可以通过配置重排过滤器执行顺序，是实现不同的需求。</td>
+</tr>
+
+<tr>
+<td class="org-left">过滤器可以使用多个管道</td>
+<td class="org-left">过滤器可以从多个管道中读写数据，是一种并行处理过程。</td>
+</tr>
+
+<tr>
+<td class="org-left">并行使用各种类型的过滤器</td>
+<td class="org-left">可以并行增加同类型过滤器实例，以降低过滤器实例负荷，提高系统性能。</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+我们将前面的shell命令进行改写成事件驱动的方式：
+</p>
+<blockquote>
+<p>
+1 PhoneNumberPublisher读取数据库。
+2 PhoneNumberPublisher发布AllPhoneNumbersListed事件。
+3 PhoneNumberFinder接收AllPhoneNumbersListed事件。
+4 PhoneNumberFinder发布PhoneNumbersMatched事件。
+5 MatchedPhoneNumberCounter接收PhoneNumbersMatched事件。
+6 MatchedPhoneNumberCounter发布MatchedPhoneNumberCounted事件。
+7 PhoneNumberExecutive接收MatchedPhoneNumberCounted事件。
+8 PhoneNumberExecutive记录日志。
+</p>
+</blockquote>
+
+<p>
+对管道和过滤器进行扩展，可以得到一种事件驱动的、分布式的并行处理模式：长时间处理过程（Long-Running Process）。
+考虑下面的场景：在一个多任务过程中，某个领域事件只能表示过程中的一部分。只有在所有的参与事件都得到处理后，这个多任务处理过程才算完成。
+这个过程是如何开始的？如何分布的？如何跟踪处理进度？这些问题可以通过长时间处理过程得到解答。长时间处理过程有三种方法：
+</p>
+<ul class="org-ul">
+<li>将过程设计为一个组合任务，使用一个执行组件对任务进行跟踪，并将各个步骤和任务完成情况进程持久化。</li>
+<li>将处理过程设计为一组聚合，这些聚合在一系列活动中相互协作。一个或多个聚合实例充当执行者并维护整个过程的状态。</li>
+<li>设计一个无状态的处理过程，每个消息处理组件都对收到的消息进行扩充。整个处理过程包含在每条消息中。</li>
+</ul>
+
+<p>
+我们这里主要介绍第一种方法。考虑下面的例子：
+</p>
+<blockquote>
+<p>
+1 PhoneNumberExecutive读取数据库。
+2 PhoneNumberExecutive发布AllPhoneNumbersListed事件。
+3a PhoneNumberFinder接收AllPhoneNumbersListed事件。
+3b TotalPhoneNumbersCounter接收AllPhoneNumbersListed事件。
+4a PhoneNumberFinder发布PhoneNumbersMatched事件。
+4b TotalPhoneNumbersCounter发布AllPhoneNumbersCounted事件。
+5 MatchedPhoneNumberCounter接收PhoneNumbersMatched事件。
+6 MatchedPhoneNumberCounter发布MatchedPhoneNumberCounted事件。
+7a PhoneNumberExecutive接收MatchedPhoneNumberCounted事件。
+7b PhoneNumberExecutive接收AllPhoneNumbersCounted事件。
+8 PhoneNumberExecutive记录日志。
+</p>
+</blockquote>
+
+<p>
+将执行器和跟踪器合并成一个聚合是最简单的方法。但是为了讨论起来更清晰，这里将二者分开讨论。长时间处理过程的执行器会建立一个类似聚合的状态跟踪器，
+用来跟踪事件的完成情况。这个对象在过程开始时创建，和所有领域事件共享一个唯一标识。当并行处理的每个执行流运行完毕时，执行器或收到相应的完成事件。
+执行器根据唯一标识找到并更新状态跟踪器，然后通过状态跟踪器的isCompleted()方法检测过程是否执行完毕。任务执行完毕后，执行器根据需要发布领域事件。
+有些消息机制无法保证“只有一次”语义，这时就必须考虑让状态实例处理重复消息。方法有两种，一是记录每个事件是否收到，忽略重复事件。
+二是将状态模型设计成幂等的。在长时间过程处理中必须考虑超时的情况。被动超时检查在执行器收到领域事件时，委托状态跟踪器进行。
+如果超时，状态跟踪器被标记为“遗弃”。执行器可以发布一个表示处理失败的领域事件。被动检查的缺点在于，超时从发生到被检测的时间是不确定的。
+主动超时检查通过外部定时器进行。定时器周期的检查跟踪器状态，将超时的跟踪器标记为“遗弃”。主动超时检查的缺点是增加了系统负担，并且需要考虑定时器和
+完成事件的竞态条件。
+</p>
+
+
+<p>
+事件溯源（event sourcing）可以跟踪领域对象上的变更。每次操作聚合，都至少有一个领域事件发布出去，这个事件描述了操作的执行结果。
+每个领域事件保存在事件存储中。每次从资源库中获取某个聚合时，我们将根据发生在聚合上的历史来重建实例。事件按照发生顺序依次应用到聚合上。
+聚合上发生的事件随着时间越来越多，为了避免事件重放产生性能问题，可以为聚合建立快照。何时建立快照取决于事件数量。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org1750332" class="outline-2">
+<h2 id="org1750332">实体</h2>
+<div class="outline-text-2" id="text-org1750332">
+<p>
+实体是一个唯一的东西，并且在相当长的一段时间内持续变化。唯一身份标识和可变性将实体和值对象区分开来。在设计实体时，首先要考虑的是实体的唯一标识和
+对实体的查找，以及在生命周期内的唯一性。唯一标识可以保存在值对象中。大部分情况下需要保护实体标识的不变性，这一点可以通过setter方法实现：
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #a020f0;">public</span> <span style="color: #a020f0;">class</span> <span style="color: #228b22;">User</span> <span style="color: #a020f0;">extends</span> <span style="color: #228b22;">Entity</span> {
+    <span style="color: #a020f0;">protected</span> <span style="color: #228b22;">void</span> <span style="color: #0000ff;">setUsername</span>(<span style="color: #228b22;">String</span> <span style="color: #a0522d;">aUsername</span>) {
+        <span style="color: #a020f0;">if</span> (<span style="color: #a020f0;">this</span>.username != <span style="color: #008b8b;">null</span>) {
+            <span style="color: #a020f0;">throw</span> <span style="color: #a020f0;">new</span> <span style="color: #228b22;">IllegalStateException</span>(<span style="color: #8b2252;">"The username may not be changed."</span>);
+        }
+        <span style="color: #a020f0;">if</span> (aUsername == <span style="color: #008b8b;">null</span>) {
+            <span style="color: #a020f0;">throw</span> <span style="color: #a020f0;">new</span> <span style="color: #228b22;">IllegalArgumentException</span>(<span style="color: #8b2252;">"The username may not be set to null."</span>);
+        }
+        <span style="color: #a020f0;">this</span>.username = aUsername;
+    }
+}
+</pre>
+</div>
+</div>
+</div>
+
+
+
+
+
+<div id="outline-container-orgdc86501" class="outline-2">
+<h2 id="orgdc86501">值对象</h2>
+<div class="outline-text-2" id="text-orgdc86501">
+<p>
+值类型用于度量和描述事务。在进行领域建模时，应当优先考虑值对象，值对象可以很方便的进行创建、使用、优化和维护。
+如果你只关心某个对象的属性，它应该被设计成值对象。值对象是不变的，没有身份标识。如果一个领域概念具有以下特征，
+它就是一个值对象：
+</p>
+
+<ul class="org-ul">
+<li>它度量或描述了领域中的一件东西。</li>
+<li>它可以作为不变量。</li>
+<li>它将不同的属性组合为一个概念整体（conceptual whole）。</li>
+<li>当度量或描述改变时，可以用另外一个值替换。</li>
+<li>它可以和其他值对象进行相等判断。</li>
+<li>它不会对协作对象产生副作用。</li>
+</ul>
+
+<p>
+值对象不是领域中的某个东西，而是度量或描述领域中某个东西的概念。比如人拥有年龄，年龄是一种度量，而不是一个实在的东西。
+值对象也可以是有层次的。如果一组属性具有比较强的关联性，它们很可能表达了一个具有整体性的概念，这时应当把它们集中起来，
+构造成一个值对象。比如一件物品的价格是5000美元，这里的价格包含了两个部分：数量和货币单位：
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #a020f0;">public</span> <span style="color: #a020f0;">class</span> <span style="color: #228b22;">Price</span> {
+    <span style="color: #228b22;">Currency</span> <span style="color: #a0522d;">currency</span>;
+    <span style="color: #228b22;">BigDecimal</span> <span style="color: #a0522d;">amount</span>;
+}
+
+<span style="color: #a020f0;">public</span> <span style="color: #a020f0;">class</span> <span style="color: #228b22;">Thing</span> {
+    <span style="color: #a020f0;">private</span> <span style="color: #228b22;">Price</span> <span style="color: #a0522d;">price</span>;
+}
+</pre>
+</div>
+
+<p>
+当然值对象不仅仅是作为属性容器存在。值对象还有一个威力巨大的特性：无副作用函数。无副作用函数指哪些不会改变对象状态的函数。
+在值对象中使用无副作用函数的方法很简单。如果你希望改变某个属性，可以让值对象的无副作用函数返回一个新的值对象实例：
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #a020f0;">public</span> <span style="color: #a020f0;">class</span> <span style="color: #228b22;">FullName</span> {
+    <span style="color: #a020f0;">public</span> <span style="color: #0000ff;">FullName</span>(<span style="color: #228b22;">String</span> <span style="color: #a0522d;">firstName</span>, <span style="color: #228b22;">String</span> <span style="color: #a0522d;">lastName</span>) { <span style="color: #b22222;">/*</span><span style="color: #b22222;">...*/</span> }
+    <span style="color: #a020f0;">public</span> <span style="color: #0000ff;">FullName</span>(<span style="color: #228b22;">String</span> <span style="color: #a0522d;">firstName</span>, <span style="color: #228b22;">String</span> <span style="color: #a0522d;">middleName</span>, <span style="color: #228b22;">String</span> <span style="color: #a0522d;">lastName</span>) { <span style="color: #b22222;">/*</span><span style="color: #b22222;">...*/</span> }
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">...    </span>
+    <span style="color: #a020f0;">public</span> <span style="color: #228b22;">FullName</span> <span style="color: #0000ff;">withMiddleInitial</span>(<span style="color: #228b22;">String</span> <span style="color: #a0522d;">middleNameOrInitial</span>) {
+        <span style="color: #a020f0;">if</span> (middle == <span style="color: #008b8b;">null</span>) {
+            <span style="color: #a020f0;">throw</span> <span style="color: #a020f0;">new</span> <span style="color: #228b22;">IllegalArgumentException</span>(<span style="color: #8b2252;">"must provide a middle name or initial"</span>);
+        }
+
+        <span style="color: #228b22;">String</span> <span style="color: #a0522d;">middle</span> = middleNameOrInitial.trim();
+        <span style="color: #a020f0;">if</span> (middle.isEmpty()) {
+            <span style="color: #a020f0;">throw</span> <span style="color: #a020f0;">new</span> <span style="color: #228b22;">IllegalArgumentException</span>(<span style="color: #8b2252;">"must provide a middle name or initial"</span>);
+        }
+
+        <span style="color: #a020f0;">return</span> <span style="color: #a020f0;">new</span> <span style="color: #228b22;">FullName</span>(<span style="color: #a020f0;">this</span>.firstName(),
+                            middle.substring(0, 1).toUpperCase(),
+                            <span style="color: #a020f0;">this</span>.lastName());
+    }
+}
+
+<span style="color: #228b22;">FullName</span> <span style="color: #a0522d;">name</span> = <span style="color: #a020f0;">new</span> <span style="color: #228b22;">FullName</span>(<span style="color: #8b2252;">"Vaughn"</span>, <span style="color: #8b2252;">"Vernon"</span>);
+name = name.withMiddleInitial(<span style="color: #8b2252;">"L"</span>);
+</pre>
+</div>
+
+<p>
+这么做的好处在于，将业务逻辑封装起来，不会泄漏到客户代码中。在编写值对象代码时，通常提供2个构造函数。一个用于接受全部属性参数，
+另一个用于从现有实例进行复制。由于值对象的不变性，复制可以采用浅拷贝（shallow copy）。同时，setter方法要设置为私有。
+值对象（无副作用）方法的命名通常不会采用JavaBean规定的get前缀。从业务角度来讲，valuePercentage()是比getValuePercentage()
+更为流畅的表达。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgd2c278e" class="outline-2">
+<h2 id="orgd2c278e">领域服务</h2>
+<div class="outline-text-2" id="text-orgd2c278e">
+<p>
+如果领域内存在一个无状态的操作，又不适合放到聚合或值对象上，这个操作就是领域服务。领域服务执行业务逻辑操作，这正是区分应用服务
+和领域服务的地方：应用服务不会处理业务逻辑。通常，领域服务负责：
+</p>
+<ul class="org-ul">
+<li>执行一个显著的业务操作过程。</li>
+<li>对领域对象进行转换。</li>
+<li>以多个领域对象作为输入进行计算，结果产生一个值对象。</li>
+</ul>
+
+<p>
+这里要注意的是，领域服务执行业务逻辑操作，但并非全部业务逻辑操作都位于领域服务之中。领域服务范围过大将导致贫血模型。合理的建模应该
+是让领域服务、实体和值对象一起协作，完成相关的业务操作。
+</p>
+</div>
+</div>
+<div id="outline-container-org629448a" class="outline-2">
+<h2 id="org629448a">领域事件</h2>
+<div class="outline-text-2" id="text-org629448a">
+<p>
+领域事件记录了领域内发生的重要事情。领域事件的命名应当使用通用语言，采用名词+动词过去式的形式，
+并和操作相对应。比如：
+</p>
+<div class="org-src-container">
+<pre class="src src-java">BacklogItem.commitTo(<span style="color: #228b22;">Sprint</span> <span style="color: #a0522d;">aSprint</span>); <span style="color: #b22222;">// </span><span style="color: #b22222;">&#25805;&#20316;&#21517;</span>
+BacklogItemCommitted; <span style="color: #b22222;">// </span><span style="color: #b22222;">&#20107;&#20214;&#21517;</span>
+</pre>
+</div>
+
+<p>
+在发布事件时，操作已经完成，因此要采用过去式。通常系统会关系事件发生（本地）时间，因此领域事件会包含时间戳。
+</p>
+
+
+<p>
+有时领域事件由客户代码发出的请求产生。这时可以把领域事件建模成聚合，也可以拥有自己的资源股。这样的领域事件必须拥有唯一标识，以便捕获和区分外部行为。
+</p>
+
+
+<p>
+通过使用领域事件，我们可以把服务和系统设计成自治的。自治服务可以拥有多个服务接口端点，也可以避免远程过程调用。
+</p>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-org8199602" class="outline-2">
+<h2 id="org8199602">模块</h2>
+<div class="outline-text-2" id="text-org8199602">
+<p>
+在设计领域模型时，模块应当受到与实体、值对象、领域服务和领域事件同样的重视。在命名模块时，也要使用通用语言。
+</p>
+</div>
+</div>
+
+
+
+
+
+<div id="outline-container-org7696c2b" class="outline-2">
+<h2 id="org7696c2b">聚合</h2>
+<div class="outline-text-2" id="text-org7696c2b">
+<p>
+将实体和值对象组合在某个一致性边界之内可以得到聚合（Aggregate）。在设计聚集时，要避免为了方便组合对象而将聚合设计的过大，
+又要避免将聚合设计得过于贫瘠而没有保护好不变性。聚合构成了一个一致性的边界。
+为了保证一致性，在引用外部聚合时，必须使用唯一标识，而非直接持有外部聚合对象。
+为了提高性能，聚合要设计得足够小。
+</p>
+</div>
+</div>
+
+
+
+<div id="outline-container-orgc45fa78" class="outline-2">
+<h2 id="orgc45fa78">工厂</h2>
+<div class="outline-text-2" id="text-orgc45fa78">
+<p>
+工厂的职责是创建对象，除此以外，工厂不再承担任何责任。工厂可以是领域服务，或者是聚合根的成员方法。
+</p>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-org1ff3f44" class="outline-2">
+<h2 id="org1ff3f44">资源库</h2>
+<div class="outline-text-2" id="text-org1ff3f44">
+<p>
+存取聚合实例是通过资源库完成的。通常来说，聚合类型与资源库是1-1对应关系。偶尔也会出现多个聚合类型使用同一个资源库的情况。在设计资源库时存在两种思路面向集合（collection-oriented）以及面向持久化（persistence-oriented）。面向集合是传统的设计思路。
+逻辑层通过一组类似集合的接口存取对象。持久化机制对逻辑层是透明的。事务的管理通常放在应用服务中，领域模型和领域层的操作粒度较细，不适合管理事务。
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-orged8ef74" class="outline-2">
+<h2 id="orged8ef74">集成限界上下文</h2>
+<div class="outline-text-2" id="text-orged8ef74">
+<p>
+限界上下文的集成方法主要有三类。一是远程过程调用，一方开发程序编程接口，另一方面通过远程过程调用获取服务。二是消息机制。通过消息队列或发布-订阅将消息主动发送给下游上下文。三是使用RESTful HTTP。这种方式类似于远程过程调用，区别在于RESTful HTTP不包含远程过程调用使用的参数，每个资源的URI都是唯一的。此外也可以通过共享文件或数据库的方式进行集成。正常情况下不应该选择这两种方法，除非遇到特定的约束限制。
+</p>
+
+
+
+<p>
+远程过程调用对自治性的支持较差，原因在于客户调用的结果必须依赖于远程过程调用的结果，而远程过程调用又是非常复杂的。分布式系统和本地系统存在根本性的差别，主要表现为：
+</p>
+
+<ul class="org-ul">
+<li>网络是不可靠的。</li>
+<li>调用存在时间延迟，而且有时会很长。</li>
+<li>带宽是有限的。</li>
+<li>网络可能存在安全问题。</li>
+<li>网络拓扑可能发生变化。</li>
+<li>知识和政策在多个管理员之间传播。</li>
+<li>网络传输有成本。</li>
+<li>网络是异构的。</li>
+</ul>
+</div>
+</div>
+
+
+
+
+
+
+<div id="outline-container-org3896420" class="outline-2">
+<h2 id="org3896420">应用程序</h2>
+<div class="outline-text-2" id="text-org3896420">
+<p>
+领域模型通常位于应用程序的中心位置。应用程序通过用户界面向外展示领域模型概念，并允许用户在模型上执行各种操作。用户界面使用应用服务来协调用例任务，管理事务，执行一些必要的安全授权。
+</p>
+
+
+<p>
+在开发用户界面的时候，我们需要考虑如何对领域模型进行渲染，以及如何将用户操作映射到领域模型上。首先考虑渲染问题。为了提高软件的易用性，通常需要将多个聚合渲染到一个界面。一种方法是使用数据传输对象（Data Transfer Object，DTO）。数据传输对象包含所要展示的属性值。应用服务通过资源库读取聚合实例，通过一个组装器（DTO Assemble）构造数据传输对象。用户界面组件根据这个对象渲染界面。数据传输对象适合于展现层位于远程机器的情况。如果展现层是本地的，这种方法太笨重了。这是可以使用一种改进方法，即领域负载对象（Domain Payload Object，DPO）。数据传输对象包含的是聚合的属性，领域负载对象包含的是聚合实例的引用。这种方式减少了不同逻辑层之间传输数据的过程，并降低了内存使用情况。
+</p>
+
+
+<p>
+并非领域负载对象中的每个数据都需要展示，如果只考虑需要渲染的数据，就产生了视图模型（View Model）或展现模型（Presentation Model）的概念。视图根据展现模型进行渲染。展现模型是对领域负载对象的扩展，它可以持有领域模型的引用。展现模型可以看成是一个适配器，它根据视图的需要提供属性和行为，并隐藏领域模型的细节。
+</p>
+
+
+<p>
+应用服务负责用例流的任务协调、以及控制事务。它是领域服务的直接客户。应用服务的输入和输出通常是基础类型，或由基础类型组成的DTO。为了适配不同的客户端，应用服务可以使用数据类型转换器，对输入和输出进行转换。
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org47d6395" class="outline-2">
+<h2 id="org47d6395">聚合与事件源：A+ES</h2>
+<div class="outline-text-2" id="text-org47d6395">
+<p>
+事件源（Event Sourcing）通过一些列事件来表示一个聚合的完整状态。通过按照顺序重放事件，可以重建任意时刻聚合的状态。重建一个聚合状态的事件位于一个事件流（Event Stream）中中。所有的事件都持久化到事件存储中。区分事件流的方法通常是使用根实体的唯一标识。A+ES是Aggregate + Event Sourcing的缩写，表示这种使用事件源来维护聚合状态的方法。A+ES的优点有：
+</p>
+<ul class="org-ul">
+<li>保留了聚合的历史状态，在可靠性、BI、数据分析、日志记录、调试等方面存在优势。</li>
+<li>只追加写的方式保证事件源具有高性能，且支持多种数据复制（data replication）方案。</li>
+<li>让开发者聚焦于通用语言，而非ORM阻抗失配。</li>
+</ul>
+
+<p>
+A+ES通用存在不足：
+</p>
+<ul class="org-ul">
+<li>需要对业务领域有深刻的理解，通常适用于业务复杂的项目。</li>
+<li>（目前）缺少工具支持和知识体系。</li>
+<li>缺少有经验的开发者。</li>
+<li>A+ES需要某种形式的命令-查询执行分离，会增加开发者的学习负担。</li>
+</ul>
+
+
+<p>
+应用服务获得控制权后，它将加载聚合，并获取所需要的领域服务以完成业务操作。当应用服务将处理逻辑委派给聚合中的业务方法时，聚合方法将发布事件作为输出。这些事件会修复聚合的状态，并以通知的形式告诉订阅方。下面是一个示例：
+</p>
+<div class="org-src-container">
+<pre class="src src-c#">public class CustomerApplicationService {
+    IEventStore _eventStore;
+    IPricingServing _pricingService;
+
+    public CustomerApplicationService(IEventStore eventStore, IPricingService pricing) {
+        _eventStore = eventStore;
+        _pricingService = pricing;
+    }
+
+    public void LockForAccountOverdraft(CustomerId customerId, string comment) {
+        var stream = _eventStore.LoadEventStream(customerId);
+        // 从事件源构建聚合。
+        var customer = new Customer(stream.Events);
+        // 将业务参数和领域服务传递给聚合方法。
+        customer.LockForAccountOverdraft(comment, _pricingService);
+        // 发布事件。
+        _eventStore.AppendToStream(customerId, stream.Version, customer.Changes);
+    }
+
+    public void LockCustomer(CustomerId customerId, string reason) {
+        var stream = _eventStore.LoadEventStream(customerId);
+        // 更新内存中的模型。
+        customer.Lock(reason);
+        // 发布事件，通知订阅者更新模型。
+        _eventStore.AppendToStream(customerId, stream.Version, customer.Changes);
+    }
+
+    // ...
+}
+
+public interface IEventStore {
+    EventStream LoadEventStream(IIdentity id);
+    EventStream LoadEventStream(IIdentity id, int skipEventsk, int maxCount);
+    void AppendToStream(IIdentity id, int expectedVersion, ICollection&lt;IEvent&gt; events);
+}
+
+public class EventStream {
+    public int Version;
+    public List&lt;IEvent&gt; Events;
+}
+
+public class Customer {
+    public Customer(IEnumerable&lt;IEvent&gt; events) {
+        // 重放事件，构造聚合。
+        foreach (var @event in events) {
+            Mutate(@event);
+        }
+    }
+
+    public bool ConsumptionLocked { get; private set; }
+    public List&lt;IEvent&gt; Changes = new List&lt;IEvent&gt;();
+
+    public void LockForAccountOverdraft(string comment, IPricingService pricing) {
+        if (ManualBilling) {
+            return;
+        }
+
+        var balance = pricing.GetOverdraftThreshold(Currency);
+        if (Balance &lt; balance) {
+            LockCustomer("Overdraft. " + comment);
+        }
+    }
+
+    public void LockCustomer(string reason) {
+        if (!ConsumptionLocked) { // 控制并发。
+            Apply(new CustomerLocked(_state.Id, reason));
+        }
+    }
+
+    public void Apply(IEvent e) {
+        Changes.Add(e);
+        Mutate(e);
+    }
+
+    private void Mutate(IEvent e) {
+        // 利用C#机制进行事件动态分派。
+        ((dynamic) this).When((dynamic) e);
+    }
+
+    private void When(CustomerLocked e) {
+        ConsumptionLocked = true;
+    }
+
+    private void When(CustomerUnlocked e) {
+        ConsumptionLocked = false;
+    }
+}
+</pre>
+</div>
+
+<p>
+从这个例子中可以看出，应用服务构造领域对象，并调用领域对象的业务方法。在执行业务方法时，领域对象首先检查业务条件，接着建立领域事件，调用自身的Apply()方法处理领域事件。Apply()在处理领域事件时，首先将事件加入本地变更集合，然后执行事件动作。业务方法执行完毕后，控制权回到应用服务，应用服务将领域模型的变更集合添加到事件流中。从这里可以看出，A+ES领域模型的实现可以分为状态部分和行为部分，Apply()将这两个部分结合起来。
+</p>
+
+
+<p>
+使用命令模式对这个例子进行简单的重构，可以给系统带来长远的好处。下面是重构之后的代码：
+</p>
+<div class="org-src-container">
+<pre class="src src-c#">public sealed class LockCustomerCommand {
+    public CustomerId { get; set; }
+    public string Reason { get; set; }
+}
+
+public class CustomerApplicationService {
+    // ...
+    public void When(LockCustomerCommand command) {
+        var eventStream = _eventStore.LoadEventStream(command.CustomerId);
+        var customer = new Customer(stream.Events);
+        customer.LockCustomer(command.Reason);
+        _eventStore.AppendToStream(command.CustomerId, eventStream.Version, customer.Changes);
+    }
+}
+</pre>
+</div>
+
+<p>
+重构之后，客户端和应用服务已经解耦。我们可以将命令（即用户行为）记录下来，可以分发给任意一个命令处理器，也可以在分发命令前加入一些链式处理步骤，比如日志、授权和验证等。下面的例子介绍了如何添加日志：
+</p>
+<div class="org-src-container">
+<pre class="src src-c#">public interface IApplicationService {
+    void Execute(ICommand command);
+}
+
+public class CustomerApplicationService: IApplicationService {
+    // ...
+    public void Execute(ICommand command) {
+        ((dynamic) this).When((dynamic) command);
+    }
+}
+
+public class LoggingWrapper: IApplicationService {
+    readonly IApplicationService underlyingService;
+    public LoggingWrapper(IApplicationService service) {
+        underlyingService = service;
+    }
+
+    public void Execute(ICommand command) {
+        Console.WriteLine("Command: " + command);
+        try {
+            var watch = Stopwatch.StartNew();
+            underlyingService.Execute(command);
+            var milliseconds = watch.ElapsedMilliseconds;
+            Console.WriteLIne("  Completed in {0} ms", milliseconds);
+        } catch (Exception exception) {
+            Console.WriteLine("Exception: {0}", exception);
+        }
+    }
+}
+
+var customerService = new CustomerApplicationService(eventStore, pricingService);
+var customerServiceWithLogging = new LoggingWrapper(customerService);
+</pre>
+</div>
+
+
+<p>
+有时多个线程会同时访问聚合的事件流，这会导致并发冲突，使得聚合出于不确定的状态。最简单的处理方法是抛出异常，让客户端手动重新执行：
+</p>
+<div class="org-src-container">
+<pre class="src src-c#">public class EventStoreConcurrencyException: Exception {
+    public List&lt;IEvent&gt; StoreEvents { get; set; }
+    public long StoreVersion { get; set; }
+}
+</pre>
+</div>
+
+<p>
+为了提高程序的易用性，可以让程序自动重试，比如：
+</p>
+<div class="org-src-container">
+<pre class="src src-c#">void Update(CustomerId id, Action&lt;Customer&gt; execute) {
+    while (true) {
+        EventStream eventStream = _eventStore.LoadEventStream(id);
+        var customer = new Customer(eventStream.Events);
+        try {
+            execute(customer);
+            _eventStore.AppendToStream(id, eventStream.Version, customer.Changes);
+            return;
+        } catch (EventStoreConcurrencyException e) {
+            // 按照预定策略重试。
+        }
+    }
+}
+</pre>
+</div>
+
+<p>
+上面的例子里没有给出重试的具体方法。重试时有三种策略：重新执行、重新委派和事件冲突决议（Event conflict resolution）。重新执行即重新开始while循环体，重新委派即将命令重新发送给应用服务。这里重点说一下事件冲突决议。事件冲突决议是将希望追加的事件和实际发生的事件向比较，如果没有冲突，将事件添加已有事件的后面：
+</p>
+<div class="org-src-container">
+<pre class="src src-c#">void Update(CustomerId id, Action&lt;Customer&gt; execute) {
+    try {
+        // ...
+    } catch (EventStoreConcurrencyException e) {
+        foreach (var failed in customer.Changes) {
+            foreach (var actural in e.ActuralEvents) {
+                if (ConflictsWith(failed, actural)) {
+                    var message = string.Format("Conflict between {0} and {1}", failed, actural);
+                    throw new RealConcurrencyException(message, e);
+                }
+            }
+        }
+
+        // 没有冲突
+        _eventStore.AppendToStream(id, e.ActuralVersion, customer.Changes);
+    }
+}
+
+bool ConflictsWith(IEvent e1, IEvent e2) {
+    // 通常不同类型的事件很少冲突。
+    return e1.GetType() == e2.GetType();
+}
+</pre>
+</div>
+
+
+<p>
+加载一个庞大的事件流会导致性能问题，因此事件流通常和快照配合使用。快照是聚合在某个时刻的状态副本。
+</p>
+<div class="org-src-container">
+<pre class="src src-c#">public interface ISnapshotRepository {
+    bool TryGetSnapshotById&lt;TAggregate&gt;(IIdentity id, out TAggregate snapshot, out int version);
+    void SaveSnapshot(IIdentity id, TAggregate snapshot, int version);
+}
+
+public class Customer {
+    // ...
+    public void ReplayEvents(IEnumerable&lt;IEvent&gt; events) {
+        foreach (var event in events) {
+            Mutate(event);
+        }
+    }
+}
+
+
+ISnapshotRepository _snapshots;
+IEventStore _store;
+
+public Customer LoadCustomerAggregateById(CustomerId id) {
+    Customer customer;
+    long snapshotVersion = 0;
+    if (_snapshots.TryGetSnapshotById(id, out customer, out snapshotVersion)) {
+        EventStream stream = _store.LoadEventStreamAfterVersion(id, snapshotVersion);
+        customer.ReplayEvents(stream.Events);
+        return customer;
+    }
+
+    EventStream stream = _store.LoadEventStream(id);
+    return new Customer(stream.Events);
+}
+
+public void GenerateSnapshotForCustomer(IIdentity id) {
+    EventStream stream = _store.LoadEventStream(id);
+    Customer customer = new Customer(stream.Events);
+    _snapshots.SaveSnapshot(id, customer, stream.Version);
+}
+</pre>
+</div>
+
+<p>
+快照的建立和持久化可以委派给后台线程。
+</p>
+
+
+<p>
+现在我们考虑事件的存储。事件存储的接口很简单：
+</p>
+<div class="org-src-container">
+<pre class="src src-c#">public interface IEventStore {
+    EventStream LoadEventStream(IIdentity id);
+    EventStream LoadEventStream(IIdentity id, int skipEvents, int maxCount);
+    void AppendToStream(IIdentity id, int expectedVersion, ICollection&lt;IEvent&gt; events);
+}
+
+public class EventStream {
+    public int Version;
+    public IList&lt;IEvent&gt; Events = new List&lt;IEvent&gt;();
+}
+public interface IAppendOnlyStore: IDisposable {
+    void Append(string name, byte[] data, int expectedVersion = -1);
+    IEnumerable&lt;DataWithVersion&gt; ReadRecords(string name, int afterVersion, int maxCount);
+    IEnumerable&lt;DataWithVersion&gt; ReadRecords(int afterVersion, int maxCount);
+    void Close();
+}
+
+public class DataWithVersion {
+    public int Version;
+    public byte[] Data;
+}
+
+public sealed class DataWithName {
+    public string Name;
+    public byte[] Data;
+}
+</pre>
+</div>
+
+
+<p>
+事件源记录的是状态的变化，但是对于“最近一个月订单总量是多少”这样的问题，事件源难以回答。如果将全部Customer实例加载到内存进行遍历，效率又非常低下。这时就需要读模型投射（Read model projection）了。读模型投射订阅事件，将结果更新到读模型中。
+</p>
+<div class="org-src-container">
+<pre class="src src-c#">public class CustomerTransactionsProjection {
+    IDocumentWriter&lt;CustomerId, CustomerTransactions&gt; _store;
+    public CustomerTransactionsProjection(IDocumentWriter&lt;CustomerId, CustomerTransactions&gt; store) {
+        _store = store;
+    }
+
+    public void When(CustomerCreated e) {
+        _store.Add(e.Id, new CustomerTransactions());
+    }
+
+    public void When(CustomerChargeAdded e) {
+        _store.UpdateOrThrow(e.Id, v =&gt; v.AddTx(e.ChargeName, -e.Charge, e.NewBalance, e.TimeUtc));
+    }
+
+    public void When(CustomerPaymentAdded e) {
+        _store.UpdateOrThrow(e.Id, v =&gt; v.AddTx(e.PaymentName, e.Payment, e.NewBalance, e.TimeUtc));
+    }
+}
+
+[Serializable]
+public class CustomerTransactions {
+    public IList&lt;CustomerTransaction&gt; Transactions = new List&lt;CustomerTransaction&gt;();
+
+    public void AddTx(string name, CurrencyAmount change, CurrencyAmount balance, DateTime timeUtc) {
+        Transactions.Add(new CustomerTransaction() {
+                Name = name,
+                Balance = balance,
+                Change = change,
+                TimeUtc = timeUtc
+            });
+    }
+}
+
+[Serializable]
+public class CustomerTransaction {
+    public CurrencyAmount Change;
+    public CurrencyAmount Balance;
+    public string Name;
+    public DateTime TimeUtc;
+}
+</pre>
+</div>
+
+<p>
+读模型的有点事可伸缩性强、并且可以任意的添加、修改和替换。
+</p>
+
+
+
+<p>
+A+ES对测试是友好的，可以用简单的Given-When-Expect方式建立测试：
+</p>
+<ul class="org-ul">
+<li>Given先前的事件。</li>
+<li>When调用聚合方法。</li>
+<li>Expect特定事件或异常。</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Created: 2019-09-23 周一 21:13</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

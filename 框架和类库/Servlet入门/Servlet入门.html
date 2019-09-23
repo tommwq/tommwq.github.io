@@ -1,0 +1,1561 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2019-09-23 周一 20:55 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Servlet入门</title>
+<meta name="generator" content="Org mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Servlet入门</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgfdde000">preface</a></li>
+<li><a href="#orgb383bf2">Servlet</a>
+<ul>
+<li><a href="#orgaa95402">Servlet简介</a></li>
+<li><a href="#org273e3f5">搭建开发环境</a>
+<ul>
+<li><a href="#org4d84efe">安装JDK</a></li>
+<li><a href="#org6a85fc9">安装Tomat</a></li>
+<li><a href="#org4fd2b17">安装Gradle</a></li>
+</ul>
+</li>
+<li><a href="#org65ce10f">Hello, servlet!</a>
+<ul>
+<li><a href="#org1620ef7">建立新项目</a></li>
+<li><a href="#orgf2ee051">编写程序</a></li>
+<li><a href="#orgc1c8ed8">打包和运行</a></li>
+<li><a href="#org4aaf9fd">HelloServlet程序说明</a></li>
+</ul>
+</li>
+<li><a href="#orga127a71">servlet生命周期</a></li>
+<li><a href="#org3518f4b">线程安全</a></li>
+<li><a href="#org4e187dc">过滤器</a></li>
+<li><a href="#orgf841cb6">Cookie和会话</a></li>
+<li><a href="#org0668c42">监听器</a></li>
+<li><a href="#orgf3b9628">异步处理</a></li>
+<li><a href="#orga86900c">Servletcontext</a></li>
+<li><a href="#orga952991">异常处理</a></li>
+</ul>
+</li>
+<li><a href="#org6f6e3d2">Spring中的Servlet</a>
+<ul>
+<li><a href="#orgb0a4e12">Spring Boot</a></li>
+<li><a href="#orgaabb37d">11. Spring MVC。</a></li>
+<li><a href="#org0e0413e">12. DispatcherServlet。</a></li>
+<li><a href="#org1f595a7">13. Interceptor。</a></li>
+<li><a href="#org33baae6">AOP</a></li>
+<li><a href="#org6081fb0">14. Spring WebFlux。</a></li>
+<li><a href="#orgdef5960">15. TinyMVC</a></li>
+</ul>
+</li>
+<li><a href="#org46cbef0">Tomcat中的Servlet</a>
+<ul>
+<li><a href="#orgb95bebb">15. Tomcat</a></li>
+<li><a href="#org6633d7b">16. TinyTomcat</a></li>
+</ul>
+</li>
+<li><a href="#orgaa8dd86">NettyReact中的Servlet</a>
+<ul>
+<li><a href="#org3385352">17. Netty</a></li>
+</ul>
+</li>
+<li><a href="#orgcc6c598">TinyNameServer</a></li>
+<li><a href="#orgad12386">Servlet</a></li>
+<li><a href="#orga8db173">附录：开发建议</a></li>
+<li><a href="#orga33a178">附录：性能优化建议</a></li>
+<li><a href="#orgaf9aa31">附录：可靠性和可用性建议</a></li>
+<li><a href="#orge33300d">附录：RESTful接口设计建议</a></li>
+<li><a href="#orge0b1915">附录：Servlet问题排查和</a></li>
+<li><a href="#orgca65d02">以下待整理</a>
+<ul>
+<li><a href="#orgff9f9f9">Servlet和JSP技术概述</a>
+<ul>
+<li><a href="#org42fdf63">Tomcat配置</a></li>
+<li><a href="#orga5a6fda">Web目录结构</a></li>
+<li><a href="#org958a57c">web.xml</a></li>
+</ul>
+</li>
+<li><a href="#org176dd42">Servlet基础</a>
+<ul>
+<li><a href="#org4150413">Servlet的生命周期</a></li>
+</ul>
+</li>
+<li><a href="#orgbddca5c">客户请求的处理</a></li>
+<li><a href="#orgc933164">HTTP请求报文</a></li>
+<li><a href="#org709f8a9">服务端返回</a></li>
+<li><a href="#org8bb0e35">示例清单</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgfdde000" class="outline-2">
+<h2 id="orgfdde000">preface</h2>
+<div class="outline-text-2" id="text-orgfdde000">
+<p>
+读者对编写Java程序有一定的了解，比如，编写过至少4个Java程序。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgb383bf2" class="outline-2">
+<h2 id="orgb383bf2">Servlet</h2>
+<div class="outline-text-2" id="text-orgb383bf2">
+</div>
+<div id="outline-container-orgaa95402" class="outline-3">
+<h3 id="orgaa95402">Servlet简介</h3>
+<div class="outline-text-3" id="text-orgaa95402">
+<p>
+Servlet是一个Java程序，它运行在容器中，为用户提供Web服务。Servlet降低了Web服务的开发复杂性，让开发者更专注于业务逻辑。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org273e3f5" class="outline-3">
+<h3 id="org273e3f5">搭建开发环境</h3>
+<div class="outline-text-3" id="text-org273e3f5">
+</div>
+<div id="outline-container-org4d84efe" class="outline-4">
+<h4 id="org4d84efe">安装JDK</h4>
+<div class="outline-text-4" id="text-org4d84efe">
+<p>
+Servlet是基于Java的技术，因此开发Servlet首先要安装JDK。JDK可以从 <a href="https://www.oracle.com/technetwork/java/javase/downloads/jdk11-downloads-5066655.html">Oracle网站</a> 下载。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org6a85fc9" class="outline-4">
+<h4 id="org6a85fc9">安装Tomat</h4>
+<div class="outline-text-4" id="text-org6a85fc9">
+<p>
+Servlet运行在容器中。JDK不提供Servlet容器，因此我们需要使用第三方容器。Tomcat是一个比较流行的Servlet容器。Tomcat可以从 <a href="http://mirrors.hust.edu.cn/apache/tomcat/tomcat-9/v9.0.16/bin/apache-tomcat-9.0.16-windows-x64.zip">这里</a> 下载。
+</p>
+
+<p>
+我们把下载的zip文件解压缩到部署目录下。在这里我们使用%userprofile%\ServletIntroduce\Application目录。%userprofile%是用户目录。
+</p>
+
+<p>
+可以在文件管理器的地址栏输入%userprofile%，然后手动建立目录。也可以打开命令提示符，输入
+</p>
+<div class="org-src-container">
+<pre class="src src-dos">mkdir %userprofile%\ServletIntroduce\Application
+</pre>
+</div>
+<p>
+来建立目录。要打开命令提示符，首先按Win+R键，在“运行”对话框中输入cmd，点击“确定”按钮。
+</p>
+
+<p>
+建立目录之后，我们把zip包解压缩到这个目录。然后我们把Tomcat的bin目录添加到系统路径中。方法如下：
+</p>
+
+<p>
+按下Win+R键，输入sysdm.cpl，点击确定。在打开的对话框中，选择“高级”标签页，点击“环境变量”按钮。在用户变量部分，选择PATH，点击“编辑”按钮，将
+</p>
+<div class="org-src-container">
+<pre class="src src-text">;%userprofile%\ServletIntroduce\Application\tomcat\bin
+</pre>
+</div>
+
+<p>
+添加到原有值的后面。
+</p>
+
+<p>
+打开命令提示符，输入
+</p>
+<div class="org-src-container">
+<pre class="src src-dos">version.bat
+</pre>
+</div>
+
+<p>
+如果输出类似
+</p>
+<div class="org-src-container">
+<pre class="src src-dos">Using CATALINA_BASE:   "D:\workspace\continuous_integration\tomcat\apache-tomcat-9.0.16"
+Using CATALINA_HOME:   "D:\workspace\continuous_integration\tomcat\apache-tomcat-9.0.16"
+Using CATALINA_TMPDIR: "D:\workspace\continuous_integration\tomcat\apache-tomcat-9.0.16\temp"
+Using JRE_HOME:        "C:\Program Files\Java\jdk-11.0.1\"
+Using CLASSPATH:       "D:\workspace\continuous_integration\tomcat\apache-tomcat-9.0.16\bin\bootstrap.jar;D:\workspace\c
+ontinuous_integration\tomcat\apache-tomcat-9.0.16\bin\tomcat-juli.jar"
+NOTE: Picked up JDK_JAVA_OPTIONS:  --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.io=ALL-UNNAMED
+ --add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED
+Server version: Apache Tomcat/9.0.16
+Server built:   Feb 4 2019 16:30:29 UTC
+Server number:  9.0.16.0
+OS Name:        Windows 7
+OS Version:     6.1
+Architecture:   amd64
+JVM Version:    11.0.1+13-LTS
+JVM Vendor:     Oracle Corporation
+</pre>
+</div>
+
+<p>
+说明安装成功。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org4fd2b17" class="outline-4">
+<h4 id="org4fd2b17">安装Gradle</h4>
+<div class="outline-text-4" id="text-org4fd2b17">
+<p>
+有了JDK和Tomcat，就可以开发Servlet了。但是为了方便开发，我们还需要安装Gradle。Gradle是一个程序构建工具，可以简化我们打包程序的工作。Gradle可以从 <a href="https://services.gradle.org/distributions/gradle-5.2.1-bin.zip">Gradle网站</a> 下载。
+</p>
+
+<p>
+Gradle也是一个压缩包。参考Tomcat的安装方法，我们把它解压缩到%userprofile%\ServletIntroduce\Application。然后，采用同样的方法，把Gradle\bin目录添加到系统路径。
+</p>
+
+<p>
+现在我们检查Gradle是否成功安装。打开命令提示符，输入
+</p>
+<div class="org-src-container">
+<pre class="src src-dos">gradle -v
+</pre>
+</div>
+
+<p>
+如果输出类似下面的内容，说明安装成功。
+</p>
+
+<div class="org-src-container">
+<pre class="src src-dos">------------------------------------------------------------
+Gradle 5.0
+------------------------------------------------------------
+
+Build time:   2018-11-26 11:48:43 UTC
+Revision:     7fc6e5abf2fc5fe0824aec8a0f5462664dbcd987
+
+Kotlin DSL:   1.0.4
+Kotlin:       1.3.10
+Groovy:       2.5.4
+Ant:          Apache Ant(TM) version 1.9.13 compiled on July 10 2018
+JVM:          11.0.1 (Oracle Corporation 11.0.1+13-LTS)
+OS:           Windows 7 6.1 amd64
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org65ce10f" class="outline-3">
+<h3 id="org65ce10f">Hello, servlet!</h3>
+<div class="outline-text-3" id="text-org65ce10f">
+<p>
+环境搭建完毕，就可以开始开发了。我们从经典的HelloWorld程序开始。开发步骤如下：
+</p>
+
+<ul class="org-ul">
+<li>建立新项目
+<ul class="org-ul">
+<li>建立项目目录</li>
+<li>初始化项目</li>
+</ul></li>
+<li>编写程序
+<ul class="org-ul">
+<li>编写java程序</li>
+<li>编写web.xml配置</li>
+</ul></li>
+<li>打包</li>
+<li>启动Tomcat</li>
+<li>部署war包</li>
+<li>使用浏览器验证</li>
+</ul>
+</div>
+
+<div id="outline-container-org1620ef7" class="outline-4">
+<h4 id="org1620ef7">建立新项目</h4>
+<div class="outline-text-4" id="text-org1620ef7">
+<p>
+首先要建立一个目录作为新项目的工作目录。进入命令提示符，依次输入：
+</p>
+<div class="org-src-container">
+<pre class="src src-dos">mdkir %userprofile%\ServletIntroduct\Example\HelloWorld
+cd %userprofile%\ServletIntroduct\Example\HelloWorld
+</pre>
+</div>
+
+<p>
+然后输入：
+</p>
+<div class="org-src-container">
+<pre class="src src-dos">gradle init --type java-application --dsl groovy --package "com.servletintroduce.helloservlet" --test-framework junit --project-name HelloServlet
+</pre>
+</div>
+
+<p>
+这个命令调用gradle，在当前目录下建立一个项目，项目类型是Java应用程序，项目名是HelloServlet，包名是com.servletintroduce.helloservlet。命令执行后，目录会生成下列文件
+</p>
+<div class="org-src-container">
+<pre class="src src-dos">PS D:\workspace\project\demo\ByTopic\ServletIntroduce\HelloServlet&gt; ls
+
+
+    目录: D:\workspace\project\demo\ByTopic\ServletIntroduce\HelloServlet
+
+
+Mode                LastWriteTime     Length Name
+----                -------------     ------ ----
+d----         2019-2-26     13:30            .gradle
+d----         2019-2-26     13:30            gradle
+d----         2019-2-26     13:30            src
+-a---         2019-2-26     13:30        108 .gitignore
+-a---         2019-2-26     13:30        998 build.gradle
+-a---         2019-2-26     13:30       5305 gradlew
+-a---         2019-2-26     13:30       2269 gradlew.bat
+-a---         2019-2-26     13:30        369 settings.gradle
+</pre>
+</div>
+
+<p>
+这里的src目录是Java成员源代码目录，gradlew和gradlew.bat是为了方便使用gradle的脚本。settings.gradle是gradle的配置文件。gradle和.gradle是gradle使用的目录。
+</p>
+
+<p>
+build.gradle是项目配置文件，内容如下：
+</p>
+<div class="org-src-container">
+<pre class="src src-gradle">/*
+ * This file was generated by the Gradle 'init' task.
+ *
+ * This generated file contains a sample Java project to get you started.
+ * For more details take a look at the Java Quickstart chapter in the Gradle
+ * user guide available at https://docs.gradle.org/5.0/userguide/tutorial_java_projects.html
+ */
+
+plugins {
+    // Apply the java plugin to add support for Java
+    id 'java'
+
+    // Apply the application plugin to add support for building an application
+    id 'application'
+}
+
+repositories {
+    // Use jcenter for resolving your dependencies.
+    // You can declare any Maven/Ivy/file repository here.
+    jcenter()
+}
+
+dependencies {
+    // This dependency is found on compile classpath of this component and consumers.
+    implementation 'com.google.guava:guava:26.0-jre'
+
+    // Use JUnit test framework
+    testImplementation 'junit:junit:4.12'
+}
+
+// Define the main class for the application
+mainClassName = 'com.servletintroduce.helloservlet.App'
+</pre>
+</div>
+
+<p>
+我们用记事本打开这个文件，将内容修改为：
+</p>
+<div class="org-src-container">
+<pre class="src src-gradle">/*
+ * This file was generated by the Gradle 'init' task.
+ *
+ * This generated file contains a sample Java project to get you started.
+ * For more details take a look at the Java Quickstart chapter in the Gradle
+ * user guide available at https://docs.gradle.org/5.0/userguide/tutorial_java_projects.html
+ */
+
+plugins {
+    // Apply the java plugin to add support for Java
+    id 'java'
+
+    // Apply the application plugin to add support for building an application
+    id 'war'
+}
+
+repositories {
+    // Use jcenter for resolving your dependencies.
+    // You can declare any Maven/Ivy/file repository here.
+    jcenter()
+}
+
+dependencies {
+    // This dependency is found on compile classpath of this component and consumers.
+    implementation 'com.google.guava:guava:26.0-jre'
+    implementation 'javax.servlet:javax.servlet-api:4.0.1'
+
+    // Use JUnit test framework
+    testImplementation 'junit:junit:4.12'
+}
+
+</pre>
+</div>
+
+<p>
+我们在这个文件里增加了两行，一行是
+</p>
+<div class="org-src-container">
+<pre class="src src-gradle">id 'war'
+</pre>
+</div>
+
+<p>
+这一行引入了war插件。这个插件用于打包servlet程序。第二行是
+</p>
+<div class="org-src-container">
+<pre class="src src-gradle">implementation 'javax.servlet:javax.servlet-api:4.0.1'
+</pre>
+</div>
+
+<p>
+这是开发Servlet程序所需要的Java包。
+</p>
+
+<p>
+同时还删除了三行：
+</p>
+<div class="org-src-container">
+<pre class="src src-gradle">id 'application'
+// Define the main class for the application
+mainClassName = 'com.servletintroduce.helloservlet.App'
+</pre>
+</div>
+
+<p>
+这三行我们不需要。
+</p>
+
+<p>
+为了加快构建速度，我们还可以使用阿里云提供的Java包仓库，方法是将build.gradle的repositories部分修改为：
+</p>
+<div class="org-src-container">
+<pre class="src src-gradle">repositories {
+    // Use jcenter for resolving your dependencies.
+    // You can declare any Maven/Ivy/file repository here.
+    jcenter()
+    maven {
+        url <span style="color: #8b2252;">"http://maven.aliyun.com/nexus/content/groups/public"</span>
+    }
+}
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgf2ee051" class="outline-4">
+<h4 id="orgf2ee051">编写程序</h4>
+<div class="outline-text-4" id="text-orgf2ee051">
+<p>
+接着我们删除文件src\main\java\com\servletintroduce\helloservlet\App.java，
+在目录src\main\java\com\servletintroduce\helloservlet下建立一个HelloServlet.java文件，
+用记事本打开它，将下面的内容写到文件里：
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #a020f0;">package</span> com.servletintroduce.<span style="color: #008b8b;">helloservlet</span>;
+
+<span style="color: #a020f0;">import</span> <span style="color: #008b8b;">java</span>.<span style="color: #008b8b;">io</span>.*;
+<span style="color: #a020f0;">import</span> <span style="color: #008b8b;">javax</span>.<span style="color: #008b8b;">servlet</span>.*;
+<span style="color: #a020f0;">import</span> <span style="color: #008b8b;">javax</span>.<span style="color: #008b8b;">servlet</span>.<span style="color: #008b8b;">http</span>.*;
+
+<span style="color: #a020f0;">public</span> <span style="color: #a020f0;">class</span> <span style="color: #228b22;">HelloServlet</span> <span style="color: #a020f0;">extends</span> <span style="color: #228b22;">HttpServlet</span> {
+    <span style="color: #008b8b;">@Override</span>
+    <span style="color: #a020f0;">public</span> <span style="color: #228b22;">void</span> <span style="color: #0000ff;">doGet</span>(<span style="color: #228b22;">HttpServletRequest</span> <span style="color: #a0522d;">req</span>, <span style="color: #228b22;">HttpServletResponse</span> <span style="color: #a0522d;">resp</span>)
+        <span style="color: #a020f0;">throws</span> <span style="color: #228b22;">ServletException</span>, <span style="color: #228b22;">IOException</span> {
+        resp.setContentType(<span style="color: #8b2252;">"text/text"</span>);
+        <span style="color: #228b22;">PrintWriter</span> <span style="color: #a0522d;">writer</span> = resp.getWriter();
+        writer.println(<span style="color: #8b2252;">"Hello, servlet!"</span>);
+    }
+}
+</pre>
+</div>
+
+<p>
+这个程序我们在后面会详细介绍。现在我们来编写web.xml文件。首先建立目录src\main\webapp\WEB-INF，然后在这个目录下建立文件web.xml，写入以下内容：
+</p>
+<div class="org-src-container">
+<pre class="src src-xml"><span style="color: #8b2252;">&lt;?</span><span style="color: #a020f0;">xml</span><span style="color: #8b2252;"> </span><span style="color: #8b2252;">version="1.0" encoding="UTF-8"</span><span style="color: #8b2252;">?&gt;</span>  
+&lt;<span style="color: #0000ff;">web-app</span> <span style="color: #a0522d;">version</span>=<span style="color: #8b2252;">"2.5"</span>   
+         <span style="color: #483d8b;">xmlns</span>=<span style="color: #8b2252;">"http://java.sun.com/xml/ns/javaee"</span>  
+         <span style="color: #483d8b;">xmlns</span>:<span style="color: #a0522d;">xsi</span>=<span style="color: #8b2252;">"http://www.w3.org/2001/XMLSchema-instance"</span>   
+         <span style="color: #483d8b;">xsi</span>:<span style="color: #a0522d;">schemaLocation</span>=<span style="color: #8b2252;">"http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"</span>&gt;
+        &lt;<span style="color: #0000ff;">servlet</span>&gt;
+                &lt;<span style="color: #0000ff;">servlet-name</span>&gt;HelloServlet&lt;/<span style="color: #0000ff;">servlet-name</span>&gt;
+                &lt;<span style="color: #0000ff;">servlet-class</span>&gt;com.servletintroduce.helloservlet.HelloServlet&lt;/<span style="color: #0000ff;">servlet-class</span>&gt;
+        &lt;/<span style="color: #0000ff;">servlet</span>&gt;
+
+        &lt;<span style="color: #0000ff;">servlet-mapping</span>&gt;
+                &lt;<span style="color: #0000ff;">servlet-name</span>&gt;HelloServlet&lt;/<span style="color: #0000ff;">servlet-name</span>&gt;
+                &lt;<span style="color: #0000ff;">url-pattern</span>&gt;/HelloServlet&lt;/<span style="color: #0000ff;">url-pattern</span>&gt;
+        &lt;/<span style="color: #0000ff;">servlet-mapping</span>&gt;
+&lt;/<span style="color: #0000ff;">web-app</span>&gt;  
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgc1c8ed8" class="outline-4">
+<h4 id="orgc1c8ed8">打包和运行</h4>
+<div class="outline-text-4" id="text-orgc1c8ed8">
+<p>
+我们输入：
+</p>
+<div class="org-src-container">
+<pre class="src src-dos">./gradlew.bat war
+</pre>
+</div>
+
+<p>
+这个命令会编译Java程序，并打包成war文件。如果命令输出
+</p>
+<div class="org-src-container">
+<pre class="src src-dos">BUILD SUCCESSFUL in 1s
+2 actionable tasks: 2 executed
+</pre>
+</div>
+
+<p>
+说明我们的程序已经打包完毕。这个包位于build\libs目录下，名字是HelloServlet.war。
+我们将这个文件复制到tomcat的webapps目录下，启动tomcat。
+在tomcat输出
+</p>
+<div class="org-src-container">
+<pre class="src src-dos">org.apache.catalina.startup.Catalina.start Server startup in [xxx] milliseconds
+</pre>
+</div>
+<p>
+之后，打开浏览器，输入地址
+</p>
+<blockquote>
+<p>
+<a href="http://localhost:8080/HelloServlet/HelloServlet">http://localhost:8080/HelloServlet/HelloServlet</a>
+</p>
+</blockquote>
+
+<p>
+可以看到网页显示
+</p>
+<blockquote>
+<p>
+Hello, servlet!
+</p>
+</blockquote>
+</div>
+</div>
+
+<div id="outline-container-org4aaf9fd" class="outline-4">
+<h4 id="org4aaf9fd">HelloServlet程序说明</h4>
+</div>
+</div>
+
+
+
+
+
+
+
+<div id="outline-container-orga127a71" class="outline-3">
+<h3 id="orga127a71">servlet生命周期</h3>
+<div class="outline-text-3" id="text-orga127a71">
+<p>
+Servlet的生命周期分为以下几个阶段：加载和实例化阶段、初始化阶段、请求处理阶段、终止服务阶段。Servlet的加载和实例化由Servlet容器负责。记载的时机由Servlet容器决定。
+在加载Servlet类后，容器会建立Servlet实例。建立Servlet实例后，容器必须对Servlet进行初始化，方法是调用Servlet的init()方法。init()方法的原型如下：
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #228b22;">void</span> <span style="color: #0000ff;">init</span>(<span style="color: #228b22;">ServletConfig</span> <span style="color: #a0522d;">servletConfig</span>) <span style="color: #a020f0;">throws</span> <span style="color: #228b22;">ServletException</span>;
+</pre>
+</div>
+
+<p>
+在初始化阶段，如果Servlet抛出ServletException异常，容器会将servlet实例释放，并且不会调用destroy()方法。
+如果抛出UnavailableException（ServletException的派生类），并且声明了不可用时间，servlet容器可以等待一段时间后重新实例化servlet。
+UnavailableException是ServletExcpetion派生类中比较特别的一个，下面讨论异常处理时，会将二者并列讨论。
+</p>
+
+<p>
+<i>/ TODO 示例：在init和destroy中输出。
+/</i> TOOD 示例：在init中抛出UnavailableException，观察重新初始化现象。
+</p>
+
+<p>
+Servlet支持异步处理。异步处理和方式和同步方式稍有不同：
+</p>
+
+<p>
+请求通过filter发送给servlet，这一步和同步servlet一样。
+servlet处理请求，这一步也一样。
+servlet请求其他资源，比如JDBC或远程服务。
+servlet返回，但没有生成应答。
+当资源就绪后，容器继续处理请求。
+</p>
+
+<p>
+异步处理时，servlet可能在不同的两个线程中工作，filter也是如此。在新线程中，filter无法保留原来的信息，因此，filter必须使用ResponseWraper来处理异步请求。
+</p>
+
+<p>
+<i>/ TODO 测试异步请求。
+/</i> TODO 异步+fitler。
+<i>/ TODO 异步+listener
+/</i> TODO 异步+异常
+</p>
+
+<p>
+在完成初始化后，servlet就可以开始提供服务了。请求和应答被封装为ServletRequest和ServletResponse传递给servlet。对于HTTP请求，封装的对象是HttpServletRequest和HttpServletResponse。
+在处理请求的过程中，servlet可能会抛出ServletException或UnavailableException。如果抛出了UnavailableException并声明servlet持续不可用，容器会将servlet移除，并调用destroy()方法释放资源。
+对于后续的请求，容器返回SC<sub>NOT</sub><sub>FOUND</sub>（404）状态。
+如果UnavaiableException声明了不可用时间，在这段时间内，对servlet的请求，容器可以返回SC<sub>SERVICE</sub><sub>UNAVAILABLE</sub>（503）状态，并提供Retry-After头。
+容器也可以将临时不可用视为持续不可用，并将servlet移除。
+</p>
+
+<p>
+// TODO 示例 UnavailableException 临时、持久。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org3518f4b" class="outline-3">
+<h3 id="org3518f4b">线程安全</h3>
+<div class="outline-text-3" id="text-org3518f4b">
+<p>
+容器可能会同时在多个线程中调用servlet方法，因此编写servlet时必须考虑线程安全的问题。
+同时，处于性能方面的考虑，不建议使用synchronized声明service。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org4e187dc" class="outline-3">
+<h3 id="org4e187dc">过滤器</h3>
+<div class="outline-text-3" id="text-org4e187dc">
+<p>
+// TODO 异步+过滤器
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgf841cb6" class="outline-3">
+<h3 id="orgf841cb6">Cookie和会话</h3>
+</div>
+<div id="outline-container-org0668c42" class="outline-3">
+<h3 id="org0668c42">监听器</h3>
+</div>
+<div id="outline-container-orgf3b9628" class="outline-3">
+<h3 id="orgf3b9628">异步处理</h3>
+</div>
+<div id="outline-container-orga86900c" class="outline-3">
+<h3 id="orga86900c">Servletcontext</h3>
+</div>
+<div id="outline-container-orga952991" class="outline-3">
+<h3 id="orga952991">异常处理</h3>
+<div class="outline-text-3" id="text-orga952991">
+<p>
+第一部分 Servlet
+</p>
+<ol class="org-ol">
+<li>环境搭建。JDK + Gradle + Tomcat Windows/Linux PowerShell bash。 p20</li>
+<li>Hello, Servlet。p30</li>
+<li>Servlet生命周期。p5</li>
+<li>线程安全。p2</li>
+<li>过滤器。p10</li>
+</ol>
+<p>
+示例：压缩。
+示例：统计访问次数。
+示例：本地化。
+</p>
+<ol class="org-ol">
+<li>Cookie和会话。</li>
+</ol>
+<p>
+示例：防止表单重复提交。
+</p>
+<ol class="org-ol">
+<li>监听器。</li>
+</ol>
+<p>
+示例：使用Memcache存储会话。
+7.1 监听器和过滤器的区别。
+</p>
+<ol class="org-ol">
+<li>异步。</li>
+<li>线程模型。</li>
+<li>ServletContext</li>
+</ol>
+<p>
+异常处理。
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org6f6e3d2" class="outline-2">
+<h2 id="org6f6e3d2">Spring中的Servlet</h2>
+<div class="outline-text-2" id="text-org6f6e3d2">
+</div>
+<div id="outline-container-orgb0a4e12" class="outline-3">
+<h3 id="orgb0a4e12">Spring Boot</h3>
+<div class="outline-text-3" id="text-orgb0a4e12">
+<p>
+示例：Hello, Spring Boot App
+</p>
+</div>
+</div>
+<div id="outline-container-orgaabb37d" class="outline-3">
+<h3 id="orgaabb37d">11. Spring MVC。</h3>
+<div class="outline-text-3" id="text-orgaabb37d">
+<p>
+示例：Hello, Spring MVC
+示例：redis保存会话。
+</p>
+</div>
+</div>
+<div id="outline-container-org0e0413e" class="outline-3">
+<h3 id="org0e0413e">12. DispatcherServlet。</h3>
+</div>
+<div id="outline-container-org1f595a7" class="outline-3">
+<h3 id="org1f595a7">13. Interceptor。</h3>
+</div>
+<div id="outline-container-org33baae6" class="outline-3">
+<h3 id="org33baae6">AOP</h3>
+</div>
+<div id="outline-container-org6081fb0" class="outline-3">
+<h3 id="org6081fb0">14. Spring WebFlux。</h3>
+</div>
+<div id="outline-container-orgdef5960" class="outline-3">
+<h3 id="orgdef5960">15. TinyMVC</h3>
+</div>
+</div>
+
+<div id="outline-container-org46cbef0" class="outline-2">
+<h2 id="org46cbef0">Tomcat中的Servlet</h2>
+<div class="outline-text-2" id="text-org46cbef0">
+</div>
+<div id="outline-container-orgb95bebb" class="outline-3">
+<h3 id="orgb95bebb">15. Tomcat</h3>
+</div>
+<div id="outline-container-org6633d7b" class="outline-3">
+<h3 id="org6633d7b">16. TinyTomcat</h3>
+</div>
+</div>
+
+<div id="outline-container-orgaa8dd86" class="outline-2">
+<h2 id="orgaa8dd86">NettyReact中的Servlet</h2>
+<div class="outline-text-2" id="text-orgaa8dd86">
+</div>
+<div id="outline-container-org3385352" class="outline-3">
+<h3 id="org3385352">17. Netty</h3>
+</div>
+</div>
+
+<div id="outline-container-orgcc6c598" class="outline-2">
+<h2 id="orgcc6c598">TinyNameServer</h2>
+</div>
+
+<div id="outline-container-orgad12386" class="outline-2">
+<h2 id="orgad12386">Servlet</h2>
+</div>
+
+<div id="outline-container-orga8db173" class="outline-2">
+<h2 id="orga8db173">附录：开发建议</h2>
+</div>
+
+<div id="outline-container-orga33a178" class="outline-2">
+<h2 id="orga33a178">附录：性能优化建议</h2>
+</div>
+
+<div id="outline-container-orgaf9aa31" class="outline-2">
+<h2 id="orgaf9aa31">附录：可靠性和可用性建议</h2>
+</div>
+
+<div id="outline-container-orge33300d" class="outline-2">
+<h2 id="orge33300d">附录：RESTful接口设计建议</h2>
+</div>
+
+<div id="outline-container-orge0b1915" class="outline-2">
+<h2 id="orge0b1915">附录：Servlet问题排查和</h2>
+<div class="outline-text-2" id="text-orge0b1915">
+<ol class="org-ol">
+<li>Servlet开发建议</li>
+</ol>
+<p>
+不适用SingleThreadModel
+不要讲service/doGet等声明为同步。
+</p>
+<ol class="org-ol">
+<li>Servlet问题排查</li>
+<li>Spring MVC问题排查</li>
+<li>Spring WebFlux问题排查</li>
+<li>Tomcat问题排查</li>
+<li>JVM问题排查</li>
+<li>设计问题排查。</li>
+</ol>
+</div>
+</div>
+
+
+
+
+
+<div id="outline-container-orgca65d02" class="outline-2">
+<h2 id="orgca65d02">以下待整理</h2>
+<div class="outline-text-2" id="text-orgca65d02">
+</div>
+<div id="outline-container-orgff9f9f9" class="outline-3">
+<h3 id="orgff9f9f9">Servlet和JSP技术概述</h3>
+<div class="outline-text-3" id="text-orgff9f9f9">
+</div>
+<div id="outline-container-org42fdf63" class="outline-4">
+<h4 id="org42fdf63">Tomcat配置</h4>
+<div class="outline-text-4" id="text-org42fdf63">
+<p>
+端口。conf/server.xml中&lt;Connector&gt;标签的port属性。
+重新加载。在conf/server.xml中&lt;Service&gt;标签中增加子标签&lt;DefaultContext reloadable="true" /&gt;。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orga5a6fda" class="outline-4">
+<h4 id="orga5a6fda">Web目录结构</h4>
+<div class="outline-text-4" id="text-orga5a6fda">
+<p>
+WEB-INF/web.xml
+WEB-INF/classes
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org958a57c" class="outline-4">
+<h4 id="org958a57c">web.xml</h4>
+<div class="outline-text-4" id="text-org958a57c">
+<div class="org-src-container">
+<pre class="src src-xml"><span style="color: #8b2252;">&lt;?</span><span style="color: #a020f0;">xml</span><span style="color: #8b2252;"> </span><span style="color: #8b2252;">version="1.0" encoding="UTF-8"</span><span style="color: #8b2252;">?&gt;</span>  
+&lt;<span style="color: #0000ff;">web-app</span> <span style="color: #a0522d;">version</span>=<span style="color: #8b2252;">"2.5"</span>   
+         <span style="color: #483d8b;">xmlns</span>=<span style="color: #8b2252;">"http://java.sun.com/xml/ns/javaee"</span>  
+         <span style="color: #483d8b;">xmlns</span>:<span style="color: #a0522d;">xsi</span>=<span style="color: #8b2252;">"http://www.w3.org/2001/XMLSchema-instance"</span>   
+         <span style="color: #483d8b;">xsi</span>:<span style="color: #a0522d;">schemaLocation</span>=<span style="color: #8b2252;">"http://java.sun.com/xml/ns/javaee   </span>
+<span style="color: #8b2252;">                             http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"</span>&gt;  
+&lt;/<span style="color: #0000ff;">web-app</span>&gt;  
+</pre>
+</div>
+
+<p>
+servlet命名
+</p>
+<div class="org-src-container">
+<pre class="src src-xml">&lt;<span style="color: #0000ff;">web-app</span>&gt;
+    &lt;<span style="color: #0000ff;">servlet</span>&gt;
+        &lt;<span style="color: #0000ff;">servlet-name</span>&gt;Servlet2&lt;/<span style="color: #0000ff;">servlet-name</span>&gt;
+        &lt;<span style="color: #0000ff;">servlet-class</span>&gt;coreservlets.HelloServlet2&lt;/<span style="color: #0000ff;">servlet-class</span>&gt;
+    &lt;/<span style="color: #0000ff;">servlet</span>&gt;
+&lt;/<span style="color: #0000ff;">web-app</span>&gt;
+</pre>
+</div>
+
+<p>
+映射URL：
+</p>
+<div class="org-src-container">
+<pre class="src src-xml">&lt;<span style="color: #0000ff;">web-app</span>&gt;
+    &lt;<span style="color: #0000ff;">servlet-mapping</span>&gt;
+        &lt;<span style="color: #0000ff;">servlet-name</span>&gt;Servlet2&lt;/<span style="color: #0000ff;">servlet-name</span>&gt;
+        &lt;<span style="color: #0000ff;">url-pattern</span>&gt;/servlet2&lt;/<span style="color: #0000ff;">url-pattern</span>&gt;
+    &lt;/<span style="color: #0000ff;">servlet-mapping</span>&gt;
+&lt;/<span style="color: #0000ff;">web-app</span>&gt;
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org176dd42" class="outline-3">
+<h3 id="org176dd42">Servlet基础</h3>
+<div class="outline-text-3" id="text-org176dd42">
+<p>
+Servlet最常用的两个方法是doGet和doPost，分别对应HTTP的GET和POST请求。这两个方法的参数和返回值是一样的。
+</p>
+</div>
+
+<div id="outline-container-org4150413" class="outline-4">
+<h4 id="org4150413">Servlet的生命周期</h4>
+<div class="outline-text-4" id="text-org4150413">
+<p>
+首次创建Servlet时，会调用init方法。之后，对每个请求，会建立一个新的线程，线程使用已经创建的servlet实例，调用service方法，并根据HTTP请求类型分派给doGet等方法。如果服务器决定卸载一个servlet，它的destroy方法被调用。
+</p>
+
+
+
+
+
+<p>
+服务器每次收到对servlet的请求，都会产生一个新线程，因此必须进行并发控制。
+</p>
+
+<p>
+doGet
+doPost
+doDelete
+doOptions
+doTrace
+doHead
+getLastModified
+</p>
+
+<p>
+初始化时，在init()中可以调用getServletConfig()得到ServletConfig对象。并调用ServletConfig.getInitParameter()得到参数。
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgbddca5c" class="outline-3">
+<h3 id="orgbddca5c">客户请求的处理</h3>
+<div class="outline-text-3" id="text-orgbddca5c">
+<p>
+表单的参数记录可以通过HttpServletRequest的getParameter方法获取。参数名是大小写敏感的。如果一个参数可能出现多次，需要使用getParameterValues()获取。参数名和全部参数可以通过getParameterNames()和getParameterMap()获取。
+</p>
+
+
+
+<p>
+如果要读取原始输入，可以调用getInputStream()这个方法不能和getParameter()同时使用。
+</p>
+
+
+<p>
+如果入参使用了特殊字符集，需要在调用getParameter前调用setCharacterEncoding()。
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-orgc933164" class="outline-3">
+<h3 id="orgc933164">HTTP请求报文</h3>
+<div class="outline-text-3" id="text-orgc933164">
+<p>
+request.getHeader()
+getCookies()
+getAuthType()
+getRemoteUser()
+getcontentLength()
+getContentType()
+getDateHeader()
+getIntHeader()
+getHeaderNames()
+getHeaders()
+getMethod()
+getRequestURI()
+getQueryString()
+getProtocol()
+</p>
+
+
+<p>
+X-Forwarded-For XFF头。采用代理时记录客户端原始IP、代理1 ip、代理2 ip。
+</p>
+
+<p>
+HTTP 1.1 头
+Accept 接受的MIME类型
+Accept-Charset 字符集
+Accept-Encoding 编码
+Accept-Language
+Authroization
+Connection
+Content-Length
+Cookie
+Host
+If-Modified-Since
+If-Unmodified-Since
+Referer
+User-Agent
+</p>
+</div>
+</div>
+
+<div id="outline-container-org709f8a9" class="outline-3">
+<h3 id="org709f8a9">服务端返回</h3>
+<div class="outline-text-3" id="text-org709f8a9">
+<p>
+setStatus()
+public void sendRedirect(String url);
+public void sendError(int code, String message);
+</p>
+
+<p>
+100 Continue
+200 OK
+202 Accepted
+204 No Content
+205 Reset Content
+301 Moved Permanently
+302 Moved Temporarily
+303 See Other
+304 Not Modified
+307 Temporary Redirect
+400 Bad Request
+401 Unauthorized
+403 Forbidden
+404 Not Found
+405 Method Not Allowed
+415 Unsupported Media Type
+417 Expection Failed
+500 Internal Server Error
+501 Not Implemented
+503 Service Unavailable
+505 HTTP Version Not Supported
+</p>
+
+<p>
+setHeader(String name, String value);
+setDateHeader(String name, long milliseconds);
+setIntHeader(String header, int value);
+setContentType(String);
+setContenteLength(int);
+addCookie(Cookie)
+</p>
+
+<p>
+应答头
+Allow
+Cache-Control public private no-cache no-store must-revalidate proxy-revalidate max-age=xxx s-max-age=xxx
+Connection keep-alive close
+Content-Disposition
+Content-Encoding
+Content-Language
+Content-Length
+Content-Type
+Expires
+Last-Modified
+Location
+Pragma
+Refresh
+Retry-After
+Set-Cookie
+WWW-Authenticate
+</p>
+
+<p>
+cookie用途：标识用户、记录密码。
+</p>
+
+<p>
+getCookies()
+Cookie.setMaxAge()
+getCommand
+getDomain
+getMaxAge
+getName
+setPath
+setSecure
+getSecure
+getValue
+setValue
+getVersion
+setVersion
+</p>
+
+<p>
+session方法：cookie、url、隐藏表单input type=hidden
+</p>
+
+<p>
+request.getSession
+HttpSession.getAttribute
+setAttribute
+removeAttribute(
+invalidate()
+logout
+getAttributeNames()
+getId()
+isNew()
+getCreationTime()
+getLastAccessedTime()
+getMaxInactiveInterval()
+</p>
+
+<p>
+Filter用于修改request/response。
+</p>
+
+
+<p>
+过滤器可以在容器收到处理请求之前，或发送应答之前执行特定的操作，比如：
+</p>
+
+<p>
+授权和校验。
+记录和审计。
+数据压缩。
+解密。
+本地化。
+</p>
+
+<p>
+过滤器涉及的接口有javax.servlet.Filter、javax.servlet.FilterChain和javax.servlet.FilterConfig。javax.servlet.Filter是过滤器接口，它有3个方法：
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #228b22;">void</span> <span style="color: #0000ff;">init</span>(<span style="color: #228b22;">FilterConfig</span> <span style="color: #a0522d;">filterConfig</span>) <span style="color: #a020f0;">throws</span> <span style="color: #228b22;">ServletException</span>;
+<span style="color: #228b22;">void</span> <span style="color: #0000ff;">doFilter</span>(<span style="color: #228b22;">ServletRequest</span> <span style="color: #a0522d;">request</span>, <span style="color: #228b22;">ServletResponse</span> <span style="color: #a0522d;">response</span>, <span style="color: #228b22;">FilterChain</span> <span style="color: #a0522d;">next</span>) <span style="color: #a020f0;">throws</span> <span style="color: #228b22;">IOException</span>, <span style="color: #228b22;">ServletException</span>;
+<span style="color: #228b22;">void</span> <span style="color: #0000ff;">destroy</span>();
+</pre>
+</div>
+
+<p>
+容器在建立过滤器对象后会调用init()方法，来执行业务层面的初始化工作。init()方法的参数是FilterConfig，这个类在后面会讲到。如果这个方法抛出异常，或者没有在容器规定的时间内返回，容器不能将这个过滤器添加到服务中。doFilter()方法定义了过滤器的实际操作。每次容器
+</p>
+
+
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #228b22;">String</span> <span style="color: #0000ff;">getFilterName</span>();
+<span style="color: #228b22;">String</span> <span style="color: #0000ff;">getInitParameter</span>(<span style="color: #228b22;">String</span> <span style="color: #a0522d;">name</span>);
+<span style="color: #228b22;">Enumeration</span>&lt;<span style="color: #228b22;">String</span>&gt; <span style="color: #0000ff;">getInitParameterNames</span>();
+<span style="color: #228b22;">ServletContext</span> <span style="color: #0000ff;">getServletContext</span>();
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #228b22;">void</span> <span style="color: #0000ff;">doFilter</span>(<span style="color: #228b22;">ServletRequest</span> <span style="color: #a0522d;">reuqest</span>, <span style="color: #228b22;">Servlet</span> <span style="color: #a0522d;">response</span>) <span style="color: #a020f0;">throws</span> <span style="color: #228b22;">IOException</span>, <span style="color: #228b22;">ServletException</span>;
+</pre>
+</div>
+
+<p>
+void destroy() 在容器将过滤器关闭时调用。
+void doFilter(ServletRequest request, ServletResponse response, FilterChain next);
+执行
+</p>
+
+
+<p>
+FilterChain
+FilterConfig
+</p>
+
+<p>
+&lt;filter&gt;
+&lt;filter-name&gt;aaa
+&lt;filter-class&gt;
+ &lt;init-param&gt;
+&lt;param-name&gt;
+&lt;param-avlue&gt;
+&lt;/filter&gt;
+</p>
+
+<p>
+&lt;filter-mapping&gt;
+&lt;filter-name
+&lt;url-pattern&gt;
+Filter也是单例。一个FitlerChain上的Filter在同一个线程中处理。处理顺序根据Filter名字排列，和web.xml中的声明顺序无关。
+</p>
+
+<p>
+&lt;filter-mapping&gt;
+&lt;fitler-name&gt;
+&lt;servlet-naem&gt;
+&lt;/filter<sub>mapping</sub>&gt;
+</p>
+
+<p>
+ServletContext
+listener
+ServletContext只有Listener、Servlet、Filter。所谓的Interceptor是框架层的，如Spring MVC。
+filter在进入servlet之前，而interceptor是进入dispatcherservlet之后，在进入具体controller之前，和从居停controller返回之后调用。
+</p>
+
+
+
+<p>
+<a href="https://www.oracle.com/technetwork/java/filters-137243.html">https://www.oracle.com/technetwork/java/filters-137243.html</a>
+</p>
+
+<p>
+如果要处理request，需要在FilterChain.doFilter之前。如果要处理response，需要在FilterChain.doFilter之后。在FilterChain.dofilter之前不应该修改response。在之后不应该修改request。
+Filter1.doFilter(res, req, chain)
+  chain.doFilter(res, req)
+    Filter2.doFilter(res, req, nextChain)
+      // &#x2026;
+      Servlet.doXXX(res, req)
+</p>
+
+
+<p>
+向Response写入的数据不能撤销，因此如果修改修改response，比如进行压缩，不能将原始response传入，需要使用javax.servlet.ServletResponseWrapper。ServletResponseWrapper也是ServletResponse：
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #a020f0;">class</span> <span style="color: #228b22;">MyWrapper</span> <span style="color: #a020f0;">extends</span> <span style="color: #228b22;">ServletResponseWrapper</span> {
+
+}
+
+<span style="color: #0000ff;">doFilter</span>(<span style="color: #228b22;">res</span>, <span style="color: #228b22;">resp</span>, <span style="color: #228b22;">chain</span>) {
+  wraper = <span style="color: #a020f0;">new</span> <span style="color: #228b22;">MyWrapper</span>(resp);
+  chain.doFilter(res, wrapper);
+  data = wrapper.getData();
+  resp.getWriter().write(compress(data));
+}
+</pre>
+</div>
+
+<p>
+public class CharResponseWrapper extends
+   HttpServletResponseWrapper {
+   private CharArrayWriter output;
+   public String toString() {
+      return output.toString();
+   }
+   public CharResponseWrapper(HttpServletResponse response){
+      super(response);
+      output = new CharArrayWriter();
+   }
+   public PrintWriter getWriter(){
+      return new PrintWriter(output);
+   }
+}
+</p>
+
+
+<p>
+监听器
+&lt;listener&gt;
+  &lt;listener-class&gt;ddd&lt;/&gt;
+&lt;/listener&gt;
+</p>
+
+<p>
+JSESSIONID
+</p>
+
+<p>
+&lt;session-config&gt;
+15         &lt;session-timeout&gt;15&lt;/session-timeout&gt;
+16     &lt;/session-config&gt;
+</p>
+
+<p>
+　　对于【场景二】和【场景三】导致表单重复提交的问题，既然客户端无法解决，那么就在服务器端解决，在服务器端解决就需要用到session了。
+</p>
+
+<p>
+　　具体的做法：在服务器端生成一个唯一的随机标识号，专业术语称为Token(令牌)，同时在当前用户的Session域中保存这个Token。然后将Token发送到客户端的Form表单中，在Form表单中使用隐藏域来存储这个Token，表单提交的时候连同这个Token一起提交到服务器端，然后在服务器端判断客户端提交上来的Token与服务器端生成的Token是否一致，如果不一致，那就是重复提交了，此时服务器端就可以不处理重复提交的表单。如果相同则处理表单提交，处理完后清除当前用户的Session域中存储的标识号。
+　　在下列情况下，服务器程序将拒绝处理用户提交的表单请求：
+</p>
+
+<p>
+存储Session域中的Token(令牌)与表单提交的Token(令牌)不同。
+当前用户的Session中不存在Token(令牌)。
+用户提交的表单数据中没有Token(令牌)。
+</p>
+
+
+<p>
+<a href="https://blog.csdn.net/javandroid/article/details/52959105">https://blog.csdn.net/javandroid/article/details/52959105</a>
+</p>
+
+<p>
+创建和修改session属性可以使用HttpSessionAttributeListener、HttpSessionListern监听。
+</p>
+
+<p>
+TODO 测试itnerceptro是如何注入的。
+TODO 测试spring redis是否使用了HttpSesisonListener。
+</p>
+
+<p>
+<a href="https://javaee.github.io/servlet-spec/">https://javaee.github.io/servlet-spec/</a>
+</p>
+</div>
+</div>
+
+
+
+<div id="outline-container-org8bb0e35" class="outline-3">
+<h3 id="org8bb0e35">示例清单</h3>
+<div class="outline-text-3" id="text-org8bb0e35">
+<p>
+helloworld。显示helloworld。
+PrintParameter。打印参数。
+ServletLifeCycle。在init/destroy/servlet等方法中打印输出。
+ServletLifeCycle2。同上，使用slf4j和log4j2。
+ServletInitialize。在初始化阶段抛出UnavailableException，观察重新加载事件。和init。destroy调用。
+ServletUnavailable。2个servlet，分别抛出UnavailableException临时和持久。
+AsyncRequest。异步请求。
+ThreadSafe。查看线程编号。和线程处理。
+HelloFilter。增加过滤器。
+GzipFilter。压缩。
+StatisticFilter。统计。
+LocaleFilter。本地化。显示日期。
+AsyncFilter。异步使用过滤器。
+AsyncListener。异步+监听器。
+HelloListener。监听器。
+HelloCookie。使用cookie。
+Idempotent。使用cookie避免重复提交。
+HelloSession。使用session。
+HelloSession2。
+HelloSession3。
+MemcachedSession。
+RedisSession。
+DynamicRegister。动态注册servlet、listener和filter。
+ExceptionHandleFilter。
+TimeoutFilter。
+Annotation。使用注释开发Servlet、Filter。
+AspectJ。使用AspectJ。
+ServletContainerInitializer
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: 2019年02月22日</p>
+<p class="date">Created: 2019-09-23 周一 20:55</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

@@ -1,0 +1,2942 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2019-09-23 周一 20:55 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Linux性能优化</title>
+<meta name="generator" content="Org mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Linux性能优化</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org4fc7d94">性能追踪建议</a></li>
+<li><a href="#orge3cde56">性能工具：系统CPU</a></li>
+<li><a href="#orgb8d2c86">性能工具：系统内存</a></li>
+<li><a href="#orgc086f2e">性能工具：特定进程CPU</a></li>
+<li><a href="#org1a4fc6f">性能工具：特定进程内存</a></li>
+<li><a href="#orgf878755">性能工具：磁盘I/O</a></li>
+<li><a href="#orgf13a72d">性能工具：网络</a></li>
+<li><a href="#org07cef5b">实用工具：性能工具助手</a></li>
+</ul>
+</div>
+</div>
+<p>
+Optimizing Linux Performance: A Hands-On Guide to Linux Performance Tools
+</p>
+
+<div id="outline-container-org4fc7d94" class="outline-2">
+<h2 id="org4fc7d94">性能追踪建议</h2>
+<div class="outline-text-2" id="text-org4fc7d94">
+<p>
+记录一切可以搜集的信息，即使其中的一些信息在当时看起来没有太大的用途。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orge3cde56" class="outline-2">
+<h2 id="orge3cde56">性能工具：系统CPU</h2>
+<div class="outline-text-2" id="text-orge3cde56">
+<p>
+在Linux下，进程有可运行和阻塞两种状态。可运行进程有分为两类：已经获得CPU时间正在运行的一类，和等待CPU时间的一类。在Linux系统中，运行队列长度就是系统中可运行状态的进程数量（平均值）。被阻塞的进程也可以分为两类：被I/O阻塞的进程，以及被系统调用阻塞的进程。一个CPU一次只能执行一个进程。在进程调度时，CPU需要把当前进程的信息保存起来，从内存中加载下一个进程的信息。这个过程叫做上下文切换。上下文切换会导致CPU中的高速缓存和流水线刷新，对性能有负面影响。为了公平的分配CPU时间，Linux会周期性的中断进程。通常，这种周期性上下文切换的数据可以作为考察系统上下文切换数量的基准：
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">cat /proc/interrupts | grep timer; sleep 10; cat /proc/interrupts | grep timer; 
+</pre>
+</div>
+
+<p>
+如果系统中断频率高于定时器的频率，说明进程经常陷入I/O等待或系统调用（比如休眠）等待之中。
+</p>
+
+
+<p>
+在任意时刻，CPU可以处于以下几种状态：
+-空闲。CPU没有任务需要执行。
+-执行用户代码，即“用户”时间。
+-执行内核代码，即“系统”时间。
+-执行低优先级的用户代码，即“nice”时间。
+-等待I/O（磁盘或网络），即“iowait”时间。
+-处理硬中断，即irq。
+-处理软终端，softirq。
+</p>
+
+<p>
+vmstat命令提供了系统CPU统计信息：
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">vmstat [-n] [-s] [delay [count]]
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">-n</td>
+<td class="org-left">不再重复显示列标题</td>
+</tr>
+
+<tr>
+<td class="org-left">-s</td>
+<td class="org-left">输出系统启动以来的累计数据</td>
+</tr>
+
+<tr>
+<td class="org-left">delay</td>
+<td class="org-left">采样间隔</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+vmstat显示的各列如下：
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">r</td>
+<td class="org-left">运行队列长度</td>
+</tr>
+
+<tr>
+<td class="org-left">b</td>
+<td class="org-left">等待I/O操作的进程数</td>
+</tr>
+
+<tr>
+<td class="org-left">forks</td>
+<td class="org-left">创建新进程的次数</td>
+</tr>
+
+<tr>
+<td class="org-left">in</td>
+<td class="org-left">系统中断次数</td>
+</tr>
+
+<tr>
+<td class="org-left">cs</td>
+<td class="org-left">系统上下文切换次数</td>
+</tr>
+
+<tr>
+<td class="org-left">us</td>
+<td class="org-left">用户代码消耗的时间占比，即用户时间和nice时间之和</td>
+</tr>
+
+<tr>
+<td class="org-left">sy</td>
+<td class="org-left">系统代码消耗的时间占比，即系统时间、irq和softirq时间之和</td>
+</tr>
+
+<tr>
+<td class="org-left">wa</td>
+<td class="org-left">等待I/O的时间占比</td>
+</tr>
+
+<tr>
+<td class="org-left">id</td>
+<td class="org-left">空闲时间占比</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>
+top命令也提供了CPU信息：
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">top [-d delay] [-n iter] [-i] [-b]
+</pre>
+</div>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">-d delay</td>
+<td class="org-left">更新间隔</td>
+</tr>
+
+<tr>
+<td class="org-left">-n iteration</td>
+<td class="org-left">迭代次数</td>
+</tr>
+
+<tr>
+<td class="org-left">-i</td>
+<td class="org-left">显示空闲进程</td>
+</tr>
+
+<tr>
+<td class="org-left">-b</td>
+<td class="org-left">以批处理方式运行</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+top显示的各列如下：
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">us</td>
+<td class="org-left">用户时间</td>
+</tr>
+
+<tr>
+<td class="org-left">sy</td>
+<td class="org-left">系统时间</td>
+</tr>
+
+<tr>
+<td class="org-left">ni</td>
+<td class="org-left">nice时间</td>
+</tr>
+
+<tr>
+<td class="org-left">id</td>
+<td class="org-left">空闲时间</td>
+</tr>
+
+<tr>
+<td class="org-left">wa</td>
+<td class="org-left">等待I/O的时间</td>
+</tr>
+
+<tr>
+<td class="org-left">hi</td>
+<td class="org-left">irq时间</td>
+</tr>
+
+<tr>
+<td class="org-left">si</td>
+<td class="org-left">softirq时间</td>
+</tr>
+
+<tr>
+<td class="org-left">load average</td>
+<td class="org-left">系统平均负载</td>
+</tr>
+
+<tr>
+<td class="org-left">%CPU</td>
+<td class="org-left">特定线程CPU占比</td>
+</tr>
+
+<tr>
+<td class="org-left">PRI</td>
+<td class="org-left">进程优先级</td>
+</tr>
+
+<tr>
+<td class="org-left">NI</td>
+<td class="org-left">进程nice值</td>
+</tr>
+
+<tr>
+<td class="org-left">WCHAN</td>
+<td class="org-left">等待在哪个系统调用中</td>
+</tr>
+
+<tr>
+<td class="org-left">TIME</td>
+<td class="org-left">进程消耗的CPU总时间（用户时间和系统时间）</td>
+</tr>
+
+<tr>
+<td class="org-left">COMMAND</td>
+<td class="org-left">进程执行的命令</td>
+</tr>
+
+<tr>
+<td class="org-left">s</td>
+<td class="org-left">进程状态：睡眠S、运行R、僵尸Z、不可中断睡眠D、跟踪T</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>
+另外一个常用的命令是procinfo：
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">procinfo [-f] [-b] [-D] [-n sec] [-F file]
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">-f</td>
+<td class="org-left">全屏</td>
+</tr>
+
+<tr>
+<td class="org-left">-d</td>
+<td class="org-left">显示变化量</td>
+</tr>
+
+<tr>
+<td class="org-left">-D</td>
+<td class="org-left">显示总量</td>
+</tr>
+
+<tr>
+<td class="org-left">-n sec</td>
+<td class="org-left">采用间隔</td>
+</tr>
+
+<tr>
+<td class="org-left">-F file</td>
+<td class="org-left">输出到文件</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+top输出的各列为：
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">user</td>
+<td class="org-left">CPU消耗的总用户时间</td>
+</tr>
+
+<tr>
+<td class="org-left">nice</td>
+<td class="org-left">CPU消耗的总nice时间</td>
+</tr>
+
+<tr>
+<td class="org-left">system</td>
+<td class="org-left">CPU消耗的总系统时间</td>
+</tr>
+
+<tr>
+<td class="org-left">idle</td>
+<td class="org-left">CPU消耗的总空闲时间</td>
+</tr>
+
+<tr>
+<td class="org-left">irq 0-N</td>
+<td class="org-left">irq编号，已启动次数即内存程序</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>
+mpstat命令可以查看指定CPU上的时间分配：
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">mpstat [-P {cpu|ALL}] [delay [count]]
+</pre>
+</div>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">-P</td>
+<td class="org-left">监视哪个CPU，从0开始</td>
+</tr>
+
+<tr>
+<td class="org-left">delay</td>
+<td class="org-left">采样间隔</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+mpstat输出的各列为：
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">user</td>
+<td class="org-left">用户时间</td>
+</tr>
+
+<tr>
+<td class="org-left">nice</td>
+<td class="org-left">nice时间</td>
+</tr>
+
+<tr>
+<td class="org-left">system</td>
+<td class="org-left">系统时间</td>
+</tr>
+
+<tr>
+<td class="org-left">iowait</td>
+<td class="org-left">I/O时间</td>
+</tr>
+
+<tr>
+<td class="org-left">irq</td>
+<td class="org-left">irq时间</td>
+</tr>
+
+<tr>
+<td class="org-left">softirq</td>
+<td class="org-left">softirq时间</td>
+</tr>
+
+<tr>
+<td class="org-left">idle</td>
+<td class="org-left">空闲时间</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>
+sar可以收集系统信息：
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">sar [options] [delay [count]]
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">-c</td>
+<td class="org-left">报告每秒创建的进程数</td>
+</tr>
+
+<tr>
+<td class="org-left">-I {irq SUM ALL XALL }</td>
+<td class="org-left">中断速度</td>
+</tr>
+
+<tr>
+<td class="org-left">-P {cpu ALL}</td>
+<td class="org-left">指定CPU</td>
+</tr>
+
+<tr>
+<td class="org-left">-q</td>
+<td class="org-left">运行队列长度</td>
+</tr>
+
+<tr>
+<td class="org-left">-u</td>
+<td class="org-left">CPU使用情况</td>
+</tr>
+
+<tr>
+<td class="org-left">-w</td>
+<td class="org-left">上下文切换数</td>
+</tr>
+
+<tr>
+<td class="org-left">-o file</td>
+<td class="org-left">输出到文件</td>
+</tr>
+
+<tr>
+<td class="org-left">-f file</td>
+<td class="org-left">从文件读取选项</td>
+</tr>
+
+<tr>
+<td class="org-left">delay</td>
+<td class="org-left">采用间隔</td>
+</tr>
+
+<tr>
+<td class="org-left">count</td>
+<td class="org-left">样本数</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+sar统计的CPU数据有：
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">user</td>
+<td class="org-left">用户时间</td>
+</tr>
+
+<tr>
+<td class="org-left">nice</td>
+<td class="org-left">nice时间</td>
+</tr>
+
+<tr>
+<td class="org-left">system</td>
+<td class="org-left">系统时间</td>
+</tr>
+
+<tr>
+<td class="org-left">iowait</td>
+<td class="org-left">I/O时间</td>
+</tr>
+
+<tr>
+<td class="org-left">idle</td>
+<td class="org-left">空闲时间</td>
+</tr>
+
+<tr>
+<td class="org-left">runq-sz</td>
+<td class="org-left">运行队列长度</td>
+</tr>
+
+<tr>
+<td class="org-left">plist-sz</td>
+<td class="org-left">进程数</td>
+</tr>
+
+<tr>
+<td class="org-left">ldavg-1</td>
+<td class="org-left">1分钟负载</td>
+</tr>
+
+<tr>
+<td class="org-left">ldavg-5</td>
+<td class="org-left">5分钟负载</td>
+</tr>
+
+<tr>
+<td class="org-left">ldavg-15</td>
+<td class="org-left">15分钟负载</td>
+</tr>
+
+<tr>
+<td class="org-left">proc/s</td>
+<td class="org-left">每秒新建线程数（等于vmstat中的forks）</td>
+</tr>
+
+<tr>
+<td class="org-left">cswch</td>
+<td class="org-left">每秒上下文切换</td>
+</tr>
+
+<tr>
+<td class="org-left">intr/s</td>
+<td class="org-left">每秒中断数</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>
+oprofile也可以收集系统信息：
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">opcontrol [--start] [--stop] [--dump]
+opcontrol [--list-events] [-event=:name:count:unitmask:kernel:user:]
+opreport [-r] [-t]
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">-s &#x2013;start</td>
+<td class="org-left">开始分析</td>
+</tr>
+
+<tr>
+<td class="org-left">-d &#x2013;dump</td>
+<td class="org-left">导出文件</td>
+</tr>
+
+<tr>
+<td class="org-left">&#x2013;stop</td>
+<td class="org-left">停止分析</td>
+</tr>
+
+<tr>
+<td class="org-left">-l &#x2013;list-events</td>
+<td class="org-left">列出可以采样的事件</td>
+</tr>
+
+<tr>
+<td class="org-left">-event=:name:count:unitmask:kernel:user:</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#x2013;vmlinux=kernel</td>
+<td class="org-left">内核</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+opreport选项：
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">-r &#x2013;reverse-sort</td>
+<td class="org-left">逆序显示</td>
+</tr>
+
+<tr>
+<td class="org-left">-t &#x2013;threshold</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-orgb8d2c86" class="outline-2">
+<h2 id="orgb8d2c86">性能工具：系统内存</h2>
+<div class="outline-text-2" id="text-orgb8d2c86">
+<p>
+Linux将内存划分为“页”，这是内存管理的单位。下面的程序可以输出系统中一个页有多少字节：
+</p>
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;unistd.h&gt;</span>
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>(<span style="color: #228b22;">int</span> <span style="color: #a0522d;">argc</span>, <span style="color: #228b22;">char</span> *<span style="color: #a0522d;">argv</span>[]) {
+    printf(<span style="color: #8b2252;">"System page size: %d\n"</span>, getpagesize());
+}
+</pre>
+</div>
+
+<p>
+IA32架构下，页通常是4KB。为了提高性能，Linux可以使用HugePage来管理单元。HugePage通常是2MB。
+</p>
+
+
+<p>
+为了提供更多的虚拟内存，当物理内存不足时，Linux将部分内存保存在磁盘上，这部分空间叫做交换分区（swap space）。Linux也会把文件系统中近期访问过的文件缓存在内存中，这部分叫做缓存（cache）。此外，为每个已经打开的文件，Linux会分配读写缓冲区，避免每次写入都执行磁盘IO。
+</p>
+
+<p>
+vmstat命令可以提供内存统计信息：
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">vmstat [-a] [-s] [-m]
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">-a</td>
+<td class="org-left">显示活跃内存和非活跃内存。非活跃内存是已分配未使用的内存。</td>
+</tr>
+
+<tr>
+<td class="org-left">-s</td>
+<td class="org-left">打印vm表</td>
+</tr>
+
+<tr>
+<td class="org-left">-m</td>
+<td class="org-left">输出分片信息，同/proc/slabinfo</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+vmstat输出的各列如下：
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">swpd</td>
+<td class="org-left">交换到磁盘的内存总量</td>
+</tr>
+
+<tr>
+<td class="org-left">free</td>
+<td class="org-left">未使用的内存</td>
+</tr>
+
+<tr>
+<td class="org-left">buff</td>
+<td class="org-left">缓冲区大小，单位KB</td>
+</tr>
+
+<tr>
+<td class="org-left">cache</td>
+<td class="org-left">缓存大小，单位KB</td>
+</tr>
+
+<tr>
+<td class="org-left">active</td>
+<td class="org-left">活跃内存</td>
+</tr>
+
+<tr>
+<td class="org-left">inactive</td>
+<td class="org-left">非活跃内存</td>
+</tr>
+
+<tr>
+<td class="org-left">si</td>
+<td class="org-left">磁盘到内存的交换速率，单位KB/s</td>
+</tr>
+
+<tr>
+<td class="org-left">so</td>
+<td class="org-left">内存到磁盘的交换速率，单位KB/s</td>
+</tr>
+
+<tr>
+<td class="org-left">pages paged in</td>
+<td class="org-left">从磁盘读入缓冲区的内存，单位页</td>
+</tr>
+
+<tr>
+<td class="org-left">pages paged out</td>
+<td class="org-left">从缓冲区写入磁盘的内存，单位页</td>
+</tr>
+
+<tr>
+<td class="org-left">used swap</td>
+<td class="org-left">已使用的交换分区</td>
+</tr>
+
+<tr>
+<td class="org-left">free swap</td>
+<td class="org-left">空闲交换分区</td>
+</tr>
+
+<tr>
+<td class="org-left">total swap</td>
+<td class="org-left">交换分区总量</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+top命令也可以查看内存情况。top输出的各列如下：
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">%MEM</td>
+<td class="org-left">进程内存占比</td>
+</tr>
+
+<tr>
+<td class="org-left">VIRT</td>
+<td class="org-left">进程虚拟内存总量，含已分配未使用的内存</td>
+</tr>
+
+<tr>
+<td class="org-left">SWAP</td>
+<td class="org-left">进程使用的交换分区总量，单位KB</td>
+</tr>
+
+<tr>
+<td class="org-left">RES</td>
+<td class="org-left">进程使用的物理内存</td>
+</tr>
+
+<tr>
+<td class="org-left">CODE</td>
+<td class="org-left">进程可执行代码使用的内存</td>
+</tr>
+
+<tr>
+<td class="org-left">DATA</td>
+<td class="org-left">进程保存数据和堆栈使用的内存</td>
+</tr>
+
+<tr>
+<td class="org-left">SHR</td>
+<td class="org-left">和其他进程共享的内存</td>
+</tr>
+
+<tr>
+<td class="org-left">nDRT</td>
+<td class="org-left">脏页面数量</td>
+</tr>
+
+<tr>
+<td class="org-left">Mem: total, used, free</td>
+<td class="org-left">内存总量、使用量、空闲量</td>
+</tr>
+
+<tr>
+<td class="org-left">swap: total, used, free</td>
+<td class="org-left">交换分区总量、使用量、空闲量</td>
+</tr>
+
+<tr>
+<td class="org-left">buffers</td>
+<td class="org-left">缓冲区大小</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+procinfo提供的内存信息如下：
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">Total</td>
+<td class="org-left">物理内存大小</td>
+</tr>
+
+<tr>
+<td class="org-left">Used</td>
+<td class="org-left">已使用的物理内存</td>
+</tr>
+
+<tr>
+<td class="org-left">Free</td>
+<td class="org-left">未使用的物理内存</td>
+</tr>
+
+<tr>
+<td class="org-left">Shared</td>
+<td class="org-left">不再使用</td>
+</tr>
+
+<tr>
+<td class="org-left">Buffers</td>
+<td class="org-left">缓冲区</td>
+</tr>
+
+<tr>
+<td class="org-left">Page in</td>
+<td class="org-left">从磁盘读入的块数量</td>
+</tr>
+
+<tr>
+<td class="org-left">Page out</td>
+<td class="org-left">向磁盘写入的块数量</td>
+</tr>
+
+<tr>
+<td class="org-left">Swap in</td>
+<td class="org-left">从交换分区读入的页数量</td>
+</tr>
+
+<tr>
+<td class="org-left">Swap out</td>
+<td class="org-left">向交换分区写入的页数量</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+free命令也可以提供内存情况：
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">free [-l] [-t] [-s delay] [-c count]
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">-s delay</td>
+<td class="org-left">采样间隔</td>
+</tr>
+
+<tr>
+<td class="org-left">-c count</td>
+<td class="org-left">采样次数</td>
+</tr>
+
+<tr>
+<td class="org-left">-l</td>
+<td class="org-left">显示高端内存和低端内存</td>
+</tr>
+
+<tr>
+<td class="org-left">-t</td>
+<td class="org-left">显示物理内存和交换分区之和</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>
+free输出的内容如下：
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">Total</td>
+<td class="org-left">物理内存和交换空间总和</td>
+</tr>
+
+<tr>
+<td class="org-left">Used</td>
+<td class="org-left">已使用的物理内存和交换空间</td>
+</tr>
+
+<tr>
+<td class="org-left">Free</td>
+<td class="org-left">未使用的物理内存和交换空间</td>
+</tr>
+
+<tr>
+<td class="org-left">Shared</td>
+<td class="org-left">已废弃</td>
+</tr>
+
+<tr>
+<td class="org-left">Buffers</td>
+<td class="org-left">缓冲区</td>
+</tr>
+
+<tr>
+<td class="org-left">Cached</td>
+<td class="org-left">缓存</td>
+</tr>
+
+<tr>
+<td class="org-left">-/+ buffers/cache</td>
+<td class="org-left">是否统计缓冲区和缓存</td>
+</tr>
+
+<tr>
+<td class="org-left">Low</td>
+<td class="org-left">低端内存，即可由内核直接访问的内存</td>
+</tr>
+
+<tr>
+<td class="org-left">High</td>
+<td class="org-left">高端内存</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>
+slabtop可以显示内存分配情况：
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">slabtop [--delay n -sort={a|b|c|l|v|n|o|p|s|u}
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">&#x2013;delay</td>
+<td class="org-left">采样间隔</td>
+</tr>
+
+<tr>
+<td class="org-left">排序</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">a</td>
+<td class="org-left">活跃对象</td>
+</tr>
+
+<tr>
+<td class="org-left">b</td>
+<td class="org-left">全部对象</td>
+</tr>
+
+<tr>
+<td class="org-left">c</td>
+<td class="org-left">缓存内存总量</td>
+</tr>
+
+<tr>
+<td class="org-left">l</td>
+<td class="org-left">缓存分片数</td>
+</tr>
+
+<tr>
+<td class="org-left">v</td>
+<td class="org-left">缓存活跃分片数</td>
+</tr>
+
+<tr>
+<td class="org-left">n</td>
+<td class="org-left">缓存名</td>
+</tr>
+
+<tr>
+<td class="org-left">o</td>
+<td class="org-left">对象数量</td>
+</tr>
+
+<tr>
+<td class="org-left">p</td>
+<td class="org-left">每个分片使用的页数量</td>
+</tr>
+
+<tr>
+<td class="org-left">s</td>
+<td class="org-left">对象大小</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+sar可以输出内存信息：
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">sar [-B] [-r] [-R]
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">-B</td>
+<td class="org-left">缺页数量</td>
+</tr>
+
+<tr>
+<td class="org-left">-W</td>
+<td class="org-left">交换页数量</td>
+</tr>
+
+<tr>
+<td class="org-left">-r</td>
+<td class="org-left">内存信息</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+sar输出的内容有：
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">pgpgin/s</td>
+<td class="org-left">每秒从磁盘读入的数据，单位KB</td>
+</tr>
+
+<tr>
+<td class="org-left">pgpgout/s</td>
+<td class="org-left">每秒向磁盘写入的数据，单位KB</td>
+</tr>
+
+<tr>
+<td class="org-left">fault/s</td>
+<td class="org-left">每秒缺页，可能不用访问磁盘</td>
+</tr>
+
+<tr>
+<td class="org-left">majflt/s</td>
+<td class="org-left">每秒缺页（major fault），需要访问磁盘</td>
+</tr>
+
+<tr>
+<td class="org-left">pswpin/s</td>
+<td class="org-left">每秒读入内存的交换分区页数</td>
+</tr>
+
+<tr>
+<td class="org-left">pswpin/s</td>
+<td class="org-left">每秒写入交换分区的页数</td>
+</tr>
+
+<tr>
+<td class="org-left">kbmemfree</td>
+<td class="org-left">空闲物理内存，单位KB</td>
+</tr>
+
+<tr>
+<td class="org-left">kbmemused</td>
+<td class="org-left">已使用物理内存，单位KB</td>
+</tr>
+
+<tr>
+<td class="org-left">%memused</td>
+<td class="org-left">已使用物理内存占比</td>
+</tr>
+
+<tr>
+<td class="org-left">kbbuffers</td>
+<td class="org-left">缓冲区</td>
+</tr>
+
+<tr>
+<td class="org-left">kbcached</td>
+<td class="org-left">缓存</td>
+</tr>
+
+<tr>
+<td class="org-left">kbswpfree</td>
+<td class="org-left">空闲交换分区</td>
+</tr>
+
+<tr>
+<td class="org-left">kbswpused</td>
+<td class="org-left">已使用交换分区</td>
+</tr>
+
+<tr>
+<td class="org-left">%swpused</td>
+<td class="org-left">已使用交换分区占比</td>
+</tr>
+
+<tr>
+<td class="org-left">kbswpcad</td>
+<td class="org-left">在物理内存和交换分区都存在的内存</td>
+</tr>
+
+<tr>
+<td class="org-left">frmpg/s</td>
+<td class="org-left">系统释放页的速度。如果是负数，说明系统正在分配页。</td>
+</tr>
+
+<tr>
+<td class="org-left">bufpg/s</td>
+<td class="org-left">系统将新页作为缓冲区的速度。如果是负数，说明缓冲区正在减少。</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>
+查看文件文件/proc/meminfo也可以得到内存信息：
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">MemTotal</td>
+<td class="org-left">物理内存</td>
+</tr>
+
+<tr>
+<td class="org-left">MemFree</td>
+<td class="org-left">物理内存空闲</td>
+</tr>
+
+<tr>
+<td class="org-left">Buffers</td>
+<td class="org-left">缓冲区</td>
+</tr>
+
+<tr>
+<td class="org-left">Cached</td>
+<td class="org-left">缓存</td>
+</tr>
+
+<tr>
+<td class="org-left">SwapCached</td>
+<td class="org-left">在交换分区和物理内存中都存在的内存</td>
+</tr>
+
+<tr>
+<td class="org-left">Active</td>
+<td class="org-left">活跃内存</td>
+</tr>
+
+<tr>
+<td class="org-left">Inactive</td>
+<td class="org-left">非活跃内存</td>
+</tr>
+
+<tr>
+<td class="org-left">HighTotal</td>
+<td class="org-left">高端内存</td>
+</tr>
+
+<tr>
+<td class="org-left">HighFree</td>
+<td class="org-left">空闲高端内存</td>
+</tr>
+
+<tr>
+<td class="org-left">LowTotal</td>
+<td class="org-left">低端内存</td>
+</tr>
+
+<tr>
+<td class="org-left">LowFree</td>
+<td class="org-left">空闲低端内存</td>
+</tr>
+
+<tr>
+<td class="org-left">SwapTotal</td>
+<td class="org-left">交换内存</td>
+</tr>
+
+<tr>
+<td class="org-left">SwapFree</td>
+<td class="org-left">空闲交换内存</td>
+</tr>
+
+<tr>
+<td class="org-left">Dirty</td>
+<td class="org-left">待刷新到磁盘的内存</td>
+</tr>
+
+<tr>
+<td class="org-left">Writeback</td>
+<td class="org-left">刷新到磁盘的内存</td>
+</tr>
+
+<tr>
+<td class="org-left">Mapped</td>
+<td class="org-left">mmap映射的内存</td>
+</tr>
+
+<tr>
+<td class="org-left">Slab</td>
+<td class="org-left">内核分片内存</td>
+</tr>
+
+<tr>
+<td class="org-left">Committed<sub>AS</sub></td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">PageTables</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">VmallocTotal</td>
+<td class="org-left">vmalloc可用内核内存</td>
+</tr>
+
+<tr>
+<td class="org-left">VmallocUsed</td>
+<td class="org-left">vmalloc已用内核内存</td>
+</tr>
+
+<tr>
+<td class="org-left">VmallocChunk</td>
+<td class="org-left">vmalloc最大可用连续内存</td>
+</tr>
+
+<tr>
+<td class="org-left">HugePages<sub>Total</sub></td>
+<td class="org-left">HugePage总大小</td>
+</tr>
+
+<tr>
+<td class="org-left">HugePages<sub>Free</sub></td>
+<td class="org-left">空闲HugePage</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-orgc086f2e" class="outline-2">
+<h2 id="orgc086f2e">性能工具：特定进程CPU</h2>
+<div class="outline-text-2" id="text-orgc086f2e">
+<p>
+time命令（/usr/bin/time，不是bash内置的time函数）可以输出
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">time [-v] application
+</pre>
+</div>
+
+<p>
+time命令的输出如下
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">User time</td>
+<td class="org-left">应用程序消耗的用户时间</td>
+</tr>
+
+<tr>
+<td class="org-left">System time</td>
+<td class="org-left">程序在Linux内核中消耗的时间</td>
+</tr>
+
+<tr>
+<td class="org-left">Elapsed(wall-clock)</td>
+<td class="org-left">应用程序执行的时间</td>
+</tr>
+
+<tr>
+<td class="org-left">Percent of CPU this job got</td>
+<td class="org-left">进程消耗的CPU占比</td>
+</tr>
+
+<tr>
+<td class="org-left">Major(requiring I/O) page faults</td>
+<td class="org-left">主缺页错误数</td>
+</tr>
+
+<tr>
+<td class="org-left">Minor(reclaiming a frame) page faults</td>
+<td class="org-left">次缺页错误数</td>
+</tr>
+
+<tr>
+<td class="org-left">Swaps</td>
+<td class="org-left">交换到磁盘的次数</td>
+</tr>
+
+<tr>
+<td class="org-left">Voluntary context switches</td>
+<td class="org-left">进程主动让出CPU（比如休眠）的次数</td>
+</tr>
+
+<tr>
+<td class="org-left">Involuntary context switchs</td>
+<td class="org-left">进程被动让出CPU（如中断）的次数</td>
+</tr>
+
+<tr>
+<td class="org-left">Page size</td>
+<td class="org-left">页大小</td>
+</tr>
+
+<tr>
+<td class="org-left">Exit status</td>
+<td class="org-left">退出码</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+strace是一个观察系统调用执行情况的工具：
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">strace [-c] [-p pid] [-o file] [command [arg ...]]
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">-c</td>
+<td class="org-left">打印统计信息</td>
+</tr>
+
+<tr>
+<td class="org-left">-p pid</td>
+<td class="org-left">跟踪进程</td>
+</tr>
+
+<tr>
+<td class="org-left">-o file</td>
+<td class="org-left">输出到文件</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+strace输出各类内容为：
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">% time</td>
+<td class="org-left">系统调用耗时占全部系统调用耗时总和的比例</td>
+</tr>
+
+<tr>
+<td class="org-left">seconds</td>
+<td class="org-left">系统调用消耗的秒数</td>
+</tr>
+
+<tr>
+<td class="org-left">usecs/call</td>
+<td class="org-left">平均每场调用消耗的微秒数</td>
+</tr>
+
+<tr>
+<td class="org-left">calls</td>
+<td class="org-left">调用次数</td>
+</tr>
+
+<tr>
+<td class="org-left">errors</td>
+<td class="org-left">调用失败次数</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+ltrace和strace类似，区别在于ltrace跟踪程序对库的调用：
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">ltrace [-c] [-p pid] [-o filename] [-S] command
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">-c</td>
+<td class="org-left">显示汇总信息</td>
+</tr>
+
+<tr>
+<td class="org-left">-s</td>
+<td class="org-left">跟踪库调用和系统调用</td>
+</tr>
+
+<tr>
+<td class="org-left">-p pid</td>
+<td class="org-left">跟踪指定进程</td>
+</tr>
+
+<tr>
+<td class="org-left">-o file</td>
+<td class="org-left">输出到文件</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+ltrace输出各类内容和strace类似：
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">% time</td>
+<td class="org-left">库调用耗时占全部库调用耗时总和的比例</td>
+</tr>
+
+<tr>
+<td class="org-left">seconds</td>
+<td class="org-left">库调用消耗的秒数</td>
+</tr>
+
+<tr>
+<td class="org-left">usecs/call</td>
+<td class="org-left">平均每场调用消耗的微秒数</td>
+</tr>
+
+<tr>
+<td class="org-left">calls</td>
+<td class="org-left">调用次数</td>
+</tr>
+
+<tr>
+<td class="org-left">function</td>
+<td class="org-left">函数名</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>
+ps也是一个很好的工具：
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">ps [-o etime,time,pcpu,command] [-u user] [-U user] [PID]
+</pre>
+</div>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">etime</td>
+<td class="org-left">从程序开始执行的总时间</td>
+</tr>
+
+<tr>
+<td class="org-left">time</td>
+<td class="org-left">CPU时间，即系统时间和用户时间之和</td>
+</tr>
+
+<tr>
+<td class="org-left">pcpu</td>
+<td class="org-left">消耗CPU占比</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+在执行动态链接程序时，首先运行的是Linux加载器ld.so。要观察程序启动时ld消耗的时间，可以用：
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">env <span style="color: #a0522d;">LD_DEBUG</span>=statistics,help <span style="color: #a0522d;">LD_DEUBG_OUTPUT</span>=filename &lt;command&gt;
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-shell">gprof [-p -flat-profile -q --graph --brief -A -annotated-source] app
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org1a4fc6f" class="outline-2">
+<h2 id="org1a4fc6f">性能工具：特定进程内存</h2>
+<div class="outline-text-2" id="text-org1a4fc6f">
+<div class="org-src-container">
+<pre class="src src-shell">ps [-o vsz,rss,tsiz,dsiz,majflt,minflt,pmem,command] &lt;pid&gt;
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">vsz</td>
+<td class="org-left">进程使用的虚拟内存</td>
+</tr>
+
+<tr>
+<td class="org-left">rss</td>
+<td class="org-left">进程使用的物理内存</td>
+</tr>
+
+<tr>
+<td class="org-left">tsiz</td>
+<td class="org-left">程序代码的虚拟大小</td>
+</tr>
+
+<tr>
+<td class="org-left">dsiz</td>
+<td class="org-left">数据的虚拟大小</td>
+</tr>
+
+<tr>
+<td class="org-left">majflt</td>
+<td class="org-left">主缺页故障，需要从执行磁盘IO</td>
+</tr>
+
+<tr>
+<td class="org-left">minflt</td>
+<td class="org-left">次缺页故障，不需要执行磁盘IO</td>
+</tr>
+
+<tr>
+<td class="org-left">pmep</td>
+<td class="org-left">进程内存占比</td>
+</tr>
+
+<tr>
+<td class="org-left">command</td>
+<td class="org-left">命令</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+/proc/&lt;PID&gt;/status
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">VmSize</td>
+<td class="org-left">进程的虚拟内存大小</td>
+</tr>
+
+<tr>
+<td class="org-left">VmLck</td>
+<td class="org-left">被锁定的虚拟内存大小，被锁定的虚拟内存不能交换到磁盘</td>
+</tr>
+
+<tr>
+<td class="org-left">VmRSS</td>
+<td class="org-left">物理内存大小，同ps中的rss</td>
+</tr>
+
+<tr>
+<td class="org-left">VmData</td>
+<td class="org-left">数据大小，不含堆栈</td>
+</tr>
+
+<tr>
+<td class="org-left">VmStk</td>
+<td class="org-left">堆栈大小</td>
+</tr>
+
+<tr>
+<td class="org-left">VmExec</td>
+<td class="org-left">可执行虚拟内存大小，不含库</td>
+</tr>
+
+<tr>
+<td class="org-left">VmLib</td>
+<td class="org-left">库大小</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+/proc/&lt;PID&gt;/maps
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">Address</td>
+<td class="org-left">地址</td>
+</tr>
+
+<tr>
+<td class="org-left">Permissions</td>
+<td class="org-left">权限。r：读，w：写，x：执行，s：共享，p：私有</td>
+</tr>
+
+<tr>
+<td class="org-left">Offset</td>
+<td class="org-left">偏移量</td>
+</tr>
+
+<tr>
+<td class="org-left">Device</td>
+<td class="org-left">设备</td>
+</tr>
+
+<tr>
+<td class="org-left">Inode</td>
+<td class="org-left">文件节点</td>
+</tr>
+
+<tr>
+<td class="org-left">Pathname</td>
+<td class="org-left">文件路径</td>
+</tr>
+</tbody>
+</table>
+
+<div class="org-src-container">
+<pre class="src src-shell">valgrind --skin-cachegrind application
+cg_annotation --pid [--auto=yes|no]
+</pre>
+</div>
+
+<p>
+kcachegrind可以检测高速缓存。
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">calltree application
+kcachegrind cachegrind.out.pid
+</pre>
+</div>
+
+
+<div class="org-src-container">
+<pre class="src src-shell">ipcs [-t] [-c] [-l] [-u] [-p]
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgf878755" class="outline-2">
+<h2 id="orgf878755">性能工具：磁盘I/O</h2>
+<div class="outline-text-2" id="text-orgf878755">
+<p>
+Linux上IDE驱动的磁盘多被命名为hda、hdb、hdc等，SCSI驱动的硬盘被命名为sda、sdb、sdc等。分区名是在磁盘名后面添加分区号，比如首个IDE磁盘的第二个分区是/dev/hda2。
+</p>
+
+<p>
+vmstat可以用来观察磁盘I/O情况：
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">vmstat [-D] [-d] [-p partition] [interval [count]]
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">-D</td>
+<td class="org-left">显示I/O系统统计信息，显示总量</td>
+</tr>
+
+<tr>
+<td class="org-left">-d</td>
+<td class="org-left">显示从系统启动后的总量</td>
+</tr>
+
+<tr>
+<td class="org-left">-p partition</td>
+<td class="org-left">显示分区</td>
+</tr>
+
+<tr>
+<td class="org-left">interval</td>
+<td class="org-left">采样间隔</td>
+</tr>
+
+<tr>
+<td class="org-left">count</td>
+<td class="org-left">采样次数</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+vmstat输出的I/O统计信息有：
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">bo</td>
+<td class="org-left">写入磁盘的块数，一个块通常KB</td>
+</tr>
+
+<tr>
+<td class="org-left">bi</td>
+<td class="org-left">读取磁盘的块数</td>
+</tr>
+
+<tr>
+<td class="org-left">wa</td>
+<td class="org-left">等待I/O消耗的CPU时间</td>
+</tr>
+
+<tr>
+<td class="org-left">reads: total</td>
+<td class="org-left">读请求总数</td>
+</tr>
+
+<tr>
+<td class="org-left">reads: merged</td>
+<td class="org-left">合并的读请求数</td>
+</tr>
+
+<tr>
+<td class="org-left">reads: sectors</td>
+<td class="org-left">读取的扇区数</td>
+</tr>
+
+<tr>
+<td class="org-left">reads: ms</td>
+<td class="org-left">读取磁盘消耗的时间</td>
+</tr>
+
+<tr>
+<td class="org-left">writes: total</td>
+<td class="org-left">写请求总数</td>
+</tr>
+
+<tr>
+<td class="org-left">writes: merged</td>
+<td class="org-left">合并的写请求数量</td>
+</tr>
+
+<tr>
+<td class="org-left">writes: sectors</td>
+<td class="org-left">写扇区数量</td>
+</tr>
+
+<tr>
+<td class="org-left">IO: cur</td>
+<td class="org-left">当前处理的I/O数</td>
+</tr>
+
+<tr>
+<td class="org-left">IO: s</td>
+<td class="org-left">等待I/O完成消耗的时间</td>
+</tr>
+</tbody>
+</table>
+
+
+<div class="org-src-container">
+<pre class="src src-shell">iostat [-d] [-k] [-x] [device] [interval] [count]
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">-d</td>
+<td class="org-left">值显示磁盘I/O统计信息</td>
+</tr>
+
+<tr>
+<td class="org-left">-k</td>
+<td class="org-left">以KB为单位，默认以块为单位</td>
+</tr>
+
+<tr>
+<td class="org-left">-x</td>
+<td class="org-left">显示扩展性能I/O统计信息</td>
+</tr>
+
+<tr>
+<td class="org-left">device</td>
+<td class="org-left">指定设备</td>
+</tr>
+
+<tr>
+<td class="org-left">interval</td>
+<td class="org-left">采样间隔</td>
+</tr>
+
+<tr>
+<td class="org-left">count</td>
+<td class="org-left">采样数</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+iostat输出的内容如下：
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">tps</td>
+<td class="org-left">每秒传输次数</td>
+</tr>
+
+<tr>
+<td class="org-left">Blk<sub>read</sub>/s</td>
+<td class="org-left">每秒读取的块数</td>
+</tr>
+
+<tr>
+<td class="org-left">Blk<sub>wrtn</sub>/s</td>
+<td class="org-left">每秒写入的块数</td>
+</tr>
+
+<tr>
+<td class="org-left">Blk<sub>read</sub></td>
+<td class="org-left">读取的块总量</td>
+</tr>
+
+<tr>
+<td class="org-left">Blk<sub>wrtn</sub></td>
+<td class="org-left">写入的块总量</td>
+</tr>
+
+<tr>
+<td class="org-left">rrqm/s</td>
+<td class="org-left">合并的读请求数</td>
+</tr>
+
+<tr>
+<td class="org-left">wrqm/s</td>
+<td class="org-left">合并的写请求数</td>
+</tr>
+
+<tr>
+<td class="org-left">r/s</td>
+<td class="org-left">每秒提交读请求数</td>
+</tr>
+
+<tr>
+<td class="org-left">w/s</td>
+<td class="org-left">每秒提交写请求数</td>
+</tr>
+
+<tr>
+<td class="org-left">rsec/s</td>
+<td class="org-left">每秒读取扇区数</td>
+</tr>
+
+<tr>
+<td class="org-left">wsec/s</td>
+<td class="org-left">每秒写入扇区数</td>
+</tr>
+
+<tr>
+<td class="org-left">rkB/s</td>
+<td class="org-left">每秒读取的KB数</td>
+</tr>
+
+<tr>
+<td class="org-left">wkB/s</td>
+<td class="org-left">每秒写入的KB数</td>
+</tr>
+
+<tr>
+<td class="org-left">avgrq-sz</td>
+<td class="org-left">请求平均大小，单位是扇区</td>
+</tr>
+
+<tr>
+<td class="org-left">avgqu-sz</td>
+<td class="org-left">请求队列平均大小</td>
+</tr>
+
+<tr>
+<td class="org-left">await</td>
+<td class="org-left">完成一个请求的平均时间，即在队列中的等待时间和磁盘操作时间之和</td>
+</tr>
+
+<tr>
+<td class="org-left">svctm</td>
+<td class="org-left">执行操作的平均时间，即await减去队列中的等待时间</td>
+</tr>
+</tbody>
+</table>
+
+<div class="org-src-container">
+<pre class="src src-shell">sar -d [interval [count]]
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">tps</td>
+<td class="org-left">每秒传输数</td>
+</tr>
+
+<tr>
+<td class="org-left">rd<sub>sec</sub>/s</td>
+<td class="org-left">每秒读取数量</td>
+</tr>
+
+<tr>
+<td class="org-left">wr<sub>sec</sub>/s</td>
+<td class="org-left">每秒写入数量</td>
+</tr>
+</tbody>
+</table>
+
+<div class="org-src-container">
+<pre class="src src-shell">lsof [-r delay] [+D directory] [+d directory] [file]
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">-r delay</td>
+<td class="org-left">采样间隔</td>
+</tr>
+
+<tr>
+<td class="org-left">+D directory</td>
+<td class="org-left">递归监视指定目录，报告使用目录中文件的进程</td>
+</tr>
+
+<tr>
+<td class="org-left">+d directory</td>
+<td class="org-left">监视指定目录，报告使用目录中文件的进程</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+lsof输出的内容有：
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">COMMAND</td>
+<td class="org-left">进程命令</td>
+</tr>
+
+<tr>
+<td class="org-left">PID</td>
+<td class="org-left">进程编号</td>
+</tr>
+
+<tr>
+<td class="org-left">USER</td>
+<td class="org-left">用户</td>
+</tr>
+
+<tr>
+<td class="org-left">FD</td>
+<td class="org-left">txt表示可执行文件，mem表示内存映射文件</td>
+</tr>
+
+<tr>
+<td class="org-left">TYPE</td>
+<td class="org-left">文件类型，REG表示普通文件</td>
+</tr>
+
+<tr>
+<td class="org-left">DEVICE</td>
+<td class="org-left">设备，可以由ls -al /dev得到</td>
+</tr>
+
+<tr>
+<td class="org-left">SIZE</td>
+<td class="org-left">文件大小</td>
+</tr>
+
+<tr>
+<td class="org-left">NODE</td>
+<td class="org-left">索引节点</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-orgf13a72d" class="outline-2">
+<h2 id="orgf13a72d">性能工具：网络</h2>
+<div class="outline-text-2" id="text-orgf13a72d">
+<p>
+当数据帧经过内核时，Linux会统计如下信息：
+-发送/接收。正常收发的数据。
+-错误。可能是电缆损坏或双工不匹配。
+-丢弃。由于内存或缓冲区不足丢弃的数据。
+-溢出。由于内核或网卡收到太多的帧，被网络丢弃的数据。
+-帧。由于物理层面原因被丢弃的帧，如CRC校验错误。
+-多播。
+-压缩。如PPP（点对点）协议或SLIP（串行线路网际）协议会压缩帧数据。
+</p>
+
+<p>
+在Linux下，以太网设备被命名为ethN，如eth0就是第一个以太网设备。PPP设备以pppN命名。
+</p>
+
+
+<p>
+mii-tool可以检测以太网设备信息：
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">mii-tool [-v] [device]
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-shell">ethtool [device]
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-shell">ifconfig [device]
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">RX packets</td>
+<td class="org-left">设备已经接收的数据包数</td>
+</tr>
+
+<tr>
+<td class="org-left">TX packets</td>
+<td class="org-left">设备已经发送的数据包数</td>
+</tr>
+
+<tr>
+<td class="org-left">errors</td>
+<td class="org-left">发送或接收时的错误数</td>
+</tr>
+
+<tr>
+<td class="org-left">dropped</td>
+<td class="org-left">发送或接收时丢弃的包数</td>
+</tr>
+
+<tr>
+<td class="org-left">overruns</td>
+<td class="org-left">发生缓冲区不足的次数</td>
+</tr>
+
+<tr>
+<td class="org-left">frame</td>
+<td class="org-left">底层帧错误数</td>
+</tr>
+
+<tr>
+<td class="org-left">carrier</td>
+<td class="org-left">由于链路（如电缆）故障丢失的数据包数</td>
+</tr>
+</tbody>
+</table>
+
+<div class="org-src-container">
+<pre class="src src-shell">ip -s [-s] link
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">bytes</td>
+<td class="org-left">发送或接收的字节数</td>
+</tr>
+
+<tr>
+<td class="org-left">packets</td>
+<td class="org-left">发送或接收的数据包数</td>
+</tr>
+
+<tr>
+<td class="org-left">errors</td>
+<td class="org-left">发送或接收时发生的错误数</td>
+</tr>
+
+<tr>
+<td class="org-left">dropped</td>
+<td class="org-left">由于网卡缺少资源，导致没有发送或接收的数据包数</td>
+</tr>
+
+<tr>
+<td class="org-left">overruns</td>
+<td class="org-left">发生缓冲区不足的次数</td>
+</tr>
+
+<tr>
+<td class="org-left">mcast</td>
+<td class="org-left">接收的多播数据包的数量</td>
+</tr>
+
+<tr>
+<td class="org-left">carrier</td>
+<td class="org-left">由于链路故障而丢弃的数据包数</td>
+</tr>
+
+<tr>
+<td class="org-left">collsns</td>
+<td class="org-left">传送时设备发送冲突的次数，当多个设备试图同时使用网络时会发送冲突</td>
+</tr>
+</tbody>
+</table>
+
+
+<div class="org-src-container">
+<pre class="src src-shell">sar [-n DEV | EDEV | SOCK | FULL] [DEVICE] [interval] [count]
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">-n DEV</td>
+<td class="org-left">显示每个设备发送和接收的字节数</td>
+</tr>
+
+<tr>
+<td class="org-left">-n EDEV</td>
+<td class="org-left">显示每个设备发送和接收的错误信息</td>
+</tr>
+
+<tr>
+<td class="org-left">-n SOCK</td>
+<td class="org-left">显示使用套接字（TCP、UDP、RAW）的总数信息</td>
+</tr>
+
+<tr>
+<td class="org-left">-n FULL</td>
+<td class="org-left">显示所有网络统计信息</td>
+</tr>
+
+<tr>
+<td class="org-left">interval</td>
+<td class="org-left">采样间隔</td>
+</tr>
+
+<tr>
+<td class="org-left">count</td>
+<td class="org-left">采样总数</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+sar输出如下：
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">rxpck/s</td>
+<td class="org-left">数据包接收速率</td>
+</tr>
+
+<tr>
+<td class="org-left">txpck/s</td>
+<td class="org-left">数据包发送速率</td>
+</tr>
+
+<tr>
+<td class="org-left">rxbyt/s</td>
+<td class="org-left">字节发送速率</td>
+</tr>
+
+<tr>
+<td class="org-left">txbyt/s</td>
+<td class="org-left">字节接收速率</td>
+</tr>
+
+<tr>
+<td class="org-left">rxcmp/s</td>
+<td class="org-left">压缩包接收速率</td>
+</tr>
+
+<tr>
+<td class="org-left">txcmp/s</td>
+<td class="org-left">压缩包发送速率</td>
+</tr>
+
+<tr>
+<td class="org-left">rxmcst/s</td>
+<td class="org-left">多播包发送速率</td>
+</tr>
+
+<tr>
+<td class="org-left">rxerr/s</td>
+<td class="org-left">接收错误率</td>
+</tr>
+
+<tr>
+<td class="org-left">txerr/s</td>
+<td class="org-left">发送错误率</td>
+</tr>
+
+<tr>
+<td class="org-left">coll/s</td>
+<td class="org-left">发送时以太网冲突率</td>
+</tr>
+
+<tr>
+<td class="org-left">rxdrop/s</td>
+<td class="org-left">由于linux内核缓冲区不足导致的接收帧丢失率</td>
+</tr>
+
+<tr>
+<td class="org-left">txdrop/s</td>
+<td class="org-left">由于linux内核缓冲区不足导致的发送帧丢失率</td>
+</tr>
+
+<tr>
+<td class="org-left">rxfram/s</td>
+<td class="org-left">帧对齐错误导致的接收帧丢失率</td>
+</tr>
+
+<tr>
+<td class="org-left">rxfifo/s</td>
+<td class="org-left">由于FIFO错误导致的接收帧丢失率</td>
+</tr>
+
+<tr>
+<td class="org-left">txfifo/s</td>
+<td class="org-left">由于FIFO错误而导致的发送帧丢失率</td>
+</tr>
+
+<tr>
+<td class="org-left">totsck</td>
+<td class="org-left">正在使用的套接字数量</td>
+</tr>
+
+<tr>
+<td class="org-left">tcpsck</td>
+<td class="org-left">TCP套接字数量</td>
+</tr>
+
+<tr>
+<td class="org-left">udpsck</td>
+<td class="org-left">UDP套接字数量</td>
+</tr>
+
+<tr>
+<td class="org-left">rawsck</td>
+<td class="org-left">RAW套接字数量</td>
+</tr>
+
+<tr>
+<td class="org-left">ip-frag</td>
+<td class="org-left">IP分片总数</td>
+</tr>
+</tbody>
+</table>
+
+<div class="org-src-container">
+<pre class="src src-shell">iptraf [-d interface] [-s interface] [-t &lt;minutes&gt;]
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">-d interface</td>
+<td class="org-left">显示详细的接口信息</td>
+</tr>
+
+<tr>
+<td class="org-left">-s interface</td>
+<td class="org-left">显示接口上哪些端口在使用</td>
+</tr>
+
+<tr>
+<td class="org-left">-t &lt;minutes&gt;</td>
+<td class="org-left">运行时间</td>
+</tr>
+</tbody>
+</table>
+
+<div class="org-src-container">
+<pre class="src src-shell">netstat [-p] [-c] [-interfaces=&lt;name&gt;] [-s] [-t] [-u] [-w]
+</pre>
+</div>
+
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">-p</td>
+<td class="org-left">显示套接字对应的PID</td>
+</tr>
+
+<tr>
+<td class="org-left">-c</td>
+<td class="org-left">每秒刷新</td>
+</tr>
+
+<tr>
+<td class="org-left">&#x2013;interfaces=&lt;name&gt;</td>
+<td class="org-left">显示指定接口</td>
+</tr>
+
+<tr>
+<td class="org-left">&#x2013;statistics, -s</td>
+<td class="org-left">显示IP、UDP、ICMP、TCP统计信息</td>
+</tr>
+
+<tr>
+<td class="org-left">&#x2013;tcp, -t</td>
+<td class="org-left">显示TCP套接字信息</td>
+</tr>
+
+<tr>
+<td class="org-left">&#x2013;udp, -u</td>
+<td class="org-left">显示UDP套接字信息</td>
+</tr>
+
+<tr>
+<td class="org-left">&#x2013;raw, -w</td>
+<td class="org-left">显示RAW套接字信息</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org07cef5b" class="outline-2">
+<h2 id="org07cef5b">实用工具：性能工具助手</h2>
+<div class="outline-text-2" id="text-org07cef5b">
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #a020f0;">while</span> true; <span style="color: #a020f0;">do</span> sleep 1; /sbin/ifconfig eth0 | grep <span style="color: #8b2252;">'RX packets'</span>; <span style="color: #a020f0;">done</span>;
+</pre>
+</div>
+
+<p>
+script命令会启动一个新shell，记录shell中的所有输入和输出。
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">script [-a] [-t] [file]
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">-a</td>
+<td class="org-left">追加写入文件</td>
+</tr>
+
+<tr>
+<td class="org-left">-t</td>
+<td class="org-left">计时</td>
+</tr>
+
+<tr>
+<td class="org-left">file</td>
+<td class="org-left">输出文件名，默认是typescript</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+在使用时，最好先设置为哑终端：
+</p>
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #483d8b;">export</span> <span style="color: #a0522d;">TERM</span>=dumb
+script ps_output
+</pre>
+</div>
+
+<p>
+watch每秒运行一次命令，并将命令输出的变化突出显示：
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">watch [-d [=cumulative]] [-n sec] &lt;command&gt;
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">-d[=cumulative]</td>
+<td class="org-left">突出显示变化</td>
+</tr>
+
+<tr>
+<td class="org-left">-n sec</td>
+<td class="org-left">采样间隔</td>
+</tr>
+</tbody>
+</table>
+
+<div class="org-src-container">
+<pre class="src src-shell">watch -n 10 <span style="color: #8b2252;">"ps -o minflt,cmd"</span>
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-shell">ldd &lt;binary&gt;
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-shell">objdump -T &lt;binary&gt;
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Created: 2019-09-23 周一 20:55</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

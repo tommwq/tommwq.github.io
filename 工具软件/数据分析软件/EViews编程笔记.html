@@ -1,0 +1,1876 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh">
+<head>
+<!-- 2019-09-23 周一 20:55 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>EViews编程笔记</title>
+<meta name="generator" content="Org mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">EViews编程笔记</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org2d3acb0">待做</a></li>
+<li><a href="#orgec76ce3">EViews编程语言</a>
+<ul>
+<li><a href="#orga9ded5b">HelloWorld</a></li>
+<li><a href="#org8884bf5">运行</a></li>
+<li><a href="#org2cca316">概念</a>
+<ul>
+<li><a href="#org5963b54">工作文件</a></li>
+<li><a href="#org636adf3">页</a></li>
+<li><a href="#orgacef280">命令</a></li>
+<li><a href="#org2eaffec">对象</a></li>
+</ul>
+</li>
+<li><a href="#org6f5fc5f">序列</a></li>
+<li><a href="#org0048a38">组</a></li>
+<li><a href="#orgfd9615a">公式</a></li>
+<li><a href="#org593bf5b">图</a></li>
+<li><a href="#org53a19c3">视图</a></li>
+<li><a href="#orgd1ee1f8">常用辅助函数</a>
+<ul>
+<li><a href="#org1e45a4d">选择样本范围</a></li>
+</ul>
+</li>
+<li><a href="#orgb74fce8">流程控制</a></li>
+<li><a href="#org63851b0">对接其他程序</a>
+<ul>
+<li><a href="#org1beca16">Python</a></li>
+<li><a href="#orge87e052">R</a></li>
+<li><a href="#org4c961c8">VBA</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org1025fc6">专题</a>
+<ul>
+<li><a href="#org14398f9">异常值处理</a></li>
+<li><a href="#org70d6651">横截面</a></li>
+<li><a href="#org718ce65">拟合</a></li>
+<li><a href="#orgcfa1a5d">预测</a></li>
+<li><a href="#org1245226">GARCH</a>
+<ul>
+<li><a href="#org1e88180">时间序列建模步骤</a></li>
+<li><a href="#orgc562041">使用EViews建立GARCH模型</a></li>
+</ul>
+</li>
+<li><a href="#orga9f6a2f">ARMA</a>
+<ul>
+<li><a href="#org2a619c6">ARMA简介</a></li>
+<li><a href="#orgd3ecf8e">使用EViews建立ARMA模型</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orgafb20cb">附录</a>
+<ul>
+<li><a href="#orge96a1bb">Jarque-Bera检验</a></li>
+<li><a href="#org48c7a11">单位根检验（unit root test）</a></li>
+<li><a href="#org4dd8f4a">Augmented Dickey-Fuller test</a></li>
+<li><a href="#org859824d">Schwarz Info Criterion</a></li>
+</ul>
+</li>
+<li><a href="#org82f8178">零散资料</a></li>
+<li><a href="#orgedbb828">参考资料</a></li>
+<li><a href="#org29d01a1">修订记录</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org2d3acb0" class="outline-2">
+<h2 id="org2d3acb0">待做</h2>
+<div class="outline-text-2" id="text-org2d3acb0">
+<ul class="org-ul">
+<li>整理零散部分</li>
+<li>增加AR示例</li>
+<li>增加MA示例</li>
+<li>增加ARMA示例</li>
+<li>增加ARCH示例</li>
+<li>增加Python调用EViews的示例</li>
+<li>增加Excel调用EViews的示例</li>
+<li>增加R调用EViews的示例</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgec76ce3" class="outline-2">
+<h2 id="orgec76ce3">EViews编程语言</h2>
+<div class="outline-text-2" id="text-orgec76ce3">
+</div>
+<div id="outline-container-orga9ded5b" class="outline-3">
+<h3 id="orga9ded5b">HelloWorld</h3>
+<div class="outline-text-3" id="text-orga9ded5b">
+<p>
+EViews编程语言由EViews命令组成。简单的说，EViews代码就是由EViews命令组成的一个序列。下面是一个EViews程序的示例：
+</p>
+<div class="org-src-container">
+<pre class="src src-eviews">'helloworld.prg
+program helloworld
+
+'draw a random line
+
+wfcreate(wf=helloworld,page=dated) d 2018 2019
+
+series r=@nrnd
+show r.line
+</pre>
+</div>
+
+<p>
+我们逐行介绍一下：
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">代码</th>
+<th scope="col" class="org-left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">'helloworld.prg</td>
+<td class="org-left">以'开头的行是注释。</td>
+</tr>
+
+<tr>
+<td class="org-left">program helloworld</td>
+<td class="org-left">声明程序名为helloworld。</td>
+</tr>
+
+<tr>
+<td class="org-left">'draw a random line</td>
+<td class="org-left">也是注释。</td>
+</tr>
+
+<tr>
+<td class="org-left">wfcreate(wf=helloworld,page=dated) d 2018 2019</td>
+<td class="org-left">建立一个工作文件（WorkFile），时间从2018年到2019年，以天为单位。</td>
+</tr>
+
+<tr>
+<td class="org-left">series r=@nrnd</td>
+<td class="org-left">声明序列r，并使用随机数对r赋值。</td>
+</tr>
+
+<tr>
+<td class="org-left">show r.line</td>
+<td class="org-left">绘制r的曲线图。</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+可以看到，EViews程序是面向过程的。虽然EViews中存在对象的概念，但是这个对象不满足OOP特性要求。对象在EViews中的用途是保存数和结果。EViews源代码通常以“.prg”为扩展名。EViews不区分大小写。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org8884bf5" class="outline-3">
+<h3 id="org8884bf5">运行</h3>
+<div class="outline-text-3" id="text-org8884bf5">
+<p>
+运行EViews.exe代码非常简单：
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">eviews.exe helloworld.prg
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org2cca316" class="outline-3">
+<h3 id="org2cca316">概念</h3>
+<div class="outline-text-3" id="text-org2cca316">
+<p>
+在EViews中有3个重要的概念：工作文件、页和对象。要理解EViews命令和程序，首先要理解这3个概念。
+</p>
+</div>
+
+<div id="outline-container-org5963b54" class="outline-4">
+<h4 id="org5963b54">工作文件</h4>
+<div class="outline-text-4" id="text-org5963b54">
+<p>
+工作文件（workfile）是一个文档，包含一个或多个页（page）。分析数据所用到的EViews对象就包含在页中。工作文件保含一个区间（Range），区间是工作文件使用的数据的范围。在分析时可以只选用区间的一个子集，叫做样本（sample）。工作文件中的页可以具有以下3中结构之一：
+</p>
+
+<ul class="org-ul">
+<li>带日期的（Dated），用于时间序列分析。</li>
+<li>不带日期的（Unstructured/undated），用于横截面分析。</li>
+<li>平衡面板（Balanced Panel），面板数据。</li>
+</ul>
+
+<p>
+在工作文件中，每个页可以具有不同的结构。
+</p>
+
+
+<p>
+命令wfcreate用于建立工作文件。下面的命令建立了一个工作文件，工作表的名字是monthly，工作表里包含一个页，页的名字是dated。工作表的区间从1950到2012，以月度为单位：
+</p>
+<div class="org-src-container">
+<pre class="src src-eviews">wfcreate(wf=monthly, page=dated) m 1950 2012
+</pre>
+</div>
+
+
+<p>
+这里的参数wf是工作文件名字，page是页名字。m定义了页的结构，表示按月份计算。1950和2012表示数据范围从1950（含）年到2012年（含）。
+</p>
+
+<p>
+和m类似的参数还有：
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">类型</td>
+<td class="org-left">说明</td>
+<td class="org-left">附注</td>
+</tr>
+
+<tr>
+<td class="org-left">a</td>
+<td class="org-left">年 annual</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">s</td>
+<td class="org-left">半年 semi-annual</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">q</td>
+<td class="org-left">季度 quarterly</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">m</td>
+<td class="org-left">月 montyly</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">w</td>
+<td class="org-left">周 weekly</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">d5</td>
+<td class="org-left">日（一周5日）</td>
+<td class="org-left">在某些早期版本中为“d”</td>
+</tr>
+
+<tr>
+<td class="org-left">d7</td>
+<td class="org-left">日（一周7日）</td>
+<td class="org-left">在某些早期版本中为“7”</td>
+</tr>
+
+<tr>
+<td class="org-left">u</td>
+<td class="org-left">不带日期 undated/unstructured</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>
+下面的命令建立了名为undated的工作表，区间是1到50，包含一个名为state的页：
+</p>
+<div class="org-src-container">
+<pre class="src src-eviews">wfcreate(wf=undated,page=state) u 50
+</pre>
+</div>
+
+
+<p>
+下面的命令建立了平衡数据面板类型的页：
+</p>
+<div class="org-src-container">
+<pre class="src src-eviews">wfcreate(wf=panel, page=country) q 1950 2010 100
+</pre>
+</div>
+
+<p>
+区间后面的100表示横截面大小。
+</p>
+
+
+<p>
+对于已经建立的工作文件，可以使用命令wfopen打开。wfopen也支持从其他应用中导入数据。下面的命令建立一个工作文件，并从Excel文件中导入数据：
+</p>
+<div class="org-src-container">
+<pre class="src src-eviews">wfopen(page=panel) "c:\panel.xls"
+</pre>
+</div>
+
+<p>
+在导入数据时，对于“表格”类型的数据（如Excel工作表），EViews认为数据按列排列。如果数据时按行排列，需要增加byrow参数：
+</p>
+<div class="org-src-container">
+<pre class="src src-eveiws">wfopen("page=transpose) "c:\transpose.xls" byrow
+</pre>
+</div>
+<p>
+EViews支持的文件有Excel、HTML、CSV、ASCII、RATS、Stata、SPSS、SAS等。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org636adf3" class="outline-4">
+<h4 id="org636adf3">页</h4>
+<div class="outline-text-4" id="text-org636adf3">
+<p>
+页（page）可以理解为一个名字空间，EViews对象保存在页中。
+</p>
+
+
+<p>
+命令pagecreate可以建立页，并将新页设置为当前页。它有5种形式，我们分别来介绍。
+下面两种形式用于建立regular frequency或unstructured页。
+</p>
+<div class="org-src-container">
+<pre class="src src-eveiws">pagecreate(OPTIONS) freq[(SUBPERIOD_OPTS)] START_DATE END_DATE [NUM_CROSS_SECTIONS]
+pagecreate(OPTIONS) u NUM_OBSERVATIONS
+</pre>
+</div>
+
+
+<p>
+下面的形式可以基于其他页的对象建立新页。
+</p>
+<div class="org-src-container">
+<pre class="src src-eviews">pagecreate(ID_METHOD[,OPTIONS]) IDENTIFIER_LIST [@srcpage PAGE_LIST]
+</pre>
+</div>
+<p>
+IDENTIFIER_LIST 是序列编号列表。ID_METHOD可以是
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">id</td>
+<td class="org-left">使用观察值</td>
+</tr>
+
+<tr>
+<td class="org-left">idunion</td>
+<td class="org-left">使用观察值并集</td>
+</tr>
+
+<tr>
+<td class="org-left">idintersect</td>
+<td class="org-left">使用观察值交集</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>
+下面的形式基于其他页的对象建立横截面数据。
+</p>
+<div class="org-src-container">
+<pre class="src src-eviews">pagecreate(idcross[,OPTIONS]) ID1 ID2 [@srcpage PAGE1 PAGE2]
+pagecreate(idcross[,OPTIONS]) ID1 @range(FREQ, START_DATE, END_DATE) [@srcpage PAGE1]
+</pre>
+</div>
+
+
+<p>
+每个新建的页都会默认包含两个对象：c和resid。这两个对象用于进行线性回归。在执行公式对象的ls命令后，c中第一个单元格（R1）记录了alpha值，第二个单元格（R2）记录了beta值。resid记录了残差项。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgacef280" class="outline-4">
+<h4 id="orgacef280">命令</h4>
+<div class="outline-text-4" id="text-orgacef280">
+<p>
+EViews程序由命令组成。在EViews中，命令分为辅助命令和对象命令。我们前面见到的大多是辅助命令。辅助命令的用途是执行管理工作文件和页等与数据分析无关的操作。对象命令是通过对象调用的命令，比如程序helloworld中的：
+</p>
+<div class="org-src-container">
+<pre class="src src-eviews">show r.line
+</pre>
+</div>
+<p>
+就使用了对象命令r.line。使用EViews分析和预测数据，通常需要使用对象命令。要了解对象命令，首先要了解对象。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org2eaffec" class="outline-4">
+<h4 id="org2eaffec">对象</h4>
+<div class="outline-text-4" id="text-org2eaffec">
+<p>
+对象是EViews用来保存数据和结果的变量。对象包含在页中，具有类型和名字。对象的名字在页中是唯一的。EViews支持的对象类型有：
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">Alpha</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Coef</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Equation</td>
+<td class="org-left">公式</td>
+</tr>
+
+<tr>
+<td class="org-left">Factor</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">graph</td>
+<td class="org-left">图</td>
+</tr>
+
+<tr>
+<td class="org-left">Group</td>
+<td class="org-left">组</td>
+</tr>
+
+<tr>
+<td class="org-left">Logl</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Matrix</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Model</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Pool</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Rowvector</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Sample</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Scalar</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Series</td>
+<td class="org-left">序列</td>
+</tr>
+
+<tr>
+<td class="org-left">Spool</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Sspace</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">String</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Svector</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Sym</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">System</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Table</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Text</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Userobj</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Valmap</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Var</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Vector</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>
+在使用对象前必须声明它。下面是一个例子，声明了一个名字是x的序列对象：
+</p>
+<div class="org-src-container">
+<pre class="src src-eviews">Series x
+</pre>
+</div>
+
+
+<p>
+对象声明的通用语法是：
+</p>
+<div class="org-src-container">
+<pre class="src src-eviews">object_type(options) object_name
+</pre>
+</div>
+
+
+<p>
+对象使用等号进行赋值，等号右边可以是函数或公式：
+</p>
+<div class="org-src-container">
+<pre class="src src-eviews">Series x
+Series y
+x = @nrnd
+y = x + 1
+</pre>
+</div>
+<p>
+在上面的程序声明了两个序列对象x和y，序列长度由页的区间决定。x使用函数@nrnd赋值，x中的每一项被赋值为一个服从标准正态分布的随机数。y的每一项被赋值为对应x项的值加1。在赋值之前，序列中各项的值是NA。
+</p>
+
+
+<p>
+声明了对象之后，就可以执行对象命令了：
+</p>
+<div class="org-src-container">
+<pre class="src src-eviews">shwo x.line
+</pre>
+</div>
+
+<p>
+上面是一个简单的对象命令，更完整的形式如下：
+</p>
+<div class="org-src-container">
+<pre class="src src-eviews">action(action_opt) object_name.view_or_proc(options_list) arg_list
+</pre>
+</div>
+
+<p>
+在这里，action是以下4个动词之一
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">do</td>
+<td class="org-left">执行命令</td>
+</tr>
+
+<tr>
+<td class="org-left">freeze</td>
+<td class="org-left">保存对象状态</td>
+</tr>
+
+<tr>
+<td class="org-left">print</td>
+<td class="org-left">显示</td>
+</tr>
+
+<tr>
+<td class="org-left">show</td>
+<td class="org-left">显示</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+object_name 是对象的名字， view_or_proc 是命令的名字，options_list是选修列表，arg_list是参数列表。我们看几个例子：
+</p>
+<div class="org-src-container">
+<pre class="src src-eviews">Series x
+x = @nrnd
+show x.line
+</pre>
+</div>
+<p>
+上面的程序中，调用了序列对象x的line命令，选项和参数为空。
+</p>
+
+<div class="org-src-container">
+<pre class="src src-eviews">Series x
+Series y
+' x = ...
+' y = '''
+Equation e
+e.ls y c x
+</pre>
+</div>
+<p>
+上面的程序中，调用了公式对象e的ls命令，参数是y、c和x。
+</p>
+
+<p>
+在使用对象命令时，动词是可以省略的，EViews会根据命令自动选择show或do作为动词，比如：
+</p>
+<div class="org-src-container">
+<pre class="src src-eviews">gdp.line                 '等效于 show gdp.line
+eq1.ls cons c gdp        '等效于 do eq1.ls cons c gdp
+show eq1.ls cons c gdp   '等效于 先 do eq1.ls cons c gdp 再 show eq1
+</pre>
+</div>
+
+<p>
+此外，对象的声明和命令也可以合并在一起：
+</p>
+<div class="org-src-container">
+<pre class="src src-eviews">series x=@rnd
+series y = log(x)
+equation e.ls y c x
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org6f5fc5f" class="outline-3">
+<h3 id="org6f5fc5f">序列</h3>
+<div class="outline-text-3" id="text-org6f5fc5f">
+<p>
+序列（series）包含一列或多列数据。
+</p>
+
+<p>
+查看折线图：
+</p>
+<div class="org-src-container">
+<pre class="src src-eviews">x.line
+</pre>
+</div>
+
+<p>
+查看直方图：
+</p>
+<div class="org-src-container">
+<pre class="src src-eviews">x.hist
+</pre>
+</div>
+
+<p>
+单位根测试：
+</p>
+<div class="org-src-container">
+<pre class="src src-eviews">series_name.uroot(options)
+gnp.uroot(adf,exog=const,lag=3,save=mout)
+</pre>
+</div>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">选项</td>
+<td class="org-left">默认值</td>
+<td class="org-left">说明</td>
+</tr>
+
+<tr>
+<td class="org-left">exog=arg</td>
+<td class="org-left">const</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">dif=integer</td>
+<td class="org-left">0</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">关键字</td>
+<td class="org-left">说明</td>
+</tr>
+
+<tr>
+<td class="org-left">adf</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">dfgls</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">pp</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">kpss</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">ers</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">np</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">hac</td>
+</tr>
+</tbody>
+</table>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">lagmethod=arg</td>
+<td class="org-left">sic</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">lag=integer</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">maxlag=integer</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">lagpval=arg</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">band=arg</td>
+</tr>
+
+<tr>
+<td class="org-left">prompt</td>
+</tr>
+
+<tr>
+<td class="org-left">p</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>
+自相关和偏自相关：
+</p>
+<div class="org-src-container">
+<pre class="src src-eviews">series_name.correl(n, options)
+ser1.correl(24)
+</pre>
+</div>
+
+<p>
+ARCH模拟：
+</p>
+<div class="org-src-container">
+<pre class="src src-eviews">equation_name.arch(p,q,options) y [x1 x2 x3] [@ t1 t2]]
+</pre>
+</div>
+<p>
+p：ARCH terms，[1,9]。q：GARCH terms，[0,9]。
+</p>
+
+<p>
+GARCH模拟：
+</p>
+<div class="org-src-container">
+<pre class="src src-eviews">equation e1.arch sp500 c
+e1.garch
+</pre>
+</div>
+
+<p>
+预测：
+</p>
+<div class="org-src-container">
+<pre class="src src-eviews">eq_name.forecast(options) yhat [y_se]
+eq_name.forecast(options) yhat [y_se y_var]
+
+e1.forecast y
+plot x y
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org0048a38" class="outline-3">
+<h3 id="org0048a38">组</h3>
+<div class="outline-text-3" id="text-org0048a38">
+<p>
+组（group）是一组序列。
+</p>
+</div>
+</div>
+<div id="outline-container-orgfd9615a" class="outline-3">
+<h3 id="orgfd9615a">公式</h3>
+<div class="outline-text-3" id="text-orgfd9615a">
+<p>
+公式（equation）是一个用于估算和预测的对象。定义了变量和解释变量的关系。
+</p>
+
+<p>
+公式可以通过最小二乘法拟合得到：
+</p>
+<div class="org-src-container">
+<pre class="src src-eivews">eq_name.ls(options) y x1 [x2 x3 ...]
+eq_name.ls(options) specification
+</pre>
+</div>
+<p>
+在第一个形式中，y是独立变量，x1、x2等是解释变量。如果需要增加截距项，可以使用常量c：
+</p>
+<div class="org-src-container">
+<pre class="src src-eviews">eq1.ls y c x
+</pre>
+</div>
+<p>
+第二个形式可以拟合复杂函数，如：
+</p>
+<div class="org-src-container">
+<pre class="src src-eviews">eq1.ls q = beta(1) + beta(2)*(1^c(1) + k^(1-c(1)))
+</pre>
+</div>
+
+<p>
+预测
+</p>
+<div class="org-src-container">
+<pre class="src src-eviews">eq_name.forecast(options) yhat [y_se]
+eq_name.forecast(options) yhat [y_se y_var]
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org593bf5b" class="outline-3">
+<h3 id="org593bf5b">图</h3>
+<div class="outline-text-3" id="text-org593bf5b">
+</div>
+</div>
+<div id="outline-container-org53a19c3" class="outline-3">
+<h3 id="org53a19c3">视图</h3>
+<div class="outline-text-3" id="text-org53a19c3">
+<p>
+视图（view）
+</p>
+</div>
+</div>
+<div id="outline-container-orgd1ee1f8" class="outline-3">
+<h3 id="orgd1ee1f8">常用辅助函数</h3>
+<div class="outline-text-3" id="text-orgd1ee1f8">
+<div class="org-src-container">
+<pre class="src src-eviews">%s=@left(%s1, 13) + @right(%s2, 3) + @mid(%s3, 1, 2)
+@mid(STR,START,LENGTH)
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org1e45a4d" class="outline-4">
+<h4 id="org1e45a4d">选择样本范围</h4>
+<div class="outline-text-4" id="text-org1e45a4d">
+<div class="org-src-container">
+<pre class="src src-eviews">smpl 1990m1 2002m12                 '选择1990年1月到2002年12月的样本
+smpl 1960m3 1970m2 1992m1 2002m10   '选择两段样本
+smpl 1 11                           '对undated数据要使用下标
+smpl @all                           '通过变量设置样本
+smpl @first+1 @last-1               '通过变量设置样本
+smpl 1960m03 1970m02 if payroll - payroll(-1) &gt; 0    '按条件采样。这里的payroll是series名字
+smpl 1960m03 1970m02 if (unemployment &gt; 4 and unemployment &lt; 6) or payroll=payroll(-1)
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-eviews">
+z = @elem(gdp, "2008Q3") 将z设置为长度和gdp一样的序列，值都是gdp在2008Q3的值。
+
+series w2=@nan(w1, 0) 将NA值设置为0
+series w2=@isna(x) 如果x的元素是NA，值为1，否则为0。
+series z = (x=y)
+
+group group03 gdp gdp(-1) log(inv) pce/gdp  建立名为group03的组。组是多个序列的集合。
+x = nrnd 正态分布随机数组
+
+@mean(s)
+@stdev(s)
+d(s) s的差分
+s(-1) s的前项
+@sqr(s)
+@rlognrom 对数正太分布随机数组
+@rnorm
+4*nrnd
+rndint(0,100)
+3*rnd
+
+
+series d1 =@runif(0,2) 'uniform distribute(0,2)
+show d1=@dunif(d1,0,2) @cunif(d1, 0, 2)
+
+@gmean(x) 'geometric average
+@mena(x, "1980m1 1990m12") '算区间
+@median(x)
+@vars(x) sample variance of X
+@varp(x)  或 @var(x) population variance of X
+@stdev(x) 或 @stdevs(x) sample sd
+stdevp(x) population sd 
+
+@rmean(grp)
+
+vector(3) v
+v(1) =@mean(gdp)
+v(2)=@varp(gdp)
+v(3)=@covs(gdp,pce)
+
+
+@lag(gdp,3) 等效于gdp(-3) gdp先右平移3。
+gdp(0 to -3) 等效于 gdp gdp(-1) gdp(-2) gdp(-3)
+gdp(to -5) 等效于 gdp(0 to -5)
+dlog(x) 等效于 log(x) - log(x(-1))
+d(gdp,3) '3阶差分
+dlog(gdp,4) 'log(gdp)的4阶差分
+d(gdp,1,4) 'gdp和gdp(4)的1阶差分
+@pc(gdp) 百分比
+@pch(gdp) 百分比，小数
+@pca(gdp) 年华pc
+@pcha(gdp) 年华pch
+@pcy(gdp) yoy
+@pchy(gdp) ypy 小数
+
+
+@cumsum(x,s)  累加
+@cumprod(x,s)
+@cummean(x,s)
+@cumobs(x,s)
+@cumbsum(x,s)
+@cumbmean(x,s)
+@cumbstdev(x,s)
+
+@movav(x,n) 移动平均，生成NA
+@movsum(x,n)
+@movvar(x,n)
+@mav(x,n) 不生成NA
+@msum(x,n)
+@mvars(x,n)
+
+
+
+@trend 从0开始的序列
+@trendc
+@trend^2
+
+
+@year
+@quarter
+@month
+@day
+@weekday
+@hour
+@minute
+@second
+@seas(x)  season
+@daycount '天数
+@before("date")
+@after("date")
+@during("date1 date2")
+@holiday
+
+series y=@year&gt;1979 生成序列，日期在1980之前的是0，之后的是1。
+series y=@month=1
+series y=@weekday=5
+
+@date
+@dateadd
+@datediff
+@datefloor
+@dateval
+
+series z=@date&lt;@dateval("1980m3")
+@datediff(d1, d2, u)
+
+@daycount("Friday")
+@daycount("Wednesday Friday")
+@datefloor(@date, "q")
+@dateadd(@datefloor(@date,"q"),1,"q")
+@record(s,x,y)  ' if s -&gt; x else -&gt; y
+@trend=0,100
+and or 
+@quantile
+
+@expand(@weekday)
+
+
+
+eq1.ls cons c gdp 'cons是观测值，c是常量，gdp是解释变量
+
+
+wfopen 打开工作文件
+wfcreate 新建工作文件
+wfclose 关闭工作文件
+wfsave 保存工作文件
+wfselect 修改当前活跃工作文件
+wfrefresh 刷新工作文件链接
+
+pageload 在工作文件中加载一个新页
+pagecreate 在工作文件中创建新页
+pagedelete 从当前工作文件中删除页
+pagestruct 重新组织当前页
+pagerename 重命名当前页
+
+smpl 修改当前页的样本区间
+import
+fetch
+store
+
+freeze 将当前对象的视图保存到新对象中。
+close 关闭对象
+delete 删除对象
+rename 重命名对象
+copy 复制对象
+
+show eq01.stats 展示eq01输出的表格
+show gdp.line 展示gdp图表
+freeze(gr1) gdp.line 将gdp的图表保存为对象gr1
+eq1.forecast yf 将eq1的预测结果保存到序列yf中。
+
+
+scalar cnt = g1.@count
+
+程序示例
+
+wfcreate a 1990 2000
+series y=@nrnd
+series x=@nrnd
+
+freeze(g) x.line
+equation eq1.ls y c x
+show g
+show eq1.stats
+
+替代变量
+%x="gdp"
+series z = {%x}
+
+@uiprompt("msg")
+@uiedit(string iostream, string promit)
+@uilist
+@uiradio
+@uidialog
+
+http://www.eviews.com/help/helpintro.html#page/content%2Fcommandcmd-pagecreate.html%23ww2016175
+
+data x y 数据
+plot x y 趋势
+scat x y 相关
+ls y c x  y = c1+c2*x 估计
+genr y = x^2 生成序列
+genr l = log(x)
+genr z = x*(x&gt;=3)  大雨3保留，小鱼的变0。
+genr d = d(x)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgb74fce8" class="outline-3">
+<h3 id="orgb74fce8">流程控制</h3>
+<div class="outline-text-3" id="text-orgb74fce8">
+<p>
+控制变量：
+!x=7
+</p>
+
+<p>
+字符串"abc"
+字符串变量
+%name="abc" + "abc"
+</p>
+
+<p>
+替代变量
+%x="gdp"
+ls %x c %x (-1) ' 等效于 ls gdp c gdp (-1)
+%0 %1 .. 脚本参数
+</p>
+
+<p>
+条件
+if CONDITION then BLOCK endif
+</p>
+
+<p>
+if !a &lt; 10 then series gnpstd=gmp/sqr(gvar) endif
+if !m&gt;9 then series newage=age/!m else series newage=age endif
+</p>
+
+<p>
+for VAR=INIT<sub>VALUE</sub> to STOP<sub>VALUE</sub> step INCR BLOCK next
+</p>
+
+<p>
+for !j = 10 to 1 step -1 series decile{!j}=original/!j next
+</p>
+
+<p>
+while CONDITION BLOCK wend
+while !a &lt; 20 smpl 1950:1 1980:1 + !a wend
+</p>
+
+<p>
+子程序
+subroutine my<sub>routine</sub>
+  series x = z<sup>2</sup>
+endsub
+</p>
+
+<p>
+subroutine power(series v, series y, scalar p)
+v = y<sup>p</sup>
+endsub
+</p>
+
+<p>
+call my<sub>routine</sub>
+</p>
+
+<p>
+include foo.prg
+call power(gdp2, gdp, 2)
+</p>
+
+<p>
+第一行
+program my<sub>program</sub>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org63851b0" class="outline-3">
+<h3 id="org63851b0">对接其他程序</h3>
+<div class="outline-text-3" id="text-org63851b0">
+</div>
+<div id="outline-container-org1beca16" class="outline-4">
+<h4 id="org1beca16">Python</h4>
+<div class="outline-text-4" id="text-org1beca16">
+<p>
+Eviews+Py
+</p>
+
+<ol class="org-ol">
+<li>安装Eviews。</li>
+<li>安装python和pip。</li>
+<li>pip install pyeviews</li>
+<li></li>
+</ol>
+<p>
+import numpy 
+import pandas
+dtsa = pandas.date<sub>range</sub>('1998', periods = 3, freq = 'A')
+benchmark = pandas.Series([4000.,4161.4,numpy.nan], index=dtsa, name='benchmark')
+dtsq=pandas.date+range('1998q1',periods=12,freq='Q')
+indicator=pandas.Series([98.2,100.8,102.2,100.8,99.,101.6,103.7,101.5,100.5,103.,103.5,101.5], index=dtsq,name='indicator')
+</p>
+
+<p>
+import pyeviews
+eviewsApp = pyeviews.GetEViewsApp(instance='new',showwindow=True)
+eviewsApp.PutPythonAsWF(benchmark, app=eviewsApp)
+eviewsApp.PutPythonAsWF(indicator, app=eviewsApp, newwf=False)
+</p>
+
+<p>
+pyeviews.Run('pageselect Untitled', app=eviewsApp)
+pyeviews.Run('pagerename Untitled annual', app=eviewsApp)
+pyeviews.Run('pageselect Untitled1', app=eviewsApp)
+pyeviews.Run('pagerename Untitled1 quarterly', app=eviewsApp)
+</p>
+
+<p>
+pyeviews.Run('copy(rho=.7,c=chowlins,overwrite) annual\\benchmark quarterly\\benchmarked @indicator indicator', app=eviewsApp)
+</p>
+</div>
+</div>
+
+<div id="outline-container-orge87e052" class="outline-4">
+<h4 id="orge87e052">R</h4>
+</div>
+<div id="outline-container-org4c961c8" class="outline-4">
+<h4 id="org4c961c8">VBA</h4>
+</div>
+</div>
+</div>
+<div id="outline-container-org1025fc6" class="outline-2">
+<h2 id="org1025fc6">专题</h2>
+<div class="outline-text-2" id="text-org1025fc6">
+</div>
+<div id="outline-container-org14398f9" class="outline-3">
+<h3 id="org14398f9">异常值处理</h3>
+<div class="outline-text-3" id="text-org14398f9">
+<p>
+从其他数据源导入数据时，可以将指定的值转换为NA，方法如下：
+</p>
+<div class="org-src-container">
+<pre class="src src-eivews">x=@record(@inlist(x, "9,-99,-999"), NA, x) ' 将序列x中值为9、-99和-999的项置为NA。
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org70d6651" class="outline-3">
+<h3 id="org70d6651">横截面</h3>
+</div>
+<div id="outline-container-org718ce65" class="outline-3">
+<h3 id="org718ce65">拟合</h3>
+<div class="outline-text-3" id="text-org718ce65">
+<p>
+假设有一个时间序列 v<sub>t</sub> ，并且根据分析可以确定， v<sub>t</sub> 满足下列等式
+</p>
+
+<p>
+log(v<sub>t</sub>) = &alpha; + &beta;<sub>t</sub> + epsilon<sub>t</sub>
+</p>
+
+<p>
+我们来拟合 &alpha; 和 &beta; ，步骤如下：
+</p>
+
+<ul class="org-ul">
+<li>导入序列v。</li>
+<li>建立logvol和t对象。</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-eviews">series logv = log(v)
+series t=@trend
+</pre>
+</div>
+<ul class="org-ul">
+<li>组合logv和t。</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-eviews">group g t logvol
+</pre>
+</div>
+<ul class="org-ul">
+<li>拟合。</li>
+</ul>
+<p>
+选择对象g，点击“View”菜单，“Graph&#x2026;”菜单项，将“Graph Type”选择为“Scatter”，将“Regression line”选择为“Fit lines”，点击“ok”按钮。
+</p>
+
+<p>
+类似的，对于模型
+</p>
+
+<p>
+log(v<sub>t</sub>) = &alpha; + &beta;<sub>1</sub> &times; t + &beta;<sub>2</sub> &times; t<sup>2</sup> + &epsilon;<sub>t</sub>
+</p>
+
+<p>
+可以用下列的Eviews命令拟合：
+</p>
+<div class="org-src-container">
+<pre class="src src-eviews">ls log(v) c @trend @trend^2
+</pre>
+</div>
+
+<p>
+ls命令输出的内容如下：
+</p>
+
+
+<div class="figure">
+<p><img src="EViewsNote_EquationOutput.png" alt="EViewsNote_EquationOutput.png" style="display: block;" />
+</p>
+</div>
+
+<p>
+其中下面一段是T检验报告：
+</p>
+
+
+<div class="figure">
+<p><img src="EViewsNote_EquationOutput_TStatistic.png" alt="EViewsNote_EquationOutput_TStatistic.png" style="display: block;" />
+</p>
+</div>
+
+<p>
+原假设是对应的参数（coefficient）的值为0。t-Statistic一列是T统计量，Prob.一列是p-value。通常，当p-value小于0.05时，应当认为参数有效。（通常，置信度0.05是统计显著的，0.01是强显著（strong significant）的。）
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgcfa1a5d" class="outline-3">
+<h3 id="orgcfa1a5d">预测</h3>
+</div>
+<div id="outline-container-org1245226" class="outline-3">
+<h3 id="org1245226">GARCH</h3>
+<div class="outline-text-3" id="text-org1245226">
+</div>
+<div id="outline-container-org1e88180" class="outline-4">
+<h4 id="org1e88180">时间序列建模步骤</h4>
+<div class="outline-text-4" id="text-org1e88180">
+<ol class="org-ol">
+<li>序列描述性分析。</li>
+<li>序列相关性分析。</li>
+<li>回归模型建立。</li>
+<li>残差的ARCH效应检验。</li>
+<li>ARCH模型的建立。</li>
+<li>模型验证。</li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-orgc562041" class="outline-4">
+<h4 id="orgc562041">使用EViews建立GARCH模型</h4>
+<div class="outline-text-4" id="text-orgc562041">
+<p>
+建立工作文件。
+导入价格数据。series p
+建立对数收益率。series r=dlog(p)
+考察序列平稳性。uroot。 P值为0说明序列平稳。
+自相关检验。correl。
+如果序列不存在显著的相关性，使用白噪声模型r<sub>t</sub> = &pi;<sub>t</sub> + \epislon<sub>t</sub>
+去均值化：series w = r-@mean(r)
+检验arch效应有两种：拉格朗日乘数检验法和残差平方相关图检验。如果没有对arma建模，使用后者。series z=w*w
+自相关检验。correl。如果存在自相关，arch小勇有效。
+常用garch模型有(1,1)(1,2)(2,1)
+t-garch
+e-garch
+</p>
+
+
+<div class="org-src-container">
+<pre class="src src-eviews">' 需要先建立价格序列p。
+series r=dlog(p)
+r.uroot(adf,lag=18)
+r.correl(12)
+series w=r-@mean(r)
+series z=w*w
+z.correl(12)
+equation e1.arch w c
+e1.garch
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orga9f6a2f" class="outline-3">
+<h3 id="orga9f6a2f">ARMA</h3>
+<div class="outline-text-3" id="text-orga9f6a2f">
+</div>
+<div id="outline-container-org2a619c6" class="outline-4">
+<h4 id="org2a619c6">ARMA简介</h4>
+</div>
+<div id="outline-container-orgd3ecf8e" class="outline-4">
+<h4 id="orgd3ecf8e">使用EViews建立ARMA模型</h4>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgafb20cb" class="outline-2">
+<h2 id="orgafb20cb">附录</h2>
+<div class="outline-text-2" id="text-orgafb20cb">
+</div>
+<div id="outline-container-orge96a1bb" class="outline-3">
+<h3 id="orge96a1bb">Jarque-Bera检验</h3>
+<div class="outline-text-3" id="text-orge96a1bb">
+<p>
+Jarque-Bera检验是对样本数据是否具有符合正态分布的偏度和峰度的拟合优度的检验。Jarque-Bera检验不能用于小样本（小于30）检验。
+</p>
+<div class="org-src-container">
+<pre class="src src-matlab">[h, p, JBSTAT,CV] = jbtest(x, alpha)
+# x&#65306;&#26679;&#26412;&#65292;alpha&#65306;&#26174;&#33879;&#27700;&#24179;
+# h&#65306;0&#34920;&#31034;&#25509;&#21463;x&#26381;&#20174;&#27491;&#24577;&#20998;&#24067;&#30340;&#20551;&#35774;&#65292;1&#34920;&#31034;&#19981;&#25509;&#21463;&#12290;p&#65306;&#26816;&#39564;&#20540;&#12290;JBSTAT&#65306;&#26816;&#39564;&#32479;&#35745;&#37327;&#12290;CV&#65306;&#20020;&#30028;&#20540;&#12290;
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org48c7a11" class="outline-3">
+<h3 id="org48c7a11">单位根检验（unit root test）</h3>
+<div class="outline-text-3" id="text-org48c7a11">
+<p>
+单位根检验用于检验序列中是否存在单位根。如果存在单位根，是非平稳序列。如果自回归的滞后系数为1，即
+</p>
+
+
+<p>
+x<sub>t</sub> = x<sub>t-1</sub> + &epsilon;
+</p>
+
+
+<p>
+就称为单位根。单位根残差序列的误差不会随着样本数（时期数）的增加而衰减，模型中的差离是永久的。因此不能使用回归。对时间序列建模时，首先进行单位根检验。另一个角度看，对于一个差分方程，如果其特征方程的一个根是1，则称其为单位根。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org4dd8f4a" class="outline-3">
+<h3 id="org4dd8f4a">Augmented Dickey-Fuller test</h3>
+<div class="outline-text-3" id="text-org4dd8f4a">
+<p>
+可以检验序列的平稳性。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org859824d" class="outline-3">
+<h3 id="org859824d">Schwarz Info Criterion</h3>
+<div class="outline-text-3" id="text-org859824d">
+<p>
+Schwarz信息准则
+</p>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-org82f8178" class="outline-2">
+<h2 id="org82f8178">零散资料</h2>
+<div class="outline-text-2" id="text-org82f8178">
+<p>
+函数
+abs(x)
+exp(x)
+d(x) := x-x(-1)
+sqr(x) := sqrt(x)
+@sin
+@cos
+@mean
+@median
+@max
+@var
+@log10
+@logx
+rnd 'uniform (0,1)
+nrnd 'standard'normal random
+rndseed
+@trend '0, 1, &#x2026;
+@year
+@quarter
+@month
+@day
+@weekday
+@record(s,x,y) := if (s) then x else y
+@isna(x)
+@eqna(x,y)
+@nan(x,y)
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgedbb828" class="outline-2">
+<h2 id="orgedbb828">参考资料</h2>
+<div class="outline-text-2" id="text-orgedbb828">
+<ul class="org-ul">
+<li><a href="http://statmath.wu.ac.at/~hauser/LVs/SE_MacroEconometrics/BasicTSA/EViewsCommandsEN.pdf">Summary of important EViews-Commands</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org29d01a1" class="outline-2">
+<h2 id="org29d01a1">修订记录</h2>
+<div class="outline-text-2" id="text-org29d01a1">
+<ul class="org-ul">
+<li>2019年02月20日 建立文档。</li>
+<li>2019年03月06日 增加拟合部分。</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: 2019年03月06日</p>
+<p class="date">Created: 2019-09-23 周一 20:55</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

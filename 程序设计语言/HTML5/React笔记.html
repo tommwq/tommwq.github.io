@@ -1,0 +1,507 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2019-09-23 周一 21:12 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org4d2f548">导入React</a></li>
+<li><a href="#org46c0b65">建立组件</a></li>
+<li><a href="#orgcdf8d83">设置组件状态</a>
+<ul>
+<li><a href="#org62e6cc5">初始化组件状态</a></li>
+<li><a href="#orgcb56e8f">获取组件状态</a></li>
+<li><a href="#org7f2d201">更新组件状态</a></li>
+<li><a href="#orgbe4b91b">示例</a></li>
+</ul>
+</li>
+<li><a href="#org70231aa">处理事件</a>
+<ul>
+<li><a href="#orged57a8a">定义事件处理函数</a></li>
+<li><a href="#org28d1b7e">示例</a></li>
+</ul>
+</li>
+<li><a href="#org1bf4302">问题记录</a>
+<ul>
+<li><a href="#org3684ed2">Warning: Each child in an array or iterator should have a unique "key" prop.</a></li>
+<li><a href="#org02b71a1">Warning: flattenChildren(&#x2026;): Encountered two children with the same key, `1`. Child keys must be unique; when two children share a key, only the first child will be used.</a></li>
+</ul>
+</li>
+<li><a href="#org9cde850">修订记录</a></li>
+</ul>
+</div>
+</div>
+<p>
+#+title React笔记
+#+date 2016年12月31日
+</p>
+
+<div id="outline-container-org4d2f548" class="outline-2">
+<h2 id="org4d2f548">导入React</h2>
+<div class="outline-text-2" id="text-org4d2f548">
+<div class="org-src-container">
+<pre class="src src-javascript"><span style="color: #a020f0;">import</span> React from <span style="color: #8b2252;">"react"</span>;
+<span style="color: #a020f0;">import</span> ReactDOM from <span style="color: #8b2252;">"react-dom"</span>;
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org46c0b65" class="outline-2">
+<h2 id="org46c0b65">建立组件</h2>
+<div class="outline-text-2" id="text-org46c0b65">
+<div class="org-src-container">
+<pre class="src src-javascript"><span style="color: #a020f0;">class</span> HelloMessage <span style="color: #a020f0;">extends</span> React.Component {
+    render() {
+        <span style="color: #a020f0;">return</span> &lt;div&gt;Hello {<span style="color: #008b8b;">this</span>.props.name}&lt;/div&gt;;
+    }
+}
+
+ReactDOM.render(&lt;HelloMessage name=<span style="color: #8b2252;">"John"</span> /&gt;, 
+    document.getElementById(<span style="color: #8b2252;">"root"</span>));
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgcdf8d83" class="outline-2">
+<h2 id="orgcdf8d83">设置组件状态</h2>
+<div class="outline-text-2" id="text-orgcdf8d83">
+</div>
+<div id="outline-container-org62e6cc5" class="outline-3">
+<h3 id="org62e6cc5">初始化组件状态</h3>
+<div class="outline-text-3" id="text-org62e6cc5">
+<div class="org-src-container">
+<pre class="src src-javascript"><span style="color: #a020f0;">class</span> MyComponent <span style="color: #a020f0;">extends</span> React.Component {
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">...</span>
+    constructor(props) {
+        <span style="color: #a020f0;">super</span>(props);
+        <span style="color: #008b8b;">this</span>.state = {
+            key: value,
+        };
+    }
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgcb56e8f" class="outline-3">
+<h3 id="orgcb56e8f">获取组件状态</h3>
+<div class="outline-text-3" id="text-orgcb56e8f">
+<div class="org-src-container">
+<pre class="src src-javascript"><span style="color: #b22222;">// </span><span style="color: #b22222;">...</span>
+&lt;div&gt;{<span style="color: #008b8b;">this</span>.state.StateName}&lt;/div&gt;
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org7f2d201" class="outline-3">
+<h3 id="org7f2d201">更新组件状态</h3>
+<div class="outline-text-3" id="text-org7f2d201">
+<div class="org-src-container">
+<pre class="src src-javascript"><span style="color: #b22222;">// </span><span style="color: #b22222;">...</span>
+<span style="color: #008b8b;">this</span>.setState((prevState) =&gt; ({
+    StateName: <span style="color: #8b2252;">"NewState"</span>,
+});
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgbe4b91b" class="outline-3">
+<h3 id="orgbe4b91b">示例</h3>
+<div class="outline-text-3" id="text-orgbe4b91b">
+<div class="org-src-container">
+<pre class="src src-javascript"><span style="color: #a020f0;">class</span> Timer <span style="color: #a020f0;">extends</span> React.Component {
+    constructor(props) {
+        <span style="color: #a020f0;">super</span>(props);
+        <span style="color: #008b8b;">this</span>.state = {secondsElapsed: 0};
+    }
+
+    tick() {
+        <span style="color: #008b8b;">this</span>.setState((prevState) =&gt; ({
+            secondsElapsed: prevState.secondsElapsed + 1,
+        }));
+    }
+
+    componentDidMount() {
+        <span style="color: #008b8b;">this</span>.inerval = setInterval(() =&gt; <span style="color: #008b8b;">this</span>.tick(), 1000);
+    }
+
+    componentWillUnmount() {
+        clearInterval(<span style="color: #008b8b;">this</span>.interval);
+    }
+
+    render() {
+        <span style="color: #a020f0;">return</span> (
+            &lt;div&gt;Seconds Elapsed: {<span style="color: #008b8b;">this</span>.state.secondsElapsed}&lt;/div&gt;
+        );
+    }
+}
+
+ReactDOM.render(&lt;Timer /&gt;, mountNode);
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org70231aa" class="outline-2">
+<h2 id="org70231aa">处理事件</h2>
+<div class="outline-text-2" id="text-org70231aa">
+</div>
+<div id="outline-container-orged57a8a" class="outline-3">
+<h3 id="orged57a8a">定义事件处理函数</h3>
+<div class="outline-text-3" id="text-orged57a8a">
+<div class="org-src-container">
+<pre class="src src-javascript"><span style="color: #a020f0;">class</span> MyComponent <span style="color: #a020f0;">extends</span> React.Component {
+    constructor(props) {
+        <span style="color: #008b8b;">this</span>.handleSubmit = <span style="color: #008b8b;">this</span>.handleSubmit.bind(<span style="color: #008b8b;">this</span>);
+    }
+
+    handleSubmit(e) {
+        e.preventDefault();
+        <span style="color: #b22222;">// </span><span style="color: #b22222;">do some thing here</span>
+    }
+
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">...</span>
+    render() {
+        <span style="color: #a020f0;">return</span> (
+            &lt;form onSubmit={<span style="color: #008b8b;">this</span>.handleSubmit}&gt;
+            <span style="color: #b22222;">// </span><span style="color: #b22222;">...</span>
+            &lt;/form&gt;
+        );
+    }
+}
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org28d1b7e" class="outline-3">
+<h3 id="org28d1b7e">示例</h3>
+<div class="outline-text-3" id="text-org28d1b7e">
+<div class="org-src-container">
+<pre class="src src-javascript"><span style="color: #a020f0;">class</span> TodoApp <span style="color: #a020f0;">extends</span> React.Component {
+    constructor(props) {
+        <span style="color: #a020f0;">super</span>(props);
+        <span style="color: #008b8b;">this</span>.handleChange = <span style="color: #008b8b;">this</span>.handleChange.bind(<span style="color: #008b8b;">this</span>);
+        <span style="color: #008b8b;">this</span>.handleSubmit = <span style="color: #008b8b;">this</span>.handleSubmit.bind(<span style="color: #008b8b;">this</span>);
+        <span style="color: #008b8b;">this</span>.state = {items: [], text: <span style="color: #8b2252;">""</span>};
+    }
+
+    render() {
+        <span style="color: #a020f0;">return</span> (
+                &lt;div&gt;
+                &lt;h3&gt;TODO&lt;/h3&gt;
+                &lt;TodoList items={<span style="color: #008b8b;">this</span>.state.items} /&gt;
+                &lt;form onSubmit={<span style="color: #008b8b;">this</span>.handleSubmit}&gt;
+                &lt;input onChange={<span style="color: #008b8b;">this</span>.handleChange} value={<span style="color: #008b8b;">this</span>.state.text} /&gt;
+                &lt;button&gt;{<span style="color: #8b2252;">"Add #"</span> + (<span style="color: #008b8b;">this</span>.state.items.length + 1)}&lt;/button&gt;
+                &lt;/form&gt;
+                &lt;/div&gt;
+        );
+    }
+
+    handleChange(e) {
+        <span style="color: #008b8b;">this</span>.setState({text: e.target.value});
+    }
+
+    handleSubmit(e) {
+        e.preventDefault();
+        <span style="color: #a020f0;">var</span> <span style="color: #a0522d;">newItem</span> = {
+            text: <span style="color: #008b8b;">this</span>.state.text,
+            id: Date.now(),
+        };
+        <span style="color: #008b8b;">this</span>.setState((prevState) =&gt; ({
+            items: prevState.items.concat(newItem),
+            text: <span style="color: #8b2252;">""</span>,
+        }));
+    }
+}
+
+<span style="color: #a020f0;">class</span> TodoList <span style="color: #a020f0;">extends</span> React.Component {
+    render() {
+        <span style="color: #a020f0;">return</span> (
+                &lt;ul&gt;
+                {<span style="color: #008b8b;">this</span>.props.items.map(item =&gt; (
+                        &lt;li key={item.id}&gt;{item.text}&lt;/li&gt;
+                ))}
+            &lt;/ul&gt;
+        );
+    }
+}
+
+ReactDOM.render(&lt;TodoApp /&gt;, mountNode);
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+
+<div id="outline-container-org1bf4302" class="outline-2">
+<h2 id="org1bf4302">问题记录</h2>
+<div class="outline-text-2" id="text-org1bf4302">
+</div>
+<div id="outline-container-org3684ed2" class="outline-3">
+<h3 id="org3684ed2">Warning: Each child in an array or iterator should have a unique "key" prop.</h3>
+<div class="outline-text-3" id="text-org3684ed2">
+<p>
+在使用map迭代时，如果没有为子标签增加key属性，react会报告这个错误。处理方法是为子标签加入key属性，并保证不同子元素的key值不相同。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org02b71a1" class="outline-3">
+<h3 id="org02b71a1">Warning: flattenChildren(&#x2026;): Encountered two children with the same key, `1`. Child keys must be unique; when two children share a key, only the first child will be used.</h3>
+<div class="outline-text-3" id="text-org02b71a1">
+<p>
+多个子标签使用了相同的key值。此时只有第一个子标签生效。处理方法是选择合理的key。
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org9cde850" class="outline-2">
+<h2 id="org9cde850">修订记录</h2>
+<div class="outline-text-2" id="text-org9cde850">
+<ul class="org-ul">
+<li>2016年12月31日 建立文档。</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Created: 2019-09-23 周一 21:12</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

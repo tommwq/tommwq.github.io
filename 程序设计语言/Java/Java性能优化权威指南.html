@@ -1,0 +1,447 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2019-09-23 周一 21:12 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Java性能优化权威指南</title>
+<meta name="generator" content="Org mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Java性能优化权威指南</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org34172b3">策略、方法和方法论</a></li>
+<li><a href="#org6827137">操作系统性能监控</a>
+<ul>
+<li><a href="#org7b0d130">查看CPU任务队列</a></li>
+<li><a href="#org220b4c0">查看内存使用率</a></li>
+</ul>
+</li>
+<li><a href="#org5d45b0c">JVM概览</a></li>
+<li><a href="#orgee1916c">JVM性能监控</a></li>
+<li><a href="#org8e7da15">Java应用调优入门</a>
+<ul>
+<li><a href="#org67dd629">调优CMS延迟</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org34172b3" class="outline-2">
+<h2 id="org34172b3">策略、方法和方法论</h2>
+</div>
+
+<div id="outline-container-org6827137" class="outline-2">
+<h2 id="org6827137">操作系统性能监控</h2>
+<div class="outline-text-2" id="text-org6827137">
+<p>
+typeperf可以监控Windows系统性能：
+</p>
+<div class="org-src-container">
+<pre class="src src-dos">typeperf "\Processor(_Total)\% Privileges Time" "\Processor(_Total)\% User Time"
+</pre>
+</div>
+
+<p>
+或者将参数写入文件，由typeperf加载：
+</p>
+<div class="org-src-container">
+<pre class="src src-dos">typeperf -cf cpu-util.txt
+</pre>
+</div>
+
+<p>
+Linux上可以使用vmstat、mpstat和top等。
+</p>
+</div>
+
+<div id="outline-container-org7b0d130" class="outline-3">
+<h3 id="org7b0d130">查看CPU任务队列</h3>
+<div class="outline-text-3" id="text-org7b0d130">
+<div class="org-src-container">
+<pre class="src src-dos">typeperf "\System\Processor Queue Length"
+</pre>
+</div>
+<div class="org-src-container">
+<pre class="src src-shell">vmstat
+uptime
+top
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org220b4c0" class="outline-3">
+<h3 id="org220b4c0">查看内存使用率</h3>
+<div class="outline-text-3" id="text-org220b4c0">
+<div class="org-src-container">
+<pre class="src src-shell">typeperf -si 5 <span style="color: #8b2252;">"\Memory\Available Mbytes"</span> <span style="color: #8b2252;">"\Memory\Pages/sec"</span>
+</pre>
+</div>
+<div class="org-src-container">
+<pre class="src src-shell">vmstat
+free
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org5d45b0c" class="outline-2">
+<h2 id="org5d45b0c">JVM概览</h2>
+<div class="outline-text-2" id="text-org5d45b0c">
+<p>
+HotSpot VM有3个主要的组件：VM运行时（Runtime）、JIT编译器（JIT Compiler）和内存管理器（Memory Manager）。
+</p>
+
+<p>
+HotSpot VM的启动过程如下：
+</p>
+
+<ul class="org-ul">
+<li>解析命令行。</li>
+<li>设置堆大小和JIT编译器。</li>
+<li>设定环境变量，如LD<sub>LIBRARY</sub><sub>PATH</sub>、CLASSPATH等。</li>
+<li>如果有-jar参数，从jar中读取Main-Class。否则从命令行读取Main-Class。</li>
+<li>使用JNI方法JNI<sub>CreateJavaVM建立HotSpot</sub> VM。</li>
+<li>加载Main-Class。</li>
+<li>通过JNI方法CallStaticVoidMethod调用Java程序的main方法，启动Java程序。</li>
+</ul>
+
+
+<p>
+类加载过程
+</p>
+
+<p>
+JVM根据类或接口的名字寻找二进制数据，定义Java类，建立java.lang.Class对象。如果没有找到二进制数据，会抛出NoClassDefFound异常。加载时会检查类的格式，如果出现错误，会抛出ClassFormatError或UnsupportedClassVersionError。加载类之前会加载超类。如果继承层次出错，JVM抛出ClassCircularityError。如果类引用的接口实际上不是接口，JVM抛出IncompatibleClassChangeError。
+</p>
+
+
+<p>
+类的加载由类加载器完成。类加载器可以委派其他加载器加载类。JVM中有3中类加载器：启动类加载器负责加载BOOTCLASSPATH中的类，如rt.jar。扩展类加载器负责lib/ext中的包，系统类加载器加载应用程序。
+</p>
+
+
+<p>
+HotSpot VM中的线程有
+</p>
+<ul class="org-ul">
+<li>VM线程</li>
+<li>周期任务线程</li>
+<li>垃圾收集线程</li>
+<li>JIT编译线程</li>
+<li>信号分发线程</li>
+</ul>
+
+
+<p>
+如果JVM发生致命错误，会生成文件hs<sub>err</sub><sub>pid</sub>&lt;PID&gt;.log记录信息。
+</p>
+
+
+<p>
+HotSpot VM使用分代垃圾回收机制，这个机制依赖于弱分代假设（weak generational hypothesis），该假设如下：
+</p>
+<ul class="org-ul">
+<li>大部分对象的生存周期较短。</li>
+<li>长生存周期对象很少引用短生存周期对象。</li>
+</ul>
+
+<p>
+基于这个假设，HotSpot VM将内存划分为新生代、老生代和永久代。新生代存放新分配的对象，老生代存放长生存周期对象，永久代存放元数据，如类的数据结构等。在回收新生代对象时，为了提高效率，避免扫描老年代对象，HotSpot VM将老年代对象对新生代的引用记录在卡表（card table）里，并通过内存屏障同步卡表更新。为了避免对象过早晋升到老年代，新生代划分为3个区域：Eden和2个Survivor。Eden保存新分配对象，Survivor保存短生命周期对象。为了提高对象分配效率，JVM在Eden中划分一块区域作为TLAB（Thread Local Allocation Buffer线程本地分配缓冲区），避免分配对象时发生竞争。HotSpot VM提供了多种垃圾回收算法，Serial适合于对停顿时间要求不高的客户端程序。Throughput（Parallel）适合于批处理任务。CMS适合于任务突发的低延迟系统，如Web服务器。G1是为替代CMS开发的新的垃圾回收器。
+</p>
+</div>
+</div>
+
+
+
+<div id="outline-container-orgee1916c" class="outline-2">
+<h2 id="orgee1916c">JVM性能监控</h2>
+<div class="outline-text-2" id="text-orgee1916c">
+<p>
+关于垃圾收集的重要数据有：
+</p>
+<ul class="org-ul">
+<li>当前使用的垃圾收集器</li>
+<li>Java堆大小</li>
+<li>新生代和老年代代销</li>
+<li>永久代大小</li>
+<li>Minor GC持续时间</li>
+<li>Minor GC的频率</li>
+<li>Minor GC的空间回收量</li>
+<li>Full GC的持续时间</li>
+<li>Full GC的频率</li>
+<li>每个并发垃圾收集器周期内的空间回收量</li>
+<li>垃圾收集前后Java堆的占用量</li>
+<li>垃圾收集前后新生代和老年代的占用量</li>
+<li>垃圾收集前后永久代的占用量</li>
+<li>是否老年代后永久代的占用触发了Full GC</li>
+<li>应用是否显示的调用了System.gc()</li>
+</ul>
+
+<p>
+HotSpot VM报告垃圾收集数据几乎没有额外开销，可以在生产环境中使用。
+</p>
+
+
+<p>
+如果目标JVM配置了JMX：
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">com.sun.management.jmxremote.port=&lt;port&gt;
+com.sun.management.jmxremote.ssl=&lt;true|false&gt;
+com.sun.management.jmxremote.authenticate=&lt;true|false&gt;
+</pre>
+</div>
+<p>
+可以通过JMC远程生成堆栈信息。
+</p>
+
+
+<p>
+使用-XX:+PrintCompilation可以观察JIT编译器的行为。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org8e7da15" class="outline-2">
+<h2 id="org8e7da15">Java应用调优入门</h2>
+<div class="outline-text-2" id="text-org8e7da15">
+</div>
+<div id="outline-container-org67dd629" class="outline-3">
+<h3 id="org67dd629">调优CMS延迟</h3>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Created: 2019-09-23 周一 21:12</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

@@ -1,0 +1,767 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2019-09-23 周一 20:55 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org4ef0fe2">复杂布局弹出菜单。</a></li>
+<li><a href="#orgb02b3e5">抽屉式侧边栏</a></li>
+<li><a href="#orgfb2dee1">侧边滑动菜单</a></li>
+<li><a href="#orgbb6040d">退出确认对话框</a></li>
+<li><a href="#org3d821c1">不规则对话框</a></li>
+<li><a href="#orgb4987d3">带图片的Toast</a></li>
+<li><a href="#orge65f9cc">不同风格的进度条</a></li>
+<li><a href="#org7d155eb">列表返回顶部</a></li>
+<li><a href="#org54d6b7f">保存应用数据</a></li>
+<li><a href="#orgb9f72ac">保存文件到SD卡</a></li>
+<li><a href="#orga083993">查看手机相册</a></li>
+<li><a href="#orgbc01ca7">将不同的图片混合</a></li>
+<li><a href="#orge974f8e">检测分贝</a></li>
+<li><a href="#org173329a">切换多个选项卡</a></li>
+<li><a href="#orgf943a7b">书签</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org4ef0fe2" class="outline-2">
+<h2 id="org4ef0fe2">复杂布局弹出菜单。</h2>
+<div class="outline-text-2" id="text-org4ef0fe2">
+<p>
+使用PopupWindow类。
+</p>
+<div class="org-src-container">
+<pre class="src src-java">findViewById(R.id.<span style="color: #228b22;">menu_button</span>).setOnClickListener(<span style="color: #a020f0;">new</span> <span style="color: #008b8b;">View</span>.<span style="color: #228b22;">OnClickListener</span>() {
+    <span style="color: #008b8b;">@Override</span>
+    <span style="color: #a020f0;">public</span> <span style="color: #228b22;">void</span> <span style="color: #0000ff;">onClick</span>(<span style="color: #228b22;">View</span> <span style="color: #a0522d;">view</span>) {
+      <span style="color: #228b22;">View</span> <span style="color: #a0522d;">popupWindowView</span> = getLayoutInflater().inflate(R.layout.menu, <span style="color: #008b8b;">null</span>, <span style="color: #008b8b;">false</span>);
+      <span style="color: #228b22;">PopupWindow</span> <span style="color: #a0522d;">popupWindow</span> = <span style="color: #a020f0;">new</span> <span style="color: #228b22;">PopupWindow</span>(popupWindowView,
+                                                <span style="color: #008b8b;">ActionBar</span>.<span style="color: #008b8b;">LayoutParams</span>.WRAP_CONTENT,
+                                                <span style="color: #008b8b;">ActionBar</span>.<span style="color: #008b8b;">LayoutParams</span>.WRAP_CONTENT,
+                                                <span style="color: #008b8b;">true</span>);
+      popupWindow.showAsDropDown(findViewById(R.id.menu_button), 0, 0);
+      popupWindowView.setOnTouchListener(<span style="color: #a020f0;">new</span> <span style="color: #008b8b;">View</span>.<span style="color: #228b22;">OnTouchListener</span>() {
+          <span style="color: #008b8b;">@Override</span>
+          <span style="color: #a020f0;">public</span> <span style="color: #228b22;">boolean</span> <span style="color: #0000ff;">onTouch</span>(<span style="color: #228b22;">View</span> <span style="color: #a0522d;">view</span>, <span style="color: #228b22;">MotionEvent</span> <span style="color: #a0522d;">event</span>) {
+            <span style="color: #a020f0;">if</span> (popupWindow != <span style="color: #008b8b;">null</span> &amp;&amp; popupWindow.isShowing()) {
+              popupWindow.dismiss();
+              popupWiondow = <span style="color: #008b8b;">null</span>;
+            }
+
+            <span style="color: #a020f0;">return</span> <span style="color: #008b8b;">false</span>;
+          }
+        });
+    }
+  });
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgb02b3e5" class="outline-2">
+<h2 id="orgb02b3e5">抽屉式侧边栏</h2>
+<div class="outline-text-2" id="text-orgb02b3e5">
+<p>
+使用SlidingDrawer控件。
+</p>
+<div class="org-src-container">
+<pre class="src src-xml">&lt;<span style="color: #0000ff;">SlidingDrawer</span> <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">id</span>=<span style="color: #8b2252;">"@+id/drawer"</span>
+               <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">layout_width</span>=<span style="color: #8b2252;">"match_parent"</span>
+               <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">layout_height</span>=<span style="color: #8b2252;">"match_parent"</span>
+               <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">layout_alignParentRight</span>=<span style="color: #8b2252;">"true"</span>
+               <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">layout_centerVertical</span>=<span style="color: #8b2252;">"true"</span>
+               <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">handle</span>=<span style="color: #8b2252;">"@+id/handle"</span>
+               <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">content</span>=<span style="color: #8b2252;">"@+id/content"</span>
+               <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">orientation</span>=<span style="color: #8b2252;">"horizontal"</span>&gt;
+        &lt;<span style="color: #0000ff;">LinearLayout</span> <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">id</span>=<span style="color: #8b2252;">"@id/handle"</span>
+                      <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">layout_width</span>=<span style="color: #8b2252;">"35dp"</span>
+                      <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">layout_height</span>=<span style="color: #8b2252;">"match_parent"</span>
+                      <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">gravity</span>=<span style="color: #8b2252;">"center"</span>&gt;
+                &lt;<span style="color: #0000ff;">ImageView</span> <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">id</span>=<span style="color: #8b2252;">"@+id/guide_button"</span>
+                           <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">layout_width</span>=<span style="color: #8b2252;">"wrap_content"</span>
+                           <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">layout_height</span>=<span style="color: #8b2252;">"wrap_content"</span>
+                           <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">src</span>=<span style="color: #8b2252;">"@drawable/open"</span> /&gt;
+        &lt;/<span style="color: #0000ff;">LinearLayout</span>&gt;
+        &lt;<span style="color: #0000ff;">ImageView</span> <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">id</span>=<span style="color: #8b2252;">"@id/content"</span>
+                   <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">layout_width</span>=<span style="color: #8b2252;">"wrap_content"</span>
+                   <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">layout_height</span>=<span style="color: #8b2252;">"wrap_content"</span>
+                   <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">src</span>=<span style="color: #8b2252;">"@drawable/content"</span> /&gt;
+&lt;/<span style="color: #0000ff;">SlidingDrawer</span>&gt;
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgfb2dee1" class="outline-2">
+<h2 id="orgfb2dee1">侧边滑动菜单</h2>
+<div class="outline-text-2" id="text-orgfb2dee1">
+<p>
+从HorizontalScrollView派生。
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #a020f0;">package</span> com.tq.<span style="color: #008b8b;">sideslidemenu</span>;
+
+<span style="color: #a020f0;">import</span> <span style="color: #008b8b;">android</span>.<span style="color: #008b8b;">content</span>.<span style="color: #228b22;">Context</span>;
+<span style="color: #a020f0;">import</span> <span style="color: #008b8b;">android</span>.<span style="color: #008b8b;">util</span>.<span style="color: #228b22;">AttributeSet</span>;
+<span style="color: #a020f0;">import</span> <span style="color: #008b8b;">android</span>.<span style="color: #008b8b;">util</span>.<span style="color: #228b22;">DisplayMetrics</span>;
+<span style="color: #a020f0;">import</span> <span style="color: #008b8b;">android</span>.<span style="color: #008b8b;">util</span>.<span style="color: #228b22;">TypedValue</span>;
+<span style="color: #a020f0;">import</span> <span style="color: #008b8b;">android</span>.<span style="color: #008b8b;">view</span>.<span style="color: #228b22;">View</span>;
+<span style="color: #a020f0;">import</span> <span style="color: #008b8b;">android</span>.<span style="color: #008b8b;">view</span>.<span style="color: #228b22;">ViewGroup</span>;
+<span style="color: #a020f0;">import</span> <span style="color: #008b8b;">android</span>.<span style="color: #008b8b;">view</span>.<span style="color: #228b22;">WindowManager</span>;
+<span style="color: #a020f0;">import</span> <span style="color: #008b8b;">android</span>.<span style="color: #008b8b;">widget</span>.<span style="color: #228b22;">HorizontalScrollView</span>;
+<span style="color: #a020f0;">import</span> <span style="color: #008b8b;">android</span>.<span style="color: #008b8b;">widget</span>.<span style="color: #228b22;">LinearLayout</span>;
+
+<span style="color: #a020f0;">public</span> <span style="color: #a020f0;">class</span> <span style="color: #228b22;">SideSliceMenu</span> <span style="color: #a020f0;">extends</span> <span style="color: #228b22;">HorizontalScrollView</span> {
+
+    <span style="color: #228b22;">int</span> <span style="color: #a0522d;">screenWidth</span>;
+    <span style="color: #228b22;">int</span> <span style="color: #a0522d;">rightPadding</span>;
+    <span style="color: #228b22;">boolean</span> <span style="color: #a0522d;">call</span>;
+    <span style="color: #228b22;">int</span> <span style="color: #a0522d;">menuWidth</span>;
+    <span style="color: #228b22;">ViewGroup</span> <span style="color: #a0522d;">menu</span>;
+    <span style="color: #228b22;">ViewGroup</span> <span style="color: #a0522d;">content</span>;
+    <span style="color: #228b22;">LinearLayout</span> <span style="color: #a0522d;">scrollView</span>;
+
+    <span style="color: #a020f0;">public</span> <span style="color: #0000ff;">SideSliceMenu</span>(<span style="color: #228b22;">Context</span> <span style="color: #a0522d;">context</span>, <span style="color: #228b22;">AttributeSet</span> <span style="color: #a0522d;">attributeSet</span>) {
+        <span style="color: #a020f0;">super</span>(context, attributeSet);
+
+        <span style="color: #228b22;">WindowManager</span> <span style="color: #a0522d;">windowManager</span> = (<span style="color: #228b22;">WindowManager</span>) context.getSystemService(<span style="color: #008b8b;">Context</span>.WINDOW_SERVICE);
+        <span style="color: #228b22;">DisplayMetrics</span> <span style="color: #a0522d;">metrics</span> = <span style="color: #a020f0;">new</span> <span style="color: #228b22;">DisplayMetrics</span>();
+        windowManager.getDefaultDisplay().getMetrics(metrics);
+
+        screenWidth = metrics.widthPixels;
+        rightPadding = (<span style="color: #228b22;">int</span>) TypedValue.applyDimension(<span style="color: #008b8b;">TypedValue</span>.COMPLEX_UNIT_DIP,
+                50,
+                context.getResources().getDisplayMetrics());
+
+
+    }
+
+    <span style="color: #008b8b;">@Override</span>
+    <span style="color: #a020f0;">protected</span> <span style="color: #228b22;">void</span> <span style="color: #0000ff;">onMeasure</span>(<span style="color: #228b22;">int</span> <span style="color: #a0522d;">width</span>, <span style="color: #228b22;">int</span> <span style="color: #a0522d;">height</span>) {
+        <span style="color: #a020f0;">if</span> (!call) {
+            scrollView = (<span style="color: #228b22;">LinearLayout</span>) getChildAt(0);
+            menu = (<span style="color: #228b22;">ViewGroup</span>) scrollView.getChildAt(0);
+            content = (<span style="color: #228b22;">ViewGroup</span>) scrollView.getChildAt(1);
+            menuWidth = menu.getLayoutParams().width = screenWidth - rightPadding;
+            content.getLayoutParams().width = screenWidth;
+            call = <span style="color: #008b8b;">true</span>;
+        }
+
+        <span style="color: #a020f0;">super</span>.onMeasure(width, height);
+    }
+
+    <span style="color: #008b8b;">@Override</span>
+    <span style="color: #a020f0;">protected</span> <span style="color: #228b22;">void</span> <span style="color: #0000ff;">onLayout</span>(<span style="color: #228b22;">boolean</span> <span style="color: #a0522d;">changed</span>, <span style="color: #228b22;">int</span> <span style="color: #a0522d;">l</span>, <span style="color: #228b22;">int</span> <span style="color: #a0522d;">t</span>, <span style="color: #228b22;">int</span> <span style="color: #a0522d;">r</span>, <span style="color: #228b22;">int</span> <span style="color: #a0522d;">b</span>) {
+        <span style="color: #a020f0;">super</span>.onLayout(changed, l, t, r, b);
+
+        <span style="color: #a020f0;">if</span> (changed) {
+            <span style="color: #a020f0;">this</span>.scrollTo(menuWidth, 0);
+        }
+    }
+}
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-xml"><span style="color: #8b2252;">&lt;?</span><span style="color: #a020f0;">xml</span><span style="color: #8b2252;"> </span><span style="color: #8b2252;">version="1.0" encoding="utf-8"</span><span style="color: #8b2252;">?&gt;</span>
+&lt;<span style="color: #0000ff;">android.support.constraint.ConstraintLayout</span> <span style="color: #483d8b;">xmlns</span>:<span style="color: #a0522d;">android</span>=<span style="color: #8b2252;">"http://schemas.android.com/apk/res/android"</span>
+    <span style="color: #483d8b;">xmlns</span>:<span style="color: #a0522d;">app</span>=<span style="color: #8b2252;">"http://schemas.android.com/apk/res-auto"</span>
+    <span style="color: #483d8b;">xmlns</span>:<span style="color: #a0522d;">tools</span>=<span style="color: #8b2252;">"http://schemas.android.com/tools"</span>
+    <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">layout_width</span>=<span style="color: #8b2252;">"match_parent"</span>
+    <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">layout_height</span>=<span style="color: #8b2252;">"match_parent"</span>
+    <span style="color: #483d8b;">tools</span>:<span style="color: #a0522d;">context</span>=<span style="color: #8b2252;">".MainActivity"</span>&gt;
+
+    &lt;<span style="color: #0000ff;">com.tq.sideslidemenu.SideSliceMenu</span>
+        <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">layout_width</span>=<span style="color: #8b2252;">"match_parent"</span>
+        <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">layout_height</span>=<span style="color: #8b2252;">"match_parent"</span>&gt;
+
+        &lt;<span style="color: #0000ff;">LinearLayout</span>
+            <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">layout_width</span>=<span style="color: #8b2252;">"match_parent"</span>
+            <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">layout_height</span>=<span style="color: #8b2252;">"match_parent"</span>&gt;
+
+            &lt;<span style="color: #0000ff;">LinearLayout</span>
+                <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">layout_width</span>=<span style="color: #8b2252;">"match_parent"</span>
+                <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">layout_height</span>=<span style="color: #8b2252;">"match_parent"</span>&gt;
+
+                &lt;<span style="color: #0000ff;">TextView</span>
+                    <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">layout_width</span>=<span style="color: #8b2252;">"wrap_content"</span>
+                    <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">layout_height</span>=<span style="color: #8b2252;">"wrap_content"</span>
+                    <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">text</span>=<span style="color: #8b2252;">"menu"</span> /&gt;
+            &lt;/<span style="color: #0000ff;">LinearLayout</span>&gt;
+
+            &lt;<span style="color: #0000ff;">LinearLayout</span>
+                <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">layout_width</span>=<span style="color: #8b2252;">"match_parent"</span>
+                <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">layout_height</span>=<span style="color: #8b2252;">"match_parent"</span>&gt;
+
+                &lt;<span style="color: #0000ff;">TextView</span>
+                    <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">layout_width</span>=<span style="color: #8b2252;">"wrap_content"</span>
+                    <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">layout_height</span>=<span style="color: #8b2252;">"wrap_content"</span>
+                    <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">text</span>=<span style="color: #8b2252;">"content"</span> /&gt;
+            &lt;/<span style="color: #0000ff;">LinearLayout</span>&gt;
+        &lt;/<span style="color: #0000ff;">LinearLayout</span>&gt;
+
+    &lt;/<span style="color: #0000ff;">com.tq.sideslidemenu.SideSliceMenu</span>&gt;
+
+&lt;/<span style="color: #0000ff;">android.support.constraint.ConstraintLayout</span>&gt;
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgbb6040d" class="outline-2">
+<h2 id="orgbb6040d">退出确认对话框</h2>
+<div class="outline-text-2" id="text-orgbb6040d">
+<p>
+涉及2个部分，一个是动画，一个是onKeyDown()重载。首先看动画。建立3个文件res/anim/enter.xml、res/anim/exit.xml、res/values/styles.xml
+</p>
+<div class="org-src-container">
+<pre class="src src-xml">&lt;<span style="color: #0000ff;">translate</span> <span style="color: #483d8b;">xmlns</span>:<span style="color: #a0522d;">android</span>=<span style="color: #8b2252;">"http://schemas.android.com/apk/res/android"</span>
+    <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">duration</span>=<span style="color: #8b2252;">"200"</span>
+    <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">fromYDelta</span>=<span style="color: #8b2252;">"-100%"</span> /&gt;
+
+&lt;<span style="color: #0000ff;">translate</span> <span style="color: #483d8b;">xmlns</span>:<span style="color: #a0522d;">android</span>=<span style="color: #8b2252;">"http://schemas.android.com/apk/res/android"</span>
+    <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">duration</span>=<span style="color: #8b2252;">"200"</span>
+    <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">fromYDelta</span>=<span style="color: #8b2252;">"0"</span>
+    <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">toYDelta</span>=<span style="color: #8b2252;">"100%"</span> /&gt;
+
+&lt;<span style="color: #0000ff;">resources</span>&gt;
+    &lt;<span style="color: #0000ff;">style</span> <span style="color: #a0522d;">name</span>=<span style="color: #8b2252;">"MyStyle"</span> <span style="color: #a0522d;">parent</span>=<span style="color: #8b2252;">"android:Animation"</span>&gt;
+        &lt;<span style="color: #0000ff;">item</span> <span style="color: #a0522d;">name</span>=<span style="color: #8b2252;">"@android:windowEnterAnimation"</span>&gt;@anim/enter&lt;/<span style="color: #0000ff;">item</span>&gt;
+        &lt;<span style="color: #0000ff;">item</span> <span style="color: #a0522d;">name</span>=<span style="color: #8b2252;">"@android:windowExitAnimation"</span>&gt;@anim/exit&lt;/<span style="color: #0000ff;">item</span>&gt;
+    &lt;/<span style="color: #0000ff;">style</span>&gt;
+&lt;/<span style="color: #0000ff;">resources</span>&gt;
+</pre>
+</div>
+
+<p>
+然后重载Activity的onKeyDown()方法。
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #008b8b;">@Override</span>
+  <span style="color: #a020f0;">public</span> <span style="color: #228b22;">boolean</span> <span style="color: #0000ff;">onKeyDown</span>(<span style="color: #228b22;">int</span> <span style="color: #a0522d;">keyCode</span>, <span style="color: #228b22;">KeyEvent</span> <span style="color: #a0522d;">event</span>) {
+
+      <span style="color: #a020f0;">if</span> (keyCode == <span style="color: #008b8b;">KeyEvent</span>.KEYCODE_BACK) {
+          <span style="color: #228b22;">AlertDialog</span> <span style="color: #a0522d;">dialog</span> = <span style="color: #a020f0;">new</span> <span style="color: #008b8b;">AlertDialog</span>.<span style="color: #228b22;">Builder</span>(<span style="color: #a020f0;">this</span>).create();
+          dialog.show();
+
+          <span style="color: #228b22;">Window</span> <span style="color: #a0522d;">window</span> = dialog.getWindow();
+          ((<span style="color: #228b22;">Window</span>) window).setGravity(<span style="color: #008b8b;">Gravity</span>.CENTER);
+          window.setWindowAnimations(<span style="color: #008b8b;">R</span>.<span style="color: #008b8b;">style</span>.MyStyle);
+          window.setContentView(R.layout.dialog);
+
+          window.findViewById(R.id.exit).setOnClickListener(<span style="color: #a020f0;">new</span> <span style="color: #008b8b;">View</span>.<span style="color: #228b22;">OnClickListener</span>() {
+              <span style="color: #008b8b;">@Override</span>
+              <span style="color: #a020f0;">public</span> <span style="color: #228b22;">void</span> <span style="color: #0000ff;">onClick</span>(<span style="color: #228b22;">View</span> <span style="color: #a0522d;">view</span>) {
+                  MainActivity.<span style="color: #a020f0;">this</span>.finish();
+              }
+          });
+      }
+
+      <span style="color: #a020f0;">return</span> <span style="color: #a020f0;">super</span>.onKeyDown(keyCode, event);
+  }
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org3d821c1" class="outline-2">
+<h2 id="org3d821c1">不规则对话框</h2>
+<div class="outline-text-2" id="text-org3d821c1">
+<p>
+在drawable目录下建立shape.xml，内容为
+</p>
+<div class="org-src-container">
+<pre class="src src-xml"><span style="color: #8b2252;">&lt;?</span><span style="color: #a020f0;">xml</span><span style="color: #8b2252;"> </span><span style="color: #8b2252;">version="1.0" encoding="utf-8"</span><span style="color: #8b2252;">?&gt;</span>
+&lt;<span style="color: #0000ff;">shape</span> <span style="color: #483d8b;">xmlns</span>:<span style="color: #a0522d;">android</span>=<span style="color: #8b2252;">"http://schemas.android.com/apk/res/android"</span>&gt;
+
+    <span style="color: #b22222;">&lt;!-- </span><span style="color: #b22222;">&#22278;&#35282; </span><span style="color: #b22222;">--&gt;</span>
+    &lt;<span style="color: #0000ff;">corners</span>
+        <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">topLeftRadius</span>=<span style="color: #8b2252;">"30dp"</span>
+        <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">topRightRadius</span>=<span style="color: #8b2252;">"30dp"</span> /&gt;
+    &lt;<span style="color: #0000ff;">stroke</span>
+        <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">width</span>=<span style="color: #8b2252;">"1dp"</span>
+        <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">color</span>=<span style="color: #8b2252;">"#000000"</span> /&gt;
+    &lt;<span style="color: #0000ff;">solid</span> <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">color</span>=<span style="color: #8b2252;">"#ffffff"</span> /&gt;
+
+&lt;/<span style="color: #0000ff;">shape</span>&gt;
+</pre>
+</div>
+<p>
+然后将控件的背景android:background设置为@drawable/shape。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgb4987d3" class="outline-2">
+<h2 id="orgb4987d3">带图片的Toast</h2>
+<div class="outline-text-2" id="text-orgb4987d3">
+<p>
+从Toast派生类，通过Toast.setView()方法设置视图。
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #a020f0;">class</span> <span style="color: #228b22;">ImageToast</span> <span style="color: #a020f0;">extends</span> <span style="color: #228b22;">Toast</span> {
+    <span style="color: #a020f0;">private</span> <span style="color: #0000ff;">ImageToast</span>(<span style="color: #228b22;">Context</span> <span style="color: #a0522d;">context</span>) {
+        <span style="color: #a020f0;">super</span>(context);
+    }
+
+    <span style="color: #a020f0;">public</span> <span style="color: #a020f0;">static</span> <span style="color: #228b22;">Toast</span> <span style="color: #0000ff;">make</span>(<span style="color: #228b22;">Context</span> <span style="color: #a0522d;">context</span>, <span style="color: #228b22;">int</span> <span style="color: #a0522d;">resourceId</span>, <span style="color: #228b22;">String</span> <span style="color: #a0522d;">text</span>) {
+        <span style="color: #228b22;">Toast</span> <span style="color: #a0522d;">toast</span> = <span style="color: #a020f0;">new</span> <span style="color: #228b22;">Toast</span>(context);
+        <span style="color: #228b22;">LayoutInflater</span> <span style="color: #a0522d;">inflater</span> = (<span style="color: #228b22;">LayoutInflater</span>) context.getSystemService(<span style="color: #008b8b;">Context</span>.LAYOUT_INFLATER_SERVICE);
+        <span style="color: #228b22;">View</span> <span style="color: #a0522d;">view</span> = inflater.inflate(R.layout.image_toast, <span style="color: #008b8b;">null</span>);
+        <span style="color: #228b22;">TextView</span> <span style="color: #a0522d;">textView</span> = (<span style="color: #228b22;">TextView</span>) view.findViewById(R.id.text);
+        <span style="color: #228b22;">ImageView</span> <span style="color: #a0522d;">imageView</span> = (<span style="color: #228b22;">ImageView</span>) view.findViewById(R.id.image);
+
+        imageView.setImageResource(resourceId);
+        textView.setText(text);
+
+        toast.setView(view);
+        toast.setDuration(<span style="color: #008b8b;">Toast</span>.LENGTH_LONG);
+        <span style="color: #a020f0;">return</span> toast;
+    }
+}
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orge65f9cc" class="outline-2">
+<h2 id="orge65f9cc">不同风格的进度条</h2>
+<div class="outline-text-2" id="text-orge65f9cc">
+<div class="org-src-container">
+<pre class="src src-xml">&lt;<span style="color: #0000ff;">ProgressBar</span>
+    <span style="color: #a0522d;">style</span>=<span style="color: #8b2252;">"?android:progressBarStyleHorizontal"</span>
+    <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">layout_width</span>=<span style="color: #8b2252;">"match_parent"</span>
+    <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">layout_height</span>=<span style="color: #8b2252;">"wrap_content"</span>
+    <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">max</span>=<span style="color: #8b2252;">"100"</span>
+    <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">progress</span>=<span style="color: #8b2252;">"50"</span>
+    <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">secondaryProgress</span>=<span style="color: #8b2252;">"70"</span> /&gt;
+
+&lt;<span style="color: #0000ff;">ProgressBar</span>
+    <span style="color: #a0522d;">style</span>=<span style="color: #8b2252;">"?android:progressBarStyleSmall"</span>
+    <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">layout_width</span>=<span style="color: #8b2252;">"match_parent"</span>
+    <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">layout_height</span>=<span style="color: #8b2252;">"wrap_content"</span>
+    <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">max</span>=<span style="color: #8b2252;">"100"</span>
+    <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">progress</span>=<span style="color: #8b2252;">"50"</span>
+    <span style="color: #483d8b;">android</span>:<span style="color: #a0522d;">secondaryProgress</span>=<span style="color: #8b2252;">"70"</span> /&gt;
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org7d155eb" class="outline-2">
+<h2 id="org7d155eb">列表返回顶部</h2>
+<div class="outline-text-2" id="text-org7d155eb">
+<p>
+使用ListView的smoothScrollToPosition()方法：
+</p>
+<div class="org-src-container">
+<pre class="src src-java">listView.smoothScrollToPosition(0);
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org54d6b7f" class="outline-2">
+<h2 id="org54d6b7f">保存应用数据</h2>
+<div class="outline-text-2" id="text-org54d6b7f">
+<div class="org-src-container">
+<pre class="src src-java">preferences = getSharedPreferences(<span style="color: #8b2252;">"userinfo"</span>, <span style="color: #008b8b;">MainActivity</span>.MODE_PRIVATE);
+<span style="color: #228b22;">String</span> <span style="color: #a0522d;">savedUsername</span> = preferences.getString(<span style="color: #8b2252;">"username"</span>, <span style="color: #8b2252;">""</span>);
+<span style="color: #008b8b;">SharedPreferences</span>.<span style="color: #228b22;">Editor</span> <span style="color: #a0522d;">editor</span> = preferences.edit();
+editor.putString(<span style="color: #8b2252;">"username"</span>, username);
+editor.putString(<span style="color: #8b2252;">"password"</span>, password);
+editor.commit();
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgb9f72ac" class="outline-2">
+<h2 id="orgb9f72ac">保存文件到SD卡</h2>
+<div class="outline-text-2" id="text-orgb9f72ac">
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #a020f0;">public</span> <span style="color: #228b22;">void</span> <span style="color: #0000ff;">writeSDCard</span>(<span style="color: #228b22;">String</span> <span style="color: #a0522d;">fileName</span>, <span style="color: #228b22;">String</span> <span style="color: #a0522d;">content</span>) <span style="color: #a020f0;">throws</span> <span style="color: #228b22;">Exception</span> {
+  <span style="color: #a020f0;">if</span> (!Environment.getExternalStorageState().equals(<span style="color: #008b8b;">Environment</span>.MEDIA_MOUNTED)) {
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">not ready</span>
+    <span style="color: #a020f0;">return</span>;
+  }
+
+  <span style="color: #228b22;">File</span> <span style="color: #a0522d;">file</span> = <span style="color: #a020f0;">new</span> <span style="color: #228b22;">File</span>(Environment.getExternalStorageDirectory(), fileName);
+  <span style="color: #228b22;">FileOutputStream</span> <span style="color: #a0522d;">outputStream</span> = <span style="color: #a020f0;">new</span> <span style="color: #228b22;">FileOutputStream</span>(file);
+  outputStream.write(content.getBytes());
+  outputStream.close();
+}
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orga083993" class="outline-2">
+<h2 id="orga083993">查看手机相册</h2>
+<div class="outline-text-2" id="text-orga083993">
+<p>
+使用ContentProvider和MediaStore.Images.Media.EXTERNAL<sub>CONTENT</sub><sub>URI读取</sub>。
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #228b22;">ContentResolver</span> <span style="color: #a0522d;">resolver</span> = getContentResolver();
+<span style="color: #228b22;">Cursor</span> <span style="color: #a0522d;">cursor</span> = resolver.query(<span style="color: #008b8b;">MediaStore</span>.<span style="color: #008b8b;">Images</span>.<span style="color: #008b8b;">Media</span>.EXTERNAL_CONTENT_URI,
+                               <span style="color: #008b8b;">null</span>,
+                               <span style="color: #008b8b;">MediaStore</span>.<span style="color: #008b8b;">Images</span>.<span style="color: #008b8b;">Media</span>.MIME_TYPE + <span style="color: #8b2252;">"=? or "</span> + <span style="color: #008b8b;">MediaStore</span>.<span style="color: #008b8b;">Images</span>.<span style="color: #008b8b;">Media</span>.MIME_TYPE + <span style="color: #8b2252;">"=?"</span> +
+                               <span style="color: #a020f0;">new</span> <span style="color: #228b22;">String</span>[]{ <span style="color: #8b2252;">"image/jpeg"</span>, <span style="color: #8b2252;">"image/png"</span> },
+                               <span style="color: #008b8b;">MediaStore</span>.<span style="color: #008b8b;">Images</span>.<span style="color: #008b8b;">Media</span>.DATE_MODIFIED);
+
+<span style="color: #a020f0;">while</span> (cursor.moveToNext()) {
+  <span style="color: #228b22;">String</span> <span style="color: #a0522d;">path</span> = cursor.getString(cursor.getColumnIndex(<span style="color: #008b8b;">MediaStore</span>.<span style="color: #008b8b;">Images</span>.<span style="color: #008b8b;">Media</span>.DATA));  
+}
+cursor.close();
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgbc01ca7" class="outline-2">
+<h2 id="orgbc01ca7">将不同的图片混合</h2>
+<div class="outline-text-2" id="text-orgbc01ca7">
+<p>
+使用Paint类的setXfermode()方法，配合Canvas可以将多幅图片混合。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orge974f8e" class="outline-2">
+<h2 id="orge974f8e">检测分贝</h2>
+<div class="outline-text-2" id="text-orge974f8e">
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #a020f0;">public</span> <span style="color: #a020f0;">class</span> <span style="color: #228b22;">DecibelDetector</span> {
+
+  <span style="color: #a020f0;">public</span> <span style="color: #a020f0;">interface</span> <span style="color: #228b22;">OnDecibelChangedListener</span> {
+    <span style="color: #228b22;">void</span> <span style="color: #0000ff;">onDecibelChanged</span>(<span style="color: #228b22;">double</span> <span style="color: #a0522d;">newDecibel</span>);
+  }
+
+  <span style="color: #a020f0;">private</span> <span style="color: #a020f0;">static</span> <span style="color: #a020f0;">final</span> <span style="color: #228b22;">int</span> <span style="color: #a0522d;">SAMPLE_RATE_IN_HZ</span> = 8000;  
+
+  <span style="color: #a020f0;">private</span> <span style="color: #228b22;">boolean</span> <span style="color: #a0522d;">isStarted</span> = <span style="color: #008b8b;">false</span>;
+  <span style="color: #a020f0;">private</span> <span style="color: #228b22;">Thread</span> <span style="color: #a0522d;">detectThread</span>;
+  <span style="color: #a020f0;">private</span> <span style="color: #228b22;">OnDecibelChangedListener</span> <span style="color: #a0522d;">listener</span>;
+
+  <span style="color: #a020f0;">public</span> <span style="color: #0000ff;">DecibelDetector</span>(<span style="color: #228b22;">OnDecibelChangedListener</span> <span style="color: #a0522d;">aListener</span>) {
+    listener = aListener;
+  }
+
+  <span style="color: #a020f0;">public</span> <span style="color: #228b22;">void</span> <span style="color: #0000ff;">start</span>() {    
+    <span style="color: #a020f0;">if</span> (isStarted) {
+      <span style="color: #a020f0;">return</span>;
+    }
+
+    detectThread = <span style="color: #a020f0;">new</span> <span style="color: #228b22;">Thread</span>(() -&gt; sampleCycle());
+    detectThread.start();
+  }
+
+  <span style="color: #a020f0;">public</span> <span style="color: #228b22;">void</span> <span style="color: #0000ff;">close</span>() {
+    <span style="color: #a020f0;">if</span> (!isStarted) {
+      <span style="color: #a020f0;">return</span>;
+    }
+
+    isStarted = <span style="color: #008b8b;">false</span>;
+    detectThread.interrupt();
+  }
+
+  <span style="color: #a020f0;">private</span> <span style="color: #228b22;">void</span> <span style="color: #0000ff;">sampleCycle</span>() {
+    isStarted = <span style="color: #008b8b;">true</span>;
+
+    <span style="color: #228b22;">double</span> <span style="color: #a0522d;">previousDecibel</span> = <span style="color: #008b8b;">Double</span>.NaN;
+    <span style="color: #228b22;">int</span> <span style="color: #a0522d;">bufferSize</span> = AudioRecord.getMinBufferSize(SAMPLE_RATE_IN_HZ,  
+                                                  <span style="color: #008b8b;">AudioFormat</span>.CHANNEL_IN_DEFAULT,
+                                                  <span style="color: #008b8b;">AudioFormat</span>.ENCODING_PCM_16BIT);  
+
+    <span style="color: #228b22;">short</span>[] <span style="color: #a0522d;">buffer</span> = <span style="color: #a020f0;">new</span> <span style="color: #228b22;">short</span>[bufferSize];
+    <span style="color: #228b22;">AudioRecord</span> <span style="color: #a0522d;">audioRecord</span> = <span style="color: #a020f0;">new</span> <span style="color: #228b22;">AudioRecord</span>(<span style="color: #008b8b;">MediaRecorder</span>.<span style="color: #008b8b;">AudioSource</span>.MIC,  
+                                              SAMPLE_RATE_IN_HZ,
+                                              <span style="color: #008b8b;">AudioFormat</span>.CHANNEL_IN_DEFAULT,  
+                                              <span style="color: #008b8b;">AudioFormat</span>.ENCODING_PCM_16BIT,
+                                              bufferSize);
+    audioRecord.startRecording();
+
+    <span style="color: #a020f0;">while</span> (isStarted) {  
+      <span style="color: #228b22;">int</span> <span style="color: #a0522d;">count</span> = audioRecord.read(buffer, 0, bufferSize);
+      <span style="color: #228b22;">double</span> <span style="color: #a0522d;">meanOfSquare</span> = Stream.of(buffer)
+        .limit(count)
+        .mapToLong(x -&gt; x * x)
+        .sum() / (<span style="color: #228b22;">double</span>) count;
+
+      <span style="color: #228b22;">double</span> <span style="color: #a0522d;">decibel</span> = 10 * Math.log10(meanOfSquare);
+      <span style="color: #a020f0;">if</span> (decibel != previousDecibel &amp;&amp; listener != <span style="color: #008b8b;">null</span>) {
+        listener.onDecibelChanged(decibel);
+      }
+      previousDecibel = decibel;
+
+      <span style="color: #a020f0;">try</span> {
+        Thread.sleep(100);
+      } <span style="color: #a020f0;">catch</span> (<span style="color: #228b22;">InterruptedException</span> <span style="color: #a0522d;">e</span>) {
+        <span style="color: #b22222;">// </span><span style="color: #b22222;">ignore</span>
+      }
+    }
+
+    audioRecord.stop();  
+    audioRecord.release();
+    audioRecord = <span style="color: #008b8b;">null</span>;
+  }  
+}  
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org173329a" class="outline-2">
+<h2 id="org173329a">切换多个选项卡</h2>
+<div class="outline-text-2" id="text-org173329a">
+<p>
+结合TabLayout和ViewPager。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgf943a7b" class="outline-2">
+<h2 id="orgf943a7b">书签</h2>
+<div class="outline-text-2" id="text-orgf943a7b">
+<p>
+421
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Created: 2019-09-23 周一 20:55</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

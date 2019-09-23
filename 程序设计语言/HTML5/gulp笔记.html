@@ -1,0 +1,710 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2019-09-23 周一 21:12 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org9f200d6">安装nodejs和npm</a></li>
+<li><a href="#org071c8da">安装gulp</a></li>
+<li><a href="#org4e69659">初始化工程目录</a></li>
+<li><a href="#org296f7dd">在工程目录安装gulp</a></li>
+<li><a href="#org3ff0977">为工程创建gulpfile.js文件</a></li>
+<li><a href="#org982160f">运行gulp</a></li>
+<li><a href="#orgd342b51">gulp API</a>
+<ul>
+<li><a href="#org06dbc23">gulp.src</a>
+<ul>
+<li><a href="#orgbceee3d">说明</a></li>
+<li><a href="#org5aaed20">语法</a></li>
+<li><a href="#orgc289689">示例</a></li>
+</ul>
+</li>
+<li><a href="#org6902c39">gulp.dest</a>
+<ul>
+<li><a href="#orga5638e0">说明</a></li>
+<li><a href="#org74500cc">语法</a></li>
+<li><a href="#orgb719f5d">示例</a></li>
+</ul>
+</li>
+<li><a href="#org09186e5">gulp.task</a>
+<ul>
+<li><a href="#orga6b4f23">说明</a></li>
+<li><a href="#org21e0151">语法</a></li>
+<li><a href="#orge2ce85a">示例</a></li>
+</ul>
+</li>
+<li><a href="#orga5f8554">gulp.watch</a></li>
+</ul>
+</li>
+<li><a href="#orgf4fc7f6">gulp插件</a>
+<ul>
+<li><a href="#orgb47ff8b">搜索gulp插件</a></li>
+<li><a href="#org54f459a">常用gulp插件</a>
+<ul>
+<li><a href="#org0632afe">gulp-babel</a></li>
+<li><a href="#org48c8400">gulp-livereload</a></li>
+<li><a href="#org87b7496">gulp-webserver</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orga0dd041">gulp + babel + webpack示例</a></li>
+<li><a href="#orgd136b6b">修订记录</a></li>
+</ul>
+</div>
+</div>
+<p>
+#+title gulp笔记
+#+date 2016年12月31日
+</p>
+
+<div id="outline-container-org9f200d6" class="outline-2">
+<h2 id="org9f200d6">安装nodejs和npm</h2>
+<div class="outline-text-2" id="text-org9f200d6">
+<p>
+略。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org071c8da" class="outline-2">
+<h2 id="org071c8da">安装gulp</h2>
+<div class="outline-text-2" id="text-org071c8da">
+<pre class="example">
+npm install --global gulp-cli
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org4e69659" class="outline-2">
+<h2 id="org4e69659">初始化工程目录</h2>
+<div class="outline-text-2" id="text-org4e69659">
+<div class="org-src-container">
+<pre class="src src-sh">npm init
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org296f7dd" class="outline-2">
+<h2 id="org296f7dd">在工程目录安装gulp</h2>
+<div class="outline-text-2" id="text-org296f7dd">
+<div class="org-src-container">
+<pre class="src src-sh">npm install --save-dev gulp
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org3ff0977" class="outline-2">
+<h2 id="org3ff0977">为工程创建gulpfile.js文件</h2>
+<div class="outline-text-2" id="text-org3ff0977">
+<div class="org-src-container">
+<pre class="src src-sh">var gulp = require(<span style="color: #8b2252;">'gulp'</span>);
+<span style="color: #0000ff;">gulp.task</span>(<span style="color: #8b2252;">'default'</span>, <span style="color: #a020f0;">function</span>() {
+
+});
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org982160f" class="outline-2">
+<h2 id="org982160f">运行gulp</h2>
+<div class="outline-text-2" id="text-org982160f">
+<div class="org-src-container">
+<pre class="src src-sh">gulp
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgd342b51" class="outline-2">
+<h2 id="orgd342b51">gulp API</h2>
+<div class="outline-text-2" id="text-orgd342b51">
+</div>
+<div id="outline-container-org06dbc23" class="outline-3">
+<h3 id="org06dbc23">gulp.src</h3>
+<div class="outline-text-3" id="text-org06dbc23">
+</div>
+<div id="outline-container-orgbceee3d" class="outline-4">
+<h4 id="orgbceee3d">说明</h4>
+<div class="outline-text-4" id="text-orgbceee3d">
+<p>
+gulp.src将glob或glob数组匹配的文件作为VinyI files流返回。
+</p>
+</div>
+</div>
+<div id="outline-container-org5aaed20" class="outline-4">
+<h4 id="org5aaed20">语法</h4>
+<div class="outline-text-4" id="text-org5aaed20">
+<div class="org-src-container">
+<pre class="src src-javascript">gulp.src(globs[, options])
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgc289689" class="outline-4">
+<h4 id="orgc289689">示例</h4>
+<div class="outline-text-4" id="text-orgc289689">
+<div class="org-src-container">
+<pre class="src src-javascript">gulp.src(<span style="color: #8b2252;">'client/templates/*.jade'</span>)
+  .pipe(jade())
+  .pipe(minify())
+  .pipe(gulp.dest(<span style="color: #8b2252;">'build/minified_templates'</span>));
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org6902c39" class="outline-3">
+<h3 id="org6902c39">gulp.dest</h3>
+<div class="outline-text-3" id="text-org6902c39">
+</div>
+<div id="outline-container-orga5638e0" class="outline-4">
+<h4 id="orga5638e0">说明</h4>
+<div class="outline-text-4" id="text-orga5638e0">
+<p>
+gulp.dest将文件流输出到目标路径。
+</p>
+</div>
+</div>
+<div id="outline-container-org74500cc" class="outline-4">
+<h4 id="org74500cc">语法</h4>
+<div class="outline-text-4" id="text-org74500cc">
+<div class="org-src-container">
+<pre class="src src-javascript">gulp.dest(path[, options])
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgb719f5d" class="outline-4">
+<h4 id="orgb719f5d">示例</h4>
+<div class="outline-text-4" id="text-orgb719f5d">
+<div class="org-src-container">
+<pre class="src src-javascript">gulp.src(<span style="color: #8b2252;">'client/templates/*.jade'</span>)
+  .pipe(jade())
+  .pipe(minify())
+  .pipe(gulp.dest(<span style="color: #8b2252;">'build/minified_templates'</span>));
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org09186e5" class="outline-3">
+<h3 id="org09186e5">gulp.task</h3>
+<div class="outline-text-3" id="text-org09186e5">
+</div>
+<div id="outline-container-orga6b4f23" class="outline-4">
+<h4 id="orga6b4f23">说明</h4>
+<div class="outline-text-4" id="text-orga6b4f23">
+<p>
+gulp.task定义了一个任务。
+</p>
+</div>
+</div>
+<div id="outline-container-org21e0151" class="outline-4">
+<h4 id="org21e0151">语法</h4>
+<div class="outline-text-4" id="text-org21e0151">
+<div class="org-src-container">
+<pre class="src src-javascript">gulp.task(name[, deps][, fn])
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orge2ce85a" class="outline-4">
+<h4 id="orge2ce85a">示例</h4>
+<div class="outline-text-4" id="text-orge2ce85a">
+<div class="org-src-container">
+<pre class="src src-javascript">gulp.task(<span style="color: #8b2252;">'pack'</span>, [<span style="color: #8b2252;">'build'</span>, <span style="color: #8b2252;">'merge'</span>, <span style="color: #8b2252;">'minify'</span>], <span style="color: #a020f0;">function</span>() {
+});
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orga5f8554" class="outline-3">
+<h3 id="orga5f8554">gulp.watch</h3>
+</div>
+</div>
+
+
+<div id="outline-container-orgf4fc7f6" class="outline-2">
+<h2 id="orgf4fc7f6">gulp插件</h2>
+<div class="outline-text-2" id="text-orgf4fc7f6">
+</div>
+<div id="outline-container-orgb47ff8b" class="outline-3">
+<h3 id="orgb47ff8b">搜索gulp插件</h3>
+<div class="outline-text-3" id="text-orgb47ff8b">
+<blockquote>
+<p>
+<a href="http://gulpjs.com/plugins/">http://gulpjs.com/plugins/</a>
+</p>
+</blockquote>
+</div>
+</div>
+
+<div id="outline-container-org54f459a" class="outline-3">
+<h3 id="org54f459a">常用gulp插件</h3>
+<div class="outline-text-3" id="text-org54f459a">
+<ul class="org-ul">
+<li>gulp-uglify 压缩js</li>
+<li>gulp-imagemin 压缩图片</li>
+<li>gulp-liverreload 自动刷新</li>
+<li>gulp-webserver 静态服务器</li>
+<li>gulp-rename 重命名</li>
+<li>gulp-sourcemaps 符号表</li>
+<li>gulp-changed 修改过的文件</li>
+<li>gulp-concat 合并文件</li>
+<li>gulp-clean 清理文件</li>
+<li>gulp-minify-css 压缩css</li>
+<li>gulp-less 编译less</li>
+<li>gulp-babel babel编译器</li>
+<li>gulp-webpack</li>
+<li>webpack-stream</li>
+</ul>
+</div>
+
+<div id="outline-container-org0632afe" class="outline-4">
+<h4 id="org0632afe">gulp-babel</h4>
+<div class="outline-text-4" id="text-org0632afe">
+</div>
+<ul class="org-ul">
+<li><a id="orgd7775c7"></a>安装<br />
+<div class="outline-text-5" id="text-orgd7775c7">
+<div class="org-src-container">
+<pre class="src src-sh">npm install --save-dev gulp
+</pre>
+</div>
+</div>
+</li>
+
+<li><a id="orgd86d3a8"></a>示例<br />
+<div class="outline-text-5" id="text-orgd86d3a8">
+<div class="org-src-container">
+<pre class="src src-javascript"><span style="color: #a020f0;">var</span> <span style="color: #a0522d;">gulp</span> = require(<span style="color: #8b2252;">'gulp'</span>);
+<span style="color: #a020f0;">var</span> <span style="color: #a0522d;">babel</span> = require(<span style="color: #8b2252;">"gulp-babel"</span>);
+
+gulp.task(<span style="color: #8b2252;">"default"</span>, <span style="color: #a020f0;">function</span>() {
+  <span style="color: #a020f0;">return</span> gulp.src(<span style="color: #8b2252;">"src/app.js"</span>)
+    .pipe(babel({
+      presets: [<span style="color: #8b2252;">"es2015"</span>, <span style="color: #8b2252;">"react"</span>]
+    }))
+    .pipe(gulp.dest(<span style="color: #8b2252;">"dist"</span>));
+});
+</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+
+
+<div id="outline-container-org48c8400" class="outline-4">
+<h4 id="org48c8400">gulp-livereload</h4>
+<div class="outline-text-4" id="text-org48c8400">
+</div>
+<ul class="org-ul">
+<li><a id="org24ca4a1"></a>安装<br />
+<div class="outline-text-5" id="text-org24ca4a1">
+<div class="org-src-container">
+<pre class="src src-sh">npm install --save-dev gulp-livereload
+</pre>
+</div>
+</div>
+</li>
+
+<li><a id="orgc89a86e"></a>示例<br />
+<div class="outline-text-5" id="text-orgc89a86e">
+<div class="org-src-container">
+<pre class="src src-javascript"><span style="color: #a020f0;">var</span> <span style="color: #a0522d;">gulp</span> = require(<span style="color: #8b2252;">"gulp"</span>);
+<span style="color: #a020f0;">var</span> <span style="color: #a0522d;">less</span> = require(<span style="color: #8b2252;">"gul-less"</span>);
+<span style="color: #a020f0;">var</span> <span style="color: #a0522d;">livereload</span> = require(<span style="color: #8b2252;">"gulp-livereload"</span>);
+
+gulp.task(<span style="color: #8b2252;">"less"</span>, <span style="color: #a020f0;">function</span>() {
+  gulp.src(<span style="color: #8b2252;">"less/*.less"</span>)
+    .pipe(less())
+    .pipe(gulp.dest(<span style="color: #8b2252;">"css"</span>))
+    .pipe(livereload());
+});
+
+gulp.task(<span style="color: #8b2252;">"watch"</span>, <span style="color: #a020f0;">function</span>() {
+  livereload.listen();
+  gulp.watch(<span style="color: #8b2252;">"less/*.less"</span>, [<span style="color: #8b2252;">"less"</span>]);
+});
+</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+
+<div id="outline-container-org87b7496" class="outline-4">
+<h4 id="org87b7496">gulp-webserver</h4>
+<div class="outline-text-4" id="text-org87b7496">
+</div>
+<ul class="org-ul">
+<li><a id="orga965567"></a>安装<br />
+<div class="outline-text-5" id="text-orga965567">
+<div class="org-src-container">
+<pre class="src src-sh">npm install --save-dev gulp-webserver
+</pre>
+</div>
+</div>
+</li>
+
+<li><a id="org00d5169"></a>示例<br />
+<div class="outline-text-5" id="text-org00d5169">
+<div class="org-src-container">
+<pre class="src src-javascript">
+<span style="color: #a020f0;">var</span> <span style="color: #a0522d;">gulp</span> = require(<span style="color: #8b2252;">"gulp"</span>);
+<span style="color: #a020f0;">var</span> <span style="color: #a0522d;">babel</span> = require(<span style="color: #8b2252;">"gulp-babel"</span>);
+<span style="color: #a020f0;">var</span> <span style="color: #a0522d;">webpack</span> = require(<span style="color: #8b2252;">"gulp-webpack"</span>);
+<span style="color: #a020f0;">var</span> <span style="color: #a0522d;">webserver</span> = require(<span style="color: #8b2252;">"gulp-webserver"</span>);
+<span style="color: #a020f0;">var</span> <span style="color: #a0522d;">livereload</span> = require(<span style="color: #8b2252;">"gulp-livereload"</span>);
+
+gulp.task(<span style="color: #8b2252;">"default"</span>, [<span style="color: #8b2252;">"build-js"</span>, <span style="color: #8b2252;">"build-html"</span>], <span style="color: #a020f0;">function</span>() {
+});
+
+gulp.task(<span style="color: #8b2252;">"build-js"</span>, <span style="color: #a020f0;">function</span>() {
+        <span style="color: #a020f0;">return</span> gulp.src(<span style="color: #8b2252;">"src/*.js"</span>)
+                .pipe(babel({
+                        presets: [<span style="color: #8b2252;">"es2015"</span>, <span style="color: #8b2252;">"react"</span>, <span style="color: #8b2252;">"stage-0"</span>]
+                }))
+                .pipe(gulp.dest(<span style="color: #8b2252;">"build"</span>))
+                .pipe(webpack({
+                        module:  {
+                                loaders: [{
+                                        test: <span style="color: #8b2252;">/\.js$/</span>,
+                                        exclude: <span style="color: #8b2252;">/node_modules/</span>,
+                                        loader: <span style="color: #8b2252;">"babel-loader"</span>,
+                                }],
+                        },
+                        output: {
+                                filename: <span style="color: #8b2252;">"bundle.js"</span>,
+                        },
+                }))
+                .pipe(gulp.dest(<span style="color: #8b2252;">"build"</span>));
+});
+
+gulp.task(<span style="color: #8b2252;">"build-html"</span>, <span style="color: #a020f0;">function</span>() {
+        <span style="color: #a020f0;">return</span> gulp.src(<span style="color: #8b2252;">"src/*.html"</span>)
+                .pipe(gulp.dest(<span style="color: #8b2252;">"build"</span>));
+});
+
+
+gulp.task(<span style="color: #8b2252;">"init-dev-env"</span>, [<span style="color: #8b2252;">"start-server"</span>, <span style="color: #8b2252;">"watch-file-change"</span>]);
+
+gulp.task(<span style="color: #8b2252;">"watch-file-change"</span>, <span style="color: #a020f0;">function</span>() {
+        gulp.watch(<span style="color: #8b2252;">"src/*.js"</span>, [<span style="color: #8b2252;">"build-js"</span>])
+        gulp.watch(<span style="color: #8b2252;">"src/*.html"</span>, [<span style="color: #8b2252;">"build-html"</span>])
+});
+
+gulp.task(<span style="color: #8b2252;">"start-server"</span>, <span style="color: #a020f0;">function</span>() {
+        gulp.src(<span style="color: #8b2252;">"build"</span>)
+                .pipe(webserver({
+                        livereload: <span style="color: #008b8b;">true</span>,
+                        open: <span style="color: #008b8b;">true</span>,
+                        host: <span style="color: #8b2252;">"0.0.0.0"</span>,
+                }));
+});
+
+</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orga0dd041" class="outline-2">
+<h2 id="orga0dd041">gulp + babel + webpack示例</h2>
+<div class="outline-text-2" id="text-orga0dd041">
+<div class="org-src-container">
+<pre class="src src-sh">var gulp = require(<span style="color: #8b2252;">"gulp"</span>);
+var babel = require(<span style="color: #8b2252;">"gulp-babel"</span>);
+var webpack = require(<span style="color: #8b2252;">"gulp-webpack"</span>);
+
+<span style="color: #0000ff;">gulp.task</span>(<span style="color: #8b2252;">"default"</span>, [<span style="color: #8b2252;">"build-js"</span>, <span style="color: #8b2252;">"build-html"</span>]);
+
+<span style="color: #0000ff;">gulp.task</span>(<span style="color: #8b2252;">"build-js"</span>, <span style="color: #a020f0;">function</span>() {
+  <span style="color: #a020f0;">return</span> gulp.src(<span style="color: #8b2252;">"src/*.js"</span>)
+    .pipe(babel({
+      presets: [<span style="color: #8b2252;">"es2015"</span>, <span style="color: #8b2252;">"react"</span>, <span style="color: #8b2252;">"stage-0"</span>]
+    }))
+    .pipe(gulp.dest(<span style="color: #8b2252;">"build"</span>))
+    .pipe(webpack({
+      :  {
+        loaders: [{
+          <span style="color: #483d8b;">test</span>: /<span style="color: #8b2252;">\.</span>js$/,
+          exclude: /node_modules/,
+          loader: <span style="color: #8b2252;">"babel-loader"</span>,
+        }],
+      },
+      output: {
+        filename: <span style="color: #8b2252;">"bundle.js"</span>,
+      },
+    }))
+    .pipe(gulp.dest(<span style="color: #8b2252;">"build"</span>));
+});
+
+<span style="color: #0000ff;">gulp.task</span>(<span style="color: #8b2252;">"build-html"</span>, <span style="color: #a020f0;">function</span>() {
+  console.log(<span style="color: #8b2252;">"done."</span>);
+  <span style="color: #a020f0;">return</span> gulp.src(<span style="color: #8b2252;">"src/*.html"</span>)
+    .pipe(gulp.dest(<span style="color: #8b2252;">"build"</span>));
+});
+
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgd136b6b" class="outline-2">
+<h2 id="orgd136b6b">修订记录</h2>
+<div class="outline-text-2" id="text-orgd136b6b">
+<ul class="org-ul">
+<li>2016年12月30日 建立文档。</li>
+<li>2016年12月31日 增加gulp-livereload和gulp-webserver插件。</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Created: 2019-09-23 周一 21:12</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

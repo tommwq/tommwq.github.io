@@ -1,0 +1,545 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2019-09-23 周一 21:13 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgb3fa0fb">应用框架演进</a></li>
+<li><a href="#org7e87d1b">分布式服务框架入门</a></li>
+<li><a href="#org22f1eba">通信框架</a></li>
+<li><a href="#org6238706">序列化和反序列化</a></li>
+<li><a href="#orgcce0ae7">协议栈</a></li>
+<li><a href="#orge886fe6">服务路由</a></li>
+<li><a href="#orgfa437d3">集群容错</a></li>
+<li><a href="#org60b7b25">服务调用</a></li>
+<li><a href="#org17e1e54">服务注册中心</a></li>
+<li><a href="#orga0f7b54">服务发布和引用</a></li>
+<li><a href="#org203a024">服务灰度发布</a></li>
+<li><a href="#orga483b66">参数传递</a></li>
+<li><a href="#org764f9d7">服务多版本</a></li>
+<li><a href="#orga58222f">流量控制</a></li>
+<li><a href="#org8ee5da6">服务降级</a></li>
+<li><a href="#orgfbe5503">服务优先级调度</a></li>
+<li><a href="#org394f974">服务治理</a></li>
+<li><a href="#org138a833">分布式消息跟踪</a></li>
+<li><a href="#orgf1a6181">可靠性设计</a></li>
+<li><a href="#org212123a">微服务架构</a></li>
+<li><a href="#org8e3b178">服务化最佳实践</a></li>
+</ul>
+</div>
+</div>
+<p>
+分布式服务框架：原理与实践 笔记
+</p>
+
+<div id="outline-container-orgb3fa0fb" class="outline-2">
+<h2 id="orgb3fa0fb">应用框架演进</h2>
+<div class="outline-text-2" id="text-orgb3fa0fb">
+<p>
+垂直架构（MVC）的特点：
+</p>
+<ul class="org-ul">
+<li>结构简单。</li>
+<li>以模块为开发基本单元。无法实现服务级别的复用和高可用。</li>
+<li>以程序为部署基本单元，全部模块打包到一个程序中。</li>
+<li>适用于业务类型单一、业务规模较小的场景。</li>
+</ul>
+
+<p>
+面向服务架构（SOA）的特点：
+</p>
+<ul class="org-ul">
+<li>以服务为开发和部署的基本单元。</li>
+<li>服务的客户和实现遵守共同契约。</li>
+<li>客户不依赖于服务的特定实现。</li>
+<li>服务可编排。</li>
+<li>服务是自动发现的。</li>
+<li>服务是自治的。</li>
+<li>服务是无状态的。</li>
+<li>适用于业务类型复杂，业务规模较大的场景。</li>
+</ul>
+
+<p>
+微服务架构的特点：
+</p>
+<ul class="org-ul">
+<li>服务原子化。一个服务只负责单一业务。</li>
+<li>服务异构化。允许使用不同技术栈来实现服务。</li>
+<li>高密度部署。</li>
+<li>适用于业务类型复杂，业务规模较大的场景。</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org7e87d1b" class="outline-2">
+<h2 id="org7e87d1b">分布式服务框架入门</h2>
+<div class="outline-text-2" id="text-org7e87d1b">
+<p>
+服务治理的主要需求：
+</p>
+<ul class="org-ul">
+<li>服务生命周期管理。包括服务上线审批、预发布、升级、下线等。</li>
+<li>服务容量规划。</li>
+<li>运行期治理。包括服务降级、流量切换等。</li>
+<li>服务安全。主要是敏感数据安全。</li>
+</ul>
+
+<p>
+分布式服务框架可以分为三层：
+</p>
+<ul class="org-ul">
+<li>RPC层。负责通信、序列化反序列化等。</li>
+<li>Filter Chain层。负责负载均衡、服务调用统计、失败重试等。</li>
+<li>Service层。将RPC服务转换为便于客户代码使用的接口。</li>
+</ul>
+
+<p>
+除了上述三层结构之外，分布式服务框架通常还包括以下服务中心：
+</p>
+<ul class="org-ul">
+<li>服务治理中心。提供服务治理接口和门户，如调用链、健康度、系统压力等。</li>
+<li>服务注册中心。负责服务的发布和通知。</li>
+<li>服务配置中心。复制配置的发布和通知。</li>
+</ul>
+
+<p>
+分布式服务框架的功能包括：
+</p>
+<ul class="org-ul">
+<li>服务订阅发布。
+<ul class="org-ul">
+<li>配置化发布和引用服务。</li>
+<li>服务自动发现机制。</li>
+<li>服务在线注册和去注册。</li>
+</ul></li>
+<li>服务路由。
+<ul class="org-ul">
+<li>路由策略，如随机、轮询、加权等。</li>
+<li>粘滞连接。</li>
+<li>路由定制。</li>
+</ul></li>
+<li>集群容错。
+<ul class="org-ul">
+<li>failover。自动切换。</li>
+<li>failback。自动重试。</li>
+<li>failfast。立即返回。</li>
+</ul></li>
+<li>服务调用。
+<ul class="org-ul">
+<li>同步。</li>
+<li>异步。</li>
+<li>并行。</li>
+</ul></li>
+<li>协议。
+<ul class="org-ul">
+<li>私有。</li>
+<li>公开。</li>
+</ul></li>
+<li>序列化。
+<ul class="org-ul">
+<li>二进制。</li>
+<li>文本。</li>
+</ul></li>
+<li>配置。
+<ul class="org-ul">
+<li>静态。</li>
+<li>配置中心。</li>
+</ul></li>
+</ul>
+
+<p>
+出于可靠性的考虑，分布式架构做了以下工作：
+</p>
+<ul class="org-ul">
+<li>服务注册中心。
+<ul class="org-ul">
+<li>服务监控检查。注册中心通过接口检查服务健康状态。如果服务失败，注册中心发出通知。</li>
+<li>故障切换。某一注册中心实例失败，自动切换到其他健康实例。</li>
+<li>本地自治。如果全部注册中心实例失败，服务提供者和客户使用自己本地缓存继续工作。</li>
+</ul></li>
+<li>单点故障。
+<ul class="org-ul">
+<li>服务无状态。</li>
+<li>服务集群容错。某一实例失败不会影响业务连续性。</li>
+</ul></li>
+<li>链路健壮。
+<ul class="org-ul">
+<li>心跳检查。</li>
+<li>断线重连。</li>
+</ul></li>
+</ul>
+
+<p>
+服务治理的功能有：
+</p>
+<ul class="org-ul">
+<li>服务运行状态管控。
+<ul class="org-ul">
+<li>服务路由。</li>
+<li>服务限流。</li>
+<li>服务迁入迁出。</li>
+<li>服务降级。</li>
+<li>服务超时控制。</li>
+</ul></li>
+<li>服务监控。
+<ul class="org-ul">
+<li>性能统计。</li>
+<li>统计报表。</li>
+<li>告警。</li>
+</ul></li>
+<li>服务生命周期管理。
+<ul class="org-ul">
+<li>上线审批。</li>
+<li>下线通知。</li>
+<li>服务灰度发布。</li>
+</ul></li>
+<li>故障快速定位。
+<ul class="org-ul">
+<li>分布式日志采集。</li>
+<li>海量日志检索。</li>
+<li>调用链可视化。</li>
+<li>运行日志故障定位。</li>
+</ul></li>
+<li>服务安全。
+<ul class="org-ul">
+<li>敏感服务授权策略。</li>
+<li>调用链路安全。</li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org22f1eba" class="outline-2">
+<h2 id="org22f1eba">通信框架</h2>
+</div>
+
+<div id="outline-container-org6238706" class="outline-2">
+<h2 id="org6238706">序列化和反序列化</h2>
+</div>
+
+<div id="outline-container-orgcce0ae7" class="outline-2">
+<h2 id="orgcce0ae7">协议栈</h2>
+</div>
+
+<div id="outline-container-orge886fe6" class="outline-2">
+<h2 id="orge886fe6">服务路由</h2>
+</div>
+
+<div id="outline-container-orgfa437d3" class="outline-2">
+<h2 id="orgfa437d3">集群容错</h2>
+</div>
+
+<div id="outline-container-org60b7b25" class="outline-2">
+<h2 id="org60b7b25">服务调用</h2>
+</div>
+
+<div id="outline-container-org17e1e54" class="outline-2">
+<h2 id="org17e1e54">服务注册中心</h2>
+</div>
+
+<div id="outline-container-orga0f7b54" class="outline-2">
+<h2 id="orga0f7b54">服务发布和引用</h2>
+<div class="outline-text-2" id="text-orga0f7b54">
+<p>
+服务的实现、服务注册中心和调用服务的客户，在启动时不应该有强制性的依赖关系。必须支持三者按任意顺序启动。服务注册中心在发布配置时，需要考虑如何避免通信风暴。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org203a024" class="outline-2">
+<h2 id="org203a024">服务灰度发布</h2>
+</div>
+
+<div id="outline-container-orga483b66" class="outline-2">
+<h2 id="orga483b66">参数传递</h2>
+</div>
+
+<div id="outline-container-org764f9d7" class="outline-2">
+<h2 id="org764f9d7">服务多版本</h2>
+<div class="outline-text-2" id="text-org764f9d7">
+<p>
+需要提供基于版本号的路由。这样做可以方便测试、灰度发布和服务降级。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orga58222f" class="outline-2">
+<h2 id="orga58222f">流量控制</h2>
+<div class="outline-text-2" id="text-orga58222f">
+<p>
+在负载均衡层记录各后端服务实例的系统压力（如QPS、响应时间等），根据这些数据，动态调整分发流量的目标。同时支持分级流控，如1级流控时，拒绝1/8的请求，2级流控拒绝1/4的请求等。在进行并发控制时，要考虑针对服务和针对客户两个方面。为了保证性能，并发控制可以异步进行。
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org8ee5da6" class="outline-2">
+<h2 id="org8ee5da6">服务降级</h2>
+<div class="outline-text-2" id="text-org8ee5da6">
+<p>
+服务降级可以分为屏蔽降级和容错降级两类。屏蔽降级由运维人员开启和取消。在进行屏蔽降级时，客户不再发起远程调用，直接假定远程调用返回默认值或抛出异常，将资源让出给核心服务使用。容错降级则是在某些远程服务失败时，将其他成功操作的结果返回给用户。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgfbe5503" class="outline-2">
+<h2 id="orgfbe5503">服务优先级调度</h2>
+</div>
+
+<div id="outline-container-org394f974" class="outline-2">
+<h2 id="org394f974">服务治理</h2>
+</div>
+
+<div id="outline-container-org138a833" class="outline-2">
+<h2 id="org138a833">分布式消息跟踪</h2>
+<div class="outline-text-2" id="text-org138a833">
+<p>
+在服务调用时，通常要记录下跟踪编号、RPC编号、调用类型、协议类型、双方IP和端口、请求方法接口名、参数等信息，以跟踪业务逻辑的实际执行情况。一些业务对性能要求较高，对安全线要求优先，可以设置采样率，只对部分调用收集跟踪信息。是否采样在网关第一次收到客户请求时决定，一点决定采样，后续调用必须记录跟踪信息。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgf1a6181" class="outline-2">
+<h2 id="orgf1a6181">可靠性设计</h2>
+</div>
+<div id="outline-container-org212123a" class="outline-2">
+<h2 id="org212123a">微服务架构</h2>
+</div>
+<div id="outline-container-org8e3b178" class="outline-2">
+<h2 id="org8e3b178">服务化最佳实践</h2>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Created: 2019-09-23 周一 21:13</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
