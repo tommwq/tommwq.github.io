@@ -1,0 +1,1683 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2019-09-23 周一 18:45 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Redis试验</title>
+<meta name="generator" content="Org mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Redis试验</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgbed3d96">基础</a>
+<ul>
+<li><a href="#orgc63cc2f">安装</a></li>
+<li><a href="#orgae1c495">基础操作</a></li>
+<li><a href="#org4c17dbd">列表操作</a></li>
+<li><a href="#org0bba06f">散列表操作</a></li>
+<li><a href="#org5fdbd8a">集合操作</a></li>
+<li><a href="#org4ada948">有序集合操作</a></li>
+<li><a href="#org6e1765c">位操作</a></li>
+<li><a href="#org60f1955">广播订阅</a></li>
+</ul>
+</li>
+<li><a href="#orgff94b52">配置</a>
+<ul>
+<li><a href="#org11592e6">配置示例</a></li>
+<li><a href="#org6ca6333">持久化</a>
+<ul>
+<li><a href="#orgddf2444">全量备份</a></li>
+<li><a href="#orgaaf09e4">AOF</a></li>
+</ul>
+</li>
+<li><a href="#org92f74e1">安全</a></li>
+</ul>
+</li>
+<li><a href="#orge4cdfd4">维护</a>
+<ul>
+<li><a href="#orgb220a61">复制</a></li>
+<li><a href="#org9b857b4">主从</a></li>
+<li><a href="#orge27c2cb">检验文件</a></li>
+<li><a href="#org43507c4">集群</a></li>
+<li><a href="#org2225352">恢复</a></li>
+<li><a href="#orgb2d6e12">中间件</a></li>
+</ul>
+</li>
+<li><a href="#org7bdaed0">应用</a>
+<ul>
+<li><a href="#org6a8e228">Java</a></li>
+<li><a href="#org13e703e">Python</a></li>
+<li><a href="#org4501202">Go</a></li>
+<li><a href="#org7c31cda">事务</a></li>
+<li><a href="#orga61bd18">分布式锁</a></li>
+<li><a href="#org47795b1">文章投票</a></li>
+<li><a href="#org1ae2192">购物车</a></li>
+<li><a href="#org93accb4">网页缓存</a></li>
+<li><a href="#org332086e">数据缓存</a></li>
+<li><a href="#org614d38c">根据IP查找国家和城市</a></li>
+<li><a href="#org0def701">服务发现</a></li>
+<li><a href="#orgdf85f99">自动补全</a></li>
+<li><a href="#org2072515">配置广播</a></li>
+<li><a href="#org0f92a28">时间线</a></li>
+<li><a href="#orgd6d2620">索引</a></li>
+<li><a href="#orgf68b010">编写扩展</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<p>
+基于Ubuntu
+</p>
+
+<div id="outline-container-orgbed3d96" class="outline-2">
+<h2 id="orgbed3d96">基础</h2>
+<div class="outline-text-2" id="text-orgbed3d96">
+</div>
+<div id="outline-container-orgc63cc2f" class="outline-3">
+<h3 id="orgc63cc2f">安装</h3>
+<div class="outline-text-3" id="text-orgc63cc2f">
+<div class="org-src-container">
+<pre class="src src-shell">sudo apt install -y redis-server redis-tools
+sudo vi /etc/redis/redis.conf
+sudo service redis restart
+redis-cli
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgae1c495" class="outline-3">
+<h3 id="orgae1c495">基础操作</h3>
+<div class="outline-text-3" id="text-orgae1c495">
+<ul class="org-ul">
+<li>获得帮助</li>
+<li>设置值</li>
+<li>查询值</li>
+<li>超时</li>
+<li>追加</li>
+<li>删除值</li>
+<li>自增</li>
+<li>自增（字符串）</li>
+<li>列出全部键</li>
+<li>判断键存在</li>
+<li>键生命周期</li>
+<li>条件设置</li>
+<li>查看值类型</li>
+<li>重命名</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-redis">help
+help get
+
+set user:name alice
+get user:name
+
+del user:name
+get user:name
+exists user:name
+
+set user:email alice@mail
+get user:email
+append user:email .com
+get user:email
+
+set user:session 1234
+ttl user:session
+expire user:session 10
+ttl user:session
+ttl user:session
+
+keys
+keys *session
+
+set age 20
+get age
+incr age 
+get age
+incrby age 2
+get age
+decrby age 2
+get age
+
+set user:session 1234 ex 10
+ttl user:session
+ttl user:session
+
+set nickname skywalker
+get nickname
+set nickname daydreamer nx
+get nickname
+set nickname daydreamer xx
+get nickname
+
+exists address
+set address walletstreet xx
+get address
+set address walletstreet nx
+get address
+
+set cache memcached
+get cache
+getset cache redis
+get cache
+
+mset name bob email bob@mail.com
+mget name email
+msetnx user1:name charli user1:email charlie@mail.com
+mget user1:name user1:email
+msetnx user1:name charlie user2:name dora
+get user1:name
+
+type user1:name
+rename user1:name user01:name
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org4c17dbd" class="outline-3">
+<h3 id="org4c17dbd">列表操作</h3>
+<div class="outline-text-3" id="text-org4c17dbd">
+<ul class="org-ul">
+<li>右侧插入</li>
+<li>左侧插入</li>
+<li>弹出</li>
+<li>列出全部元素</li>
+<li>索引</li>
+<li>区间</li>
+<li>列表长度</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-redis">RPUSH rmdbs mysql sqlserver oracle pregresql
+LPUSH rmdbs sqlite
+
+LRANGE rmdbs 0 -1
+LRANGE rmdbs 0 3
+
+LINDEX rmdbs 0
+LINDEX rmdbs -1
+
+LPOP rmdbs
+RPOP rmdbs
+LLEN rmdbs
+
+LPUSH rmdbs mongodb mongodb mongodb
+LREM rmdbs 1 mongodb
+LRANGE rmdbs 0 -1
+LREM rmdbs 0 mongodb
+LRANGE rmdbs 0 -1
+
+LSET rmdbs 0 db2
+LRANGE rmdbs 0 -1
+
+LTRIM rmdbs 1 3
+LRANGE rmdbs 0 -1
+
+LPUSH global_request_queue p1 p2 p3 p4
+RPOPLPUSH global_request_queue node1queue
+RPOPLPUSH global_request_queue node2queue
+RPOPLPUSH global_request_queue node1queue
+RPOPLPUSH global_request_queue node2queue
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org0bba06f" class="outline-3">
+<h3 id="org0bba06f">散列表操作</h3>
+<div class="outline-text-3" id="text-org0bba06f">
+<ul class="org-ul">
+<li>设置</li>
+<li>查询</li>
+<li>删除</li>
+<li>自增</li>
+<li>交集</li>
+<li>并集</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-redis">HSET users 1 ella
+HGET users 1
+HEXISTS users 1
+HSET users 2 frank
+HGETALL users
+HKEYS users
+HVALS users
+HLEN users
+HMSET users 3 gery 4 harry
+HMGET users 1 2 3 4
+HDEL users 1
+
+HSET pagecount 1 10
+HINCRBY pagecount 1 20
+HGET pagecount 1
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org5fdbd8a" class="outline-3">
+<h3 id="org5fdbd8a">集合操作</h3>
+<div class="outline-text-3" id="text-org5fdbd8a">
+<ul class="org-ul">
+<li>交集</li>
+<li>并集</li>
+<li>设置</li>
+<li>查询</li>
+<li>删除</li>
+<li>判断属于</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-redis">SADD fruit apple banana cherry durian
+SCARD fruit
+
+SMEMBERS fruit
+SISMEMBER fruit apple
+SREM fruit apple
+SISMEMBER fruit apple
+SMOVE fruit favourite durian
+SMEMBERS fruit
+SMEMBERS favourite
+SPOP fruit
+
+SADD vehicle car truck bike bus metro texi
+SRANDMEMBER vehicle
+SADD public_transport bus metro
+SDIFF vehicle public_transport
+SINTER vehicle public_transport
+SUNION vehicle public_transport
+
+SADD operating_system linux unix windows dos freebsd ios android
+SADD open_source_software linux android freebsd redis mysql pregresql unix
+SDIFFSTORE closed_source_os operating_system open_source_software
+SMEMBERS closed_source_os
+SINTERSTORE open_source_os open_source_software operating_system
+SMEMBERS open_source_os
+SUNIONSTORE all_software open_source_software operating_system
+SMEMBERS all_software
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org4ada948" class="outline-3">
+<h3 id="org4ada948">有序集合操作</h3>
+<div class="outline-text-3" id="text-org4ada948">
+<ul class="org-ul">
+<li>插入</li>
+<li>排行</li>
+<li>排序</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-redis">ZADD vote 10.0 article1
+ZADD vote 7.0 article2
+ZADD vote 3.0 article3
+ZCARD vote
+ZRANGE vote 0 -1
+ZINCRBY vote 1.0 article3
+ZADD vote 4.0 article4
+ZCOUNT vote 4.0 8.0
+ZRANK vote article1
+ZREVRANGE vote 0 -1
+ZSCORE voite article1
+ZRANGEBYSCORE vote 4.0 8.0
+ZREM vote article1
+ZREMRANGEBYSCORE vote 4.0 8.0
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org6e1765c" class="outline-3">
+<h3 id="org6e1765c">位操作</h3>
+<div class="outline-text-3" id="text-org6e1765c">
+</div>
+</div>
+<div id="outline-container-org60f1955" class="outline-3">
+<h3 id="org60f1955">广播订阅</h3>
+<div class="outline-text-3" id="text-org60f1955">
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgff94b52" class="outline-2">
+<h2 id="orgff94b52">配置</h2>
+<div class="outline-text-2" id="text-orgff94b52">
+</div>
+<div id="outline-container-org11592e6" class="outline-3">
+<h3 id="org11592e6">配置示例</h3>
+<div class="outline-text-3" id="text-org11592e6">
+<div class="org-src-container">
+<pre class="src src-redis.conf">include /path/to/local.conf # 引用其他配置文件
+include /path/to/other.conf
+
+loadmodule /path/to/my_module.so # 加载so模块
+loadmodule /path/to/other_module.so
+
+# bind 192.168.1.100 10.0.0.1 
+# bind 127.0.0.1 ::1
+bind 127.0.0.1  # 绑定IP和端口
+
+protected-mode yes # 是否启用保护模式。如果启动保护模式，并且服务没有绑定到特定地址，且没有没有设置密码，Redis只允许从本地连接。
+
+port 6379 # 端口号
+
+tcp-backlog 511 # 接受队列长度
+
+# unixsocket /tmp/redis.sock # 使用UNIX域套接字连接
+# unixsocketperm 700
+
+timeout 0 # 等待空闲客户端的最长时间，单位秒。超过这个时间，Redis将0表示关闭此功能。
+
+tcp-keepalive 300 # TCP保活时间
+
+daemonize no # 以守护进程运行。会写文件/var/run/redis.pid。
+
+supervised no # 使用upstart/systemd启动的配置。可以是no/upstart/systemd/auto。
+
+pidfile /var/run/redis_6379.pid # pid文件
+
+loglevel notice # 日志级别。可以是debug/verbose/notice/warning。
+
+logfile "" # 日志文件。空表示输出到标准输出或/dev/null（守护进程模式）。
+
+# syslog-enabled no # 使用syslog
+# syslog-ident redis # syslog标识
+# syslog-facility local0 # syslog级别。可以是USER/LOCAL0-LOCAL7
+
+databases 16 # 数据库数量。数据库从0开始。通过SELECT &lt;dbid&gt;切换。
+
+always-show-logo yes # 显示logo。
+
+save 900 1 # 写磁盘条件。如果900秒内有至少1个键发生变更，保存。
+save 300 10
+save 60 10000
+#   save "" # 移除前面的save配置。
+
+stop-writes-on-bgsave-error yes # 如果后台保存进程发生错误，停止执行写入命令。
+
+rdbcompression yes # 使用LZF算法压缩dump.rdb文件。
+rdbchecksum yes # 为rdb文件增加CRC64校验码
+dbfilename dump.rdb # 导出文件名
+dir ./ # 工作目录
+
+# slaveof &lt;masterip&gt; &lt;masterport&gt; # 配置master服务器。Redis的复制是异步的，
+                    # 但是可以让master在连接了一定数量的slaver后才接受写入命令。
+                    # 发生网络分区后，slave会自从重试复制。
+# masterauth &lt;master-password&gt; # master节点密码
+
+slave-serve-stale-data yes # 当slave和master断开后，或slave在同步过程中，可以响应客户端请求。
+                                    # 如果配置成no，slave对除INFO和SLAVEOF外的请求响应“SYNC with master in progress”。
+
+slave-read-only yes # 禁止向slave发送写请求。
+
+repl-diskless-sync no # 是否使用diskless同步机制。Redis支持两种同步机制：disk和socket。
+      # 在disk模式下，master建立一个新进程，将RDB文件写入文件。稍后父进程将rdb文件增量发送给slave。
+      # 在socket模式下，Redis建立一个新进程，将RDB文件发送给slave socket。socket模式仍处于试验状态。
+
+repl-diskless-sync-delay 5  # socket同步模式下传输下一个RDB前，等待slave的秒数。
+
+# repl-ping-slave-period 10 # 心跳包周期
+# repl-timeout 60 # 复制超时时间。这个值应当大于repl-ping-slave-period
+
+repl-disable-tcp-nodelay no # 在SYNC后关闭复制的TCP_NODELAY
+
+# repl-backlog-size 1mb # 复制块大小
+
+# repl-backlog-ttl 3600
+
+# The slave priority is an integer number published by Redis in the INFO output.
+# It is used by Redis Sentinel in order to select a slave to promote into a
+# master if the master is no longer working correctly.
+#
+# A slave with a low priority number is considered better for promotion, so
+# for instance if there are three slaves with priority 10, 100, 25 Sentinel will
+# pick the one with priority 10, that is the lowest.
+#
+# However a special priority of 0 marks the slave as not able to perform the
+# role of master, so a slave with priority of 0 will never be selected by
+# Redis Sentinel for promotion.
+#
+# By default the priority is 100.
+slave-priority 100
+
+# It is possible for a master to stop accepting writes if there are less than
+# N slaves connected, having a lag less or equal than M seconds.
+#
+# The N slaves need to be in "online" state.
+#
+# The lag in seconds, that must be &lt;= the specified value, is calculated from
+# the last ping received from the slave, that is usually sent every second.
+#
+# This option does not GUARANTEE that N replicas will accept the write, but
+# will limit the window of exposure for lost writes in case not enough slaves
+# are available, to the specified number of seconds.
+#
+# For example to require at least 3 slaves with a lag &lt;= 10 seconds use:
+#
+# min-slaves-to-write 3
+# min-slaves-max-lag 10
+#
+# Setting one or the other to 0 disables the feature.
+#
+# By default min-slaves-to-write is set to 0 (feature disabled) and
+# min-slaves-max-lag is set to 10.
+
+# A Redis master is able to list the address and port of the attached
+# slaves in different ways. For example the "INFO replication" section
+# offers this information, which is used, among other tools, by
+# Redis Sentinel in order to discover slave instances.
+# Another place where this info is available is in the output of the
+# "ROLE" command of a master.
+#
+# The listed IP and address normally reported by a slave is obtained
+# in the following way:
+#
+#   IP: The address is auto detected by checking the peer address
+#   of the socket used by the slave to connect with the master.
+#
+#   Port: The port is communicated by the slave during the replication
+#   handshake, and is normally the port that the slave is using to
+#   list for connections.
+#
+# However when port forwarding or Network Address Translation (NAT) is
+# used, the slave may be actually reachable via different IP and port
+# pairs. The following two options can be used by a slave in order to
+# report to its master a specific set of IP and port, so that both INFO
+# and ROLE will report those values.
+#
+# There is no need to use both the options if you need to override just
+# the port or the IP address.
+#
+# slave-announce-ip 5.5.5.5
+# slave-announce-port 1234
+
+################################## SECURITY ###################################
+
+# Require clients to issue AUTH &lt;PASSWORD&gt; before processing any other
+# commands.  This might be useful in environments in which you do not trust
+# others with access to the host running redis-server.
+#
+# This should stay commented out for backward compatibility and because most
+# people do not need auth (e.g. they run their own servers).
+#
+# Warning: since Redis is pretty fast an outside user can try up to
+# 150k passwords per second against a good box. This means that you should
+# use a very strong password otherwise it will be very easy to break.
+#
+# requirepass foobared
+
+# Command renaming.
+#
+# It is possible to change the name of dangerous commands in a shared
+# environment. For instance the CONFIG command may be renamed into something
+# hard to guess so that it will still be available for internal-use tools
+# but not available for general clients.
+#
+# Example:
+#
+# rename-command CONFIG b840fc02d524045429941cc15f59e41cb7be6c52
+#
+# It is also possible to completely kill a command by renaming it into
+# an empty string:
+#
+# rename-command CONFIG ""
+#
+# Please note that changing the name of commands that are logged into the
+# AOF file or transmitted to slaves may cause problems.
+
+################################### CLIENTS ####################################
+
+# Set the max number of connected clients at the same time. By default
+# this limit is set to 10000 clients, however if the Redis server is not
+# able to configure the process file limit to allow for the specified limit
+# the max number of allowed clients is set to the current file limit
+# minus 32 (as Redis reserves a few file descriptors for internal uses).
+#
+# Once the limit is reached Redis will close all the new connections sending
+# an error 'max number of clients reached'.
+#
+# maxclients 10000
+
+############################## MEMORY MANAGEMENT ################################
+
+# Set a memory usage limit to the specified amount of bytes.
+# When the memory limit is reached Redis will try to remove keys
+# according to the eviction policy selected (see maxmemory-policy).
+#
+# If Redis can't remove keys according to the policy, or if the policy is
+# set to 'noeviction', Redis will start to reply with errors to commands
+# that would use more memory, like SET, LPUSH, and so on, and will continue
+# to reply to read-only commands like GET.
+#
+# This option is usually useful when using Redis as an LRU or LFU cache, or to
+# set a hard memory limit for an instance (using the 'noeviction' policy).
+#
+# WARNING: If you have slaves attached to an instance with maxmemory on,
+# the size of the output buffers needed to feed the slaves are subtracted
+# from the used memory count, so that network problems / resyncs will
+# not trigger a loop where keys are evicted, and in turn the output
+# buffer of slaves is full with DELs of keys evicted triggering the deletion
+# of more keys, and so forth until the database is completely emptied.
+#
+# In short... if you have slaves attached it is suggested that you set a lower
+# limit for maxmemory so that there is some free RAM on the system for slave
+# output buffers (but this is not needed if the policy is 'noeviction').
+#
+# maxmemory &lt;bytes&gt;
+
+# MAXMEMORY POLICY: how Redis will select what to remove when maxmemory
+# is reached. You can select among five behaviors:
+#
+# volatile-lru -&gt; Evict using approximated LRU among the keys with an expire set.
+# allkeys-lru -&gt; Evict any key using approximated LRU.
+# volatile-lfu -&gt; Evict using approximated LFU among the keys with an expire set.
+# allkeys-lfu -&gt; Evict any key using approximated LFU.
+# volatile-random -&gt; Remove a random key among the ones with an expire set.
+# allkeys-random -&gt; Remove a random key, any key.
+# volatile-ttl -&gt; Remove the key with the nearest expire time (minor TTL)
+# noeviction -&gt; Don't evict anything, just return an error on write operations.
+#
+# LRU means Least Recently Used
+# LFU means Least Frequently Used
+#
+# Both LRU, LFU and volatile-ttl are implemented using approximated
+# randomized algorithms.
+#
+# Note: with any of the above policies, Redis will return an error on write
+#       operations, when there are no suitable keys for eviction.
+#
+#       At the date of writing these commands are: set setnx setex append
+#       incr decr rpush lpush rpushx lpushx linsert lset rpoplpush sadd
+#       sinter sinterstore sunion sunionstore sdiff sdiffstore zadd zincrby
+#       zunionstore zinterstore hset hsetnx hmset hincrby incrby decrby
+#       getset mset msetnx exec sort
+#
+# The default is:
+#
+# maxmemory-policy noeviction
+
+# LRU, LFU and minimal TTL algorithms are not precise algorithms but approximated
+# algorithms (in order to save memory), so you can tune it for speed or
+# accuracy. For default Redis will check five keys and pick the one that was
+# used less recently, you can change the sample size using the following
+# configuration directive.
+#
+# The default of 5 produces good enough results. 10 Approximates very closely
+# true LRU but costs more CPU. 3 is faster but not very accurate.
+#
+# maxmemory-samples 5
+
+############################# LAZY FREEING ####################################
+
+# Redis has two primitives to delete keys. One is called DEL and is a blocking
+# deletion of the object. It means that the server stops processing new commands
+# in order to reclaim all the memory associated with an object in a synchronous
+# way. If the key deleted is associated with a small object, the time needed
+# in order to execute the DEL command is very small and comparable to most other
+# O(1) or O(log_N) commands in Redis. However if the key is associated with an
+# aggregated value containing millions of elements, the server can block for
+# a long time (even seconds) in order to complete the operation.
+#
+# For the above reasons Redis also offers non blocking deletion primitives
+# such as UNLINK (non blocking DEL) and the ASYNC option of FLUSHALL and
+# FLUSHDB commands, in order to reclaim memory in background. Those commands
+# are executed in constant time. Another thread will incrementally free the
+# object in the background as fast as possible.
+#
+# DEL, UNLINK and ASYNC option of FLUSHALL and FLUSHDB are user-controlled.
+# It's up to the design of the application to understand when it is a good
+# idea to use one or the other. However the Redis server sometimes has to
+# delete keys or flush the whole database as a side effect of other operations.
+# Specifically Redis deletes objects independently of a user call in the
+# following scenarios:
+#
+# 1) On eviction, because of the maxmemory and maxmemory policy configurations,
+#    in order to make room for new data, without going over the specified
+#    memory limit.
+# 2) Because of expire: when a key with an associated time to live (see the
+#    EXPIRE command) must be deleted from memory.
+# 3) Because of a side effect of a command that stores data on a key that may
+#    already exist. For example the RENAME command may delete the old key
+#    content when it is replaced with another one. Similarly SUNIONSTORE
+#    or SORT with STORE option may delete existing keys. The SET command
+#    itself removes any old content of the specified key in order to replace
+#    it with the specified string.
+# 4) During replication, when a slave performs a full resynchronization with
+#    its master, the content of the whole database is removed in order to
+#    load the RDB file just transfered.
+#
+# In all the above cases the default is to delete objects in a blocking way,
+# like if DEL was called. However you can configure each case specifically
+# in order to instead release memory in a non-blocking way like if UNLINK
+# was called, using the following configuration directives:
+
+lazyfree-lazy-eviction no
+lazyfree-lazy-expire no
+lazyfree-lazy-server-del no
+slave-lazy-flush no
+
+############################## APPEND ONLY MODE ###############################
+
+# By default Redis asynchronously dumps the dataset on disk. This mode is
+# good enough in many applications, but an issue with the Redis process or
+# a power outage may result into a few minutes of writes lost (depending on
+# the configured save points).
+#
+# The Append Only File is an alternative persistence mode that provides
+# much better durability. For instance using the default data fsync policy
+# (see later in the config file) Redis can lose just one second of writes in a
+# dramatic event like a server power outage, or a single write if something
+# wrong with the Redis process itself happens, but the operating system is
+# still running correctly.
+#
+# AOF and RDB persistence can be enabled at the same time without problems.
+# If the AOF is enabled on startup Redis will load the AOF, that is the file
+# with the better durability guarantees.
+#
+# Please check http://redis.io/topics/persistence for more information.
+
+appendonly no
+
+# The name of the append only file (default: "appendonly.aof")
+
+appendfilename "appendonly.aof"
+
+# The fsync() call tells the Operating System to actually write data on disk
+# instead of waiting for more data in the output buffer. Some OS will really flush
+# data on disk, some other OS will just try to do it ASAP.
+#
+# Redis supports three different modes:
+#
+# no: don't fsync, just let the OS flush the data when it wants. Faster.
+# always: fsync after every write to the append only log. Slow, Safest.
+# everysec: fsync only one time every second. Compromise.
+#
+# The default is "everysec", as that's usually the right compromise between
+# speed and data safety. It's up to you to understand if you can relax this to
+# "no" that will let the operating system flush the output buffer when
+# it wants, for better performances (but if you can live with the idea of
+# some data loss consider the default persistence mode that's snapshotting),
+# or on the contrary, use "always" that's very slow but a bit safer than
+# everysec.
+#
+# More details please check the following article:
+# http://antirez.com/post/redis-persistence-demystified.html
+#
+# If unsure, use "everysec".
+
+# appendfsync always
+appendfsync everysec
+# appendfsync no
+
+# When the AOF fsync policy is set to always or everysec, and a background
+# saving process (a background save or AOF log background rewriting) is
+# performing a lot of I/O against the disk, in some Linux configurations
+# Redis may block too long on the fsync() call. Note that there is no fix for
+# this currently, as even performing fsync in a different thread will block
+# our synchronous write(2) call.
+#
+# In order to mitigate this problem it's possible to use the following option
+# that will prevent fsync() from being called in the main process while a
+# BGSAVE or BGREWRITEAOF is in progress.
+#
+# This means that while another child is saving, the durability of Redis is
+# the same as "appendfsync none". In practical terms, this means that it is
+# possible to lose up to 30 seconds of log in the worst scenario (with the
+# default Linux settings).
+#
+# If you have latency problems turn this to "yes". Otherwise leave it as
+# "no" that is the safest pick from the point of view of durability.
+
+no-appendfsync-on-rewrite no
+
+# Automatic rewrite of the append only file.
+# Redis is able to automatically rewrite the log file implicitly calling
+# BGREWRITEAOF when the AOF log size grows by the specified percentage.
+#
+# This is how it works: Redis remembers the size of the AOF file after the
+# latest rewrite (if no rewrite has happened since the restart, the size of
+# the AOF at startup is used).
+#
+# This base size is compared to the current size. If the current size is
+# bigger than the specified percentage, the rewrite is triggered. Also
+# you need to specify a minimal size for the AOF file to be rewritten, this
+# is useful to avoid rewriting the AOF file even if the percentage increase
+# is reached but it is still pretty small.
+#
+# Specify a percentage of zero in order to disable the automatic AOF
+# rewrite feature.
+
+auto-aof-rewrite-percentage 100
+auto-aof-rewrite-min-size 64mb
+
+# An AOF file may be found to be truncated at the end during the Redis
+# startup process, when the AOF data gets loaded back into memory.
+# This may happen when the system where Redis is running
+# crashes, especially when an ext4 filesystem is mounted without the
+# data=ordered option (however this can't happen when Redis itself
+# crashes or aborts but the operating system still works correctly).
+#
+# Redis can either exit with an error when this happens, or load as much
+# data as possible (the default now) and start if the AOF file is found
+# to be truncated at the end. The following option controls this behavior.
+#
+# If aof-load-truncated is set to yes, a truncated AOF file is loaded and
+# the Redis server starts emitting a log to inform the user of the event.
+# Otherwise if the option is set to no, the server aborts with an error
+# and refuses to start. When the option is set to no, the user requires
+# to fix the AOF file using the "redis-check-aof" utility before to restart
+# the server.
+#
+# Note that if the AOF file will be found to be corrupted in the middle
+# the server will still exit with an error. This option only applies when
+# Redis will try to read more data from the AOF file but not enough bytes
+# will be found.
+aof-load-truncated yes
+
+# When rewriting the AOF file, Redis is able to use an RDB preamble in the
+# AOF file for faster rewrites and recoveries. When this option is turned
+# on the rewritten AOF file is composed of two different stanzas:
+#
+#   [RDB file][AOF tail]
+#
+# When loading Redis recognizes that the AOF file starts with the "REDIS"
+# string and loads the prefixed RDB file, and continues loading the AOF
+# tail.
+#
+# This is currently turned off by default in order to avoid the surprise
+# of a format change, but will at some point be used as the default.
+aof-use-rdb-preamble no
+
+################################ LUA SCRIPTING  ###############################
+
+# Max execution time of a Lua script in milliseconds.
+#
+# If the maximum execution time is reached Redis will log that a script is
+# still in execution after the maximum allowed time and will start to
+# reply to queries with an error.
+#
+# When a long running script exceeds the maximum execution time only the
+# SCRIPT KILL and SHUTDOWN NOSAVE commands are available. The first can be
+# used to stop a script that did not yet called write commands. The second
+# is the only way to shut down the server in the case a write command was
+# already issued by the script but the user doesn't want to wait for the natural
+# termination of the script.
+#
+# Set it to 0 or a negative value for unlimited execution without warnings.
+lua-time-limit 5000
+
+################################ REDIS CLUSTER  ###############################
+#
+# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# WARNING EXPERIMENTAL: Redis Cluster is considered to be stable code, however
+# in order to mark it as "mature" we need to wait for a non trivial percentage
+# of users to deploy it in production.
+# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#
+# Normal Redis instances can't be part of a Redis Cluster; only nodes that are
+# started as cluster nodes can. In order to start a Redis instance as a
+# cluster node enable the cluster support uncommenting the following:
+#
+# cluster-enabled yes
+
+# Every cluster node has a cluster configuration file. This file is not
+# intended to be edited by hand. It is created and updated by Redis nodes.
+# Every Redis Cluster node requires a different cluster configuration file.
+# Make sure that instances running in the same system do not have
+# overlapping cluster configuration file names.
+#
+# cluster-config-file nodes-6379.conf
+
+# Cluster node timeout is the amount of milliseconds a node must be unreachable
+# for it to be considered in failure state.
+# Most other internal time limits are multiple of the node timeout.
+#
+# cluster-node-timeout 15000
+
+# A slave of a failing master will avoid to start a failover if its data
+# looks too old.
+#
+# There is no simple way for a slave to actually have an exact measure of
+# its "data age", so the following two checks are performed:
+#
+# 1) If there are multiple slaves able to failover, they exchange messages
+#    in order to try to give an advantage to the slave with the best
+#    replication offset (more data from the master processed).
+#    Slaves will try to get their rank by offset, and apply to the start
+#    of the failover a delay proportional to their rank.
+#
+# 2) Every single slave computes the time of the last interaction with
+#    its master. This can be the last ping or command received (if the master
+#    is still in the "connected" state), or the time that elapsed since the
+#    disconnection with the master (if the replication link is currently down).
+#    If the last interaction is too old, the slave will not try to failover
+#    at all.
+#
+# The point "2" can be tuned by user. Specifically a slave will not perform
+# the failover if, since the last interaction with the master, the time
+# elapsed is greater than:
+#
+#   (node-timeout * slave-validity-factor) + repl-ping-slave-period
+#
+# So for example if node-timeout is 30 seconds, and the slave-validity-factor
+# is 10, and assuming a default repl-ping-slave-period of 10 seconds, the
+# slave will not try to failover if it was not able to talk with the master
+# for longer than 310 seconds.
+#
+# A large slave-validity-factor may allow slaves with too old data to failover
+# a master, while a too small value may prevent the cluster from being able to
+# elect a slave at all.
+#
+# For maximum availability, it is possible to set the slave-validity-factor
+# to a value of 0, which means, that slaves will always try to failover the
+# master regardless of the last time they interacted with the master.
+# (However they'll always try to apply a delay proportional to their
+# offset rank).
+#
+# Zero is the only value able to guarantee that when all the partitions heal
+# the cluster will always be able to continue.
+#
+# cluster-slave-validity-factor 10
+
+# Cluster slaves are able to migrate to orphaned masters, that are masters
+# that are left without working slaves. This improves the cluster ability
+# to resist to failures as otherwise an orphaned master can't be failed over
+# in case of failure if it has no working slaves.
+#
+# Slaves migrate to orphaned masters only if there are still at least a
+# given number of other working slaves for their old master. This number
+# is the "migration barrier". A migration barrier of 1 means that a slave
+# will migrate only if there is at least 1 other working slave for its master
+# and so forth. It usually reflects the number of slaves you want for every
+# master in your cluster.
+#
+# Default is 1 (slaves migrate only if their masters remain with at least
+# one slave). To disable migration just set it to a very large value.
+# A value of 0 can be set but is useful only for debugging and dangerous
+# in production.
+#
+# cluster-migration-barrier 1
+
+# By default Redis Cluster nodes stop accepting queries if they detect there
+# is at least an hash slot uncovered (no available node is serving it).
+# This way if the cluster is partially down (for example a range of hash slots
+# are no longer covered) all the cluster becomes, eventually, unavailable.
+# It automatically returns available as soon as all the slots are covered again.
+#
+# However sometimes you want the subset of the cluster which is working,
+# to continue to accept queries for the part of the key space that is still
+# covered. In order to do so, just set the cluster-require-full-coverage
+# option to no.
+#
+# cluster-require-full-coverage yes
+
+# This option, when set to yes, prevents slaves from trying to failover its
+# master during master failures. However the master can still perform a
+# manual failover, if forced to do so.
+#
+# This is useful in different scenarios, especially in the case of multiple
+# data center operations, where we want one side to never be promoted if not
+# in the case of a total DC failure.
+#
+# cluster-slave-no-failover no
+
+# In order to setup your cluster make sure to read the documentation
+# available at http://redis.io web site.
+
+########################## CLUSTER DOCKER/NAT support  ########################
+
+# In certain deployments, Redis Cluster nodes address discovery fails, because
+# addresses are NAT-ted or because ports are forwarded (the typical case is
+# Docker and other containers).
+#
+# In order to make Redis Cluster working in such environments, a static
+# configuration where each node knows its public address is needed. The
+# following two options are used for this scope, and are:
+#
+# * cluster-announce-ip
+# * cluster-announce-port
+# * cluster-announce-bus-port
+#
+# Each instruct the node about its address, client port, and cluster message
+# bus port. The information is then published in the header of the bus packets
+# so that other nodes will be able to correctly map the address of the node
+# publishing the information.
+#
+# If the above options are not used, the normal Redis Cluster auto-detection
+# will be used instead.
+#
+# Note that when remapped, the bus port may not be at the fixed offset of
+# clients port + 10000, so you can specify any port and bus-port depending
+# on how they get remapped. If the bus-port is not set, a fixed offset of
+# 10000 will be used as usually.
+#
+# Example:
+#
+# cluster-announce-ip 10.1.1.5
+# cluster-announce-port 6379
+# cluster-announce-bus-port 6380
+
+################################## SLOW LOG ###################################
+
+# The Redis Slow Log is a system to log queries that exceeded a specified
+# execution time. The execution time does not include the I/O operations
+# like talking with the client, sending the reply and so forth,
+# but just the time needed to actually execute the command (this is the only
+# stage of command execution where the thread is blocked and can not serve
+# other requests in the meantime).
+#
+# You can configure the slow log with two parameters: one tells Redis
+# what is the execution time, in microseconds, to exceed in order for the
+# command to get logged, and the other parameter is the length of the
+# slow log. When a new command is logged the oldest one is removed from the
+# queue of logged commands.
+
+# The following time is expressed in microseconds, so 1000000 is equivalent
+# to one second. Note that a negative number disables the slow log, while
+# a value of zero forces the logging of every command.
+slowlog-log-slower-than 10000
+
+# There is no limit to this length. Just be aware that it will consume memory.
+# You can reclaim memory used by the slow log with SLOWLOG RESET.
+slowlog-max-len 128
+
+################################ LATENCY MONITOR ##############################
+
+# The Redis latency monitoring subsystem samples different operations
+# at runtime in order to collect data related to possible sources of
+# latency of a Redis instance.
+#
+# Via the LATENCY command this information is available to the user that can
+# print graphs and obtain reports.
+#
+# The system only logs operations that were performed in a time equal or
+# greater than the amount of milliseconds specified via the
+# latency-monitor-threshold configuration directive. When its value is set
+# to zero, the latency monitor is turned off.
+#
+# By default latency monitoring is disabled since it is mostly not needed
+# if you don't have latency issues, and collecting data has a performance
+# impact, that while very small, can be measured under big load. Latency
+# monitoring can easily be enabled at runtime using the command
+# "CONFIG SET latency-monitor-threshold &lt;milliseconds&gt;" if needed.
+latency-monitor-threshold 0
+
+############################# EVENT NOTIFICATION ##############################
+
+# Redis can notify Pub/Sub clients about events happening in the key space.
+# This feature is documented at http://redis.io/topics/notifications
+#
+# For instance if keyspace events notification is enabled, and a client
+# performs a DEL operation on key "foo" stored in the Database 0, two
+# messages will be published via Pub/Sub:
+#
+# PUBLISH __keyspace@0__:foo del
+# PUBLISH __keyevent@0__:del foo
+#
+# It is possible to select the events that Redis will notify among a set
+# of classes. Every class is identified by a single character:
+#
+#  K     Keyspace events, published with __keyspace@&lt;db&gt;__ prefix.
+#  E     Keyevent events, published with __keyevent@&lt;db&gt;__ prefix.
+#  g     Generic commands (non-type specific) like DEL, EXPIRE, RENAME, ...
+#  $     String commands
+#  l     List commands
+#  s     Set commands
+#  h     Hash commands
+#  z     Sorted set commands
+#  x     Expired events (events generated every time a key expires)
+#  e     Evicted events (events generated when a key is evicted for maxmemory)
+#  A     Alias for g$lshzxe, so that the "AKE" string means all the events.
+#
+#  The "notify-keyspace-events" takes as argument a string that is composed
+#  of zero or multiple characters. The empty string means that notifications
+#  are disabled.
+#
+#  Example: to enable list and generic events, from the point of view of the
+#           event name, use:
+#
+#  notify-keyspace-events Elg
+#
+#  Example 2: to get the stream of the expired keys subscribing to channel
+#             name __keyevent@0__:expired use:
+#
+#  notify-keyspace-events Ex
+#
+#  By default all notifications are disabled because most users don't need
+#  this feature and the feature has some overhead. Note that if you don't
+#  specify at least one of K or E, no events will be delivered.
+notify-keyspace-events ""
+
+############################### ADVANCED CONFIG ###############################
+
+# Hashes are encoded using a memory efficient data structure when they have a
+# small number of entries, and the biggest entry does not exceed a given
+# threshold. These thresholds can be configured using the following directives.
+hash-max-ziplist-entries 512
+hash-max-ziplist-value 64
+
+# Lists are also encoded in a special way to save a lot of space.
+# The number of entries allowed per internal list node can be specified
+# as a fixed maximum size or a maximum number of elements.
+# For a fixed maximum size, use -5 through -1, meaning:
+# -5: max size: 64 Kb  &lt;-- not recommended for normal workloads
+# -4: max size: 32 Kb  &lt;-- not recommended
+# -3: max size: 16 Kb  &lt;-- probably not recommended
+# -2: max size: 8 Kb   &lt;-- good
+# -1: max size: 4 Kb   &lt;-- good
+# Positive numbers mean store up to _exactly_ that number of elements
+# per list node.
+# The highest performing option is usually -2 (8 Kb size) or -1 (4 Kb size),
+# but if your use case is unique, adjust the settings as necessary.
+list-max-ziplist-size -2
+
+# Lists may also be compressed.
+# Compress depth is the number of quicklist ziplist nodes from *each* side of
+# the list to *exclude* from compression.  The head and tail of the list
+# are always uncompressed for fast push/pop operations.  Settings are:
+# 0: disable all list compression
+# 1: depth 1 means "don't start compressing until after 1 node into the list,
+#    going from either the head or tail"
+#    So: [head]-&gt;node-&gt;node-&gt;...-&gt;node-&gt;[tail]
+#    [head], [tail] will always be uncompressed; inner nodes will compress.
+# 2: [head]-&gt;[next]-&gt;node-&gt;node-&gt;...-&gt;node-&gt;[prev]-&gt;[tail]
+#    2 here means: don't compress head or head-&gt;next or tail-&gt;prev or tail,
+#    but compress all nodes between them.
+# 3: [head]-&gt;[next]-&gt;[next]-&gt;node-&gt;node-&gt;...-&gt;node-&gt;[prev]-&gt;[prev]-&gt;[tail]
+# etc.
+list-compress-depth 0
+
+# Sets have a special encoding in just one case: when a set is composed
+# of just strings that happen to be integers in radix 10 in the range
+# of 64 bit signed integers.
+# The following configuration setting sets the limit in the size of the
+# set in order to use this special memory saving encoding.
+set-max-intset-entries 512
+
+# Similarly to hashes and lists, sorted sets are also specially encoded in
+# order to save a lot of space. This encoding is only used when the length and
+# elements of a sorted set are below the following limits:
+zset-max-ziplist-entries 128
+zset-max-ziplist-value 64
+
+# HyperLogLog sparse representation bytes limit. The limit includes the
+# 16 bytes header. When an HyperLogLog using the sparse representation crosses
+# this limit, it is converted into the dense representation.
+#
+# A value greater than 16000 is totally useless, since at that point the
+# dense representation is more memory efficient.
+#
+# The suggested value is ~ 3000 in order to have the benefits of
+# the space efficient encoding without slowing down too much PFADD,
+# which is O(N) with the sparse encoding. The value can be raised to
+# ~ 10000 when CPU is not a concern, but space is, and the data set is
+# composed of many HyperLogLogs with cardinality in the 0 - 15000 range.
+hll-sparse-max-bytes 3000
+
+# Active rehashing uses 1 millisecond every 100 milliseconds of CPU time in
+# order to help rehashing the main Redis hash table (the one mapping top-level
+# keys to values). The hash table implementation Redis uses (see dict.c)
+# performs a lazy rehashing: the more operation you run into a hash table
+# that is rehashing, the more rehashing "steps" are performed, so if the
+# server is idle the rehashing is never complete and some more memory is used
+# by the hash table.
+#
+# The default is to use this millisecond 10 times every second in order to
+# actively rehash the main dictionaries, freeing memory when possible.
+#
+# If unsure:
+# use "activerehashing no" if you have hard latency requirements and it is
+# not a good thing in your environment that Redis can reply from time to time
+# to queries with 2 milliseconds delay.
+#
+# use "activerehashing yes" if you don't have such hard requirements but
+# want to free memory asap when possible.
+activerehashing yes
+
+# The client output buffer limits can be used to force disconnection of clients
+# that are not reading data from the server fast enough for some reason (a
+# common reason is that a Pub/Sub client can't consume messages as fast as the
+# publisher can produce them).
+#
+# The limit can be set differently for the three different classes of clients:
+#
+# normal -&gt; normal clients including MONITOR clients
+# slave  -&gt; slave clients
+# pubsub -&gt; clients subscribed to at least one pubsub channel or pattern
+#
+# The syntax of every client-output-buffer-limit directive is the following:
+#
+# client-output-buffer-limit &lt;class&gt; &lt;hard limit&gt; &lt;soft limit&gt; &lt;soft seconds&gt;
+#
+# A client is immediately disconnected once the hard limit is reached, or if
+# the soft limit is reached and remains reached for the specified number of
+# seconds (continuously).
+# So for instance if the hard limit is 32 megabytes and the soft limit is
+# 16 megabytes / 10 seconds, the client will get disconnected immediately
+# if the size of the output buffers reach 32 megabytes, but will also get
+# disconnected if the client reaches 16 megabytes and continuously overcomes
+# the limit for 10 seconds.
+#
+# By default normal clients are not limited because they don't receive data
+# without asking (in a push way), but just after a request, so only
+# asynchronous clients may create a scenario where data is requested faster
+# than it can read.
+#
+# Instead there is a default limit for pubsub and slave clients, since
+# subscribers and slaves receive data in a push fashion.
+#
+# Both the hard or the soft limit can be disabled by setting them to zero.
+client-output-buffer-limit normal 0 0 0
+client-output-buffer-limit slave 256mb 64mb 60
+client-output-buffer-limit pubsub 32mb 8mb 60
+
+# Client query buffers accumulate new commands. They are limited to a fixed
+# amount by default in order to avoid that a protocol desynchronization (for
+# instance due to a bug in the client) will lead to unbound memory usage in
+# the query buffer. However you can configure it here if you have very special
+# needs, such us huge multi/exec requests or alike.
+#
+# client-query-buffer-limit 1gb
+
+# In the Redis protocol, bulk requests, that are, elements representing single
+# strings, are normally limited ot 512 mb. However you can change this limit
+# here.
+#
+# proto-max-bulk-len 512mb
+
+# Redis calls an internal function to perform many background tasks, like
+# closing connections of clients in timeout, purging expired keys that are
+# never requested, and so forth.
+#
+# Not all tasks are performed with the same frequency, but Redis checks for
+# tasks to perform according to the specified "hz" value.
+#
+# By default "hz" is set to 10. Raising the value will use more CPU when
+# Redis is idle, but at the same time will make Redis more responsive when
+# there are many keys expiring at the same time, and timeouts may be
+# handled with more precision.
+#
+# The range is between 1 and 500, however a value over 100 is usually not
+# a good idea. Most users should use the default of 10 and raise this up to
+# 100 only in environments where very low latency is required.
+hz 10
+
+# When a child rewrites the AOF file, if the following option is enabled
+# the file will be fsync-ed every 32 MB of data generated. This is useful
+# in order to commit the file to the disk more incrementally and avoid
+# big latency spikes.
+aof-rewrite-incremental-fsync yes
+
+# Redis LFU eviction (see maxmemory setting) can be tuned. However it is a good
+# idea to start with the default settings and only change them after investigating
+# how to improve the performances and how the keys LFU change over time, which
+# is possible to inspect via the OBJECT FREQ command.
+#
+# There are two tunable parameters in the Redis LFU implementation: the
+# counter logarithm factor and the counter decay time. It is important to
+# understand what the two parameters mean before changing them.
+#
+# The LFU counter is just 8 bits per key, it's maximum value is 255, so Redis
+# uses a probabilistic increment with logarithmic behavior. Given the value
+# of the old counter, when a key is accessed, the counter is incremented in
+# this way:
+#
+# 1. A random number R between 0 and 1 is extracted.
+# 2. A probability P is calculated as 1/(old_value*lfu_log_factor+1).
+# 3. The counter is incremented only if R &lt; P.
+#
+# The default lfu-log-factor is 10. This is a table of how the frequency
+# counter changes with a different number of accesses with different
+# logarithmic factors:
+#
+# +--------+------------+------------+------------+------------+------------+
+# | factor | 100 hits   | 1000 hits  | 100K hits  | 1M hits    | 10M hits   |
+# +--------+------------+------------+------------+------------+------------+
+# | 0      | 104        | 255        | 255        | 255        | 255        |
+# +--------+------------+------------+------------+------------+------------+
+# | 1      | 18         | 49         | 255        | 255        | 255        |
+# +--------+------------+------------+------------+------------+------------+
+# | 10     | 10         | 18         | 142        | 255        | 255        |
+# +--------+------------+------------+------------+------------+------------+
+# | 100    | 8          | 11         | 49         | 143        | 255        |
+# +--------+------------+------------+------------+------------+------------+
+#
+# NOTE: The above table was obtained by running the following commands:
+#
+#   redis-benchmark -n 1000000 incr foo
+#   redis-cli object freq foo
+#
+# NOTE 2: The counter initial value is 5 in order to give new objects a chance
+# to accumulate hits.
+#
+# The counter decay time is the time, in minutes, that must elapse in order
+# for the key counter to be divided by two (or decremented if it has a value
+# less &lt;= 10).
+#
+# The default value for the lfu-decay-time is 1. A Special value of 0 means to
+# decay the counter every time it happens to be scanned.
+#
+# lfu-log-factor 10
+# lfu-decay-time 1
+
+########################### ACTIVE DEFRAGMENTATION #######################
+#
+# WARNING THIS FEATURE IS EXPERIMENTAL. However it was stress tested
+# even in production and manually tested by multiple engineers for some
+# time.
+#
+# What is active defragmentation?
+# -------------------------------
+#
+# Active (online) defragmentation allows a Redis server to compact the
+# spaces left between small allocations and deallocations of data in memory,
+# thus allowing to reclaim back memory.
+#
+# Fragmentation is a natural process that happens with every allocator (but
+# less so with Jemalloc, fortunately) and certain workloads. Normally a server
+# restart is needed in order to lower the fragmentation, or at least to flush
+# away all the data and create it again. However thanks to this feature
+# implemented by Oran Agra for Redis 4.0 this process can happen at runtime
+# in an "hot" way, while the server is running.
+#
+# Basically when the fragmentation is over a certain level (see the
+# configuration options below) Redis will start to create new copies of the
+# values in contiguous memory regions by exploiting certain specific Jemalloc
+# features (in order to understand if an allocation is causing fragmentation
+# and to allocate it in a better place), and at the same time, will release the
+# old copies of the data. This process, repeated incrementally for all the keys
+# will cause the fragmentation to drop back to normal values.
+#
+# Important things to understand:
+#
+# 1. This feature is disabled by default, and only works if you compiled Redis
+#    to use the copy of Jemalloc we ship with the source code of Redis.
+#    This is the default with Linux builds.
+#
+# 2. You never need to enable this feature if you don't have fragmentation
+#    issues.
+#
+# 3. Once you experience fragmentation, you can enable this feature when
+#    needed with the command "CONFIG SET activedefrag yes".
+#
+# The configuration parameters are able to fine tune the behavior of the
+# defragmentation process. If you are not sure about what they mean it is
+# a good idea to leave the defaults untouched.
+
+# Enabled active defragmentation
+# activedefrag yes
+
+# Minimum amount of fragmentation waste to start active defrag
+# active-defrag-ignore-bytes 100mb
+
+# Minimum percentage of fragmentation to start active defrag
+# active-defrag-threshold-lower 10
+
+# Maximum percentage of fragmentation at which we use maximum effort
+# active-defrag-threshold-upper 100
+
+# Minimal effort for defrag in CPU percentage
+# active-defrag-cycle-min 25
+
+# Maximal effort for defrag in CPU percentage
+# active-defrag-cycle-max 75
+
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org6ca6333" class="outline-3">
+<h3 id="org6ca6333">持久化</h3>
+<div class="outline-text-3" id="text-org6ca6333">
+</div>
+<div id="outline-container-orgddf2444" class="outline-4">
+<h4 id="orgddf2444">全量备份</h4>
+<div class="outline-text-4" id="text-orgddf2444">
+<p>
+试验BGSAVE命令和SAVE命令。
+加载dump.rdb。
+</p>
+</div>
+</div>
+<div id="outline-container-orgaaf09e4" class="outline-4">
+<h4 id="orgaaf09e4">AOF</h4>
+<div class="outline-text-4" id="text-orgaaf09e4">
+<p>
+使用AOF恢复。
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org92f74e1" class="outline-3">
+<h3 id="org92f74e1">安全</h3>
+<div class="outline-text-3" id="text-org92f74e1">
+<p>
+密码
+SSL
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orge4cdfd4" class="outline-2">
+<h2 id="orge4cdfd4">维护</h2>
+<div class="outline-text-2" id="text-orge4cdfd4">
+</div>
+<div id="outline-container-orgb220a61" class="outline-3">
+<h3 id="orgb220a61">复制</h3>
+</div>
+<div id="outline-container-org9b857b4" class="outline-3">
+<h3 id="org9b857b4">主从</h3>
+</div>
+<div id="outline-container-orge27c2cb" class="outline-3">
+<h3 id="orge27c2cb">检验文件</h3>
+</div>
+<div id="outline-container-org43507c4" class="outline-3">
+<h3 id="org43507c4">集群</h3>
+<div class="outline-text-3" id="text-org43507c4">
+<p>
+redis cluster
+</p>
+</div>
+</div>
+<div id="outline-container-org2225352" class="outline-3">
+<h3 id="org2225352">恢复</h3>
+</div>
+<div id="outline-container-orgb2d6e12" class="outline-3">
+<h3 id="orgb2d6e12">中间件</h3>
+</div>
+</div>
+
+<div id="outline-container-org7bdaed0" class="outline-2">
+<h2 id="org7bdaed0">应用</h2>
+<div class="outline-text-2" id="text-org7bdaed0">
+</div>
+<div id="outline-container-org6a8e228" class="outline-3">
+<h3 id="org6a8e228">Java</h3>
+</div>
+<div id="outline-container-org13e703e" class="outline-3">
+<h3 id="org13e703e">Python</h3>
+</div>
+<div id="outline-container-org4501202" class="outline-3">
+<h3 id="org4501202">Go</h3>
+</div>
+<div id="outline-container-org7c31cda" class="outline-3">
+<h3 id="org7c31cda">事务</h3>
+</div>
+<div id="outline-container-orga61bd18" class="outline-3">
+<h3 id="orga61bd18">分布式锁</h3>
+</div>
+<div id="outline-container-org47795b1" class="outline-3">
+<h3 id="org47795b1">文章投票</h3>
+</div>
+<div id="outline-container-org1ae2192" class="outline-3">
+<h3 id="org1ae2192">购物车</h3>
+</div>
+<div id="outline-container-org93accb4" class="outline-3">
+<h3 id="org93accb4">网页缓存</h3>
+</div>
+<div id="outline-container-org332086e" class="outline-3">
+<h3 id="org332086e">数据缓存</h3>
+</div>
+<div id="outline-container-org614d38c" class="outline-3">
+<h3 id="org614d38c">根据IP查找国家和城市</h3>
+<div class="outline-text-3" id="text-org614d38c">
+<p>
+GeoLiteCity
+</p>
+</div>
+</div>
+<div id="outline-container-org0def701" class="outline-3">
+<h3 id="org0def701">服务发现</h3>
+</div>
+<div id="outline-container-orgdf85f99" class="outline-3">
+<h3 id="orgdf85f99">自动补全</h3>
+</div>
+<div id="outline-container-org2072515" class="outline-3">
+<h3 id="org2072515">配置广播</h3>
+</div>
+<div id="outline-container-org0f92a28" class="outline-3">
+<h3 id="org0f92a28">时间线</h3>
+</div>
+<div id="outline-container-orgd6d2620" class="outline-3">
+<h3 id="orgd6d2620">索引</h3>
+</div>
+<div id="outline-container-orgf68b010" class="outline-3">
+<h3 id="orgf68b010">编写扩展</h3>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Created: 2019-09-23 周一 18:45</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

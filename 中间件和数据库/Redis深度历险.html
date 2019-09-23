@@ -1,0 +1,1042 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2019-09-23 周一 18:45 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Redis深度历险笔记</title>
+<meta name="generator" content="Org mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Redis深度历险笔记</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org3f730b3">基础</a>
+<ul>
+<li><a href="#org45479ef">Redis简介</a></li>
+<li><a href="#org2ff6e15">Redis基础数据结构</a>
+<ul>
+<li><a href="#orga7105a4">字符串</a></li>
+<li><a href="#orgd805ba6">列表</a></li>
+<li><a href="#orgbc7de6d">散列表</a></li>
+<li><a href="#org063deaf">集合</a></li>
+<li><a href="#org55ddc57">有序列表</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orgb2b460f">实践</a>
+<ul>
+<li><a href="#orgd0a7876">分布式锁</a></li>
+<li><a href="#orgaf16896">消息队列</a></li>
+<li><a href="#orge50a4fe">位图</a></li>
+<li><a href="#org187b4aa">HyperLogLog</a></li>
+<li><a href="#orgcfd21d9">Bloom过滤器</a></li>
+<li><a href="#orgd4244b5">地理信息</a></li>
+</ul>
+</li>
+<li><a href="#org0fed607">原理</a>
+<ul>
+<li><a href="#org6041135">线程IO模型</a></li>
+<li><a href="#org1edcaa3">通信协议</a></li>
+<li><a href="#org0dcf3bd">持久化</a></li>
+<li><a href="#org5ec3c35">管道</a></li>
+<li><a href="#org444374e">事务</a></li>
+<li><a href="#org3a51099">广播订阅</a></li>
+<li><a href="#orgbe9b562">小对象压缩</a></li>
+<li><a href="#org2e3992b">主从同步</a></li>
+</ul>
+</li>
+<li><a href="#orge243634">集群</a>
+<ul>
+<li><a href="#orgfb6bf31">哨兵</a></li>
+<li><a href="#org35d68f5">Codis</a></li>
+<li><a href="#orgaf5f8b0">Cluster</a></li>
+</ul>
+</li>
+<li><a href="#org66941c3">扩展</a>
+<ul>
+<li><a href="#orgebbda2a">stream</a></li>
+<li><a href="#org3e8558f">info指令</a></li>
+<li><a href="#org8b7b4d7">spiped</a></li>
+</ul>
+</li>
+<li><a href="#orgf74dad0">源码分析</a>
+<ul>
+<li><a href="#orgc9aa4b4">字符串</a></li>
+<li><a href="#orgf735a57">字典</a></li>
+<li><a href="#orgceb936a">Radix tree</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org3f730b3" class="outline-2">
+<h2 id="org3f730b3">基础</h2>
+<div class="outline-text-2" id="text-org3f730b3">
+</div>
+<div id="outline-container-org45479ef" class="outline-3">
+<h3 id="org45479ef">Redis简介</h3>
+<div class="outline-text-3" id="text-org45479ef">
+<p>
+Redis是Remote Dictionary Service的缩写。正如同名字描述的一样，Redis是一个远程键值对存储服务。在系统中，Redis通常作为缓存，起到降低数据库压力的作用。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org2ff6e15" class="outline-3">
+<h3 id="org2ff6e15">Redis基础数据结构</h3>
+<div class="outline-text-3" id="text-org2ff6e15">
+<p>
+Redis可以保存结构化的数据。Redis有5中基本数据结构：字符串（string）、列表（list）、集合（set）、散列表（hash）和有序集合（zset）。
+</p>
+</div>
+
+<div id="outline-container-orga7105a4" class="outline-4">
+<h4 id="orga7105a4">字符串</h4>
+<div class="outline-text-4" id="text-orga7105a4">
+<p>
+字符串是最基本的数据结构。在Redis中，字符串是可变长的。为了降低内存分配次数，提高性能，Redis为字符串保留一部分冗余容量。在容量耗尽后，重新分配容量，并将容量翻倍。如果容量超过1MB，每次扩容时只增加1MB容量。字符串的容量上限是512MB。
+</p>
+
+<p>
+下面是字符串相关的常用命令。
+</p>
+
+<p>
+设置字符串：
+</p>
+<div class="org-src-container">
+<pre class="src src-redis">set name1 Alice
+set name2 Bob
+mset email1 alice@mail.com email2 bob@mail.com
+setex name3 5 Charlie       # 等效于 set name3 Charlie; expire name3 5
+setnx name1 Ada             # 当name1不存在时设置
+</pre>
+</div>
+
+<p>
+获取字符串：
+</p>
+<div class="org-src-container">
+<pre class="src src-redis">get name1
+mget name1 email1
+</pre>
+</div>
+
+<p>
+删除键：
+</p>
+<div class="org-src-container">
+<pre class="src src-redis">del name1
+</pre>
+</div>
+
+<p>
+计数：
+</p>
+<div class="org-src-container">
+<pre class="src src-redis">set click_count 30
+incr click_count
+incrby click_count 100
+</pre>
+</div>
+
+
+<p>
+使用incr/incrby命令时要特别注意，如果键不是数值，redis会执行类型转换，转换成整数然后加1。比如：
+</p>
+<div class="org-src-container">
+<pre class="src src-redis">set value 1
+incr value            # value是2
+set value "rainbow"
+incr value            # value是1
+set value "123"
+incr value            # value是124
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgd805ba6" class="outline-4">
+<h4 id="orgd805ba6">列表</h4>
+<div class="outline-text-4" id="text-orgd805ba6">
+<p>
+列表是Redis提供的一个线性数据结构。列表在头部和尾部的插入删除操作速度很快，但是随机访问性能较差。下面是一些常用命令：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-redis">rpush books python java golang # 列表中的元素是python java golang
+llen books                     # 列表长度
+lpop books                     # 从左侧出队，python
+rpop books                     # 从右侧出队，golang
+rpush books python java golang 
+lindex books 1                 # 查找下标为1的元素，java
+lrange books 0 -1              # 查找所有元素
+ltrim books 1 -1               # 保留第二个元素到最后一个元素
+ltrim books -1 0               # 清空列表
+lrem books python 0            # 按值删除元素
+</pre>
+</div>
+
+<p>
+列表的命令中有一些涉及区间。Redis采用闭区间，的下标从0开始。-1下标表示最后一个元素，-2下标表示倒数第二个元素，以此类推。
+</p>
+
+<p>
+前面说到列表的随机访问性能较差，这个特点和链表相似。实际上，在Redis的底层实现中，列表使用了链表技术。但普通的双向链表不同，为了提高性能，链表上保存的数据不是一个单独的元素，而是一个局部的数组。这个局部数组叫做ziplist。列表就是很多个ziplist构成的双向链表，叫做quicklist。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgbc7de6d" class="outline-4">
+<h4 id="orgbc7de6d">散列表</h4>
+<div class="outline-text-4" id="text-orgbc7de6d">
+<p>
+Redis的rehash是通过构建副本的方式进行的。构建一个散列表副本，在查询时，同时查询两个散列表。同时通过定时任务，将原散列表中的记录逐步迁移到新副本中。
+</p>
+
+<p>
+下面是散列表常用的命令：
+</p>
+<div class="org-src-container">
+<pre class="src src-redis">hset bookshelf java "Thinking in Java"
+hset bookshelf golang "Concurrency in Go"
+hgetall bookshelf             # 读取全部值，按k1 v1 k2 v2 ... 顺序返回
+hlen bookshelf                # 散列表大小
+hget bookshelf java           # 读取散列表项
+hmset bookshelf java "Effective Java" python "Dive into Python" # 设置多个散列表项
+hset player#1 health 90
+hincrby player#1 health 10    # 增加
+hdel bookshelf java           # 删除
+hkeys bookshelf               # 获取键列表
+hvals bookshelf               # 获取值列表
+hexists books                 # 检查键是否存在
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org063deaf" class="outline-4">
+<h4 id="org063deaf">集合</h4>
+<div class="outline-text-4" id="text-org063deaf">
+<p>
+集合的操作有：
+</p>
+<div class="org-src-container">
+<pre class="src src-redis">sadd books python
+sadd books java golang        # 向集合加入元素
+smembers books                # 查看元素
+sismember books csharp        # 检查元素是否属于集合
+scard books                   # 集合长度
+spop books                    # 随机删除一个元素并返回
+sdiff books books2 books3     # 计算差集和
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org55ddc57" class="outline-4">
+<h4 id="org55ddc57">有序列表</h4>
+<div class="outline-text-4" id="text-org55ddc57">
+<p>
+有序列表（zset）是一个结合了优先队列和集合的数据结构。有序列表的元素是唯一的，同时每个元素具有一个评分（score），元素按照评分排列。
+</p>
+
+<p>
+有序列表的操作有：
+</p>
+<div class="org-src-container">
+<pre class="src src-redis">zadd books 9.0 "Thinking in Java"   # 向排序集合插入
+zrange books 0 -1 withscores        # 查看元素
+zrevrange books 0 -1                # 逆序查看
+zcard books                         # 集合大小
+zscore books "Java Concurrency"     # 查看评分
+zrank books "Java Concurrency"      # 查看排名
+zrangebyscore books 0 8.91          # 按评分区间查找
+zrangebyscore books -inf 8.91 withscores  # 按评分区间查找
+zrem books "Java Concurrency"       # 删除元素
+zincrby books 1.0 js                # 增加评分。
+</pre>
+</div>
+
+<p>
+在内部，有序列表通过跳表实现。有续集默认按照评分从小到达排列。
+</p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgb2b460f" class="outline-2">
+<h2 id="orgb2b460f">实践</h2>
+<div class="outline-text-2" id="text-orgb2b460f">
+</div>
+<div id="outline-container-orgd0a7876" class="outline-3">
+<h3 id="orgd0a7876">分布式锁</h3>
+<div class="outline-text-3" id="text-orgd0a7876">
+<p>
+Redis的set命令提供了一种语法：
+</p>
+<div class="org-src-container">
+<pre class="src src-redis">set lock#object_id true ex 5 nx
+</pre>
+</div>
+<p>
+上面语句的含义是：如果lock#object<sub>id不存在</sub>，新建lock#object<sub>id</sub>，并设置超时时间为5秒。这个命令是原子的，它使得redis可以作为分布式锁管理器来使用。如果命令返回OK，说明封锁成功。
+</p>
+
+<p>
+在使用redis作为分布式锁时有一点需要特别注意：在锁的释放上，应用程序和redis之间不是同步的。如果应用阻塞或崩溃，在redis键超时之后，其他进程就可以得到锁，这样无法保证临界区的互斥性。因此要使用redis作为分布式锁，必须保证：
+</p>
+
+<ul class="org-ul">
+<li>临界区代码的耗时不超过锁的超时时间。</li>
+<li>只有在“提交”时才能更新全局资源。</li>
+</ul>
+
+<p>
+此外，还需要考虑重入的情况。对于redis分布式锁，最好不要允许重入。可以设置一个本地变量isLockAccquired，当isLockAccquired为真时，禁止继续加锁。对于支持异常处理的编程语言，需要在发生异常后释放锁。异常处理是异步的，考虑下面的情况：
+</p>
+
+<ul class="org-ul">
+<li>进程A得到锁。</li>
+<li>进程A发生异常，进入异常处理流程。</li>
+<li>锁超时，被redis自动释放。</li>
+<li>进程B得到锁。</li>
+<li>进程A在处理异常时再次释放锁。</li>
+</ul>
+
+<p>
+这时进程B正在对一个没有锁保护的全局资源进行操作，这是非常危险的，可能导致更新丢失或者更严重的错误。为了避免这种情况，可以记录上锁的时间，在释放时检查。如果超过了锁的ttl，不再进行释放。
+</p>
+
+<p>
+命令set的参数中，和ex、nx类似的还有：
+</p>
+<div class="org-src-container">
+<pre class="src src-redis">px milliseconds 设置超时时间
+xx 仅当键存在时设置
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgaf16896" class="outline-3">
+<h3 id="orgaf16896">消息队列</h3>
+<div class="outline-text-3" id="text-orgaf16896">
+<p>
+Redis的列表（list）可以用作消息队里，用brpush/blpush入列，blpop/brpop出列。这4个命令和rpush等4个命令执行相同的操作，区别在于，带前缀b的命令是阻塞（blocking）的。使用阻塞命令不需要轮询，降低了CPU使用率。但是使用阻塞命令时，必须考虑到，如果长时间没有数据传输，redis服务器会关闭客户端连接，这时阻塞命令会抛出异常。
+</p>
+
+<p>
+如果消息队列需要支持发送延迟消息的功能，就涉及消息调度的工作。涉及调度的系统，最常用到的就是优先队列。前面提到过，redis的有序列表是优先队列和集合的结合，非常适合于执行调度一类的任务。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orge50a4fe" class="outline-3">
+<h3 id="orge50a4fe">位图</h3>
+<div class="outline-text-3" id="text-orge50a4fe">
+<p>
+对于从1开始的小规模的整数结合，位图是一种很好的表示方法。位图是一块连续的内存，第1位表示数字1，第2位表示数字2，以此类推。
+用位图表示集合时，哪个数字在集合中，就把对应的位设置为1。比如数字5<sub>10</sub> = 101<sub>2表示集合</sub>{1，3}。Redis没有提供位图数据结构，而是提供了一组位图操作。这些操作吧字符串当做位图来处理：
+</p>
+<div class="org-src-container">
+<pre class="src src-redis">bin(ord('h))          # 0b11010000
+setbit s 1 1          # 将s的内存第1位设置为1。
+getbit w 2            # 读取s的内存第2位。
+bitcount s            # 统计值为1的位数。
+bitpos s 0            # 第一个值为0的位。
+bitfield s get u4 0   # 从s的内存第0位开始取4位。
+bitfield s incrby u4 2 1 # 将从第2位开始的u4数值加1。
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org187b4aa" class="outline-3">
+<h3 id="org187b4aa">HyperLogLog</h3>
+<div class="outline-text-3" id="text-org187b4aa">
+<p>
+HyperLogLog是一个用于非精确计数的数据结构，从用法上看，和集合差不多：
+</p>
+<div class="org-src-container">
+<pre class="src src-redis">pfadd page#www.somewhere.com/123.html user#1   # 增加计数
+pfadd page#www.somewhere.com/123.html user#2
+pfcount page#www.somewhere.com/123.html        # 读取计数
+pfmerge ?
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgcfd21d9" class="outline-3">
+<h3 id="orgcfd21d9">Bloom过滤器</h3>
+<div class="outline-text-3" id="text-orgcfd21d9">
+<div class="org-src-container">
+<pre class="src src-redis">bf.add filter#1 user#1
+bf.exists filter#1 user#1
+bf.mexists filter#1 user#1 user#2
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgd4244b5" class="outline-3">
+<h3 id="orgd4244b5">地理信息</h3>
+<div class="outline-text-3" id="text-orgd4244b5">
+<div class="org-src-container">
+<pre class="src src-redis">geoadd company 1116.48105 39.996794 juejin
+godist company juejin ireader
+geopos company juejin 
+geohash company juejin
+georediusbymember company ireader 20 km count 3 asc
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org0fed607" class="outline-2">
+<h2 id="org0fed607">原理</h2>
+<div class="outline-text-2" id="text-org0fed607">
+</div>
+<div id="outline-container-org6041135" class="outline-3">
+<h3 id="org6041135">线程IO模型</h3>
+<div class="outline-text-3" id="text-org6041135">
+<p>
+Redis采用单进程单线程的方式运行。在处理多个客户端连接时，采用IO多路复用技术。Redis为每个客户端分配了请求队列，
+</p>
+</div>
+</div>
+
+<div id="outline-container-org1edcaa3" class="outline-3">
+<h3 id="org1edcaa3">通信协议</h3>
+<div class="outline-text-3" id="text-org1edcaa3">
+</div>
+</div>
+
+<div id="outline-container-org0dcf3bd" class="outline-3">
+<h3 id="org0dcf3bd">持久化</h3>
+<div class="outline-text-3" id="text-org0dcf3bd">
+<p>
+Redis支持两种方式的持久化：快照和AOF，二者的区别如下：
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">快照</td>
+<td class="org-left">AOF</td>
+</tr>
+
+<tr>
+<td class="org-left">全量备份</td>
+<td class="org-left">增量备份</td>
+</tr>
+
+<tr>
+<td class="org-left">记录二进制原始数据</td>
+<td class="org-left">记录数据修改指令文本</td>
+</tr>
+
+<tr>
+<td class="org-left">重启后可以直接使用</td>
+<td class="org-left">重启后需要重放指令</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+在建立快照时，Redis通过系统调用fork()建立一个新进程，新进程将数据写入磁盘。由于Redis的数据全部保存在内存中，子进程和父进程共享地址空间，因此子进程可以直接将内存数据写入磁盘。
+如果父进程中更新了数据，通过Linux提供的机制（页错误），系统会自动为父进程分配一个页。这个机制对父进程和子进程都是透明的。
+</p>
+
+<p>
+在开启AOF后，redis的修改指令都会首先记录到磁盘上然后才执行。在写磁盘时，默认情况下redis不会立即调用fsync，而是每间隔1秒调用一次。Redis提供了3中策略：用不fsync、每次fsync。
+</p>
+
+<p>
+长时间运行的redis实例，AOF可能会过长，导致恢复redis需要的时间非常长。
+并且AOF中会包含大量没有实际效果的日志，比如：
+</p>
+
+<ul class="org-ul">
+<li>set user1#name "Alie"</li>
+<li>set user1#name "Alice"</li>
+</ul>
+
+<p>
+Redis提供了bgrewriteaof指令进行AOF压缩。这个指令也会建立子进程。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org5ec3c35" class="outline-3">
+<h3 id="org5ec3c35">管道</h3>
+<div class="outline-text-3" id="text-org5ec3c35">
+<p>
+为了提高吞吐量，redis和客户端的通信采用异步方式，请求和应答通过队列保存。这样做可以提高传输效率，避免由于RTT导致吞吐量下降。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org444374e" class="outline-3">
+<h3 id="org444374e">事务</h3>
+<div class="outline-text-3" id="text-org444374e">
+<p>
+Redis提供了命令multi/exec/discard执行类型事务的操作：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-redis">multi
+incr bookcount
+incr bookcount
+exec
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org3a51099" class="outline-3">
+<h3 id="org3a51099">广播订阅</h3>
+<div class="outline-text-3" id="text-org3a51099">
+</div>
+</div>
+
+<div id="outline-container-orgbe9b562" class="outline-3">
+<h3 id="orgbe9b562">小对象压缩</h3>
+</div>
+
+<div id="outline-container-org2e3992b" class="outline-3">
+<h3 id="org2e3992b">主从同步</h3>
+</div>
+</div>
+
+<div id="outline-container-orge243634" class="outline-2">
+<h2 id="orge243634">集群</h2>
+<div class="outline-text-2" id="text-orge243634">
+</div>
+<div id="outline-container-orgfb6bf31" class="outline-3">
+<h3 id="orgfb6bf31">哨兵</h3>
+<div class="outline-text-3" id="text-orgfb6bf31">
+<p>
+对于需要高可用的场景，Redis提供了哨兵（sentinel）高可用方案。在这个方案中，一组redis实例组成主-从集群。
+客户端访问主节点，主节点将数据修改指令发送给从节点。哨兵承担了两个职责，监控和名字服务。哨兵监控各redis节点的健康状态，
+当主节点崩溃时，选择一个从节点作为新的主节点，并将恢复的redis实例重新加入集群。同时，
+哨兵还是一个名字服务器，客户端通过哨兵得到redis主节点，并使用这个实例。如果客户端和redis实例的连接断开，客户端需要重新从哨兵得到redis主节点。
+</p>
+
+<p>
+为了提高可用性，哨兵也不是单一的实例，而是由多实例组成的一个小集群。
+todo 哨兵如何达成一致？
+</p>
+
+<p>
+Redis的主从同步是异步的，因此可能出现消息丢失的情况。哨兵无法避免这一点。在时间中，可以通过限制主从延迟的方式，降低消息可能丢失的数量：
+</p>
+<div class="org-src-container">
+<pre class="src src-ini">min-slaves-to-write 1
+min-slaves-max-lag 10
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org35d68f5" class="outline-3">
+<h3 id="org35d68f5">Codis</h3>
+<div class="outline-text-3" id="text-org35d68f5">
+<p>
+Codis是一个Redis转发代理中间价。Codis使用redis协议，将数据按值分片，写入不同的redis实例。
+为了提高可用性，Codis允许同时运行多个实例。各个实例通过分布式中间件（zk或etcd）共享分片状态。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgaf5f8b0" class="outline-3">
+<h3 id="orgaf5f8b0">Cluster</h3>
+</div>
+</div>
+
+<div id="outline-container-org66941c3" class="outline-2">
+<h2 id="org66941c3">扩展</h2>
+<div class="outline-text-2" id="text-org66941c3">
+</div>
+<div id="outline-container-orgebbda2a" class="outline-3">
+<h3 id="orgebbda2a">stream</h3>
+</div>
+
+<div id="outline-container-org3e8558f" class="outline-3">
+<h3 id="org3e8558f">info指令</h3>
+</div>
+
+<div id="outline-container-org8b7b4d7" class="outline-3">
+<h3 id="org8b7b4d7">spiped</h3>
+</div>
+</div>
+
+
+<div id="outline-container-orgf74dad0" class="outline-2">
+<h2 id="orgf74dad0">源码分析</h2>
+<div class="outline-text-2" id="text-orgf74dad0">
+</div>
+<div id="outline-container-orgc9aa4b4" class="outline-3">
+<h3 id="orgc9aa4b4">字符串</h3>
+<div class="outline-text-3" id="text-orgc9aa4b4">
+<p>
+Redis中的字符串采用sdshdr8、sdshdr16、sdshdr32、sdshdr64这4个数据结构保存。它们的结构是一样的，差别在于len和alloc两个成员的位数不同。以sdshdr8为例：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #a020f0;">struct</span> <span style="color: #a020f0;">__attribute__</span> ((packed__)) <span style="color: #228b22;">sdshdr8</span> {
+    <span style="color: #228b22;">uint8_t</span> <span style="color: #a0522d;">len</span>;
+    <span style="color: #228b22;">uint8_t</span> <span style="color: #a0522d;">alloc</span>;
+    <span style="color: #228b22;">unsigned</span> <span style="color: #228b22;">char</span> <span style="color: #a0522d;">flags</span>;
+    <span style="color: #228b22;">char</span> <span style="color: #a0522d;">buf</span>[];
+}
+</pre>
+</div>
+
+<p>
+alloc是为字符串分配的空间，len是字符串的实际字节数。使用哪种类型，由redis根据字符串长度决定。
+在C语言里有一种习惯用法，对于可变长数据结构，将头部最后一个数据成员声明为char[]，然后将数据紧邻头部保存。这样做效率更高，使用也更方便。
+</p>
+
+
+<p>
+在Redis中也使用了这种方法。对于长度小于44字节（OBJ<sub>ENCODING</sub><sub>EMBSTR</sub><sub>SIZE</sub><sub>LIMIT</sub>，object.c）的字符串，redis将对象头、字符串头和字符串内容保存在一起。这样的字符串叫做内嵌字符串（embeded string）。
+为什么要求不超过44字节呢？Redis使用的内存分配器jemalloc以64字节为单位，而redis对象头占16字节（struct redisObject，server.h），sdshdr8头占4字节，剩余44字节空闲。
+</p>
+
+<p>
+分配字符串的空间函数是sds.c中的sdsMakeRoomFor。如果分配后的空间小于SDS<sub>MAX</sub><sub>PREALLOC</sub>，空间会翻倍。如果超过SDS<sub>MAX</sub><sub>PREALLOC</sub>，每次增加一个SDS<sub>MAX</sub><sub>PREALLOC</sub>。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgf735a57" class="outline-3">
+<h3 id="orgf735a57">字典</h3>
+<div class="outline-text-3" id="text-orgf735a57">
+<p>
+字典（dict）是redis内部一个重要的数据结构。Redis中的全部就都保存在一个字典里：
+</p>
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #b22222;">// </span><span style="color: #b22222;">server.h</span>
+<span style="color: #a020f0;">typedef</span> <span style="color: #a020f0;">struct</span> <span style="color: #228b22;">redisDB</span> {
+    <span style="color: #228b22;">dict</span> *<span style="color: #a0522d;">dict</span>;
+    <span style="color: #228b22;">dict</span> *<span style="color: #a0522d;">expires</span>;
+    <span style="color: #228b22;">dict</span> *<span style="color: #a0522d;">blocking_keys</span>;
+    <span style="color: #228b22;">dict</span> *<span style="color: #a0522d;">ready_keys</span>;
+    <span style="color: #228b22;">dict</span> *<span style="color: #a0522d;">watched_keys</span>;
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">...</span>
+} <span style="color: #228b22;">redisDB</span>;
+</pre>
+</div>
+
+<p>
+有序列表也使用字典将值和评分关联起来：
+</p>
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #b22222;">// </span><span style="color: #b22222;">server.h</span>
+<span style="color: #a020f0;">typedef</span> <span style="color: #a020f0;">struct</span> <span style="color: #228b22;">zset</span> {
+    <span style="color: #228b22;">dict</span> *<span style="color: #a0522d;">dict</span>;
+    <span style="color: #228b22;">zskiplist</span> *<span style="color: #a0522d;">zsl</span>;
+} <span style="color: #228b22;">zset</span>;
+</pre>
+</div>
+
+<p>
+dict结构体定义在dict.h中，定义如下：
+</p>
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #a020f0;">typedef</span> <span style="color: #a020f0;">struct</span> <span style="color: #228b22;">dict</span> {
+    <span style="color: #228b22;">dictType</span> *<span style="color: #a0522d;">type</span>;
+    <span style="color: #228b22;">void</span> *<span style="color: #a0522d;">privdata</span>;
+    <span style="color: #228b22;">dictht</span> <span style="color: #a0522d;">ht</span>[2];
+    <span style="color: #228b22;">long</span> <span style="color: #a0522d;">rehashidx</span>;
+    <span style="color: #228b22;">unsigned</span> <span style="color: #228b22;">long</span> <span style="color: #a0522d;">iterators</span>;
+} <span style="color: #228b22;">dict</span>;
+</pre>
+</div>
+
+<p>
+字典的数据保存在ht中，它是一个散列表，结构为：
+</p>
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #a020f0;">typedef</span> <span style="color: #a020f0;">struct</span> <span style="color: #228b22;">dictht</span> {
+    <span style="color: #228b22;">dictEntry</span> **<span style="color: #a0522d;">table</span>;
+    <span style="color: #228b22;">unsigned</span> <span style="color: #228b22;">long</span> <span style="color: #a0522d;">size</span>;
+    <span style="color: #228b22;">unsigned</span> <span style="color: #228b22;">long</span> <span style="color: #a0522d;">sizemark</span>;
+    <span style="color: #228b22;">unsigned</span> <span style="color: #228b22;">long</span> <span style="color: #a0522d;">used</span>;
+} <span style="color: #228b22;">dictht</span>;
+</pre>
+</div>
+
+<p>
+dictEntry是散列表项：
+</p>
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #a020f0;">typedef</span> <span style="color: #a020f0;">struct</span> <span style="color: #228b22;">dictEntry</span> {
+    <span style="color: #228b22;">void</span> *<span style="color: #a0522d;">key</span>;
+    <span style="color: #a020f0;">union</span> {
+        <span style="color: #228b22;">void</span> *<span style="color: #a0522d;">val</span>;
+        <span style="color: #228b22;">uint64_t</span> <span style="color: #a0522d;">u64</span>;
+        <span style="color: #228b22;">int64_t</span> <span style="color: #a0522d;">s64</span>;
+        <span style="color: #228b22;">double</span> <span style="color: #a0522d;">d</span>;
+    } <span style="color: #a0522d;">v</span>;
+    <span style="color: #a020f0;">struct</span> <span style="color: #228b22;">dictEntry</span> *<span style="color: #a0522d;">next</span>;
+} <span style="color: #228b22;">dictEntry</span>;
+</pre>
+</div>
+
+<p>
+字典的type字段是字典的类型，定义了字典操作，比如计算散列值等。Redis提供的字典类型有：
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">objectKeyPointerValueDictType</td>
+</tr>
+
+<tr>
+<td class="org-left">setDictType</td>
+</tr>
+
+<tr>
+<td class="org-left">zsetDictType</td>
+</tr>
+
+<tr>
+<td class="org-left">dbDictType</td>
+</tr>
+
+<tr>
+<td class="org-left">shaScriptObjectDictType</td>
+</tr>
+
+<tr>
+<td class="org-left">keyptrDictType</td>
+</tr>
+
+<tr>
+<td class="org-left">commandTableDictType</td>
+</tr>
+
+<tr>
+<td class="org-left">hashDictType</td>
+</tr>
+
+<tr>
+<td class="org-left">keylistDictType</td>
+</tr>
+
+<tr>
+<td class="org-left">clusterNodesDictType</td>
+</tr>
+
+<tr>
+<td class="org-left">clusterNodesBlackListDictType</td>
+</tr>
+
+<tr>
+<td class="org-left">modulesDictType</td>
+</tr>
+
+<tr>
+<td class="org-left">migrateCacheDictType</td>
+</tr>
+
+<tr>
+<td class="org-left">replScriptCacheDictType</td>
+</tr>
+
+<tr>
+<td class="org-left">BenchmarkDictType</td>
+</tr>
+
+<tr>
+<td class="org-left">latencyTimeSeriesDictType</td>
+</tr>
+
+<tr>
+<td class="org-left">moduleAPIDictType</td>
+</tr>
+
+<tr>
+<td class="org-left">instancesDictType</td>
+</tr>
+
+<tr>
+<td class="org-left">leaderVotesDictType</td>
+</tr>
+
+<tr>
+<td class="org-left">renamedCommandsDictType</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+我们可以看到，字典里有2个ht对象。这是为了进行渐进式散列而保留的。
+</p>
+
+<p>
+TODO dict.c:1888 dictRehash
+</p>
+
+<p>
+在redis中，集合是一类特殊的字典，它的值都是null。
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-orgceb936a" class="outline-3">
+<h3 id="orgceb936a">Radix tree</h3>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: 2019年02月25日</p>
+<p class="date">Created: 2019-09-23 周一 18:45</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

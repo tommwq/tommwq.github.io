@@ -1,0 +1,1490 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2019-09-23 周一 18:45 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>软件调试笔记</title>
+<meta name="generator" content="Org mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">软件调试笔记</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org00c894a">软件调试基础</a></li>
+<li><a href="#org73047c0">CPU基础</a></li>
+<li><a href="#org9fa8bdf">中断和异常</a></li>
+<li><a href="#org4206931">断点和单步执行</a></li>
+<li><a href="#org9ad2c94">分支记录和性能监视</a></li>
+<li><a href="#orgc833691">机器检查架构</a></li>
+<li><a href="#orgc69df5f">JTAG调试</a></li>
+<li><a href="#org82b2cdd">Windows概要</a></li>
+<li><a href="#org51ae5cf">用户态调试模型</a></li>
+<li><a href="#orgc0fe547">用户态调试过程</a></li>
+<li><a href="#org636aae9">中断和异常管理</a></li>
+<li><a href="#org283cee8">未处理异常和JIT调试</a></li>
+<li><a href="#org89c857a">硬错误和蓝屏</a></li>
+<li><a href="#org9df3c09">日志</a></li>
+<li><a href="#org4b930a7">事件追踪</a></li>
+<li><a href="#orgd635b83">Windows的验证机制</a></li>
+<li><a href="#org99e68d6">编译和编译期检查</a></li>
+<li><a href="#org6d72ccd">运行库和运行期检查</a></li>
+<li><a href="#org829c73d">栈和函数调用</a></li>
+<li><a href="#org3ef378a">堆和堆检查</a></li>
+<li><a href="#org905923e">异常处理代码的编译</a></li>
+<li><a href="#orgceae284">调试符号</a></li>
+<li><a href="#org8e13744">可调试性概览</a></li>
+<li><a href="#org9bdc269">可调试性的实现</a></li>
+<li><a href="#orgc8c945e">调试器概览</a></li>
+<li><a href="#orgb6c3b80">WinDBG及其实现</a></li>
+<li><a href="#orgcd797df">WinDBG用法详解</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org00c894a" class="outline-2">
+<h2 id="org00c894a">软件调试基础</h2>
+<div class="outline-text-2" id="text-org00c894a">
+<p>
+软件调试指侦测、定位、修复程序或硬件中的逻辑错误和语义错误。软件调试的基本步骤包括：
+</p>
+<ul class="org-ul">
+<li>重现故障。确认被调试系统中存在该问题。</li>
+<li>定位根源。确定表现和预期不一致的原因是行为错误（做错了）还是不行为错误（该做的没做）。</li>
+<li>探索和实现解决方案。</li>
+<li>验证方案。</li>
+</ul>
+
+<p>
+软件调试工作和硬件、操作系统、编译器、调试器有紧密的联系。顺利的完成软件调试任务，需要上述组件的支持。为了支持调试，x86 CPU在标志寄存器（FLAGS）中设置了TF（Trace Flag）标志位。当用户进行单步跟踪时，调试器设置TF位，CPU在执行完毕一条指令后，如果发现TF位被设置，会产生一个调试异常（INT 1），通知调试器。此外，x86还提供了断点异常（INT 3）。
+</p>
+
+
+<p>
+下面简单介绍一些常用的软件调试技术。
+</p>
+
+
+<ul class="org-ul">
+<li>断点（breakpoint）。断点是在指令序列的某个位置设定一个“陷阱”，当CPU执行到这个位置时启动调试器，让工程师进行分析和调试。根据断点设置的空间，断点可以分为：代码断点，当代码执行到此处时触发。数据断点，当程序访问此处的数据时触发。I/O断点，当程序访问指定I/O地址时触发。断点还有两个衍生的形式，一个是追踪点（tracepoint），当断点触发时，调试器打印提示信息和变量值，然后恢复程序执行。另一个叫条件断点（conditional breakpoint），调试器检查某个附加条件，如果条件满足，中断程序，否则恢复程序执行。</li>
+<li>单步执行（step by step）。让CPU一次执行一小部分指令，以观察这些指令对程序状态的影响。根据对“一小部分”的定义不同，又可以分为单步指令（一次执行一条指令）、单步源代码（一次执行一行源代码）、单步分支（一次执行一个分支）和单步任务（一次执行一个任务/线程）。</li>
+<li>日志/打印调试信息/事件追踪。在程序中输出信息，记录内部状态。</li>
+<li>转储文件。将故障发生时的系统状态记录下来，用于后续的分析。</li>
+<li>栈回溯。显示函数调用关系，帮助定位问题。</li>
+<li>反汇编。查看程序的指令。</li>
+<li>观察和修改数据。</li>
+</ul>
+
+<p>
+软件调试的主要工作对象是软件中的缺陷。在工作中，缺陷通常也被称作error、bug、fault、failure、defect等。下面对这些词汇进行一个简单的区分。failure（失败）描述的是软件行为的外在可见部分，即表现和症状。error（错误）是导致失败的内部原因（root cause）。fault通常指失败时系统的错误状态，bug和defect则是对错误和失败的通用说法。一个错误可能导致多个失败，也可能由于特定条件无法满足，而没有产生任何失败。
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org73047c0" class="outline-2">
+<h2 id="org73047c0">CPU基础</h2>
+<div class="outline-text-2" id="text-org73047c0">
+<p>
+CPU（Central Processing Unit）也叫做中央处理单元，它的工作可以分为三部分：从内存中读取指令（fetch instruments）、解码（decode）、执行（execute）。某类CPU能够支持的指令集合叫做指令集（Instrument Set）。
+</p>
+
+<p>
+根据所支持的指令集不同，计算机分为两类，一类是精简指令集计算机（RISC，Reduced Instrument Set Computer），它们选择较少的指令数量和简化的指令格式，典型代表有ARM。与之相反的另一类叫做复杂指令集计算机（CISC，Complex Instrument Set Computer），典型代表有x86。RISC和CISC的主要区别在于：
+</p>
+<ul class="org-ul">
+<li>指令长度。RISC的指令通常是等长的，而CISC是变长的。</li>
+<li>寻址方式。CISC的寻址方式更丰富。</li>
+<li>通用寄存器数量。RISC的通用寄存器数量较多。</li>
+<li>指令数量。RISC的指令数量较少。</li>
+<li>子程序调用。RISC通常使用寄存器传递参数，CISC则往往需要使用堆栈。</li>
+</ul>
+
+
+<p>
+寻址方式定义CPU得到操作数的方法，是指令集乃至CPU架构的关键特性。x86的寻址方式有
+</p>
+<ul class="org-ul">
+<li>立即寻址（immediate addressing）。操作数作为指令的一部分，在操作码之后。如mov al, 5对应的机器码为b0 05。</li>
+<li>寄存器寻址（register addressing）。操作数放在寄存器中，如mov ax, bx。</li>
+<li>直接寻址（direct addressing）。操作数的有效地址（Effective Address，EA）作为指令的一部分，如mov ax,[402128h]的机器码为b8 28 21 40 00。</li>
+<li>寄存器间接寻址（register indirect addressing）。操作数的地址保存在寄存器中，如add ax, [bx]。</li>
+</ul>
+
+<p>
+间接寻址为处理表格和字符串提供了方便，同时也使得指令变得复杂，解码和优化难度大。RISC通常只支持简单的寻址方式，不支持间接寻址，因此涉及内存访问的指令较少，有利于提高CPU执行流水线的效率。
+</p>
+
+
+<p>
+IA-32有8个通用寄存器（General Purpose Regisger，GRP），分别是EAX、EBX、ECX、EDX、ESP、EBP、ESI、EDI。ECX、ESI和EDI常用于循环和字符串操作。EBP和ESP用于维护堆栈，EBP指向栈顶，ESP指向栈底。在x86中，栈向下生长，因此压栈时ESP值会减小。
+</p>
+
+
+<p>
+IA-32有一个32位的标志位寄存器叫做EFLAGS。EFLAGS中各标志位的含义如下：
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">标志</td>
+<td class="org-left">标志</td>
+<td class="org-right">位</td>
+<td class="org-left">说明</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">CF</td>
+<td class="org-left">Carry Flag</td>
+<td class="org-right">0</td>
+<td class="org-left">进位或借位</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">PF</td>
+<td class="org-left">Parity Flag</td>
+<td class="org-right">2</td>
+<td class="org-left">计算结果最低字节中包含1的位数是否为偶数</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">AF</td>
+<td class="org-left">Adjust Flag</td>
+<td class="org-right">4</td>
+<td class="org-left">辅助进位标志</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">ZF</td>
+<td class="org-left">Zero Flag</td>
+<td class="org-right">6</td>
+<td class="org-left">计算结果是否为0</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">SF</td>
+<td class="org-left">Sign Flag</td>
+<td class="org-right">7</td>
+<td class="org-left">计算结果是否为负数</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">OF</td>
+<td class="org-left">Overflow Flag</td>
+<td class="org-right">11</td>
+<td class="org-left">计算结果是否溢出</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">DF</td>
+<td class="org-left">Direction Flag</td>
+<td class="org-right">10</td>
+<td class="org-left">方向标志。1表示ESI/EDI递减，0表示递增</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">TF</td>
+<td class="org-left">Trap Flag</td>
+<td class="org-right">8</td>
+<td class="org-left">陷阱标志</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">IF</td>
+<td class="org-left">Interrupt enable Flag</td>
+<td class="org-right">9</td>
+<td class="org-left">是否需要响应可屏蔽中断</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">IOPL</td>
+<td class="org-left">I/O Privilege Level</td>
+<td class="org-right">12和13</td>
+<td class="org-left">当前任务的I/O权限级别</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">NT</td>
+<td class="org-left">Nested Task Flag</td>
+<td class="org-right">14</td>
+<td class="org-left">任务嵌套标志</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">RF</td>
+<td class="org-left">Resume Flag</td>
+<td class="org-right">16</td>
+<td class="org-left">用于调试</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">VM</td>
+<td class="org-left">Virtual-8086 Mode Flag</td>
+<td class="org-right">17</td>
+<td class="org-left">是否启用虚拟8086模式</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">AC</td>
+<td class="org-left">Alignment Check Flag</td>
+<td class="org-right">18</td>
+<td class="org-left">内存对齐</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">VIF</td>
+<td class="org-left">Virtual Interrupt Flag</td>
+<td class="org-right">19</td>
+<td class="org-left">虚拟中断</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">VIP</td>
+<td class="org-left">Virtual Interrupt Pending Flag</td>
+<td class="org-right">20</td>
+<td class="org-left">虚拟中断</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">ID</td>
+<td class="org-left">Identification Flag</td>
+<td class="org-right">21</td>
+<td class="org-left">是否支持CPUID指令</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>
+IA-32有5个控制寄存器：CR0~CR4。CR0和CR4用于记录CPU工作模式，CR1保留未用，CR2记录页错误异常的线性地址，CR3记录页目录基地址和目录缓存标志，也叫做页目录基地址寄存器（Page-Directory Base Register，PDBR）。
+</p>
+
+
+<p>
+除了上面介绍的，IA-32还有如下寄存器：
+</p>
+<ul class="org-ul">
+<li>6个16位段寄存器：CS、DS、SS、ES、FS、GS。</li>
+<li>1个32位程序指针寄存器EIP（Extended Instruction Pointer），指向CPU要执行的下一条指令。</li>
+<li>8个128位向量运算寄存器：XMM0~XMM7，供SSE/SSE2/SSE3指令使用。</li>
+<li>8个80位FPU和MMX两用寄存器：ST0~ST7。在执行MMX指令时，其低64位作为MMX数据寄存器MM0~MM7。当执行x87浮点指令时，被用作浮点数据寄存器R0~R7。</li>
+<li>1个32位中断描述符表寄存器IDTR，记录IDT的基地址和边界。</li>
+<li>1个32位全局描述符寄存器GDTR，记录GDT的基地址和边界。</li>
+<li>1个16位局部描述符寄存器LDTR，记录LDT的基地址和边界。</li>
+<li>1个16位任务寄存器TR，用于存放选择任务状态段（Task State Segment，TSS）描述符的选择子。</li>
+<li>1个64位时间戳计数器（Time Stamp Counter，TSC）。每个时钟周期加1，重启时清零。</li>
+<li>内存类型范围寄存器（Memory Type and Range Register，MTRR）。定义各区域的内存类型。</li>
+<li>性能监视寄存器。</li>
+<li>调试寄存器：DR0~DR7。</li>
+</ul>
+
+<p>
+IA-32定义了4个特权级（Ring），从高到低分别表示为：0、1、2和3。IA-32支持分页（Paging），分页的目的是高效利用内存，将暂时不用的数据保存到磁盘上。当程序访问某个内存地址时，CPU根据段寄存器找到段描述符，将段的基地址加上偏移量得到线性地址。如果这个线性地址不在内存中，CPU产生一个页错误异常（#PF），操作系统捕获异常后，根据CR2寄存器中的线性地址，将内存页加载到物理内存中，然后退出中断处理程序，恢复程序执行。在将虚拟地址翻译为线性地址的过程中，需要使用页目录、页表等数据结构。页目录用来保存页目录表项（Page-Directory Entry，PDE）。每个页目录占4KB，每个PDE占4字节，一个页目录最多有1024个PDE。页表（page table）用来保存页表项（Page-Table Entry，PTE），每个页表栈4KB，每个PTE占4字节，一个页表同样最多包含1024个PTE。现在我们来观察将虚拟地址翻译为物理地址的过程（只考虑不启用PAE的情况）：
+</p>
+<ul class="org-ul">
+<li>确定页目录。通过寄存器CR3得到页目录的起始地址。</li>
+<li>确定页目录项。取线性地址的高10位作为索引，选取页目录中的一个项。</li>
+<li>确定页表。根据PDE中的页表基地址（高20位）确定页表。</li>
+<li>确定页表项。取线性地址的12-21位（共10位）作为索引，选择页表中的一个项。</li>
+<li>确定页。从页表项中得到页的基地址（页表项高20位）。</li>
+<li>确定物理地址。取线性地址的低12位作为页偏移，与上一步得到的页基地址相加，得到物理地址。</li>
+</ul>
+
+<p>
+地址的翻译工作由CPU内部的内存管理单元（Memory Management Unit，MMU）负责。为了减少翻译时访问页目录和页表的开销，CPU会把最近使用的页目录和页表缓存在内部专用的高速缓存中，叫做译址旁视缓存（Translation Lookaside Buffer，TLB）。
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org9fa8bdf" class="outline-2">
+<h2 id="org9fa8bdf">中断和异常</h2>
+<div class="outline-text-2" id="text-org9fa8bdf">
+<p>
+中断通常由外部设备触发，用来通知CPU外部事件，让CPU暂停当前任务，去执行对应的中断处理例程（Interrupt Service Routine，ISR）。如果CPU正在执行的任务非常重要，不希望被打断，CPU可以通过CLI（clear interrupt）指令清除IF标志位，让CPU不会因为可屏蔽中断（maskable interrupt）而切换任务。而对于不可屏蔽中断（Non-Maskable Interrupt，NMI），CPU必须立即处理。中断机制是CPU和外部设备之间的异步通信机制。有了中断，CPU不再需要轮询外部设备状态。在硬件层面，专门处理中断的芯片叫做中断控制器（Interrupt Controller）。中断控制器使用IRQ加上数字表示不同设备的中断。IRQ是Interrupt ReQuest的缩写。按照惯例，IRQ0分配给系统时钟，IRQ1分配给键盘，IRQ3和IRQ4分配给串口1和串口2，IRQ6分配给软盘驱动器。中断和异常都是异步事件。中断是外部设备触发的而，异常是CPU在执行指令时，检测到某些预定义条件而产生的。异常的来源主要有3中：程序错误，如除零；特殊指令，如int 3；机器检测异常（Machine Check Exception）。根据报告异常的方式，以及导致异常的指令是否可以安全的重新执行，IA-32把异常分为错误（fault）、陷阱（trap）和中止（abort）。错误类异常通常可以被纠正，然后程序可以恢复执行。在遇到错误异常时，CPU会将自己的状态恢复为该指令执行前的状态，然后执行异常处理程序。当异常处理程序返回后，CPU从导致错误异常的指令开始恢复执行。如果之前的错误没有被消除，CPU会再次产生异常。常见的错误类异常是页错误（page fault）。陷阱类异常通常用于调试程序，因此当异常处理例程返回后，CPU会从下一条指令开始执行。中止类异常是不可恢复的错误，CPU无法保证程序的状态，因此中止程序。
+</p>
+
+
+<p>
+系统中的每个中断和异常都被分配了一个整数编号，叫做向量号（vector number）。IA-32要求保留0-31号向量由CPU设计者使用，32-255号向量由操作系统和开发商使用。下表列出了已知的IA-32中断：
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-right">向量号</td>
+<td class="org-left">助记符</td>
+<td class="org-left">类型</td>
+<td class="org-left">描述</td>
+<td class="org-left">来源</td>
+</tr>
+
+<tr>
+<td class="org-right">0</td>
+<td class="org-left">#DE</td>
+<td class="org-left">错误</td>
+<td class="org-left">除零错误</td>
+<td class="org-left">div和idiv指令</td>
+</tr>
+
+<tr>
+<td class="org-right">1</td>
+<td class="org-left">#DB</td>
+<td class="org-left">错误/陷阱</td>
+<td class="org-left">调试异常</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">2</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">中断</td>
+<td class="org-left">NMI中断</td>
+<td class="org-left">不可屏蔽外部中断</td>
+</tr>
+
+<tr>
+<td class="org-right">3</td>
+<td class="org-left">#BP</td>
+<td class="org-left">陷阱</td>
+<td class="org-left">断点</td>
+<td class="org-left">int 3指令</td>
+</tr>
+
+<tr>
+<td class="org-right">4</td>
+<td class="org-left">#OF</td>
+<td class="org-left">陷阱</td>
+<td class="org-left">溢出</td>
+<td class="org-left">into指令</td>
+</tr>
+
+<tr>
+<td class="org-right">5</td>
+<td class="org-left">#BR</td>
+<td class="org-left">错误</td>
+<td class="org-left">数组越界</td>
+<td class="org-left">bound指令</td>
+</tr>
+
+<tr>
+<td class="org-right">6</td>
+<td class="org-left">#UD</td>
+<td class="org-left">错误</td>
+<td class="org-left">无效指令</td>
+<td class="org-left">UD2或其他保留指令</td>
+</tr>
+
+<tr>
+<td class="org-right">7</td>
+<td class="org-left">#NM</td>
+<td class="org-left">错误</td>
+<td class="org-left">数学协处理器不可用</td>
+<td class="org-left">浮点或WAIT/FWAIT指令</td>
+</tr>
+
+<tr>
+<td class="org-right">8</td>
+<td class="org-left">#DF</td>
+<td class="org-left">中止</td>
+<td class="org-left">双重错误（double fault）</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">9</td>
+<td class="org-left">#MF</td>
+<td class="org-left">错误</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">浮点指令</td>
+</tr>
+
+<tr>
+<td class="org-right">10</td>
+<td class="org-left">#TS</td>
+<td class="org-left">错误</td>
+<td class="org-left">无效TSS</td>
+<td class="org-left">任务切换或访问TSS</td>
+</tr>
+
+<tr>
+<td class="org-right">11</td>
+<td class="org-left">#NP</td>
+<td class="org-left">错误</td>
+<td class="org-left">段不存在</td>
+<td class="org-left">加载段寄存器或访问系统段</td>
+</tr>
+
+<tr>
+<td class="org-right">12</td>
+<td class="org-left">#SS</td>
+<td class="org-left">错误</td>
+<td class="org-left">栈段错误</td>
+<td class="org-left">栈操作或加载SS寄存器</td>
+</tr>
+
+<tr>
+<td class="org-right">13</td>
+<td class="org-left">#GP</td>
+<td class="org-left">错误</td>
+<td class="org-left">通用包含（GP）异常。</td>
+<td class="org-left">任何内存引用和保护性检查</td>
+</tr>
+
+<tr>
+<td class="org-right">14</td>
+<td class="org-left">#PF</td>
+<td class="org-left">错误</td>
+<td class="org-left">页错误</td>
+<td class="org-left">内存引用</td>
+</tr>
+
+<tr>
+<td class="org-right">15</td>
+<td class="org-left">保留</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">16</td>
+<td class="org-left">#MF</td>
+<td class="org-left">错误</td>
+<td class="org-left">浮点错误</td>
+<td class="org-left">浮点或WAIT/FWAIT指令</td>
+</tr>
+
+<tr>
+<td class="org-right">17</td>
+<td class="org-left">#AC</td>
+<td class="org-left">错误</td>
+<td class="org-left">对齐检查</td>
+<td class="org-left">对内存数据的引用</td>
+</tr>
+
+<tr>
+<td class="org-right">18</td>
+<td class="org-left">#MC</td>
+<td class="org-left">中止</td>
+<td class="org-left">机器检查（Machine Check）</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">19</td>
+<td class="org-left">#XF</td>
+<td class="org-left">错误</td>
+<td class="org-left">SIMD异常检查</td>
+<td class="org-left">SIMD指令</td>
+</tr>
+
+<tr>
+<td class="org-right">20-31</td>
+<td class="org-left">保留</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">32-255</td>
+<td class="org-left">用户定义中断</td>
+<td class="org-left">中断</td>
+<td class="org-left">可屏蔽中断</td>
+<td class="org-left">intr、int n指令或外部中断</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>
+对于应用程序中的异常，Windows提供了结构化异常处理机制，代码如下：
+</p>
+<div class="org-src-container">
+<pre class="src src-c">__try {
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">&#36923;&#36753;&#20195;&#30721;</span>
+} <span style="color: #0000ff;">__except</span>(<span style="color: #228b22;">GetExceptionCode</span>() == EXCEPTION_INT_DIVIDE_BY_ZERO ? EXCEPTION_CONTINUE_EXECUTION : EXCEPTION_CONTINUE_SEARCH) {
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">&#24322;&#24120;&#22788;&#29702;&#20195;&#30721;</span>
+}
+</pre>
+</div>
+
+<p>
+在_<sub>except中可以返回如下的3个值</sub>：
+</p>
+<ul class="org-ul">
+<li>EXCEPTION<sub>CONTINUE</sub><sub>SEARCH</sub>。本保护块无法处理该异常，继续寻找其他保护壳。</li>
+<li>EXCEPTION<sub>CONTINUE</sub><sub>EXECUTION</sub>。异常已经处理，继续执行程序。</li>
+<li>EXCEPTION<sub>EXECUTE</sub><sub>HANDLER</sub>。执行本保护块中的代码。</li>
+</ul>
+
+<p>
+在IA-32中，中断具有优先级。IA-32定义了10个优先级。
+</p>
+
+
+<p>
+中断和异常处理的核心数据结构是中断描述符表（Interrupt Descriptor Table，IDT）。IDT的地址记录在IDTR（IDT Register）寄存器，CPU通过IDT得到处理例程。IDTR有48位，高32位是IDT表基地址（线性地址），低16位是表边界。CPU加电后，IDTR的基地址设置为0x00000000，边界设置为0xFFFF。这个位置和8086 CPU的中断向量表（Interrupt Vector Table，IVT）一致。在实模式下，IVT表项的4个字节可以分为高2字节的中断例程段地址和低2字节的中断例程偏移地址。在实模式下，CPU响应中断和异常的步骤如下：
+</p>
+<ul class="org-ul">
+<li>将代码段寄存器CS和指令指针寄存器EIP的低16位压栈。</li>
+<li>将标志寄存器EFLAGS的低16位压栈。</li>
+<li>清除IF标志位，禁止其他中断。</li>
+<li>清除TF标志位，RF标志位和AC标志位。</li>
+<li>使用向量号n作为索引，在IVT表中找到对应项（n*4+IVT表基地址）。</li>
+<li>将表项中的段地址和偏移地址分别装入CS和EIP寄存器，执行中断处理例程。</li>
+<li>中断处理例程以iret指令结束。iret指令从堆栈中弹出之前保存的CS、IP和标志寄存器的值，返回执行被中断的程序。</li>
+</ul>
+
+<p>
+在保护模式下，中断和异常还需要考虑权限控制、任务切换等情况，处理步骤更加复杂。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org4206931" class="outline-2">
+<h2 id="org4206931">断点和单步执行</h2>
+<div class="outline-text-2" id="text-org4206931">
+<p>
+在Windows中，int 3的处理函数是内核函数KiTrap03（nt!KiTrap03）。对于一般的int N指令，指令码是0xCD后面跟着N的16进制值。由于int 3的特殊性，专门为它分配了0xCC的指令码。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org9ad2c94" class="outline-2">
+<h2 id="org9ad2c94">分支记录和性能监视</h2>
+<div class="outline-text-2" id="text-org9ad2c94">
+<p>
+从奔腾开始，IA-32增加了RDPMC指令用于读取性能计数器的值。性能计数器一共有两个，PerfCtl0和PerfCtl1，都是40位。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgc833691" class="outline-2">
+<h2 id="orgc833691">机器检查架构</h2>
+</div>
+
+<div id="outline-container-orgc69df5f" class="outline-2">
+<h2 id="orgc69df5f">JTAG调试</h2>
+</div>
+
+
+
+
+<div id="outline-container-org82b2cdd" class="outline-2">
+<h2 id="org82b2cdd">Windows概要</h2>
+<div class="outline-text-2" id="text-org82b2cdd">
+<p>
+对32位的x86系统，进程空间是4GB。默认情况下，Windows将低2GB（0x00000000-0x7FFFFFFF）分配为用户空间，高2GB（0x80000000-0xFFFFFFFF）为系统空间。在x64系统中，用户空间的范围是0x0000000000000000-0x07FFFFFFFFFFFFFF，大小为8TB，系统空间的范围是0xFFFF800000000000-0xFFFFFFFFFFFFFFFF，大小也是8TB。除了虚拟地址空间，每个Windows进程还拥有：
+</p>
+<ul class="org-ul">
+<li>全局唯一的进程ID，也叫做用户ID（Client ID），记为PID。</li>
+<li>可执行映像。</li>
+<li>1个或多个线程。</li>
+<li>1个位于内核空间中的进程执行块EPROCESS（executive process block）。记录进程的关键信息。</li>
+<li>1个位于内核空间中的对象句柄表。记录进程打开的内核对象。</li>
+<li>页目录基地址（DirBase）。</li>
+<li>1个位于用户空间中的进程环境块（process environment block，PEB）。</li>
+<li>1个访问权限令牌（access token）。表示进程的用户、安全组和优先级。</li>
+</ul>
+
+<p>
+按照下面的步骤可以观察一个进程的EPROCESS进程执行块：
+</p>
+<ul class="org-ul">
+<li>启动WinDBG，开始本地内核调试（点击菜单File &gt; Kernel Debug，选择Local）。</li>
+<li>列出全部进程。输入命令</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-windbg">!process 0 0 
+</pre>
+</div>
+<ul class="org-ul">
+<li>找到对应进程的信息。这些信息类似</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-text">PROCESS 86a7d030 SessionId: 0 Cid: 0f20 Peb: 7ffdf000 ParentCid: 0d98
+    DirBase: 1f350000 ObjectTable: e1771668 HandleCount: 33.
+    Image: notepate.exe
+</pre>
+</div>
+<p>
+其中PROCESS后面的数字就是进程执行块的地址。
+</p>
+<ul class="org-ul">
+<li>查看进程执行块</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-windbg">dt _EPROCESS 86a7d030
+</pre>
+</div>
+<ul class="org-ul">
+<li>或者使用下列命令查看进程执行块的关键信息：</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-windbg">!process 86a7d030
+</pre>
+</div>
+
+
+<p>
+上面的命令会输出一个Token字段，记录了进程的令牌。用!Token命令可以查看进程的权限：
+</p>
+<div class="org-src-container">
+<pre class="src src-windbg">!Token e24d8510
+</pre>
+</div>
+<p>
+或
+</p>
+<div class="org-src-container">
+<pre class="src src-windbg">dt nt!_TOKEN e24d8510
+</pre>
+</div>
+
+<p>
+进程执行块建立后，系统会将其映射到用户空间，叫做进程环境块：
+</p>
+<div class="org-src-container">
+<pre class="src src-windbg">.process 86a7d030
+!peb 7ffdf000
+</pre>
+</div>
+
+
+<p>
+Windows操作系统分为内核空间和用户空间。内核空间的优先级是0，用户空间是3。优先级（Ring）是代码或数据段的一个属性。当调用系统服务时，调用线程会从用户模式切换为内核模式再返回。这个过程也叫做上下文切换。线程的KTHREAD结构中会将上下文切换的次数记录在ContextSwitches字段中。上下文切换的方式有两种：软终端和快速系统调用（fast system call）。Windows使用int 2e进行上下文切换。以函数ReadFile()为例，它的执行过程如下：
+</p>
+<ul class="org-ul">
+<li>用户程序调用ReadFile()函数。</li>
+<li>调用Kernel32.dll中的Kernel32!ReadFile()。</li>
+<li>调用NtDll.dll中的Ntdll!NtReadFile()。</li>
+<li>产生int 2e中断，进入内核空间。</li>
+<li>调用NtOSKrnl.exe中的KiSystemService。</li>
+<li>调用NtOSKrnl.exe中的Nt!NtReadFile()。</li>
+<li>通过iret返回用户空间。</li>
+</ul>
+
+<p>
+在使用中断进行系统调用时，CPU必须首先从内存加载门描述符和段描述符，并进行权限检查。为了降低这些不必要的开销，奔腾II引入的SYSENTER/SYSEXIT指令，AMD K7引入了SYSCALL/SYSRETURN指令。采用这些新指令的调用叫做快速系统调用。为了进行快速系统调用，Windows首先要进行如下的准备工作：
+</p>
+<ul class="org-ul">
+<li>在全局描述符表GDT中建立4个段描述符，分别描述SYSENTER进入内核模式时使用的代码段和数据段，以及SYSEXIT返回用户模式时使用的代码段和数据段。</li>
+<li>设置用于系统调用的MSR寄存器，将SYSENTER<sub>EIP</sub><sub>MSR设置为KiFastCallEntry</sub>。并设置SYSENTER<sub>CS</sub><sub>MSR和SYSENTER</sub><sub>ESP</sub><sub>MSR</sub>。</li>
+<li>将一段名为SystemCallStub的代码复制到SharedUserData内存区。这个区域被映射到每个进程的地址空间中。</li>
+</ul>
+
+
+<p>
+Windows也支持内核函数主动调用用户函数（回调）。这种情况叫做逆向调用（reverse call）。逆向调用由内核函数KiCallUserMode发起，进入用户模式后，调用NtDll的KiUserCallbackDispatcher()函数，由后者调用实际的用户函数。调用完成后，触发int 2b异常，并由KiCallbackReturn()回到内核态。
+</p>
+
+
+<p>
+Windows内核可以从逻辑上大致分为：
+</p>
+<ul class="org-ul">
+<li>硬件抽象层（Hardware Abstraction Layer，HAL）。</li>
+<li>操作系统内核。负责线程调度、中断处理等。</li>
+<li>执行体（Executive）。提供基本服务，如内存管理、进程管理、I/O、网络和进程间通信等。</li>
+<li>内核态驱动程序。包括文件系统和图形显示驱动程序。</li>
+<li>Windows子系统驱动程序（Win32K.SYS）。包括USER和GDI两大部分。</li>
+<li>内核支持模块。包括调试用的KDCOM.DLL、启动阶段显示驱动BOOTVID.DLL、简称模块完好性的CI.DLL、支持日志的CLFS.SYS、支持WHEA的PSHED.DLL。</li>
+</ul>
+
+
+<p>
+在物理上，Windows的内核和执行体位于同一个而文件中，即所谓的NT内核文件。NT内核文件由多个版本，它们使用相同的源代码和不同的编译选项编译得到。
+</p>
+<ul class="org-ul">
+<li>NTOSKRNL.EXE。64位单处理器版本。</li>
+<li>NTKRNLPA.EXE。支持PAE的32位单处理器版本。</li>
+<li>NTOSKRNL.EXE。不支持PAE的32位单处理器版本。</li>
+<li>NTKRNLMP.EXE。64位多处理器版本。</li>
+<li>KTKRPAMP.EXE。支持PAE的32位多处理器版本。</li>
+<li>KTKRNLMP.EXE。不支持PAE的32位多处理器版本。</li>
+</ul>
+
+<p>
+在系统安装时，安装程序会根据系统配置，选择合适的版本，复制到C:\Windows\System32目录下，并重命名为NTOSKRNL.EXE。对于32位系统，还会复制对应的PAE版本，并重命名为NTKRNLPA.EXE。类似的，HAL也有多个版本：
+</p>
+<ul class="org-ul">
+<li>HAL.DLL。标准平台。</li>
+<li>HALACPI.DLL。符合ACPI的平台。</li>
+<li>HALAPIC.DLL。支持APIC（高级可编程中断控制器）的平台。</li>
+<li>HALAACPI.DLL。同时支持ACPI和APIC。</li>
+<li>HALMPS.DLL。多处理器。</li>
+<li>HALMACPI.DLL。支持ACPI的多处理器平台。</li>
+</ul>
+
+<p>
+Windows系统里面有两个比较特殊的进程：系统进程（system process）和空闲进程（idle process）。这两个进程没有磁盘映像，并且只有内核态部分。idle进程的进程ID是0，系统进程的进程ID是8（Windows 2000）或4（Windows XP及更高版本）。Windows系统在用户空间运行的进程有：
+</p>
+<ul class="org-ul">
+<li>会话管理器进程（SMSS.EXE）。这是第一个从映像文件创建的进程。它会加载和初始化Win32子系统的Win32K.SYS，创建CSRSS.EXE进程和登录进程WinLogon.EXE。</li>
+<li>Windows子系统服务进程（CSRSS.EXE）。负责为子系统中的各个进程提供服务。CSRSS是Client/Server Runtime Server Subsystem的缩写。</li>
+<li>登录进程（WinLogon.EXE）。负责用户登录和事务安全有关的事务。它会创建LSASS进程和系统服务管理进程（Services.exe）。</li>
+<li>本地安全和认证进程（LSASS.EXE）。负责用户身份验证。LSASS是Local Security Authority Subsystem Service的缩写。</li>
+<li>服务管理进程（Services.exe）。负责启动和管理系统服务程序。常见的服务有Spoolsv.exe打印机脱机服务、WmiPrvSE.exe WMI提供器管理服务、SvcHost.exe通用服务宿主程序等。</li>
+<li>OS/2子系统和POSIX子系统服务进程。只有在需要时启动。</li>
+<li>壳程序（shell）。默认为Explorer.exe。</li>
+</ul>
+
+<p>
+NTDLL.DLL是衔接内核空间与用户空间的桥梁。用户空间代码通过它来访问内核空间的服务。系统启动阶段，NTDLL.DLL被加载到内存中，并映射到所有用户进程的进程空间。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org51ae5cf" class="outline-2">
+<h2 id="org51ae5cf">用户态调试模型</h2>
+<div class="outline-text-2" id="text-org51ae5cf">
+<p>
+调试器进程（debugger process）是调试过程的主导者，它负责发起调试对话，处理调试事件，接收开发者下达的指令。被调试进程（debuggee process）是调试的目标。调试子系统将二者联系起来。调试子系统由3个部分组成：NTDLL中的支持函数、内核文件中的支持函数，以及调试子系统服务器。和Windows程序的消息驱动机制类似，用户态调试也是通过调试事件来驱动的。当调试器程序与被调试器进程建立调试会话后，调试器就进入的调试事件循环（debug event loop）：
+</p>
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #a020f0;">while</span> (WaitForDebugEvent(&amp;DbgEvt, INFINITE)) {
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">&#22788;&#29702;&#35843;&#35797;&#20107;&#20214;</span>
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">&#24674;&#22797;&#35843;&#35797;&#30446;&#26631;&#32487;&#32493;&#25191;&#34892;</span>
+    ContinueDebugEvent(DbgEvt.dwProcessId, DbgEvt.dwThreadId, dwContinueStatus);
+}
+</pre>
+</div>
+
+<p>
+调试子系统的内核部分有一系列函数采集调试事件，并保存在调试子系统的调试消息队列中。调试子系统和调试器使用一个内核对象同步。在内核中，调试事件也叫做调试消息，使用DBGKM<sub>EVENT结构体描述</sub>。调试事件（消息）一共有8种类型：
+</p>
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #a020f0;">typedef</span> <span style="color: #a020f0;">enum</span> <span style="color: #228b22;">_DBGKM_APINUMBER</span> {
+    <span style="color: #a0522d;">DbgKmExceptionApi</span> = 0, 
+    <span style="color: #a0522d;">DbgKmCreateThreadApi</span> = 1, 
+    <span style="color: #a0522d;">DbgKmCreateProcessApi</span> = 2,
+    <span style="color: #a0522d;">DbgKmExitThreadApi</span> = 3,
+    <span style="color: #a0522d;">DbgKmExitProcessApi</span> = 4,
+    <span style="color: #a0522d;">DbgKmLoadDllApi</span> = 5,
+    <span style="color: #a0522d;">DbgKmUnloadDllApi</span> = 6,
+    <span style="color: #a0522d;">DbgKmErrorReportApi</span> = 7,
+    <span style="color: #a0522d;">DbgKmMaxApiNumber</span> = 8,
+} <span style="color: #228b22;">DBGKM_APINUMBER</span>;
+</pre>
+</div>
+
+<p>
+进程管理器在创建一个新的用户态线程时，首先其分配内核对象、数据结构和栈空间。这时线程处于创建挂起（CREATE<sub>SUSPEND</sub>）状态。进程管理器通知环境子系统，子系统进行相应的设置和登记。然后进程管理器调用PspUserThreadStartup()，准备启动线程。PspUserThreadStartup()会调用调试子系统的内核函数DbgkCreateThread()，后者根据DebugPort判断线程所在进程是否是被调试进程，并通过UserTime判断是否是被调试进程中的首个线程。根据判断结果，向DebugPort发送DbgKmCreateProcessApi或DbgKmCreateThreadApi消息。类似的，在线程退出时，PspExitThread()会调用DbgkExitThread()或DbgkExitProcess()函数，向DebugPort发送DbgKmExitThreadApi或DbgKmExitProcessApi消息。动态链接库（Dynamic-link Library，DLL）是Windows使用最多的技术之一。当Windows使用LoadLibrary()或LoadLibraryEx()（或其他未公开接口）加载DLL时，如果发现该DLL已经加载到内存中，Windows会把对应的内存页面映射到目标进程空间。在进程退出或通过FreeLibrary()卸载DLL时，Windows会检查DLL的引用计数，只有在计数为0是才会真正从内存中卸载。Windows内核中的内存管理器（Memory Manager）负责DLL的映射和卸载。内存管理器使用Section对象（Windows子系统称为文件映射对象file mapping object）表示一个被多个进程共享的内存区域。负责映射和卸载的函数是NtMapViewOfSection和NtUnmapViewOfSection。这两个函数会调用DbgkMapViewOfSection和DbgkUnMapViewOfSection，发出DbgKmLoadDllApi和DbgKmUnloadDllApi消息。对于异常，内核中的分发函数KiDispatchException会调用DbgkForwardException，向DebugPort发出DbgKmException消息。
+</p>
+
+
+<p>
+从Windows XP开始，调试子系统运行在内核空间中。调试子系统提供了两个函数来控制被调试进程：DbgkpSuspendProcess和DbgkpResumeProcess。DebugObject内核对象用于用户态调试，它的结构如下：
+</p>
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #a020f0;">typedef</span> <span style="color: #a020f0;">struct</span> <span style="color: #228b22;">_DEBUG_OBJECT</span> {
+    <span style="color: #228b22;">KEVENT</span> <span style="color: #a0522d;">EventsPresent</span>;
+    <span style="color: #228b22;">FAST_MUTEX</span> <span style="color: #a0522d;">Mutex</span>;
+    <span style="color: #228b22;">LIST_ENTRY</span> <span style="color: #a0522d;">StateEventListEntry</span>; <span style="color: #b22222;">// </span><span style="color: #b22222;">&#35843;&#35797;&#28040;&#24687;&#38431;&#21015;</span>
+    <span style="color: #228b22;">ULONG</span> <span style="color: #a0522d;">Flags</span>;
+} <span style="color: #228b22;">DEBUG_OBJECT</span>, *<span style="color: #228b22;">PDEBUG_OBJECT</span>;
+</pre>
+</div>
+
+<p>
+在调试消息队列中，每个元素个格式为：
+</p>
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #a020f0;">typedef</span> <span style="color: #a020f0;">struct</span> <span style="color: #228b22;">_DBGKM_DEBUG_EVENT</span> {
+    <span style="color: #228b22;">LIST_ENTRY</span> <span style="color: #a0522d;">EventList</span>; <span style="color: #b22222;">// </span><span style="color: #b22222;">&#25351;&#21521;&#20804;&#24351;&#33410;&#28857;&#30340;&#38142;&#25509;</span>
+    <span style="color: #228b22;">KEVENT</span> <span style="color: #a0522d;">ContinueEvent</span>; <span style="color: #b22222;">// </span><span style="color: #b22222;">&#31561;&#24453;&#35843;&#35797;&#22120;&#22238;&#22797;</span>
+    <span style="color: #228b22;">CLIENT_ID</span> <span style="color: #a0522d;">ClientId</span>; <span style="color: #b22222;">// </span><span style="color: #b22222;">&#32447;&#31243;ID&#21644;&#36827;&#31243;ID</span>
+    <span style="color: #228b22;">PEPROCESS</span> <span style="color: #a0522d;">Process</span>; <span style="color: #b22222;">// </span><span style="color: #b22222;">EPROCESS&#32467;&#26500;</span>
+    <span style="color: #228b22;">PETHREAD</span> <span style="color: #a0522d;">Thread</span>; <span style="color: #b22222;">// </span><span style="color: #b22222;">ETHREAD&#32467;&#26500;</span>
+    <span style="color: #228b22;">NTSATUS</span> <span style="color: #a0522d;">Status</span>; <span style="color: #b22222;">// </span><span style="color: #b22222;">&#23545;&#35843;&#35797;&#20107;&#20214;&#30340;&#22788;&#29702;&#32467;&#26524;</span>
+    <span style="color: #228b22;">ULONG</span> <span style="color: #a0522d;">Flags</span>; <span style="color: #b22222;">// </span><span style="color: #b22222;">&#26631;&#24535;</span>
+    <span style="color: #228b22;">PETHREAD</span> <span style="color: #a0522d;">BackoutThread</span>;
+    <span style="color: #228b22;">DBGKM_MSG</span> <span style="color: #a0522d;">ApiMsg</span>; <span style="color: #b22222;">// </span><span style="color: #b22222;">&#35843;&#35797;&#20107;&#20214;&#35814;&#32454;&#20449;&#24687;</span>
+} <span style="color: #228b22;">DBGKM_DEBUG_EVENT</span>, *<span style="color: #228b22;">PDBGKM_DEBUG_EVENT</span>;
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgc0fe547" class="outline-2">
+<h2 id="orgc0fe547">用户态调试过程</h2>
+<div class="outline-text-2" id="text-orgc0fe547">
+<p>
+被调试进程和普通进程的差异主要有：
+</p>
+<ul class="org-ul">
+<li>进程执行块EPROCESS的DebugPort不为0。</li>
+<li>进程环境块PEB的BeingDebugged不为0。</li>
+<li>会响应调试热键（F12）。</li>
+</ul>
+
+
+<p>
+调试器和被调试程序之间的交互叫做调试会话（debugging session）。调试会话的建立有2中方式：调试器启动被调试程序和调试器附加到被调试程序。对于第一种情况，调试器调用CreateProcess函数（或CreateProcessAsUser、CreateProcessWithTokenW、CreateProcessWithLogonW等），在参数dwCreationFlags中设置DEBUG<sub>PROCESS或DEBUG</sub><sub>ONLY</sub><sub>THIS</sub><sub>PROCESS</sub>（不调试子进程）。这时，系统在执行NtCreateProcess/NtCreateProcessEx之前，首先调用DbgUiConnectDbg，让调试器与调试子系统连接。接着，在执行NtCreateProcess/NtCreateProcessEx时设置被调试程序的DebugPort。最后，当PspCreateProcess创建新进程的进程环境块时（调用MmCreatePeb），设置BeingDebugged为真。这三个步骤完成后，调试会话就建立起来了。当新线程在自己的上下文中进行初始化时，NtDll.dll中的LdrpInitializeProcess会检查BeingDebugged字段，并通过DbgBreakPoint触发一个断点异常，来通知调试器。这个断点叫做初始断点。对于已经启动的程序，通过DebugActiveProcess可以建立调试会话。这个过程也分为3步：首先通过DbgUiConnectToDbg将调试器和调试子系统连接起来，然后通过ProcessIdToHandle得到目标进程的句柄，接着调用NtDll.dll中的DbgUiDebugActiveProcess完成调试会话的建立。对于一些由系统或其他进程启动的程序，Windows提供了一种自动启动调试器的方法。在创建进程时，Windows会检查注册表项HKEY<sub>LOCAL</sub><sub>MACHINE\SOFTWARE\Microsoft\Windows</sub> NT\CurrentVersion\Image File Execution Options，如果里面存在以要执行映像名命名的子键，且子键下存在Debugger值，Windows会将当前命令行附加到Debugger值的后面，作为实际的启动命令。
+</p>
+
+
+<p>
+调试子系统向调试发送消息使用的是DbgkpSendApiMessage函数。这个函数在发出消息之前首先会调用DbgkpSuspendProcess，挂起被调试进程。在编程时，也可以让程序主动中断到调试器：
+</p>
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #a020f0;">if</span> (IsDebuggerPresent() &amp;&amp; SomeConditionMeet()) {
+    DebugBreak();
+}
+</pre>
+</div>
+
+<p>
+DebugBreak是Windows提供的编程接口，在x86上它等效于
+</p>
+<div class="org-src-container">
+<pre class="src src-c">_asm {<span style="color: #228b22;">int</span> 3};
+</pre>
+</div>
+
+<p>
+从Windows XP开始，Windows运行调试器和被调试程序分离，方法是调用函数DebugActiveProcessStop(DWORD dwProcessId)，这个函数必须在建立调试会话的线程中调用。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org636aae9" class="outline-2">
+<h2 id="org636aae9">中断和异常管理</h2>
+<div class="outline-text-2" id="text-org636aae9">
+<p>
+当中断发生时，CPU通过中断描述符表（Interrupt Descriptor Table，IDT）找到处理函数。IDT是一个线性表，有256个表项。在IA-32中，IDT表项栈8字节。IDT表的位置和界限由IDTR寄存器描述。IDTR有48位，高32位是IDT表的基地址，第16位是IDT表界限（limit）。LIDT指令和SIDT指令可以将数据在内存和IDT寄存器之间转移。Windows系统中，IDT的设置在实模式下完成。每个IDT表项是一个门描述符（gate descriptor）。这些门描述符可以分为3类：任务门（task gate）用于切换任务，中断门（interrupt gate）用于记录中断处理例程入口，陷阱门（trap gate）用户记录异常处理例程入口。
+</p>
+
+
+<p>
+Windows用来描述异常的结构是EXCEPTION<sub>RECORD</sub>：
+</p>
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #a020f0;">typedef</span> <span style="color: #a020f0;">struct</span> <span style="color: #228b22;">_EXCEPTION_RECORD</span> {
+    <span style="color: #228b22;">DWORD</span> <span style="color: #a0522d;">ExceptionCode</span>;
+    <span style="color: #228b22;">DWORD</span> <span style="color: #a0522d;">ExceptionFlags</span>;
+    <span style="color: #a020f0;">struct</span> <span style="color: #228b22;">_EXCEPTION_RECORD</span>* <span style="color: #a0522d;">ExceptionRecord</span>; <span style="color: #b22222;">// </span><span style="color: #b22222;">&#30456;&#20851;&#24322;&#24120;</span>
+    <span style="color: #228b22;">PVOID</span> <span style="color: #a0522d;">ExceptionAddress</span>; <span style="color: #b22222;">// </span><span style="color: #b22222;">&#24322;&#24120;&#21457;&#29983;&#22320;&#22336;</span>
+    <span style="color: #228b22;">DWORD</span> <span style="color: #a0522d;">NumberParameters</span>; <span style="color: #b22222;">// </span><span style="color: #b22222;">&#21442;&#25968;&#20010;&#25968;</span>
+    <span style="color: #228b22;">ULONG_PTR</span> <span style="color: #a0522d;">ExceptionInformation</span>[EXCEPTION_MAXIMUM_PARAMETERS]; <span style="color: #b22222;">// </span><span style="color: #b22222;">&#21442;&#25968;</span>
+} <span style="color: #228b22;">EXCEPTION_RECORD</span>, *<span style="color: #228b22;">PEXCEPTION_RECORD</span>;
+</pre>
+</div>
+
+<p>
+无论是软件异常还是硬件异常，Windows都使用KiDispatchException来分发。如果是内核态异常，在第一轮处理机会，KiDispatchException尝试通知内核调试器。如果内核调试器声明已经处理了异常（KiDebugRoutine返回TRUE），KiDispatchException停止继续分发。否则它调用RtlDispatchException，寻找已经注册的结构化异常处理器（SEH）。对于用户态异常，KiDispatchException也会首先寻找内核调试器。不过通常内核调试器不处理用户态异常，因此KiDispatchException需要寻找用户态调试器。函数DbgkForwardException负责这个工作，并在需要时，调用DbgkpSendApiMessage通知调试器。如果调试器无法处理该异常，KiDispatchException会切换到用户态然后返回。线程返回用户态后，会从KiUserExceptionDispatcher函数开始执行，接着通过RtlDispatchException来寻找SEH。
+</p>
+
+
+<p>
+为了方便系统和程序代码对异常的处理，Windows定义了一套异常处理机制，叫做结构化异常处理（Structured Exception Handling，SEH）。SEH提供了两个功能：终结处理（Termination Handling）保证终结处理块可以得到执行，异常处理（Exception Handling）用于接收和处理被保护块中的异常。终结处理的语法如下：
+</p>
+<div class="org-src-container">
+<pre class="src src-c">__try {
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">guarded body</span>
+} __finally {
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">release resources</span>
+}
+</pre>
+</div>
+<p>
+除非被保护块中的代码终止了当前进程，终结处理块一定会执行。SEH异常处理的语法如下：
+</p>
+<div class="org-src-container">
+<pre class="src src-c">__try {
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">guarded body</span>
+} <span style="color: #0000ff;">__except</span> (&#36807;&#28388;&#34920;&#36798;&#24335;) {
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">exception-handling block</span>
+}
+</pre>
+</div>
+<p>
+过滤表达式可以是如下的值：
+</p>
+<ul class="org-ul">
+<li>EXCEPTION<sub>CONTINUE</sub><sub>SEARCH</sub>。本保护块无法处理该异常，继续寻找其他保护壳。</li>
+<li>EXCEPTION<sub>CONTINUE</sub><sub>EXECUTION</sub>。异常已经处理，继续执行程序。</li>
+<li>EXCEPTION<sub>EXECUTE</sub><sub>HANDLER</sub>。执行本保护块中的代码。</li>
+</ul>
+
+<p>
+为了简化异常处理逻辑的开发，MSVC提供了两个宏：
+</p>
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #228b22;">DWORD</span> <span style="color: #0000ff;">GetExceptionCode</span>(); <span style="color: #b22222;">// </span><span style="color: #b22222;">&#36820;&#22238;&#24322;&#24120;&#20195;&#30721;&#12290;&#21482;&#33021;&#22312;&#36807;&#28388;&#34920;&#36798;&#24335;&#25110;&#24322;&#24120;&#22788;&#29702;&#22359;&#20013;&#20351;&#29992;&#12290;</span>
+<span style="color: #228b22;">LPEXCEPTION_POINTERS</span> <span style="color: #0000ff;">GetExceptionInfo</span>(); <span style="color: #b22222;">// </span><span style="color: #b22222;">&#24471;&#21040;&#24322;&#24120;&#32467;&#26500;</span>
+
+<span style="color: #a020f0;">typedef</span> <span style="color: #a020f0;">struct</span> <span style="color: #228b22;">_EXCEPTION_POINTERS</span> {
+    <span style="color: #228b22;">PEXCEPTION_RECORD</span> <span style="color: #a0522d;">ExceptionRecord</span>;
+    <span style="color: #228b22;">PCONTEXT</span> <span style="color: #a0522d;">ContextRecord</span>;
+} <span style="color: #228b22;">EXCEPTION_POINTERS</span>, *<span style="color: #228b22;">PEXCEPTION_POINTERS</span>;
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org283cee8" class="outline-2">
+<h2 id="org283cee8">未处理异常和JIT调试</h2>
+<div class="outline-text-2" id="text-org283cee8">
+<p>
+UnhandledExceptionFilter
+</p>
+</div>
+</div>
+
+<div id="outline-container-org89c857a" class="outline-2">
+<h2 id="org89c857a">硬错误和蓝屏</h2>
+<div class="outline-text-2" id="text-org89c857a">
+<p>
+一套好的错误处理方案应当考虑以下3个方面：即时提示、永久记录和自动报告。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org9df3c09" class="outline-2">
+<h2 id="org9df3c09">日志</h2>
+<div class="outline-text-2" id="text-org9df3c09">
+<p>
+Windows提供了两套日志机制，CLFS（Common Log File System）和Elf（Event Log File）。通常一条日志要包含入校的要素：
+</p>
+<ul class="org-ul">
+<li>时间。至少是分钟级别。</li>
+<li>地点。如机器名、进程ID、线程ID等。</li>
+<li>主体或来源。如服务名、模块名、类名或函数名。</li>
+<li>事件。发生了什么。</li>
+<li>类型或严重程度。至少分为信息（information）、警告（warning）和错误（error）。</li>
+</ul>
+
+<p>
+此外，日志机制还需要考虑：
+</p>
+<ul class="org-ul">
+<li>容量。存储多久的日志，是否要压缩？</li>
+<li>阅读。使用文本还是二进制记录日志？如何阅读日志？</li>
+<li>易失性。如果程序发生故障，如何保证日志不会丢失？</li>
+<li>安全性。是否允许所有人或程序读取日志内容？</li>
+<li>并发控制。多个线程同时写日志时，如何保证日志正确？</li>
+<li>性能。如何避免日志导致应用程序性能降低？</li>
+</ul>
+
+<p>
+Windows将日志分为3类，应用程序（application）日志保存在AppEvent.Evt中，安全（security）日志保存在SecEvent.evt中，系统（system）日志保存在SysEvent.evt中。这些日志文件都位于存储注册表文件和配置信息的%SystemRoot%\SYSTEM32\CONFIG目录。从Windows Vista开始，Windows增加了HardwareEvent和DFS Replication等类别的日志，保存在%SystemRoot%\SYSTEM32\winevt\Logs目录，并将后缀名改为evtx。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org4b930a7" class="outline-2">
+<h2 id="org4b930a7">事件追踪</h2>
+</div>
+
+<div id="outline-container-orgd635b83" class="outline-2">
+<h2 id="orgd635b83">Windows的验证机制</h2>
+</div>
+
+<div id="outline-container-org99e68d6" class="outline-2">
+<h2 id="org99e68d6">编译和编译期检查</h2>
+</div>
+<div id="outline-container-org6d72ccd" class="outline-2">
+<h2 id="org6d72ccd">运行库和运行期检查</h2>
+</div>
+
+<div id="outline-container-org829c73d" class="outline-2">
+<h2 id="org829c73d">栈和函数调用</h2>
+<div class="outline-text-2" id="text-org829c73d">
+<p>
+在x86系统上，栈向低地址方向增长，压栈会导致ESP的值减小，弹栈会让ESP的值增加。栈的信息保存在任务状态段TSS中。每个普通的Windows线程由2个栈，一个是内核模式下使用的，叫做内核台栈（kernel-mode stack），另一个是用户态下使用的，叫做用户态栈（user-mode stack）。跨越特权代码段的调用通常通过调用门（call gate）完成。
+</p>
+
+
+<p>
+函数参数传递通常需要通过栈来完成，上层函数的返回地址也保存在栈中。对于如何使用和清理栈，上层函数和子程序必须采用相同的方式。这种方式叫做调用约定（call convention）。调用约定规定了参数传递方式和由谁负责栈平衡。在x86系统上，常用的调用约定有
+</p>
+<ul class="org-ul">
+<li>C调用约定（_<sub>cdecl</sub>）。参数从右到左依次压栈，caller负责栈平衡。</li>
+<li>标准调用约定（_<sub>stdcall</sub>）。参数从右到左依次压栈，callee负责栈平衡。</li>
+<li>快速调用约定（_<sub>fastcall</sub>）。前两个不超过32位的参数通过寄存器ECX和EDX传递，其他参数通过栈传递。callee清理堆栈。</li>
+<li>this调用约定。C++的类成员函数默认使用这种调用约定，this指针被放入ECX寄存器，caller负责清理栈。如果使用了可变参数函数，编译器会自动改为C调用约定。</li>
+<li>x86调用约定。x86使用RCX、RDX、R8和R9传递64位或更短的整数（含指针）参数，使用XMM0到XMM3传递浮点数参数，并要求caller清理栈。</li>
+</ul>
+
+<p>
+对于返回值，通常使用EAX传递。如果返回值超过4字节小于8字节，EDX会被用来存放高位数据。对于结构体，会将地址通过EAX传递。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org3ef378a" class="outline-2">
+<h2 id="org3ef378a">堆和堆检查</h2>
+<div class="outline-text-2" id="text-org3ef378a">
+<p>
+应用程序的内存需求是零散和频繁的，如果每次都向内核中的内存管理器发出请求，系统性能会受到影响。因此内存管理器（Memory Manager）将一块较大的内存委托给堆管理器（Heap Manager），后者将其分割成大小不同的块来满足应用程序的需要。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org905923e" class="outline-2">
+<h2 id="org905923e">异常处理代码的编译</h2>
+</div>
+
+<div id="outline-container-orgceae284" class="outline-2">
+<h2 id="orgceae284">调试符号</h2>
+</div>
+
+<div id="outline-container-org8e13744" class="outline-2">
+<h2 id="org8e13744">可调试性概览</h2>
+<div class="outline-text-2" id="text-org8e13744">
+<ul class="org-ul">
+<li>最短距离原则。使错误检查代码距离失败操作的距离最短。</li>
+<li>最小范围原则。使错误报告或调试信息所能定位到的范围尽可能小。</li>
+<li>立即终止原则。当检测到严重错误时，使程序立刻终止并报告第一现场的信息。</li>
+<li>可追溯原则。使代码的执行轨迹和数据的变化过程可以追溯。</li>
+<li>可控制原则。通过简单的方式就可以控制程序的执行轨迹。</li>
+<li>可重复原则。使程序的行为可以被简单的重复。</li>
+<li>可观察原则。使软件的特征和内部状态可以被方便的观察。</li>
+<li>可辨识原则。可以简单的辨识出每个模块乃至类或函数的版本。</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org9bdc269" class="outline-2">
+<h2 id="org9bdc269">可调试性的实现</h2>
+</div>
+<div id="outline-container-orgc8c945e" class="outline-2">
+<h2 id="orgc8c945e">调试器概览</h2>
+<div class="outline-text-2" id="text-orgc8c945e">
+<p>
+调试器读写被调试进程寄存器值的时候，实际上访问的是被调试进程上下文结构（context）中的数据。在被调试进行恢复运行时，这些数据被写入寄存器。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgb6c3b80" class="outline-2">
+<h2 id="orgb6c3b80">WinDBG及其实现</h2>
+</div>
+
+<div id="outline-container-orgcd797df" class="outline-2">
+<h2 id="orgcd797df">WinDBG用法详解</h2>
+<div class="outline-text-2" id="text-orgcd797df">
+<p>
+常用命令：
+</p>
+<ul class="org-ul">
+<li>控制调试目标执行。g恢复运行。t跟踪执行。p单步执行。wt追踪监视。</li>
+<li>控制寄存器。r编辑寄存器。rdmsr/wrmsr读写MSR寄存器。rm设置寄存器显示掩码。</li>
+<li>控制IO端口。ib/iw/id/ob/ow/od读写I/O端口。</li>
+<li>内存编辑。d/e/s观察、编辑和搜索内存。</li>
+<li>查看堆栈。k查看堆栈。</li>
+<li>维护断点。bp软件断点。ba硬件断点。bl列出断点。bc/bd/be清除、禁止、重新启用断点。</li>
+<li>显示和控制线程。~显示和控制线程。</li>
+<li>显示进程。l显示进程。</li>
+<li>评估表达式。?评估表达式。??评估C++表达式。</li>
+<li>汇编。a汇编。u反汇编。</li>
+<li>段选择子。dg段选择子。</li>
+<li>执行命令。$执行命令。</li>
+<li>检查符号。x检查符号。</li>
+<li>控制和显示源代码。ls控制和显示源代码。</li>
+<li>结束调试会话。q结束调试会话。qd结束调试会话并分离。qq结束远程调试。</li>
+</ul>
+
+<p>
+元命令
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">.symopt</td>
+<td class="org-left">符号选项</td>
+</tr>
+
+<tr>
+<td class="org-left">.sympath .symfix</td>
+<td class="org-left">符号路径</td>
+</tr>
+
+<tr>
+<td class="org-left">.srcpath .srcnoise .srcfix</td>
+<td class="org-left">源代码路径</td>
+</tr>
+
+<tr>
+<td class="org-left">.exepath</td>
+<td class="org-left">可执行文件路径</td>
+</tr>
+
+<tr>
+<td class="org-left">.asm</td>
+<td class="org-left">反汇编选项</td>
+</tr>
+
+<tr>
+<td class="org-left">.expr</td>
+<td class="org-left">评估表达式选项</td>
+</tr>
+
+<tr>
+<td class="org-left">.restart</td>
+<td class="org-left">重启调试目标</td>
+</tr>
+
+<tr>
+<td class="org-left">.abandon</td>
+<td class="org-left">放弃用户态调试进程</td>
+</tr>
+
+<tr>
+<td class="org-left">.create</td>
+<td class="org-left">创建新进程</td>
+</tr>
+
+<tr>
+<td class="org-left">.attach</td>
+<td class="org-left">附加到进程</td>
+</tr>
+
+<tr>
+<td class="org-left">.opendump</td>
+<td class="org-left">打开转储文件</td>
+</tr>
+
+<tr>
+<td class="org-left">.detach</td>
+<td class="org-left">分离调试目标</td>
+</tr>
+
+<tr>
+<td class="org-left">.kill</td>
+<td class="org-left">杀死目标进程</td>
+</tr>
+
+<tr>
+<td class="org-left">.load</td>
+<td class="org-left">加载模块</td>
+</tr>
+
+<tr>
+<td class="org-left">.unload</td>
+<td class="org-left">卸载模块</td>
+</tr>
+
+<tr>
+<td class="org-left">.unloadall</td>
+<td class="org-left">卸载模块</td>
+</tr>
+
+<tr>
+<td class="org-left">.logfile .logopen .logappend .logclose</td>
+<td class="org-left">管理调试器日志</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Created: 2019-09-23 周一 18:45</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

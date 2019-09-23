@@ -1,0 +1,469 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2019-09-23 周一 18:44 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>TensorFlow机器学习项目实战</title>
+<meta name="generator" content="Org mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">TensorFlow机器学习项目实战</h1>
+<p>
+张量（tensor）是向量和矩阵概念的推广。张量使用阶（rank）来描述维度。
+0阶张量就是标量（scalar），1阶张量是向量（vector），2阶张量是矩阵（matrix）。
+一般的，一个n+1阶张量是由多个n阶张量组成的序列。
+</p>
+
+<p>
+在TensorFlow中，使用tf.constant可以创建一个不可变张量对象，例如：
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #a020f0;">import</span> tensorflow <span style="color: #a020f0;">as</span> tf
+<span style="color: #a0522d;">tensor1</span> = tf.constant([[[1, 2],
+                   [2, 3]],
+                  [[3, 4],
+                   [5, 6]]])
+
+<span style="color: #a020f0;">print</span>(tensor1)
+
+<span style="color: #b22222;"># </span><span style="color: #b22222;">&#36755;&#20986;&#65306;                </span>
+<span style="color: #b22222;"># </span><span style="color: #b22222;">&gt;&gt;&gt; Tensor("Const:0", shape=(2, 2, 2), dtype=int32)</span>
+</pre>
+</div>
+
+<p>
+n阶张量的形状由一个n维向量 \((k_1, \cdots, k_n)\) 描述，表示这个张量由 \(k_n\) 个形状为 
+\((k_1, \cdots, k_{n-1})\) 的n-1维张量组成。 \(k_i\) 是张量在第i个维度上的包含的元素数。
+对于1阶张量（即向量）， \(k_1\) 就是向量的长度。
+对2阶张量（即矩阵）， \(k_1\) 、 \(k_2\) 分别是矩阵的行数和列数。
+</p>
+
+
+<p>
+在TensorFlow中，张量可以拥有不同的数据类型，包括：
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">tf.float32</td>
+</tr>
+
+<tr>
+<td class="org-left">tf.float64</td>
+</tr>
+
+<tr>
+<td class="org-left">tf.int8</td>
+</tr>
+
+<tr>
+<td class="org-left">tf.int16</td>
+</tr>
+
+<tr>
+<td class="org-left">tf.int32</td>
+</tr>
+
+<tr>
+<td class="org-left">tf.int64</td>
+</tr>
+
+<tr>
+<td class="org-left">tf.uint8</td>
+</tr>
+
+<tr>
+<td class="org-left">tf.string</td>
+</tr>
+
+<tr>
+<td class="org-left">tf.bool</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+张量也可以从Python或numpy对象转换而来。TensorFlow提供的函数tf.convert<sub>to</sub><sub>tensor</sub>
+复制进行转换。
+</p>
+
+<p>
+TensorFlow提供了将张量直接注入到图中任意节点的机制，叫做供给（feed）机制。会话（session）是运行张量的环境。
+</p>
+
+
+<p>
+张量的基本运算。
+</p>
+
+<p>
+查看张量内容。
+</p>
+<div class="org-src-container">
+<pre class="src src-python">tf.InteractiveSession()
+x.<span style="color: #483d8b;">eval</span>()
+</pre>
+</div>
+
+<p>
+转置。
+</p>
+<div class="org-src-container">
+<pre class="src src-python">tf.transpose(x)
+</pre>
+</div>
+
+<p>
+矩阵乘法。
+</p>
+<div class="org-src-container">
+<pre class="src src-python">tf.matmul(x, y)
+</pre>
+</div>
+
+<p>
+行列式值。
+</p>
+<div class="org-src-container">
+<pre class="src src-python">tf.matrix_determinant(x)
+</pre>
+</div>
+
+<p>
+矩阵的逆。
+</p>
+<div class="org-src-container">
+<pre class="src src-python">tf.matrix_inverse(x)
+</pre>
+</div>
+
+<p>
+解方程。
+</p>
+<div class="org-src-container">
+<pre class="src src-python">tf.matrix_solve(matrix, bias_vector)
+</pre>
+</div>
+
+<p>
+约简（reduction）。从n阶张量生成n-k阶张量。
+</p>
+<div class="org-src-container">
+<pre class="src src-python">tf.reduce_prod(x, reduction_indices=1)  <span style="color: #b22222;"># </span><span style="color: #b22222;">[[x,y,z], ...] -&gt; [x*y*z, ...]</span>
+tf.reduce_min(x, reduction_indices=1) <span style="color: #b22222;"># </span><span style="color: #b22222;">[[x,y,z], ...] -&gt; [min(x,y,z), ...]</span>
+tf.reduce_max(x, reduction_indices=1) <span style="color: #b22222;"># </span><span style="color: #b22222;">[[x,y,z], ...] -&gt; [max(x,y,z), ...]</span>
+tf.reduce_mean(x, reduction_indices=1) <span style="color: #b22222;"># </span><span style="color: #b22222;">[[x,y,z], ...] -&gt; [mean(x,y,z), ...]</span>
+tf.reduce_all(x, reduction_indices) <span style="color: #b22222;"># </span><span style="color: #b22222;">&#36923;&#36753;&#19982;</span>
+tf.reduce_any(x, reduction_indices) <span style="color: #b22222;"># </span><span style="color: #b22222;">&#36923;&#36753;&#25110;</span>
+</pre>
+</div>
+
+<p>
+分割。
+</p>
+<div class="org-src-container">
+<pre class="src src-python">tf.segment_sum
+tf.segment_min
+tf.segment_max
+tf.segment_mean
+</pre>
+</div>
+
+<p>
+序列。
+</p>
+<div class="org-src-container">
+<pre class="src src-python">tf.argmin(x, 1) <span style="color: #b22222;"># </span><span style="color: #b22222;">&#26368;&#23567;&#20540;&#25152;&#22312;&#30340;&#21015;</span>
+tf.argmax(x, 1) <span style="color: #b22222;"># </span><span style="color: #b22222;">&#26368;&#22823;&#20540;&#25152;&#22312;&#30340;&#21015;</span>
+tf.listdiff
+tf.where(x) <span style="color: #b22222;"># </span><span style="color: #b22222;">True&#20803;&#32032;&#25152;&#22312;&#30340;&#20301;&#32622;</span>
+tf.unique()
+</pre>
+</div>
+
+<p>
+张量形状。
+</p>
+<div class="org-src-container">
+<pre class="src src-python">tf.shape(x) <span style="color: #b22222;"># </span><span style="color: #b22222;">&#36820;&#22238;&#24418;&#29366;&#21521;&#37327;</span>
+tf.size(x) <span style="color: #b22222;"># </span><span style="color: #b22222;">&#36820;&#22238;&#24418;&#29366;&#21521;&#37327;&#21508;&#20803;&#32032;&#30340;&#20056;&#31215;</span>
+tf.rank(x) <span style="color: #b22222;"># </span><span style="color: #b22222;">&#38454;</span>
+tf.reshape(x, [8, 2]) <span style="color: #b22222;"># </span><span style="color: #b22222;">&#25913;&#21464;&#24418;&#29366;</span>
+tf.squeeze(x)
+tf.expand_dims(x, 1) <span style="color: #b22222;"># </span><span style="color: #b22222;">&#25193;&#23637;&#32500;&#24230;</span>
+tf.<span style="color: #483d8b;">slice</span>(x, start_point, length_vector) <span style="color: #b22222;"># </span><span style="color: #b22222;">&#20999;&#29255;</span>
+tf.split(0, 2, array)
+tf.tile
+tf.pad
+tf.concat
+tf.pack
+tf.unpack
+tf.reverse
+</pre>
+</div>
+
+
+<p>
+k均值（k-means）聚类算法。
+</p>
+
+
+<p>
+p102
+</p>
+</div>
+<div id="postamble" class="status">
+<p class="date">Created: 2019-09-23 周一 18:44</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

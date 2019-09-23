@@ -1,0 +1,1293 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2019-09-23 周一 18:45 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>《算法精解：C语言描述》笔记</title>
+<meta name="generator" content="Org mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">《算法精解：C语言描述》笔记</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orge2043d9">第一章 概述</a></li>
+<li><a href="#orge08c784">第二章 指针操作</a></li>
+<li><a href="#org6a9e4ba">第三章 递归</a></li>
+<li><a href="#orga606ae4">第四章 算法分析</a></li>
+<li><a href="#org93bc49b">第五章 链表</a></li>
+<li><a href="#org10502d8">第六章 栈和队列</a></li>
+<li><a href="#orgfafd1a3">第七章 集合</a></li>
+<li><a href="#orgeb7c1ef">第八章 哈希表</a></li>
+<li><a href="#org80780d2">第九章 树</a></li>
+<li><a href="#orgc95ed1e">第十章 堆和优先队列</a></li>
+<li><a href="#org23bc551">第十一章 图</a></li>
+<li><a href="#org57f1ee3">修订记录</a></li>
+</ul>
+</div>
+</div>
+<p>
+p84
+</p>
+
+<div id="outline-container-orge2043d9" class="outline-2">
+<h2 id="orge2043d9">第一章 概述</h2>
+<div class="outline-text-2" id="text-orge2043d9">
+<p>
+在计算机科学中，常用的数据结构有：链表、栈、队列、集合、哈希表、树、堆、优先级队列和图；常用的算法有随机法、分治法、动态规划、贪心法、近似法等。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orge08c784" class="outline-2">
+<h2 id="orge08c784">第二章 指针操作</h2>
+<div class="outline-text-2" id="text-orge08c784">
+<p>
+在C语言中，
+</p>
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #228b22;">a</span>[i]
+</pre>
+</div>
+<p>
+等价于
+</p>
+<div class="org-src-container">
+<pre class="src src-c">*(a + i)
+</pre>
+</div>
+<p>
+同样的，
+</p>
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #228b22;">a</span>[i][j]
+</pre>
+</div>
+<p>
+等价于
+</p>
+<div class="org-src-container">
+<pre class="src src-c">*(*(a + i) + j)
+</pre>
+</div>
+
+<p>
+C语言中的参数都是按值传递的，即传入函数中的参数，都是在函数堆栈上建立的副本，副本的构造方法是按位复制（mov）。参考下面的例子
+// TODO 增加例子
+</p>
+</div>
+</div>
+
+<div id="outline-container-org6a9e4ba" class="outline-2">
+<h2 id="org6a9e4ba">第三章 递归</h2>
+<div class="outline-text-2" id="text-org6a9e4ba">
+<p>
+递归过程的两个基本阶段：递推和回归。递推阶段在达到终止条件时结束，然后进入回归阶段。回归阶段整合并处理推阶段产生的数据，生成最终结果。以计算阶乘为例：
+</p>
+<div class="org-src-container">
+<pre class="src src-text">F(n) = n*F(n-1), F(0) = F(1) = 1
+
+F(4) = 4 * F(3)                              &#36882;&#24402;&#38454;&#27573;
+           F(3) = 3 * F(2)
+                        F(2) = 2 * F(1)
+                                   F(1) = 1  &#32456;&#27490;&#26465;&#20214;
+                        F(2) = 2 * 1         &#22238;&#24402;&#38454;&#27573;
+             F(3) = 3 * 2
+F&#65288;4&#65289;= 4 * 6
+24                                           &#36882;&#24402;&#23436;&#25104;
+</pre>
+</div>
+
+<p>
+下面就是一个使用递归方法计算阶乘的C语言程序：
+</p>
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #228b22;">int</span> <span style="color: #0000ff;">fact</span>(<span style="color: #228b22;">int</span> <span style="color: #a0522d;">n</span>) {
+    <span style="color: #a020f0;">if</span> (n &lt; 0) {
+        <span style="color: #a020f0;">return</span> 0;
+    }
+
+    <span style="color: #a020f0;">if</span> (n == 0) {
+        <span style="color: #a020f0;">return</span> 1;
+    }
+
+    <span style="color: #a020f0;">if</span> (n == 1) {
+        <span style="color: #a020f0;">return</span> 1;
+    }
+
+    <span style="color: #a020f0;">return</span> n * fact(n - 1);
+}
+</pre>
+</div>
+
+<p>
+在运行时，C程序使用的内存被划分为4个区域：代码段、静态数据段区、堆和栈。代码段用于保存二进制的程序代码。静态数据区保存程序生命周期中一直存在的对象，如全局变量和静态局部变量。堆是程序运行时分配的存储空间，从低地址向高地址增长。栈保存函数调用信息，比如入参、局部变量等。栈地址从高向低增长。栈记录了函数调用的历史信息。记录当前函数信息的部分叫做活跃记录或栈帧。活跃记录又可以划分为5个区域：输入参数、返回值空间、临时存储空间、函数调用时保存的状态、输出参数。如果递归程度过深，在递推阶段，会产生多次递归函数调用，消耗大量栈空间。为此产生了一种优化方案，叫做尾递归。尾递归在回归过程中不做任何操作，因此编译器可以复用已经分配的函数调用栈。这要求尾递归的最后一个语句是递归调用，并且递归调用的返回值不是表达式的一部分。由于尾递归不需要保存当前堆栈，编译器会对尾递归进行优化，避免分配额外的栈空间。下面是阶乘的为递归方式：
+</p>
+<div class="org-src-container">
+<pre class="src src-text">F(n, a) = F(n-1, n*a), F(0, a) = 1, F(1, a) = a
+</pre>
+</div>
+
+<p>
+用C语言表达为::
+</p>
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #228b22;">int</span> <span style="color: #0000ff;">facttail</span>(<span style="color: #228b22;">int</span> <span style="color: #a0522d;">n</span>, <span style="color: #228b22;">int</span> <span style="color: #a0522d;">a</span>)
+{
+    <span style="color: #a020f0;">if</span> (n &lt; 0)
+    {
+        <span style="color: #a020f0;">return</span> 0;
+    }
+    <span style="color: #a020f0;">else</span> <span style="color: #a020f0;">if</span> (n == 0)
+    {
+        <span style="color: #a020f0;">return</span> 1
+    }
+    <span style="color: #a020f0;">else</span> <span style="color: #a020f0;">if</span> (n == 1)
+    {
+        <span style="color: #a020f0;">return</span> a;
+    }
+    <span style="color: #a020f0;">else</span>
+    {
+        <span style="color: #a020f0;">return</span> facttail(n - 1, n * a);
+    }
+}
+</pre>
+</div>
+
+<p>
+可以看出，在尾递归中，递归调用返回的值不进行任何运算，直接返回给上层调用。普通递归和尾递归的区别在于，普通递归将临时结果保存在函数本地，而尾递归将中间结果保存在一个上下文变量中，通过参数传递给下一次调用，本地不记录任何状态。
+</p>
+
+<p>
+下面是一个调和级数的定义，有递归和尾递归两个版本：
+</p>
+<div class="org-src-container">
+<pre class="src src-text">H(n) = 1 + 1/2 + 1/3 + ... + 1/n
+H(n) = H(n-1) + (1/n), H(1) = 1
+H(n,a) = H(n-1, a+1/n), H(1) = a + 1
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orga606ae4" class="outline-2">
+<h2 id="orga606ae4">第四章 算法分析</h2>
+<div class="outline-text-2" id="text-orga606ae4">
+<p>
+常见算法复杂度有：
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">O(1)</td>
+<td class="org-left">从数据集中获取第一个元素。</td>
+</tr>
+
+<tr>
+<td class="org-left">O(lg n)</td>
+<td class="org-left">将集合分成两半，每个子集再分两半，以此类推。</td>
+</tr>
+
+<tr>
+<td class="org-left">O(n)</td>
+<td class="org-left">遍历数据集。</td>
+</tr>
+
+<tr>
+<td class="org-left">O(n lg n)</td>
+<td class="org-left">将一个数据集分成两半，每个子集再分成两半，以此类推。在此同时遍历其中的一个子集。</td>
+</tr>
+
+<tr>
+<td class="org-left">O(n<sup>2</sup>)</td>
+<td class="org-left">遍历一个数据集的同时遍历一个同等规模的数据集。</td>
+</tr>
+
+<tr>
+<td class="org-left">O(2<sup>n</sup>)</td>
+<td class="org-left">为一个数据集生成其全部子集。</td>
+</tr>
+
+<tr>
+<td class="org-left">O(n!)</td>
+<td class="org-left">为一个数据集生成其可能所有排列组合。</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+NP完全问题是没有找到多项式时间求解算法的问题。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org93bc49b" class="outline-2">
+<h2 id="org93bc49b">第五章 链表</h2>
+<div class="outline-text-2" id="text-org93bc49b">
+<p>
+单向链表各操作耗时：
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">操作</td>
+<td class="org-left">时间复杂度</td>
+</tr>
+
+<tr>
+<td class="org-left">初始化链表</td>
+<td class="org-left">O(1)</td>
+</tr>
+
+<tr>
+<td class="org-left">销毁链表</td>
+<td class="org-left">O(n)</td>
+</tr>
+
+<tr>
+<td class="org-left">插入元素</td>
+<td class="org-left">O(1)</td>
+</tr>
+
+<tr>
+<td class="org-left">删除元素</td>
+<td class="org-left">O(1)</td>
+</tr>
+
+<tr>
+<td class="org-left">遍历元素</td>
+<td class="org-left">O(n)</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+单链表的一个用途是操作系统虚拟内存的页面管理。当进程访问一个不在物理页帧上的虚拟地址时，系统产生一个页错误，并在物理内存中分配一个页帧。
+</p>
+
+
+<p>
+双向链表各操作耗时：
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">操作</td>
+<td class="org-left">时间复杂度</td>
+</tr>
+
+<tr>
+<td class="org-left">初始化链表</td>
+<td class="org-left">O(1)</td>
+</tr>
+
+<tr>
+<td class="org-left">销毁链表</td>
+<td class="org-left">O(n)</td>
+</tr>
+
+<tr>
+<td class="org-left">插入元素</td>
+<td class="org-left">O(1)</td>
+</tr>
+
+<tr>
+<td class="org-left">删除元素</td>
+<td class="org-left">O(1)</td>
+</tr>
+
+<tr>
+<td class="org-left">遍历元素</td>
+<td class="org-left">O(n)</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>
+..
+  循环链表;
+  操作,时间复杂度;
+  初始化链表,O(1);
+  销毁链表,O(n);
+  插入元素,O(1);
+  删除元素,O(1);
+  遍历元素,O(n);
+</p>
+
+<!-- This HTML table template is generated by emacs 26.1 -->
+<table border="1">
+  <tr>
+    <td align="left" valign="top">
+      循环链表&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+    <td align="left" valign="top">
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+  </tr>
+  <tr>
+    <td align="left" valign="top">
+      操作&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+    <td align="left" valign="top">
+      时间复杂度&nbsp;&nbsp;
+    </td>
+  </tr>
+  <tr>
+    <td align="left" valign="top">
+      初始化链表&nbsp;&nbsp;
+    </td>
+    <td align="left" valign="top">
+      O(1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+  </tr>
+  <tr>
+    <td align="left" valign="top">
+      销毁链表&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+    <td align="left" valign="top">
+      O(n)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+  </tr>
+  <tr>
+    <td align="left" valign="top">
+      插入元素&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+    <td align="left" valign="top">
+      O(1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+  </tr>
+  <tr>
+    <td align="left" valign="top">
+      删除元素&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+    <td align="left" valign="top">
+      O(1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+  </tr>
+  <tr>
+    <td align="left" valign="top">
+      遍历元素&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+    <td align="left" valign="top">
+      O(n)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+  </tr>
+</table>
+
+<p>
+循环链表可以用来实现LRU（Last Recently Used）算法。为每个元素分配一个标志位，并放到循环链表中。当查找LRU元素时，从一个节点开始遍历。对于每个标志位为1的元素，将标志位改为0，并遍历下一个元素。对第一个标志位为0的元素，将标志位设置为1，并返回该元素。
+</p>
+
+<p>
+双向循环链表
+链表数组
+广义表
+游标
+</p>
+
+<p>
+使用二次机会置换法实现LRU（least recently used）算法：
+</p>
+
+<ol class="org-ol">
+<li>将资源句柄和一个布尔型标志组成一个结构体，保存在循环链表中。</li>
+<li>初始时，每个句柄的标志设置为0。</li>
+<li>在查找资源时，在循环链表中，从当前位置的下一个位置开始遍历。</li>
+<li>当遍历到一个结构体时，如果标志是1，将标志设置为0，继续遍历。如果标志是0，将标志设置为1，停止遍历，将句柄返回。</li>
+</ol>
+
+<p>
+代码示例::
+</p>
+
+
+<p>
+struct Entry {
+        int handle;
+        bool in<sub>use</sub>{ false };
+        static int global<sub>handle</sub>;
+</p>
+
+<p>
+        Entry() :handle(++global<sub>handle</sub>) {}
+};
+</p>
+
+<p>
+int Entry::global<sub>handle</sub> = 0;
+</p>
+
+
+<p>
+template&lt;typename T, int N&gt;
+class Cycle<sub>array</sub> : public array&lt;T, N&gt; {
+public:
+        void next() noexcept {
+                index = (index + 1) % this-&gt;size();
+        }
+</p>
+
+<p>
+        T&amp; get() noexcept {
+                return this-&gt;at(index);
+        }
+private:
+        size<sub>t</sub> index{ 0 };
+};
+</p>
+
+<p>
+template&lt;int N&gt;
+class Allocator {
+public:
+        int operator()() {
+                while(true) {
+                        Entry&amp; e = pool.get();
+                        e.in<sub>use</sub> = !e.in<sub>use</sub>;
+                        if (e.in<sub>use</sub>) {
+                                return e.handle;
+                        }
+                        pool.next();
+                }
+        }
+private:
+        Cycle<sub>array</sub>&lt;Entry, N&gt; pool;
+};
+</p>
+
+<p>
+int main()
+{
+        Allocator&lt;3&gt; a;
+        for (int i = 0; i &lt; 9; i++) {
+                cout &lt;&lt; a() &lt;&lt; endl;
+        }
+}
+</p>
+</div>
+</div>
+
+
+
+<div id="outline-container-org10502d8" class="outline-2">
+<h2 id="org10502d8">第六章 栈和队列</h2>
+<div class="outline-text-2" id="text-org10502d8">
+<p>
+栈是一个后进先出LIFO方式存储和删除元素的数据结构。
+</p>
+
+<p>
+..
+  栈;
+  操作,时间复杂度;
+  初始化栈,O(1);
+  销毁栈,O(1);
+  插入元素,O(1);
+  删除元素,O(1);
+</p>
+
+<!-- This HTML table template is generated by emacs 26.1 -->
+<table border="1">
+  <tr>
+    <td align="left" valign="top">
+      栈&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+    <td align="left" valign="top">
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+  </tr>
+  <tr>
+    <td align="left" valign="top">
+      操作&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+    <td align="left" valign="top">
+      时间复杂度&nbsp;&nbsp;
+    </td>
+  </tr>
+  <tr>
+    <td align="left" valign="top">
+      初始化栈&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+    <td align="left" valign="top">
+      O(1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+  </tr>
+  <tr>
+    <td align="left" valign="top">
+      销毁栈&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+    <td align="left" valign="top">
+      O(1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+  </tr>
+  <tr>
+    <td align="left" valign="top">
+      插入元素&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+    <td align="left" valign="top">
+      O(1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+  </tr>
+  <tr>
+    <td align="left" valign="top">
+      删除元素&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+    <td align="left" valign="top">
+      O(1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+  </tr>
+</table>
+
+
+<p>
+..
+  队列;
+  操作,时间复杂度;
+  初始化队列,O(1);
+  销毁队列,O(n);
+  插入元素,O(1);
+  删除元素,O(1);
+</p>
+
+<!-- This HTML table template is generated by emacs 26.1 -->
+<table border="1">
+  <tr>
+    <td align="left" valign="top">
+      队列&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+    <td align="left" valign="top">
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+  </tr>
+  <tr>
+    <td align="left" valign="top">
+      操作&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+    <td align="left" valign="top">
+      时间复杂度&nbsp;&nbsp;
+    </td>
+  </tr>
+  <tr>
+    <td align="left" valign="top">
+      初始化队列&nbsp;&nbsp;
+    </td>
+    <td align="left" valign="top">
+      O(1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+  </tr>
+  <tr>
+    <td align="left" valign="top">
+      销毁队列&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+    <td align="left" valign="top">
+      O(n)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+  </tr>
+  <tr>
+    <td align="left" valign="top">
+      插入元素&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+    <td align="left" valign="top">
+      O(1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+  </tr>
+  <tr>
+    <td align="left" valign="top">
+      删除元素&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+    <td align="left" valign="top">
+      O(1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+  </tr>
+</table>
+
+
+<p>
+双向队列
+循环队列
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgfafd1a3" class="outline-2">
+<h2 id="orgfafd1a3">第七章 集合</h2>
+<div class="outline-text-2" id="text-orgfafd1a3">
+<p>
+..
+  集合;
+  操作,时间复杂度;
+  初始化集合,O(1);
+  销毁集合,O(n);
+  插入元素,O(n);
+  删除元素,O(n);
+  并集,O(mn);
+  交集,O(mn);
+  差集,O(mn);
+  查找元素,O(n);
+  判断子集,O(nm);
+</p>
+
+<!-- This HTML table template is generated by emacs 26.1 -->
+<table border="1">
+  <tr>
+    <td align="left" valign="top">
+      集合&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+    <td align="left" valign="top">
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+  </tr>
+  <tr>
+    <td align="left" valign="top">
+      操作&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+    <td align="left" valign="top">
+      时间复杂度&nbsp;&nbsp;
+    </td>
+  </tr>
+  <tr>
+    <td align="left" valign="top">
+      初始化集合&nbsp;&nbsp;
+    </td>
+    <td align="left" valign="top">
+      O(1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+  </tr>
+  <tr>
+    <td align="left" valign="top">
+      销毁集合&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+    <td align="left" valign="top">
+      O(n)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+  </tr>
+  <tr>
+    <td align="left" valign="top">
+      插入元素&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+    <td align="left" valign="top">
+      O(n)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+  </tr>
+  <tr>
+    <td align="left" valign="top">
+      删除元素&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+    <td align="left" valign="top">
+      O(n)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+  </tr>
+  <tr>
+    <td align="left" valign="top">
+      并集&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+    <td align="left" valign="top">
+      O(mn)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+  </tr>
+  <tr>
+    <td align="left" valign="top">
+      交集&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+    <td align="left" valign="top">
+      O(mn)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+  </tr>
+  <tr>
+    <td align="left" valign="top">
+      差集&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+    <td align="left" valign="top">
+      O(mn)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+  </tr>
+  <tr>
+    <td align="left" valign="top">
+      查找元素&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+    <td align="left" valign="top">
+      O(n)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+  </tr>
+  <tr>
+    <td align="left" valign="top">
+      判断子集&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+    <td align="left" valign="top">
+      O(nm)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+  </tr>
+</table>
+
+<p>
+一种集合覆盖算法：
+</p>
+
+<p>
+假设S是一个集合，P是2<sup>S的子集</sup>，求P的子集C，使得C可以覆盖S。可以采用贪心算法，每次取P中可以覆盖S中最多点的集合，加入C中。然后把这个集合从P中移除，把这个集合中的元素从S中移除。循环反复，直到S变成空集。这个算法是O(n<sup>3</sup>)的。
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-orgeb7c1ef" class="outline-2">
+<h2 id="orgeb7c1ef">第八章 哈希表</h2>
+<div class="outline-text-2" id="text-orgeb7c1ef">
+<p>
+哈希表根据内部实现方式分为链式哈希表和开放地址哈希表。
+</p>
+
+
+<p>
+链式哈希表
+</p>
+<hr />
+
+<p>
+在链式哈希表中，每个哈希位置是一个链表，包含了具有相同哈希值的元素。每个链表称为一个桶。如果一个链式哈希表有n个元素和m个桶，则m/n称为其负载因子。哈希表的性能由包含元素最多的桶决定。通过选择合适的哈希函数，让桶更加均匀，可以提高哈希表的性能。哈希函数将键k映射为哈希表中的位置x。x叫做键k的哈希编码。在定义哈希函数时，通常假定键k是正整数。定义哈希函数的方法有取余法和乘数法。取余法将哈希函数定义为::
+</p>
+
+<p>
+h(k) = k mod m
+</p>
+
+<p>
+在取余法中，m通常选择距离2的方幂较远的素数。乘数法将哈希函数定义为::
+</p>
+
+<p>
+h(k) = floor(m*(k*A - floor(k*A)))
+</p>
+
+<p>
+其中A是一个介于0和1之间的小数。在计算哈希编码时，取k和A乘积的小数部分和m相乘，将结果的整数部分作为哈希编码。乘数法中m的选择更加灵活，A通常是0.618。
+</p>
+
+<p>
+键是正整数这个假设并没有限制哈希函数的使用范围。实际上任意对象都可以很容易的转换成正整数。比如下面的字符串哈希函数例子::
+</p>
+
+<p>
+unsigned int hashpjw(const void *key) {
+        const char *ptr;
+        unsigned int val;
+</p>
+
+<p>
+val = 0;
+ptr = key;
+</p>
+
+<p>
+while (*ptr != '\0') {
+        unsigned int tmp;
+        val = (val &lt;&lt; 4) + (*ptr);
+</p>
+
+<p>
+if (tmp = (val &amp; 0xf0000000)) {
+        val = val ^ (tmp &gt;&gt; 24);
+        val = val ^ tmp;
+}
+</p>
+
+<p>
+        ptr++;
+}
+</p>
+
+<p>
+        return val % PRIME<sub>TBLSIZE</sub>;
+}
+</p>
+
+
+<p>
+开放地址哈希表
+</p>
+<hr />
+
+<p>
+开放地址哈希表将元素直接保存在表中。如果在插入时发生冲突，会从当前位置开始寻找下一个开放地址来放置元素。在删除元素时，开放地址哈希表需要找到全部具有相同哈希值的对象，重新排列它们的位置。由于元素直接保存在哈希表中，开放地址哈希表的负载因子a&lt;=1。在均匀散列情况下，为了找到开放地址需要检查1/(1-a)个地址。
+</p>
+
+<p>
+开放地址哈希表的哈希函数定义为::
+</p>
+
+<p>
+h(k,i) = x
+</p>
+
+<p>
+其中k是键，i是探查次数，x是哈希编码。最简单的探查方法是线性探查函数，定义如下::
+</p>
+
+<p>
+h(k,i) = (h'(k) + i) mod m
+</p>
+
+<p>
+这里的h'是一个辅助哈希函数，将元素随机分布在表中。线性探查方法的有点是简单，对m没有限制。缺点是不够均匀。另一种方法是采用双散列。双散列采用两个辅助哈希函数::
+</p>
+
+<p>
+h(k,i) = (h1(k) + i * h2(k)) mod m
+</p>
+
+<p>
+这里h1和h2要尽量保证元素随机和均匀。为了保证第二次访问任何一个槽之前其他所有槽都访问过了，必须满足下列条件之一：
+#. m是2的方幂，且h2(x)返回一个奇数。
+#. m是素数，且h2(x)返回的值属于区间[1,m-1]。
+</p>
+
+<p>
+在使用双散列法时，通常令h1(k)=k mod m，h2(k)=1+(k mod m')（m'是略小于m）。双散列法能够产生较好的元素分布，缺点是m值的选择没那么灵活。
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org80780d2" class="outline-2">
+<h2 id="org80780d2">第九章 树</h2>
+<div class="outline-text-2" id="text-org80780d2">
+<p>
+树是一种数据结构，树定义了集合上的一个偏序关系。对于非空的树，存在一个节点r，r是任何其他节点个前驱节点。r叫做树的根节点。对于树中的节点x和y，如果x是y的前驱，则称y是x在子孙节点。如果x是y的直接前驱，称y是x的子节点，x是y的父节点。这时，y和y的子孙节点构成的树叫做x的子树。如果一个节点没有任何子节点，这个节点叫做叶子节点。如果每个非叶子节点都有不超过k个子节点，这个树叫做k叉树。树的优点在于在搜索空间（集合）之上构建了层级关系。在进入下一层（子节点）时，搜索空间会缩小。比如二叉树，每次进入下一层级，搜索空间缩小为原来的二分之一。如果初始搜索空间大小为n，经过log(n)层就可以得到解（达到大小为1的搜索空间）。此外，树也提供了遍历集合的方法。树有4种遍历方法：先序、中序、后序遍历，以及层级遍历。在遍历时，先序遍历首先访问根节点，然后访问子节点。后续遍历则是首先访问子节点，然后访问根节点。中序遍历通常用于二叉树，按照左子节点、根节点、右子节点的顺序遍历。层级遍历是根据树定义的层级关系，逐层遍历元素。
+</p>
+
+
+<p>
+AVL树是一种二叉搜索树，其中的每个节点都带有平衡因子。节点的平衡因子是其左子树高度与右子树高度只差。在更新节点时，AVL要求每个节点的平衡因子绝对值不大于1。
+</p>
+
+<p>
+红黑树的统计性能比AVL树好。
+</p>
+
+<p>
+K叉树
+红黑树
+Trie树
+B树
+B*树
+B+树
+</p>
+</div>
+</div>
+
+
+
+<div id="outline-container-orgc95ed1e" class="outline-2">
+<h2 id="orgc95ed1e">第十章 堆和优先队列</h2>
+<div class="outline-text-2" id="text-orgc95ed1e">
+<p>
+维持一个树的代价小于维持一个有序集合的代价，树是偏序的。堆和优先队列通常用于任务调度、霍夫曼编码或负载均衡。如果一个二叉树的根节点保存了最大值，这个二叉树称为最大堆。类似的，可以定义最小堆。最大堆和最小堆统称为堆。在实践中，通常将堆保存在数组里。如果把一个堆保存在以0开始索引的数组里，节点i的父节点和左右子节点的索引分别是(i-1)/2、2i+1、2i+2。堆可以迅速获取集合中的最值。
+</p>
+
+
+<p>
+..
+  堆;
+  操作,时间复杂度;
+  建立堆,O(1);
+  销毁堆,O(n);
+  插入元素,O(lgn);
+  删除元素,O(lgn);
+  取最大（小）值,O(1);
+</p>
+
+
+<!-- This HTML table template is generated by emacs 26.1 -->
+<table border="1">
+  <tr>
+    <td align="left" valign="top">
+      堆&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+    <td align="left" valign="top">
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+  </tr>
+  <tr>
+    <td align="left" valign="top">
+      操作&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+    <td align="left" valign="top">
+      时间复杂度&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+  </tr>
+  <tr>
+    <td align="left" valign="top">
+      建立堆&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+    <td align="left" valign="top">
+      O(1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+  </tr>
+  <tr>
+    <td align="left" valign="top">
+      销毁堆&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+    <td align="left" valign="top">
+      O(n)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+  </tr>
+  <tr>
+    <td align="left" valign="top">
+      插入元素&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+    <td align="left" valign="top">
+      O(lgn)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+  </tr>
+  <tr>
+    <td align="left" valign="top">
+      删除元素&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+    <td align="left" valign="top">
+      O(lgn)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+  </tr>
+  <tr>
+    <td align="left" valign="top">
+      取最大（小）值&nbsp;&nbsp;
+    </td>
+    <td align="left" valign="top">
+      O(1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+  </tr>
+</table>
+
+
+<p>
+向最小堆中插入元素时，首先将元素放到堆的尾部，然后检查新元素和它父节点关联的元素，如果新元素小于父节点的值，交互两个节点的位置，然后继续检查上一层节点，直到堆中各层级节点满足序关系。从堆中删除数据时，首先将根节点移除，接着讲最后一个节点复制到根节点，然后类似插入节点那样，让跟节点逐层和下层节点比较并交换位置，直到序关系得到满足。
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org23bc551" class="outline-2">
+<h2 id="org23bc551">第十一章 图</h2>
+<div class="outline-text-2" id="text-org23bc551">
+<p>
+图将集合中各元素的关系组织起来。图包含两类元素：顶点和边。边是两个顶点之间的关联。如果这种关联是不对称的，这样的图叫做有向图。有向图的边又叫做弧。在有向图中，以某个顶点为起点的边的数量叫做这个顶点的出度，以这个顶点为终点的边的数量叫做入度。如果存在从u到v的路径，称v是u可达的。简单路径是没有重复顶点的路径。有重复顶点的路径叫做环（cycle）。有向无环图叫做DAG（Directed Acyine Graph）。如果在一个图中，任意两个顶点之间都存在一条路径，这个图叫做连通图。如果这个图是有向图，就叫做强连通图。如果图的一个子图是连通的，它就叫做这个图的连通分支。如果移除一个节点后，原本连通的图或分支不再连通，这个节点就叫做关节点。如果移除某个边使得图丧失了连通性，这个边就叫做桥。对于没有关节点的图，叫做双连通图。
+有向无环图G=(V,E)的拓扑排序是其顶点的线性序列，满足如果(u,v)是G的一条边，则u在v之前。
+</p>
+
+
+
+
+<p>
+BFS：
+</p>
+<ol class="org-ol">
+<li>节点的状态可以是未发现、已发现、已访问。初始情况下，节点的状态是未发现。</li>
+<li>如果图中没有未发现节点，结束。</li>
+<li>建立队列。</li>
+<li>随机选择图中一个未发现的节点，将节点标记为已发现，并放入队列。</li>
+<li>当队列非空时，循环：</li>
+</ol>
+<p>
+5.1 从队列头部中取得节点s。
+5.2 将与s邻接的未发现节点加入队列尾部。
+5.3 将s标记为已遍历，并从队列中删除。
+</p>
+<ol class="org-ol">
+<li>跳转到2。</li>
+</ol>
+
+
+<p>
+DFS：
+</p>
+<ol class="org-ol">
+<li>节点的状态可以是未发现或已访问。初始情况下，节点的状态是未发现。</li>
+<li>如果图中没有未发现节点，结束。</li>
+<li>随机选择图中的一个节点s，将s标记为已访问。</li>
+<li>对于s邻接的未发现节点，逐一递归调用DFS算法。</li>
+<li>跳转到2。</li>
+</ol>
+
+<p>
+DFS2：
+</p>
+<ol class="org-ol">
+<li>节点的状态可以是未发现或已访问。初始情况下，节点的状态是未发现。</li>
+<li>如果图中没有未发现节点，结束。</li>
+<li>建立栈。</li>
+<li>随机选择图中一个未发现的节点，标记为已访问并压入栈。</li>
+<li>当栈非空时，循环：</li>
+</ol>
+<p>
+5.1 从栈顶取节点s。
+5.2 如果与s邻接的节点中有未发现节点t，循环：
+5.2.1 将t标记为已访问并压栈。
+5.2.2 跳转到5.1。
+5.3 将s弹栈。
+</p>
+<ol class="org-ol">
+<li>跳转到2。</li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-org57f1ee3" class="outline-2">
+<h2 id="org57f1ee3">修订记录</h2>
+<div class="outline-text-2" id="text-org57f1ee3">
+<ul class="org-ul">
+<li>2017年08月08日 建立文档。</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Created: 2019-09-23 周一 18:45</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

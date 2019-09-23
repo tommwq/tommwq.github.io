@@ -1,0 +1,443 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2019-09-23 周一 18:45 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<p>
+简单谈一点自己的看法。首先要说明，下面的内容主要是关于桌面或服务器上普通应用程序的开发，不涉及实时系统、嵌入式、类库或其他有特殊要求的程序。其次，主要关注类和函数级别的代码，不讨论架构和设计模式方面的内容。关于架构方面可以参考这篇文章《架构漫谈（八）：从架构的角度看如何写好代码》<a href="https://www.infoq.cn/article/an-informal-discussion-on-architecture-part08">https://www.infoq.cn/article/an-informal-discussion-on-architecture-part08</a> 。
+</p>
+
+<p>
+对于代码是否优雅，我的判断标准是：是否清晰明了。原因有两点：第一，可读性好，易于维护；第二，代码产生了静态（参考UML类图）、动态（参考UML时序图）两个模型，这两个模型的质量决定了软件的质量，而好的模型应该是清晰明了的。
+</p>
+
+<p>
+基于这个标准，我在编写代码时通常会
+</p>
+
+<ul class="org-ul">
+<li>选择语义明确的命名。</li>
+</ul>
+<p>
+示例：
+</p>
+<div class="org-src-container">
+<pre class="src src-go"><span style="color: #b22222;">// </span><span style="color: #b22222;">Go&#35821;&#35328;&#30340;regexp&#21253;</span>
+<span style="color: #a020f0;">func</span> <span style="color: #0000ff;">Compile</span>(expr <span style="color: #228b22;">string</span>) (*<span style="color: #228b22;">Regexp</span>, <span style="color: #228b22;">error</span>) <span style="color: #b22222;">// </span><span style="color: #b22222;">&#22833;&#36133;&#26102;&#36820;&#22238;error</span>
+<span style="color: #a020f0;">func</span> <span style="color: #0000ff;">MustCompile</span>(expr <span style="color: #228b22;">string</span>) *<span style="color: #228b22;">Regexp</span>      <span style="color: #b22222;">// </span><span style="color: #b22222;">&#22833;&#36133;&#26102;panic</span>
+</pre>
+</div>
+
+<ul class="org-ul">
+<li>将读/写操作分离，并避免在写操作中返回操作结果。</li>
+</ul>
+<p>
+示例：
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #a020f0;">public</span> <span style="color: #a020f0;">class</span> <span style="color: #228b22;">Calculator</span> {
+    <span style="color: #a020f0;">private</span> <span style="color: #228b22;">int</span> <span style="color: #a0522d;">result</span> = 0;
+    <span style="color: #a020f0;">public</span> <span style="color: #228b22;">void</span> <span style="color: #0000ff;">add</span>(<span style="color: #228b22;">int</span> <span style="color: #a0522d;">x</span>, <span style="color: #228b22;">int</span> <span style="color: #a0522d;">y</span>) {
+        result = x + y;
+    }
+
+    <span style="color: #a020f0;">public</span> <span style="color: #228b22;">int</span> <span style="color: #0000ff;">getResult</span>() {
+        <span style="color: #a020f0;">return</span> result;
+    }
+}
+</pre>
+</div>
+
+<ul class="org-ul">
+<li>将复杂逻辑拆分成小函数。函数或方法原则上不超过50行。</li>
+<li>避免嵌套逻辑判断，将程序逻辑流程尽量安排成“非”字右半边的格式。</li>
+</ul>
+<p>
+示例（修改前）：
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #a020f0;">if</span> (conditionX) {
+    <span style="color: #a020f0;">if</span> (conditionY) {
+        <span style="color: #a020f0;">return</span> doA();
+    } <span style="color: #a020f0;">else</span> {
+        <span style="color: #a020f0;">return</span> doB();
+    }
+} <span style="color: #a020f0;">else</span> {
+    <span style="color: #a020f0;">throw</span> <span style="color: #a020f0;">new</span> <span style="color: #228b22;">RuntimeException</span>(<span style="color: #8b2252;">"something goes wrong"</span>);
+}
+</pre>
+</div>
+<p>
+示例（修改后）：
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #a020f0;">if</span> (!conditionX) {
+    <span style="color: #a020f0;">throw</span> <span style="color: #a020f0;">new</span> <span style="color: #228b22;">RuntimeException</span>(<span style="color: #8b2252;">"something goes wrong"</span>);
+}
+
+<span style="color: #a020f0;">if</span> (conditionY) {
+    <span style="color: #a020f0;">return</span> doA();
+}
+
+<span style="color: #a020f0;">return</span> doB();
+</pre>
+</div>
+<ul class="org-ul">
+<li>函数入参数量超过3个时，每个参数占单独一行。</li>
+<li>避免返回null、nullptr、NULL。</li>
+</ul>
+<p>
+示例（修改前）：
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #a020f0;">public</span> <span style="color: #228b22;">Properties</span> <span style="color: #0000ff;">readLocalConfig</span>() {
+    <span style="color: #228b22;">Properties</span> <span style="color: #a0522d;">result</span>;
+    <span style="color: #a020f0;">try</span> {
+        result = <span style="color: #b22222;">// </span><span style="color: #b22222;">...</span>
+        <span style="color: #a020f0;">return</span> result;
+    } <span style="color: #a020f0;">catch</span> (<span style="color: #228b22;">IOException</span> <span style="color: #a0522d;">e</span>) {
+        <span style="color: #a020f0;">return</span> <span style="color: #008b8b;">null</span>;
+    }
+}
+</pre>
+</div>
+<p>
+示例（修改后）：
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #a020f0;">public</span> <span style="color: #228b22;">Properties</span> <span style="color: #0000ff;">readLocalConfig</span>() <span style="color: #a020f0;">throws</span> <span style="color: #228b22;">IOException</span> {...}
+<span style="color: #a020f0;">public</span> <span style="color: #228b22;">Optional</span>&lt;<span style="color: #228b22;">Properites</span>&gt; <span style="color: #0000ff;">tryReadLocalConfig</span>() {
+    <span style="color: #228b22;">Properties</span> <span style="color: #a0522d;">result</span>;
+    <span style="color: #a020f0;">try</span> {
+        result = readLocalConfig();
+    } <span style="color: #a020f0;">catch</span> (<span style="color: #228b22;">IOException</span> <span style="color: #a0522d;">e</span>) {
+        <span style="color: #b22222;">// </span><span style="color: #b22222;">ignore</span>
+    }
+
+    <span style="color: #a020f0;">return</span> Optional.ofNullable(result);
+}
+</pre>
+</div>
+
+<ul class="org-ul">
+<li>注意维护对象在整个生命周期内的不变性，包括多线程环境和异步信号处理下的不变性。</li>
+</ul>
+<p>
+示例（修改前）：
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #a020f0;">public</span> <span style="color: #a020f0;">class</span> <span style="color: #228b22;">SomeResource</span> {
+    <span style="color: #a020f0;">public</span> <span style="color: #0000ff;">SomeResource</span>(<span style="color: #228b22;">String</span> <span style="color: #a0522d;">parameter</span>) <span style="color: #a020f0;">throws</span> <span style="color: #228b22;">InvalidArgumentException</span> {...}
+    <span style="color: #a020f0;">public</span> <span style="color: #228b22;">void</span> <span style="color: #0000ff;">doSomething</span>();
+}
+
+<span style="color: #a020f0;">public</span> <span style="color: #a020f0;">class</span> <span style="color: #228b22;">Agent</span> {
+    <span style="color: #a020f0;">private</span> <span style="color: #a020f0;">static</span> <span style="color: #228b22;">Agent</span> <span style="color: #a0522d;">instance</span>;
+    <span style="color: #a020f0;">private</span> <span style="color: #228b22;">SomeResource</span> <span style="color: #a0522d;">resource</span>;
+
+    <span style="color: #a020f0;">private</span> <span style="color: #0000ff;">Agent</span>(<span style="color: #228b22;">String</span> <span style="color: #a0522d;">parameter</span>) {
+        resource = <span style="color: #a020f0;">new</span> <span style="color: #228b22;">SomeResource</span>(parameter);
+    }
+
+    <span style="color: #a020f0;">public</span> <span style="color: #a020f0;">static</span> <span style="color: #228b22;">Agent</span> <span style="color: #0000ff;">getInstance</span>(<span style="color: #228b22;">String</span> <span style="color: #a0522d;">parameter</span>) {
+        <span style="color: #a020f0;">try</span> {
+            <span style="color: #a020f0;">if</span> (instance == <span style="color: #008b8b;">null</span>) {
+                <span style="color: #a020f0;">synchronized</span> (Agent.<span style="color: #a020f0;">class</span>) {
+                    <span style="color: #a020f0;">if</span> (instance == <span style="color: #008b8b;">null</span>) {
+                        instance = <span style="color: #a020f0;">new</span> <span style="color: #228b22;">Agent</span>(parameter);
+                    }
+                }
+            }
+        } <span style="color: #a020f0;">catch</span> (<span style="color: #228b22;">Exception</span> <span style="color: #a0522d;">e</span>) {
+            logger.warn(e.getMessage());
+        }
+
+        <span style="color: #a020f0;">return</span> instance;
+    }
+
+    <span style="color: #a020f0;">public</span> <span style="color: #228b22;">void</span> <span style="color: #0000ff;">doSomething</span>() {
+        <span style="color: #a020f0;">if</span> (resource != <span style="color: #008b8b;">null</span>) {
+            resource.doSomething();
+        }
+    }
+}
+</pre>
+</div>
+<p>
+示例（修改后）：
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #a020f0;">public</span> <span style="color: #a020f0;">class</span> <span style="color: #228b22;">Agent</span> {
+    <span style="color: #a020f0;">private</span> <span style="color: #a020f0;">static</span> <span style="color: #228b22;">Agent</span> <span style="color: #a0522d;">instance</span> = <span style="color: #a020f0;">new</span> <span style="color: #228b22;">Agent</span>();
+    <span style="color: #a020f0;">private</span> <span style="color: #228b22;">SomeResource</span> <span style="color: #a0522d;">resource</span>;
+    <span style="color: #a020f0;">private</span> <span style="color: #a020f0;">volatile</span> <span style="color: #228b22;">boolean</span> <span style="color: #a0522d;">initialized</span>;
+
+    <span style="color: #a020f0;">private</span> <span style="color: #0000ff;">Agent</span>() {}
+    <span style="color: #a020f0;">private</span> <span style="color: #228b22;">void</span> <span style="color: #0000ff;">initialize</span>(<span style="color: #228b22;">String</span> <span style="color: #a0522d;">parameter</span>) {
+        <span style="color: #a020f0;">try</span> {
+            resource = <span style="color: #a020f0;">new</span> <span style="color: #228b22;">SomeResource</span>(parameter);
+            initialized = <span style="color: #008b8b;">true</span>;
+        } <span style="color: #a020f0;">catch</span>(<span style="color: #228b22;">InvalidArgumentException</span> <span style="color: #a0522d;">e</span>) {
+            logger.warn(e.getMessage());
+        }
+    }
+
+    <span style="color: #a020f0;">private</span> <span style="color: #228b22;">void</span> <span style="color: #0000ff;">initializeInNeed</span>(<span style="color: #228b22;">String</span> <span style="color: #a0522d;">parameter</span>) {
+        <span style="color: #a020f0;">if</span> (initialized) {
+            <span style="color: #a020f0;">return</span>;
+        }
+
+        <span style="color: #a020f0;">synchronized</span> (Agent.<span style="color: #a020f0;">class</span>) {
+            <span style="color: #a020f0;">if</span> (!initialized) {
+                instance.initialize(parameter);
+            }
+        }
+    }
+
+    <span style="color: #a020f0;">public</span> <span style="color: #a020f0;">static</span> <span style="color: #228b22;">Agent</span> <span style="color: #0000ff;">getInstance</span>(<span style="color: #228b22;">String</span> <span style="color: #a0522d;">parameter</span>) {
+        instance.initializeInNeed(parameter);
+        <span style="color: #a020f0;">return</span> instance;
+    }
+
+    <span style="color: #a020f0;">public</span> <span style="color: #228b22;">void</span> <span style="color: #0000ff;">doSomething</span>() {
+        <span style="color: #a020f0;">if</span> (!initialized) {
+            <span style="color: #a020f0;">return</span>;
+        }
+
+        resource.doSomething();
+    }
+}
+</pre>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Created: 2019-09-23 周一 18:45</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

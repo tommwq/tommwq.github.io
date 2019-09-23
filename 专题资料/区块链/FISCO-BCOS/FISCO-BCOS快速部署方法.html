@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2019-09-23 周一 18:45 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgbe93e23">检查前置条件</a></li>
+<li><a href="#orge7c013b">下载FISCO BCOS软件包</a></li>
+<li><a href="#org171c5bf">构建</a></li>
+<li><a href="#orgbad7d55">运行</a></li>
+<li><a href="#org2fdfebc">验证节点</a></li>
+<li><a href="#orgc80ef22">验证节点连接</a></li>
+<li><a href="#org6d20429">验证共识</a></li>
+<li><a href="#org5cad044">部署合约</a></li>
+<li><a href="#org6998c1e">调用合约</a></li>
+<li><a href="#org20558f2">说明</a></li>
+</ul>
+</div>
+</div>
+<p>
+FISCO BCOS部署
+</p>
+
+<div id="outline-container-orgbe93e23" class="outline-2">
+<h2 id="orgbe93e23">检查前置条件</h2>
+<div class="outline-text-2" id="text-orgbe93e23">
+<ul class="org-ul">
+<li>CPU 1.5GHz及以上</li>
+<li>内存 1GB及以上</li>
+<li>核心 2核及以上</li>
+<li>带宽 1Mb及以上</li>
+<li>操作系统 CentOS 7.2 64位 或 Ubuntu 16.04 64位</li>
+<li>软件 
+<ul class="org-ul">
+<li>git</li>
+<li>yum或apt</li>
+<li>nodejs 6.0及以上</li>
+<li>g++</li>
+</ul></li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-shell">cat /proc/cpuinfo | grep <span style="color: #8b2252;">"cpu MHz"</span>
+cat /proc/cpuinfo | grep <span style="color: #8b2252;">"cpu cores"</span>
+cat /etc/issue
+cat /etc/lsb-release
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orge7c013b" class="outline-2">
+<h2 id="orge7c013b">下载FISCO BCOS软件包</h2>
+<div class="outline-text-2" id="text-orge7c013b">
+<div class="org-src-container">
+<pre class="src src-shell">git clone https://github.com/fisco-bcos/fisco-bcos
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org171c5bf" class="outline-2">
+<h2 id="org171c5bf">构建</h2>
+<div class="outline-text-2" id="text-org171c5bf">
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #483d8b;">cd</span> fisco-bcos
+chmod +x build.sh
+./build.sh 
+</pre>
+</div>
+<p>
+如果输出
+</p>
+<blockquote>
+<p>
+fisco-bcos build succ! path: /usr/local/bin/fisco-bcos
+</p>
+</blockquote>
+<p>
+说明构建成功。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgbad7d55" class="outline-2">
+<h2 id="orgbad7d55">运行</h2>
+<div class="outline-text-2" id="text-orgbad7d55">
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #483d8b;">cd</span> sample
+chmod +x run.sh
+./run.sh
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org2fdfebc" class="outline-2">
+<h2 id="org2fdfebc">验证节点</h2>
+<div class="outline-text-2" id="text-org2fdfebc">
+<div class="org-src-container">
+<pre class="src src-shell">ps -ef | grep fisco-bcos 
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgc80ef22" class="outline-2">
+<h2 id="orgc80ef22">验证节点连接</h2>
+<div class="outline-text-2" id="text-orgc80ef22">
+<div class="org-src-container">
+<pre class="src src-shell">cat /bcos-data/node0/log/* | grep <span style="color: #8b2252;">"Connected to 1 peers"</span>
+</pre>
+</div>
+<p>
+如果有输出，说明连接成功。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org6d20429" class="outline-2">
+<h2 id="org6d20429">验证共识</h2>
+<div class="outline-text-2" id="text-org6d20429">
+<div class="org-src-container">
+<pre class="src src-shell">tail -f /bcos-data/node0/log/* | grep ++++
+</pre>
+</div>
+
+<p>
+如果有输出，说明共识成功。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org5cad044" class="outline-2">
+<h2 id="org5cad044">部署合约</h2>
+<div class="outline-text-2" id="text-org5cad044">
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #483d8b;">cd</span> tool
+babel-node deploy.js HelloWorld
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org6998c1e" class="outline-2">
+<h2 id="org6998c1e">调用合约</h2>
+<div class="outline-text-2" id="text-org6998c1e">
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #483d8b;">cd</span> tool
+bable-node demoHelloWorld.js
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org20558f2" class="outline-2">
+<h2 id="org20558f2">说明</h2>
+<div class="outline-text-2" id="text-org20558f2">
+<ul class="org-ul">
+<li>执行build.sh时，下载的软件包较多，需要下载大量NodeJS包，需要下载并构建包括Boost库在内的大量cpp包。需要的时间较长。</li>
+<li>在Ubuntu 17.10上没有nodejs-legacy包。需要改为nodejs。</li>
+<li>执行build.sh时遇到错误</li>
+</ul>
+<blockquote>
+<p>
+npm ERR! Linux 4.13.0-21-generic
+npm ERR! argv "/usr/bin/node" "/usr/bin/npm" "install" "-g" "cnpm" "&#x2013;registry=<a href="https://registry.npm.taobao.org">https://registry.npm.taobao.org</a>"
+npm ERR! node v6.11.4
+npm ERR! npm  v3.5.2
+npm ERR! path <i>usr/local/lib/node<sub>modules</sub></i>.staging/abbrev-cf0db83f
+npm ERR! code ENOENT
+npm ERR! errno -2
+npm ERR! syscall rename
+</p>
+
+<p>
+npm ERR! enoent ENOENT: no such file or directory, rename '<i>usr/local/lib/node<sub>modules</sub></i>.staging/abbrev-cf0db83f' -&gt; '<i>usr/local/lib/node<sub>modules</sub>/cnpm/node<sub>modules</sub>/npm/node<sub>modules</sub>/abbrev'
+npm ERR! enoent ENOENT: no such file or directory, rename '/usr/local/lib/node<sub>modules</sub></i>.staging/abbrev-cf0db83f' -&gt; '/usr/local/lib/node<sub>modules</sub>/cnpm/node<sub>modules</sub>/npm/node<sub>modules</sub>/abbrev'
+npm ERR! enoent This is most likely not a problem with npm itself
+npm ERR! enoent and is related to npm not being able to find a file.
+npm ERR! enoent 
+</p>
+
+<p>
+npm ERR! Please include the following file with any support request:
+npm ERR!     /home/tq/workspace/fisco-bcos/fisco-bcos/npm-debug.log
+npm ERR! code 1
+</p>
+</blockquote>
+
+<p>
+需要执行
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">sudo npm uninstall -g cnpm --registry=https://registry.npm.taobao.org
+</pre>
+</div>
+
+<ul class="org-ul">
+<li>执行build.sh时遇到错误</li>
+</ul>
+<blockquote>
+<p>
+[ 99%] Linking CXX executable fisco-bcos
+/home/tq/workspace/fisco-bcos/fisco-bcos/libevm/ethcall/EthCallEntry.h:162: error: undefined reference to 'void dev::eth::EthCallParamParser::parseToTuple&lt;unsigned int, std::_<sub>cxx11</sub>::basic<sub>string</sub>&lt;char, std::char<sub>traits</sub>&lt;char&gt;, std::allocator&lt;char&gt; &gt; &gt;(boost::multiprecision::number&lt;boost::multiprecision::backends::cpp<sub>int</sub><sub>backend</sub>&lt;256u, 256u, (boost::multiprecision::cpp<sub>integer</sub><sub>type</sub>)0, (boost::multiprecision::cpp<sub>int</sub><sub>check</sub><sub>type</sub>)0, void&gt;, (boost::multiprecision::expression<sub>template</sub><sub>option</sub>)0&gt;*, std::tuple&lt;unsigned int, std::_<sub>cxx11</sub>::basic<sub>string</sub>&lt;char, std::char<sub>traits</sub>&lt;char&gt;, std::allocator&lt;char&gt; &gt; &gt;&amp;)'
+/home/tq/workspace/fisco-bcos/fisco-bcos/libevm/ethcall/EthCallEntry.h:162: error: undefined reference to 'void dev::eth::EthCallParamParser::parseToTuple&lt;dev::vector<sub>ref</sub>&lt;char&gt;, std::_<sub>cxx11</sub>::basic<sub>string</sub>&lt;char, std::char<sub>traits</sub>&lt;char&gt;, std::allocator&lt;char&gt; &gt;, std::_<sub>cxx11</sub>::basic<sub>string</sub>&lt;char, std::char<sub>traits</sub>&lt;char&gt;, std::allocator&lt;char&gt; &gt; &gt;(boost::multiprecision::number&lt;boost::multiprecision::backends::cpp<sub>int</sub><sub>backend</sub>&lt;256u, 256u, (boost::multiprecision::cpp<sub>integer</sub><sub>type</sub>)0, (boost::multiprecision::cpp<sub>int</sub><sub>check</sub><sub>type</sub>)0, void&gt;, (boost::multiprecision::expression<sub>template</sub><sub>option</sub>)0&gt;*, std::tuple&lt;dev::vector<sub>ref</sub>&lt;char&gt;, std::_<sub>cxx11</sub>::basic<sub>string</sub>&lt;char, std::char<sub>traits</sub>&lt;char&gt;, std::allocator&lt;char&gt; &gt;, std::_<sub>cxx11</sub>::basic<sub>string</sub>&lt;char, std::char<sub>traits</sub>&lt;char&gt;, std::allocator&lt;char&gt; &gt; &gt;&amp;)'
+/home/tq/workspace/fisco-bcos/fisco-bcos/libevm/ethcall/EthCallEntry.h:162: error: undefined reference to 'void dev::eth::EthCallParamParser::parseToTuple&lt;std::_<sub>cxx11</sub>::basic<sub>string</sub>&lt;char, std::char<sub>traits</sub>&lt;char&gt;, std::allocator&lt;char&gt; &gt;, std::_<sub>cxx11</sub>::basic<sub>string</sub>&lt;char, std::char<sub>traits</sub>&lt;char&gt;, std::allocator&lt;char&gt; &gt;, std::_<sub>cxx11</sub>::basic<sub>string</sub>&lt;char, std::char<sub>traits</sub>&lt;char&gt;, std::allocator&lt;char&gt; &gt;, std::_<sub>cxx11</sub>::basic<sub>string</sub>&lt;char, std::char<sub>traits</sub>&lt;char&gt;, std::allocator&lt;char&gt; &gt; &gt;(boost::multiprecision::number&lt;boost::multiprecision::backends::cpp<sub>int</sub><sub>backend</sub>&lt;256u, 256u, (boost::multiprecision::cpp<sub>integer</sub><sub>type</sub>)0, (boost::multiprecision::cpp<sub>int</sub><sub>check</sub><sub>type</sub>)0, void&gt;, (boost::multiprecision::expression<sub>template</sub><sub>option</sub>)0&gt;*, std::tuple&lt;std::_<sub>cxx11</sub>::basic<sub>string</sub>&lt;char, std::char<sub>traits</sub>&lt;char&gt;, std::allocator&lt;char&gt; &gt;, std::_<sub>cxx11</sub>::basic<sub>string</sub>&lt;char, std::char<sub>traits</sub>&lt;char&gt;, std::allocator&lt;char&gt; &gt;, std::_<sub>cxx11</sub>::basic<sub>string</sub>&lt;char, std::char<sub>traits</sub>&lt;char&gt;, std::allocator&lt;char&gt; &gt;, std::_<sub>cxx11</sub>::basic<sub>string</sub>&lt;char, std::char<sub>traits</sub>&lt;char&gt;, std::allocator&lt;char&gt; &gt; &gt;&amp;)'
+collect2: error: ld returned 1 exit status
+eth/CMakeFiles/fisco-bcos.dir/build.make:172: recipe for target 'eth/fisco-bcos' failed
+make[2]: <b>*</b> [eth/fisco-bcos] Error 1
+CMakeFiles/Makefile2:324: recipe for target 'eth/CMakeFiles/fisco-bcos.dir/all' failed
+make[1]: <b>*</b> [eth/CMakeFiles/fisco-bcos.dir/all] Error 2
+Makefile:129: recipe for target 'all' failed
+make: <b>*</b> [all] Error 2
+</p>
+</blockquote>
+<p>
+将libevm/ethcall/EthCallEntry.h:162注释后可以编译。不去定注释后行为会发生哪些变化。环境Ubuntu 17.10 64位，g++ 7.2.0。
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Created: 2019-09-23 周一 18:45</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
