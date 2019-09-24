@@ -6,8 +6,9 @@
 <!-- 2019-09-24 周二 18:20 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>论文笔记：Gradient-Based Learning Applied to Document Recognition</title>
+<title>Python遍历目录的方法</title>
 <meta name="generator" content="Org mode" />
+<meta name="author" content="Wang Qian" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
   .title  { text-align: center;
@@ -225,77 +226,60 @@ for the JavaScript code in this tag.
  }
 /*]]>*///-->
 </script>
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        displayAlign: "center",
-        displayIndent: "0em",
-
-        "HTML-CSS": { scale: 100,
-                        linebreaks: { automatic: "false" },
-                        webFont: "TeX"
-                       },
-        SVG: {scale: 100,
-              linebreaks: { automatic: "false" },
-              font: "TeX"},
-        NativeMML: {scale: 100},
-        TeX: { equationNumbers: {autoNumber: "AMS"},
-               MultLineWidth: "85%",
-               TagSide: "right",
-               TagIndent: ".8em"
-             }
-});
-</script>
-<script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
 <div id="content">
-<h1 class="title">论文笔记：Gradient-Based Learning Applied to Document Recognition</h1>
-<p>
-论文地址：<a href="http://yann.lecun.com/exdb/publis/pdf/lecun-98.pdf">http://yann.lecun.com/exdb/publis/pdf/lecun-98.pdf</a>
-</p>
+<h1 class="title">Python遍历目录的方法</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org3b0a995">示例</a></li>
+<li><a href="#orgda26421">参考资料</a></li>
+<li><a href="#org94605cd">修订记录</a></li>
+</ul>
+</div>
+</div>
 
-<p>
-在lecun-98之前，传统的模式识别算法通常分为两个步骤：从原始输入中提取特征，根据特征进行分类。lecun-98提出，神经网络方法可以将这两个步骤合而为一，并且发现卷积神经网络可以识别手写数字。lecun-98的贡献在于揭示了：神经网络可以自主学习特征。
-</p>
+<div id="outline-container-org3b0a995" class="outline-2">
+<h2 id="org3b0a995">示例</h2>
+<div class="outline-text-2" id="text-org3b0a995">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #a020f0;">import</span> os
+<span style="color: #a020f0;">import</span> os.path
 
+<span style="color: #a0522d;">root_path</span>=<span style="color: #8b2252;">"C:\Data"</span>
+<span style="color: #a020f0;">for</span> parent_dir, sub_dirs, files <span style="color: #a020f0;">in</span> os.walk(root_path):
+    <span style="color: #a020f0;">for</span> <span style="color: #483d8b;">dir</span> <span style="color: #a020f0;">in</span> sub_dirs:
+        <span style="color: #a020f0;">print</span>(<span style="color: #483d8b;">dir</span>)
+    <span style="color: #a020f0;">for</span> <span style="color: #483d8b;">file</span> <span style="color: #a020f0;">in</span> files:
+        <span style="color: #a020f0;">print</span>(<span style="color: #483d8b;">file</span>)
+</pre>
+</div>
+</div>
+</div>
 
-<p>
-对于一个机器学习算法，假设 \(Z^p\) 是第p个输入模式，W表示系统参数。我们用 
-</p>
+<div id="outline-container-orgda26421" class="outline-2">
+<h2 id="orgda26421">参考资料</h2>
+<div class="outline-text-2" id="text-orgda26421">
+<ul class="org-ul">
+<li><a href="http://www.cnblogs.com/kaituorensheng/archive/2012/08/14/2638935.html">http://www.cnblogs.com/kaituorensheng/archive/2012/08/14/2638935.html</a></li>
+</ul>
+</div>
+</div>
 
-<p>
-\[
-Y^p = F(Z^p, W)
-\]
-</p>
-
-<p>
-表示算法对于 \(Z^p\) 的计算结果。由此我们可以定义损失函数
-</p>
-
-<p>
-\[
-E^p = D(D^p, F(W, Z^p))
-\]
-</p>
-
-<p>
-这里的 \(D^p\) 是“正确”的或期望的结果。损失函数描述了计算结果和 \(D^p\) 之间的差距，或者说，描述了学习得到的函数和目标函数的差距。我们用 \(E_{train}\) 表示训练集上所有样本损失的平均值，用 \(E_{test}\) 表示测试集上的损失平均值。lecun-98揭示了一个事实，随着训练集增大，测试集误差和训练集误差逐渐接近：
-</p>
-
-<p>
-\[
-E_{test} - E_{train} = k (\frac{h}{P}) ^ \alpha
-\]
-</p>
-
-<p>
-这里 \(P\) 是 \(E_{train}\) 中的样本数量， \(h\) 是学习算法的“有效容量”， \(\alpha\) 是介于0.5和1.0之间的值， \(k\) 是一个常数。
-</p>
+<div id="outline-container-org94605cd" class="outline-2">
+<h2 id="org94605cd">修订记录</h2>
+<div class="outline-text-2" id="text-org94605cd">
+<ul class="org-ul">
+<li>2017年03月11日 建立文档。</li>
+</ul>
+</div>
+</div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Date: 2019年09月23日</p>
+<p class="date">Date: 2017-03-11</p>
+<p class="author">Author: Wang Qian</p>
 <p class="date">Created: 2019-09-24 周二 18:20</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
