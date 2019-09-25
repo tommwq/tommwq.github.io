@@ -6,7 +6,7 @@
 <!-- 2019-09-26 周四 01:02 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Vue笔记</title>
+<title>webpack笔记</title>
 <meta name="generator" content="Org mode" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
@@ -228,104 +228,11 @@ for the JavaScript code in this tag.
 </head>
 <body>
 <div id="content">
-<h1 class="title">Vue笔记</h1>
-<div id="table-of-contents">
-<h2>Table of Contents</h2>
-<div id="text-table-of-contents">
-<ul>
-<li><a href="#org3ab13e3">修订记录</a></li>
-</ul>
-</div>
-</div>
-<p>
-Vue是一个现代化的Web开发框架。
-</p>
+<h1 class="title">webpack笔记</h1>
 
-<p>
-引入Vue。
-</p>
-<div class="org-src-container">
-<pre class="src src-html">&lt;<span style="color: #0000ff;">script</span> <span style="color: #a0522d;">src</span>=<span style="color: #8b2252;">"https://cdn.jsdelivr.net/npm/vue/dist/vue.js"</span>&gt;&lt;/<span style="color: #0000ff;">script</span>&gt;
-</pre>
-</div>
-
-<p>
-Vue是声明式的。
-</p>
-<div class="org-src-container">
-<pre class="src src-html">&lt;<span style="color: #0000ff;">div</span> <span style="color: #a0522d;">id</span>=<span style="color: #8b2252;">"app"</span>&gt;
-  {{ message }}
-&lt;/<span style="color: #0000ff;">div</span>&gt;
-</pre>
-</div>
-
-<div class="org-src-container">
-<pre class="src src-javascript"><span style="color: #a020f0;">var</span> <span style="color: #a0522d;">app</span> = <span style="color: #a020f0;">new</span> <span style="color: #228b22;">Vue</span>({
-  el: <span style="color: #8b2252;">"#app"</span>,
-  data: {
-    message: <span style="color: #8b2252;">"Hello Vue!"</span>
-  }
-});
-</pre>
-</div>
-
-<p>
-Vue可以绑定标签属性。
-</p>
-<div class="org-src-container">
-<pre class="src src-html">&lt;<span style="color: #0000ff;">div</span> <span style="color: #a0522d;">id</span>=<span style="color: #8b2252;">"app-2"</span>&gt;
-  &lt;<span style="color: #0000ff;">span</span> <span style="color: #483d8b;">v-bind</span>:<span style="color: #a0522d;">title</span>=<span style="color: #8b2252;">"message"</span>&gt;
-    &#40736;&#26631;&#24748;&#20572;&#20960;&#31186;&#38047;&#26597;&#30475;&#27492;&#22788;&#21160;&#24577;&#32465;&#23450;&#30340;&#25552;&#31034;&#20449;&#24687;&#65281;
-  &lt;/<span style="color: #0000ff;">span</span>&gt;
-&lt;/<span style="color: #0000ff;">div</span>&gt;
-
-var app2 = new Vue({
-  el: <span style="color: #8b2252;">"#app-2"</span>,
-  data: {
-    message: <span style="color: #8b2252;">"&#39029;&#38754;&#21152;&#36733;&#20110;"</span> + new Date().toLocaleStirng()
-  }
-});
-</pre>
-</div>
-
-<p>
-传递属性给Vue组件。
-向vue.component传递属性时，可以使用
-</p>
-<div class="org-src-container">
-<pre class="src src-html">&lt;<span style="color: #0000ff;">My</span> v-bind:myprop=foo&gt;...&lt;/<span style="color: #0000ff;">My</span>&gt;
-</pre>
-</div>
-<p>
-将foo对象绑定到组件的
-</p>
-<div class="org-src-container">
-<pre class="src src-javascript">props[<span style="color: #8b2252;">"myprop"</span>]
-</pre>
-</div>
-<p>
-对象上。
-</p>
-
-<p>
-更新数组
-</p>
-<pre class="example">
-let arr = this.data.arr;
-this.data.arr.splice(0, arr.length, ...brr);
-</pre>
-
-<div id="outline-container-org3ab13e3" class="outline-2">
-<h2 id="org3ab13e3">修订记录</h2>
-<div class="outline-text-2" id="text-org3ab13e3">
-<ul class="org-ul">
-<li>2019年08月31日 建立文档。</li>
-<li>2019年09月23日 增加组件属性绑定。</li>
-</ul>
-</div>
-</div>
 </div>
 <div id="postamble" class="status">
+<p class="date">Date: 2019年09月25日</p>
 <p class="date">Created: 2019-09-26 周四 01:02</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

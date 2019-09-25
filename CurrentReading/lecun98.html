@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2019-09-24 周二 18:20 -->
+<!-- 2019-09-26 周四 01:02 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>论文笔记：Gradient-Based Learning Applied to Document Recognition</title>
@@ -281,7 +281,7 @@ E^p = D(D^p, F(W, Z^p))
 </p>
 
 <p>
-这里的 \(D^p\) 是“正确”的或期望的结果。损失函数描述了计算结果和 \(D^p\) 之间的差距，或者说，描述了学习得到的函数和目标函数的差距。我们用 \(E_{train}\) 表示训练集上所有样本损失的平均值，用 \(E_{test}\) 表示测试集上的损失平均值。lecun-98揭示了一个事实，随着训练集增大，测试集误差和训练集误差逐渐接近：
+这里的 \(D^p\) 是“正确”的或期望的结果。损失函数描述了计算结果和 \(D^p\) 之间的差距，或者说，描述了学习得到的函数和目标函数的差距。我们用 \(E_{train}\) 表示训练集上所有样本损失的平均值，用 \(E_{test}\) 表示测试集上的损失平均值。在lecun-98之前，已经有研究揭示出这样一个事实：随着训练集增大，测试集误差和训练集误差逐渐接近：
 </p>
 
 <p>
@@ -291,12 +291,12 @@ E_{test} - E_{train} = k (\frac{h}{P}) ^ \alpha
 </p>
 
 <p>
-这里 \(P\) 是 \(E_{train}\) 中的样本数量， \(h\) 是学习算法的“有效容量”， \(\alpha\) 是介于0.5和1.0之间的值， \(k\) 是一个常数。
+这里 \(P\) 是 \(E_{train}\) 中的样本数量， \(h\) 是学习算法的“有效容量”， \(\alpha\) 是介于0.5和1.0之间的值， \(k\) 是一个常数。之前的研究重点在降低 \(E_{train}\) 同时缩小 \(E_{train}\) 和 \(E_{test}\) 的差距。
 </p>
 </div>
 <div id="postamble" class="status">
 <p class="date">Date: 2019年09月23日</p>
-<p class="date">Created: 2019-09-24 周二 18:20</p>
+<p class="date">Created: 2019-09-26 周四 01:02</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
