@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2019-09-23 周一 20:55 -->
+<!-- 2019-10-29 周二 01:28 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Protobuf3笔记</title>
@@ -179,6 +179,7 @@
   .org-svg { width: 90%; }
   /*]]>*/-->
 </style>
+<link rel=stylesheet href=/global.css type=text/css/>
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
@@ -233,59 +234,60 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org11906b2">文件后缀</a></li>
-<li><a href="#orga5288ee">语法版本</a></li>
-<li><a href="#orgdec2c1b">定义字段</a></li>
-<li><a href="#org733d06b">标签数字</a></li>
-<li><a href="#orgbb66ba4">多消息</a></li>
-<li><a href="#org1c85535">注释</a></li>
-<li><a href="#org924bf1b">编译输出</a></li>
-<li><a href="#org27ecfa3">常用标量类型</a></li>
-<li><a href="#org52f7e07">默认值</a></li>
-<li><a href="#org7f314b6">枚举类型</a></li>
-<li><a href="#org2e9ec4e">引用其他消息类型</a></li>
-<li><a href="#orgf967e02">引用其他proto文件</a></li>
-<li><a href="#orgfb2790c">protoc参数</a></li>
-<li><a href="#orgb7f0c54">内置类型</a></li>
-<li><a href="#org1d19e81">更新消息</a>
+<li><a href="#org11906b2">1. 文件后缀</a></li>
+<li><a href="#orga5288ee">2. 语法版本</a></li>
+<li><a href="#orgdec2c1b">3. 定义字段</a></li>
+<li><a href="#org733d06b">4. 标签数字</a></li>
+<li><a href="#orgbb66ba4">5. 多消息</a></li>
+<li><a href="#org1c85535">6. 注释</a></li>
+<li><a href="#org924bf1b">7. 编译输出</a></li>
+<li><a href="#org27ecfa3">8. 常用标量类型</a></li>
+<li><a href="#org52f7e07">9. 默认值</a></li>
+<li><a href="#org7f314b6">10. 枚举类型</a></li>
+<li><a href="#org2e9ec4e">11. 引用其他消息类型</a></li>
+<li><a href="#orgf967e02">12. 引用其他proto文件</a></li>
+<li><a href="#orgfb2790c">13. protoc参数</a></li>
+<li><a href="#orgb7f0c54">14. 内置类型</a></li>
+<li><a href="#org1d19e81">15. 更新消息</a>
 <ul>
-<li><a href="#org99e7eb0">字段标签</a></li>
-<li><a href="#org688538f">删除字段</a></li>
-<li><a href="#org7f6c58c">bytes和string</a></li>
+<li><a href="#org99e7eb0">15.1. 字段标签</a></li>
+<li><a href="#org688538f">15.2. 删除字段</a></li>
+<li><a href="#org7f6c58c">15.3. bytes和string</a></li>
 </ul>
 </li>
-<li><a href="#org7a2b01b">Any消息</a></li>
-<li><a href="#org101cec8">OneOf消息</a></li>
-<li><a href="#org6b8a2fd">Map消息</a></li>
-<li><a href="#org97172e4">声明包。</a></li>
-<li><a href="#orgbaf49f5">定义服务</a></li>
-<li><a href="#orga998c44">在Go中使用protobuf</a>
+<li><a href="#org7a2b01b">16. Any消息</a></li>
+<li><a href="#org101cec8">17. OneOf消息</a></li>
+<li><a href="#org6b8a2fd">18. Map消息</a></li>
+<li><a href="#org97172e4">19. 声明包。</a></li>
+<li><a href="#orgbaf49f5">20. 定义服务</a></li>
+<li><a href="#orga998c44">21. 在Go中使用protobuf</a>
 <ul>
-<li><a href="#org863efdd">示例proto</a></li>
-<li><a href="#orgf762830">生成的代码</a></li>
-<li><a href="#org1891854">调用方法</a></li>
-<li><a href="#org83800c8">Any消息在Go中的用法</a></li>
-<li><a href="#orgab02524">注意事项</a></li>
+<li><a href="#orgcbfcfa3">21.1. 示例proto</a></li>
+<li><a href="#org8e335ee">21.2. 生成的代码</a></li>
+<li><a href="#org42171bd">21.3. 调用方法</a></li>
+<li><a href="#org83800c8">21.4. Any消息在Go中的用法</a></li>
+<li><a href="#orgab02524">21.5. 注意事项</a></li>
 </ul>
 </li>
-<li><a href="#orgea32b3b">在Java中使用protobuf</a>
+<li><a href="#orgea32b3b">22. 在Java中使用protobuf</a>
 <ul>
-<li><a href="#orgcbfcfa3">示例proto</a></li>
-<li><a href="#org8e335ee">生成的代码</a></li>
-<li><a href="#org42171bd">调用方法</a></li>
-<li><a href="#orgf835042">使用Gradle生成protobuf</a></li>
+<li><a href="#orgb6c584d">22.1. 示例proto</a></li>
+<li><a href="#org0bb8875">22.2. 生成的代码</a></li>
+<li><a href="#orga9db5ae">22.3. 调用方法</a></li>
+<li><a href="#orgf835042">22.4. 使用Gradle生成protobuf</a></li>
 </ul>
 </li>
-<li><a href="#org03420a4">参考资料</a></li>
-<li><a href="#org04a2ba6">修订记录</a></li>
+<li><a href="#org219fc8b">23. 字符串和Message对象相互转换</a></li>
+<li><a href="#org03420a4">24. 参考资料</a></li>
+<li><a href="#org04a2ba6">25. 修订记录</a></li>
 </ul>
 </div>
 </div>
 
 
 <div id="outline-container-org11906b2" class="outline-2">
-<h2 id="org11906b2">文件后缀</h2>
-<div class="outline-text-2" id="text-org11906b2">
+<h2 id="org11906b2"><span class="section-number-2">1</span> 文件后缀</h2>
+<div class="outline-text-2" id="text-1">
 <p>
 定义Proto的文件应以.proto为后缀。
 </p>
@@ -293,14 +295,14 @@ for the JavaScript code in this tag.
 </div>
 
 <div id="outline-container-orga5288ee" class="outline-2">
-<h2 id="orga5288ee">语法版本</h2>
-<div class="outline-text-2" id="text-orga5288ee">
+<h2 id="orga5288ee"><span class="section-number-2">2</span> 语法版本</h2>
+<div class="outline-text-2" id="text-2">
 <p>
 Proto文件的首行应指定语法版本：
 </p>
 
 <div class="org-src-container">
-<pre class="src src-protobuf">syntax = <span style="color: #8b2252;">"proto3"</span>; <span style="color: #b22222;">// </span><span style="color: #b22222;">"proto2"</span>
+<pre class="src src-text">syntax = "proto3"; // "proto2"
 </pre>
 </div>
 </div>
@@ -308,14 +310,14 @@ Proto文件的首行应指定语法版本：
 
 
 <div id="outline-container-orgdec2c1b" class="outline-2">
-<h2 id="orgdec2c1b">定义字段</h2>
-<div class="outline-text-2" id="text-orgdec2c1b">
+<h2 id="orgdec2c1b"><span class="section-number-2">3</span> 定义字段</h2>
+<div class="outline-text-2" id="text-3">
 <p>
 在消息中，每个字段以下列方式定义：
 </p>
 
 <div class="org-src-container">
-<pre class="src src-protobuf"><span style="color: #228b22;">type</span> <span style="color: #a0522d;">field</span> <span style="color: #8b2252;">"="</span> tag <span style="color: #8b2252;">";"</span>
+<pre class="src src-text">type field "=" tag ";"
 </pre>
 </div>
 
@@ -324,10 +326,10 @@ Proto文件的首行应指定语法版本：
 </p>
 
 <div class="org-src-container">
-<pre class="src src-protobuf"><span style="color: #a020f0;">message</span> <span style="color: #228b22;">SearchRequest</span> {
-  <span style="color: #228b22;">string</span> <span style="color: #a0522d;">query</span> = 1;
-  <span style="color: #228b22;">int32</span> <span style="color: #a0522d;">page_number</span> = 2;
-  <span style="color: #228b22;">int32</span> <span style="color: #a0522d;">result_per_page</span> = 3;
+<pre class="src src-text">message SearchRequest {
+  string query = 1;
+  int32 page_number = 2;
+  int32 result_per_page = 3;
 }
 </pre>
 </div>
@@ -336,8 +338,8 @@ Proto文件的首行应指定语法版本：
 
 
 <div id="outline-container-org733d06b" class="outline-2">
-<h2 id="org733d06b">标签数字</h2>
-<div class="outline-text-2" id="text-org733d06b">
+<h2 id="org733d06b"><span class="section-number-2">4</span> 标签数字</h2>
+<div class="outline-text-2" id="text-4">
 <p>
 出于性能考虑，在消息中，常用字段的标签最好小于15。这样可以降低消息序列化后的体积。
 </p>
@@ -345,17 +347,17 @@ Proto文件的首行应指定语法版本：
 </div>
 
 <div id="outline-container-orgbb66ba4" class="outline-2">
-<h2 id="orgbb66ba4">多消息</h2>
-<div class="outline-text-2" id="text-orgbb66ba4">
+<h2 id="orgbb66ba4"><span class="section-number-2">5</span> 多消息</h2>
+<div class="outline-text-2" id="text-5">
 <p>
 一个Proto文件中，可以定义多个消息。如：
 </p>
 <div class="org-src-container">
-<pre class="src src-protobuf"><span style="color: #a020f0;">message</span> <span style="color: #228b22;">SearchRequest</span> {
-    <span style="color: #b22222;">// </span><span style="color: #b22222;">...</span>
+<pre class="src src-text">message SearchRequest {
+    // ...
 }
-<span style="color: #a020f0;">message</span> <span style="color: #228b22;">SearchResponse</span> {
-    <span style="color: #b22222;">// </span><span style="color: #b22222;">...</span>
+message SearchResponse {
+    // ...
 }
 </pre>
 </div>
@@ -363,8 +365,8 @@ Proto文件的首行应指定语法版本：
 </div>
 
 <div id="outline-container-org1c85535" class="outline-2">
-<h2 id="org1c85535">注释</h2>
-<div class="outline-text-2" id="text-org1c85535">
+<h2 id="org1c85535"><span class="section-number-2">6</span> 注释</h2>
+<div class="outline-text-2" id="text-6">
 <p>
 Proto使用C风格的注释。
 </p>
@@ -372,8 +374,8 @@ Proto使用C风格的注释。
 </div>
 
 <div id="outline-container-org924bf1b" class="outline-2">
-<h2 id="org924bf1b">编译输出</h2>
-<div class="outline-text-2" id="text-org924bf1b">
+<h2 id="org924bf1b"><span class="section-number-2">7</span> 编译输出</h2>
+<div class="outline-text-2" id="text-7">
 <p>
 对于C++，protobuf为每个消息生成一个类，为每个proto文件生成一个.h头文件和一个.cc源代码文件。
 </p>
@@ -396,8 +398,8 @@ Proto使用C风格的注释。
 </div>
 
 <div id="outline-container-org27ecfa3" class="outline-2">
-<h2 id="org27ecfa3">常用标量类型</h2>
-<div class="outline-text-2" id="text-org27ecfa3">
+<h2 id="org27ecfa3"><span class="section-number-2">8</span> 常用标量类型</h2>
+<div class="outline-text-2" id="text-8">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -446,8 +448,8 @@ Proto使用C风格的注释。
 </div>
 
 <div id="outline-container-org52f7e07" class="outline-2">
-<h2 id="org52f7e07">默认值</h2>
-<div class="outline-text-2" id="text-org52f7e07">
+<h2 id="org52f7e07"><span class="section-number-2">9</span> 默认值</h2>
+<div class="outline-text-2" id="text-9">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -492,14 +494,14 @@ Proto使用C风格的注释。
 </div>
 
 <div id="outline-container-org7f314b6" class="outline-2">
-<h2 id="org7f314b6">枚举类型</h2>
-<div class="outline-text-2" id="text-org7f314b6">
+<h2 id="org7f314b6"><span class="section-number-2">10</span> 枚举类型</h2>
+<div class="outline-text-2" id="text-10">
 <div class="org-src-container">
-<pre class="src src-protobuf"><span style="color: #a020f0;">message</span> <span style="color: #228b22;">SearchRequest</span> {
-  <span style="color: #228b22;">string</span> <span style="color: #a0522d;">query</span> = 1;
-  <span style="color: #228b22;">int32</span> <span style="color: #a0522d;">page_number</span> = 2;
-  <span style="color: #228b22;">int32</span> <span style="color: #a0522d;">result_per_page</span> = 3;
-  <span style="color: #a020f0;">enum</span> <span style="color: #228b22;">Corpus</span> {
+<pre class="src src-text">message SearchRequest {
+  string query = 1;
+  int32 page_number = 2;
+  int32 result_per_page = 3;
+  enum Corpus {
     UNIVERSAL = 0;
     WEB = 1;
     IMAGES = 2;
@@ -508,11 +510,11 @@ Proto使用C风格的注释。
     PRODUCTS = 5;
     VIDEO = 6;
   }
-  <span style="color: #228b22;">Corpus</span> <span style="color: #a0522d;">corpus</span> = 4;
+  Corpus corpus = 4;
 }
 
-<span style="color: #a020f0;">message</span> <span style="color: #228b22;">EnumAllowingAlias</span> {
-  <span style="color: #a020f0;">option</span> <span style="color: #a0522d;">allow_alias</span> = <span style="color: #008b8b;">true</span>;
+message EnumAllowingAlias {
+  option allow_alias = true;
   UNKNOWN = 0;
   STARTED = 1;
   RUNNING = 1;
@@ -523,17 +525,17 @@ Proto使用C风格的注释。
 </div>
 
 <div id="outline-container-org2e9ec4e" class="outline-2">
-<h2 id="org2e9ec4e">引用其他消息类型</h2>
-<div class="outline-text-2" id="text-org2e9ec4e">
+<h2 id="org2e9ec4e"><span class="section-number-2">11</span> 引用其他消息类型</h2>
+<div class="outline-text-2" id="text-11">
 <div class="org-src-container">
-<pre class="src src-protobuf"><span style="color: #a020f0;">message</span> <span style="color: #228b22;">SearchResponse</span> {
-  <span style="color: #a020f0;">repeated</span> <span style="color: #228b22;">Result</span> <span style="color: #a0522d;">results</span> = 1;
+<pre class="src src-text">message SearchResponse {
+  repeated Result results = 1;
 }
 
-<span style="color: #a020f0;">message</span> <span style="color: #228b22;">Result</span> {
-  <span style="color: #228b22;">string</span> <span style="color: #a0522d;">url</span> = 1;
-  <span style="color: #228b22;">string</span> <span style="color: #a0522d;">title</span> = 2;
-  <span style="color: #a020f0;">repeated</span> <span style="color: #228b22;">string</span> <span style="color: #a0522d;">snippets</span> = 3;
+message Result {
+  string url = 1;
+  string title = 2;
+  repeated string snippets = 3;
 }
 </pre>
 </div>
@@ -541,18 +543,18 @@ Proto使用C风格的注释。
 </div>
 
 <div id="outline-container-orgf967e02" class="outline-2">
-<h2 id="orgf967e02">引用其他proto文件</h2>
-<div class="outline-text-2" id="text-orgf967e02">
+<h2 id="orgf967e02"><span class="section-number-2">12</span> 引用其他proto文件</h2>
+<div class="outline-text-2" id="text-12">
 <div class="org-src-container">
-<pre class="src src-protobuf"><span style="color: #a020f0;">import</span> <span style="color: #8b2252;">"myproject/other_protos.proto"</span>;
+<pre class="src src-text">import "myproject/other_protos.proto";
 </pre>
 </div>
 </div>
 </div>
 
 <div id="outline-container-orgfb2790c" class="outline-2">
-<h2 id="orgfb2790c">protoc参数</h2>
-<div class="outline-text-2" id="text-orgfb2790c">
+<h2 id="orgfb2790c"><span class="section-number-2">13</span> protoc参数</h2>
+<div class="outline-text-2" id="text-13">
 <p>
 -I/&#x2013;proto<sub>path</sub> 指定proto文件目录。
 </p>
@@ -560,20 +562,20 @@ Proto使用C风格的注释。
 </div>
 
 <div id="outline-container-orgb7f0c54" class="outline-2">
-<h2 id="orgb7f0c54">内置类型</h2>
-<div class="outline-text-2" id="text-orgb7f0c54">
+<h2 id="orgb7f0c54"><span class="section-number-2">14</span> 内置类型</h2>
+<div class="outline-text-2" id="text-14">
 <div class="org-src-container">
-<pre class="src src-protobuf"><span style="color: #a020f0;">message</span> <span style="color: #228b22;">SearchResponse</span> {
-    <span style="color: #a020f0;">message</span> <span style="color: #228b22;">Result</span> {
-    <span style="color: #228b22;">string</span> <span style="color: #a0522d;">url</span> = 1;
-    <span style="color: #228b22;">string</span> <span style="color: #a0522d;">title</span> = 2;
-    <span style="color: #a020f0;">repeated</span> <span style="color: #228b22;">string</span> <span style="color: #a0522d;">snippets</span> = 3;
+<pre class="src src-text">message SearchResponse {
+    message Result {
+    string url = 1;
+    string title = 2;
+    repeated string snippets = 3;
   }
-  <span style="color: #a020f0;">repeated</span> <span style="color: #228b22;">Result</span> <span style="color: #a0522d;">results</span> = 1;
+  repeated Result results = 1;
 }
 
-<span style="color: #a020f0;">message</span> <span style="color: #228b22;">SomeOtherMessage</span> {
-  <span style="color: #008b8b;">SearchResponse</span>.<span style="color: #228b22;">Result</span> <span style="color: #a0522d;">result</span> = 1;
+message SomeOtherMessage {
+  SearchResponse.Result result = 1;
 }
 </pre>
 </div>
@@ -581,28 +583,28 @@ Proto使用C风格的注释。
 </div>
 
 <div id="outline-container-org1d19e81" class="outline-2">
-<h2 id="org1d19e81">更新消息</h2>
-<div class="outline-text-2" id="text-org1d19e81">
+<h2 id="org1d19e81"><span class="section-number-2">15</span> 更新消息</h2>
+<div class="outline-text-2" id="text-15">
 </div>
 <div id="outline-container-org99e7eb0" class="outline-3">
-<h3 id="org99e7eb0">字段标签</h3>
-<div class="outline-text-3" id="text-org99e7eb0">
+<h3 id="org99e7eb0"><span class="section-number-3">15.1</span> 字段标签</h3>
+<div class="outline-text-3" id="text-15-1">
 <p>
 不得改动已存在的字段标签。新生成的代码可以解析旧消息。新增的字段会被设置为默认值。旧代码页可以解析新消息，新增的字段会被忽略。
 </p>
 </div>
 </div>
 <div id="outline-container-org688538f" class="outline-3">
-<h3 id="org688538f">删除字段</h3>
-<div class="outline-text-3" id="text-org688538f">
+<h3 id="org688538f"><span class="section-number-3">15.2</span> 删除字段</h3>
+<div class="outline-text-3" id="text-15-2">
 <p>
 字段可以被删除。但已使用过的标签不得重复使用。
 </p>
 </div>
 </div>
 <div id="outline-container-org7f6c58c" class="outline-3">
-<h3 id="org7f6c58c">bytes和string</h3>
-<div class="outline-text-3" id="text-org7f6c58c">
+<h3 id="org7f6c58c"><span class="section-number-3">15.3</span> bytes和string</h3>
+<div class="outline-text-3" id="text-15-3">
 <p>
 当字符串是UTF-8编码时，bytes和string可以兼容。
 </p>
@@ -610,28 +612,28 @@ Proto使用C风格的注释。
 </div>
 </div>
 <div id="outline-container-org7a2b01b" class="outline-2">
-<h2 id="org7a2b01b">Any消息</h2>
-<div class="outline-text-2" id="text-org7a2b01b">
+<h2 id="org7a2b01b"><span class="section-number-2">16</span> Any消息</h2>
+<div class="outline-text-2" id="text-16">
 <p>
 Any消息是一个占位符，表示任意类型。使用Any消息时，需要引用google/protobuf/any.proto。
 </p>
 <div class="org-src-container">
-<pre class="src src-protobuf"><span style="color: #a020f0;">import</span> <span style="color: #8b2252;">"google/protobuf/any.proto"</span>;
+<pre class="src src-text">import "google/protobuf/any.proto";
 
-<span style="color: #a020f0;">message</span> <span style="color: #228b22;">ErrorStatus</span> {
-  <span style="color: #228b22;">string</span> <span style="color: #a020f0;">message</span> = 1;
-  <span style="color: #a020f0;">repeated</span> <span style="color: #008b8b;">google</span>.<span style="color: #008b8b;">protobuf</span>.<span style="color: #228b22;">Any</span> <span style="color: #a0522d;">details</span> = 2;
+message ErrorStatus {
+  string message = 1;
+  repeated google.protobuf.Any details = 2;
 }
 
-<span style="color: #228b22;">NetworkErrorDetails</span> <span style="color: #a0522d;">details</span> = ...;
-<span style="color: #228b22;">ErrorStatus</span> <span style="color: #a0522d;">status</span>;
-<span style="color: #008b8b;">status</span>.add_details()-&gt;PackFrom(details);
+NetworkErrorDetails details = ...;
+ErrorStatus status;
+status.add_details()-&gt;PackFrom(details);
 
-<span style="color: #228b22;">ErrorStatus</span> <span style="color: #a0522d;">status</span> = ...;
-for (const Any&amp; detail : <span style="color: #008b8b;">status</span>.details()){
-  if (<span style="color: #008b8b;">detail</span>.Is&lt;NetworkErrorDetails&gt;()){
-    <span style="color: #228b22;">NetworkErrorDetails</span> <span style="color: #a0522d;">network_error</span>;
-    <span style="color: #008b8b;">detail</span>.UnpackTo(&amp;network_error);
+ErrorStatus status = ...;
+for (const Any&amp; detail : status.details()){
+  if (detail.Is&lt;NetworkErrorDetails&gt;()){
+    NetworkErrorDetails network_error;
+    detail.UnpackTo(&amp;network_error);
     ...
   }
 }
@@ -641,57 +643,57 @@ for (const Any&amp; detail : <span style="color: #008b8b;">status</span>.details
 </div>
 
 <div id="outline-container-org101cec8" class="outline-2">
-<h2 id="org101cec8">OneOf消息</h2>
-<div class="outline-text-2" id="text-org101cec8">
+<h2 id="org101cec8"><span class="section-number-2">17</span> OneOf消息</h2>
+<div class="outline-text-2" id="text-17">
 <p>
 OneOf提供了一种类似C语言union结构体的机制，来降低存储体积。
 </p>
 <div class="org-src-container">
-<pre class="src src-protobuf"><span style="color: #a020f0;">message</span> <span style="color: #228b22;">SampleMessage</span> {
-  <span style="color: #228b22;">oneof</span> <span style="color: #a0522d;">test_oneof</span> {
-    <span style="color: #228b22;">string</span> <span style="color: #a0522d;">name</span> = 4;
-    <span style="color: #228b22;">SubMessage</span> <span style="color: #a0522d;">sub_message</span> = 9;
+<pre class="src src-text">message SampleMessage {
+  oneof test_oneof {
+    string name = 4;
+    SubMessage sub_message = 9;
   }
 }
 
-<span style="color: #228b22;">SampleMessage</span> <span style="color: #a020f0;">message</span>;
-<span style="color: #a020f0;">message</span>.set_name(<span style="color: #8b2252;">"Joe"</span>);
-assert(<span style="color: #a020f0;">message</span>.has_name());
+SampleMessage message;
+message.set_name("Joe");
+assert(message.has_name());
 </pre>
 </div>
 </div>
 </div>
 
 <div id="outline-container-org6b8a2fd" class="outline-2">
-<h2 id="org6b8a2fd">Map消息</h2>
-<div class="outline-text-2" id="text-org6b8a2fd">
+<h2 id="org6b8a2fd"><span class="section-number-2">18</span> Map消息</h2>
+<div class="outline-text-2" id="text-18">
 <p>
 Map可以定义一组键值对。
 </p>
 
 <div class="org-src-container">
-<pre class="src src-protobuf">map&lt;<span style="color: #228b22;">string</span>, Project&gt; projects = 3;
+<pre class="src src-text">map&lt;string, Project&gt; projects = 3;
 </pre>
 </div>
 </div>
 </div>
 
 <div id="outline-container-org97172e4" class="outline-2">
-<h2 id="org97172e4">声明包。</h2>
-<div class="outline-text-2" id="text-org97172e4">
+<h2 id="org97172e4"><span class="section-number-2">19</span> 声明包。</h2>
+<div class="outline-text-2" id="text-19">
 <div class="org-src-container">
-<pre class="src src-protobuf"><span style="color: #a020f0;">package</span> <span style="color: #008b8b;">foo</span>.<span style="color: #228b22;">bar</span>;
+<pre class="src src-text">package foo.bar;
 </pre>
 </div>
 </div>
 </div>
 
 <div id="outline-container-orgbaf49f5" class="outline-2">
-<h2 id="orgbaf49f5">定义服务</h2>
-<div class="outline-text-2" id="text-orgbaf49f5">
+<h2 id="orgbaf49f5"><span class="section-number-2">20</span> 定义服务</h2>
+<div class="outline-text-2" id="text-20">
 <div class="org-src-container">
-<pre class="src src-protobuf"><span style="color: #a020f0;">service</span> <span style="color: #228b22;">SearchService</span> {
-  <span style="color: #a020f0;">rpc</span> <span style="color: #0000ff;">Search</span> (SearchRequest) <span style="color: #a020f0;">returns</span> (SearchResponse);
+<pre class="src src-text">service SearchService {
+  rpc Search (SearchRequest) returns (SearchResponse);
 }
 </pre>
 </div>
@@ -699,101 +701,101 @@ Map可以定义一组键值对。
 </div>
 
 <div id="outline-container-orga998c44" class="outline-2">
-<h2 id="orga998c44">在Go中使用protobuf</h2>
-<div class="outline-text-2" id="text-orga998c44">
+<h2 id="orga998c44"><span class="section-number-2">21</span> 在Go中使用protobuf</h2>
+<div class="outline-text-2" id="text-21">
 </div>
-<div id="outline-container-org863efdd" class="outline-3">
-<h3 id="org863efdd">示例proto</h3>
-<div class="outline-text-3" id="text-org863efdd">
+<div id="outline-container-orgcbfcfa3" class="outline-3">
+<h3 id="orgcbfcfa3"><span class="section-number-3">21.1</span> 示例proto</h3>
+<div class="outline-text-3" id="text-21-1">
 <div class="org-src-container">
-<pre class="src src-protobuf"><span style="color: #a020f0;">package</span> <span style="color: #228b22;">tutorial</span>;
+<pre class="src src-text">package tutorial;
 
-<span style="color: #a020f0;">option</span> <span style="color: #a0522d;">java_package</span> = <span style="color: #8b2252;">"com.example.tutorial"</span>;
-<span style="color: #a020f0;">option</span> <span style="color: #a0522d;">java_outer_classname</span> = <span style="color: #8b2252;">"AddressBookProtos"</span>;
+option java_package = "com.example.tutorial";
+option java_outer_classname = "AddressBookProtos";
 
-<span style="color: #a020f0;">message</span> <span style="color: #228b22;">Person</span> {
-  <span style="color: #a020f0;">required</span> <span style="color: #228b22;">string</span> <span style="color: #a0522d;">name</span> = 1;
-  <span style="color: #a020f0;">required</span> <span style="color: #228b22;">int32</span> <span style="color: #a0522d;">id</span> = 2;
-  <span style="color: #228b22;">string</span> <span style="color: #a0522d;">email</span> = 3;
+message Person {
+  required string name = 1;
+  required int32 id = 2;
+  string email = 3;
 
-  <span style="color: #a020f0;">enum</span> <span style="color: #228b22;">PhoneType</span> {
+  enum PhoneType {
     MOBILE = 0;
     HOME = 1;
     WORK = 2;
   }
 
-  <span style="color: #a020f0;">message</span> <span style="color: #228b22;">PhoneNumber</span> {
-    <span style="color: #a020f0;">required</span> <span style="color: #228b22;">string</span> <span style="color: #a0522d;">number</span> = 1;
-    <span style="color: #a020f0;">optional</span> <span style="color: #228b22;">PhoneType</span> <span style="color: #a0522d;">type</span> = 2 [<span style="color: #a020f0;">default</span> = HOME];
+  message PhoneNumber {
+    required string number = 1;
+    optional PhoneType type = 2 [default = HOME];
   }
-  <span style="color: #a020f0;">repeated</span> <span style="color: #228b22;">PhoneNumber</span> <span style="color: #a0522d;">phone</span> = 4;
+  repeated PhoneNumber phone = 4;
 }
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgf762830" class="outline-3">
-<h3 id="orgf762830">生成的代码</h3>
+<div id="outline-container-org8e335ee" class="outline-3">
+<h3 id="org8e335ee"><span class="section-number-3">21.2</span> 生成的代码</h3>
 </div>
 
 
 
-<div id="outline-container-org1891854" class="outline-3">
-<h3 id="org1891854">调用方法</h3>
-<div class="outline-text-3" id="text-org1891854">
+<div id="outline-container-org42171bd" class="outline-3">
+<h3 id="org42171bd"><span class="section-number-3">21.3</span> 调用方法</h3>
+<div class="outline-text-3" id="text-21-3">
 <div class="org-src-container">
-<pre class="src src-protobuf"><span style="color: #a020f0;">import</span> (
-  <span style="color: #8b2252;">"github.com/golang/protobuf/proto"</span>
-  pb <span style="color: #8b2252;">"path/to/generated/pb/file"</span>
+<pre class="src src-text">import (
+  "github.com/golang/protobuf/proto"
+  pb "path/to/generated/pb/file"
 )
-<span style="color: #b22222;">// </span><span style="color: #b22222;">...</span>
+// ...
 
-p := &amp;<span style="color: #008b8b;">pb</span>.Person {
+p := &amp;pb.Person {
   Id: 1234,
-  Name: <span style="color: #8b2252;">"John Doe"</span>,
-  Email: <span style="color: #8b2252;">"jdoe@example.com"</span>,
-  Phones: []*<span style="color: #008b8b;">pb</span>.Person_PhoneNumber {
-    {Number: <span style="color: #8b2252;">"555-4321"</span>, Type: <span style="color: #008b8b;">pb</span>.Person_HOME},
+  Name: "John Doe",
+  Email: "jdoe@example.com",
+  Phones: []*pb.Person_PhoneNumber {
+    {Number: "555-4321", Type: pb.Person_HOME},
   },
 }
-out, err := <span style="color: #008b8b;">proto</span>.Marshal(p)
-q := &amp;<span style="color: #008b8b;">pb</span>.Person{}
-err := <span style="color: #008b8b;">proto</span>.Unmarshal(in, q)
+out, err := proto.Marshal(p)
+q := &amp;pb.Person{}
+err := proto.Unmarshal(in, q)
 
-<span style="color: #008b8b;">proto</span>.MessageType(name <span style="color: #228b22;">string</span>) <span style="color: #008b8b;">reflect</span>.Type
-<span style="color: #008b8b;">proto</span>.Clone(pb Message) Message
+proto.MessageType(name string) reflect.Type
+proto.Clone(pb Message) Message
 </pre>
 </div>
 </div>
 </div>
 
 <div id="outline-container-org83800c8" class="outline-3">
-<h3 id="org83800c8">Any消息在Go中的用法</h3>
-<div class="outline-text-3" id="text-org83800c8">
+<h3 id="org83800c8"><span class="section-number-3">21.4</span> Any消息在Go中的用法</h3>
+<div class="outline-text-3" id="text-21-4">
 <p>
 Any消息可以表示任意类型的消息。在Go中使用Any消息的示例如下：
 </p>
 <div class="org-src-container">
-<pre class="src src-protobuf"><span style="color: #a020f0;">import</span> <span style="color: #8b2252;">"github.com/golang/protobuf/ptypes"</span>
-<span style="color: #a020f0;">import</span> <span style="color: #8b2252;">"github.com/golang/protobuf/proto"</span>
-<span style="color: #a020f0;">import</span> <span style="color: #8b2252;">"path/to/generated/pb"</span>
-<span style="color: #b22222;">// </span><span style="color: #b22222;">message Foo {</span>
-<span style="color: #b22222;">//     </span><span style="color: #b22222;">google.protobuf.Any bar = 1;</span>
-<span style="color: #b22222;">// </span><span style="color: #b22222;">}</span>
-<span style="color: #b22222;">// </span><span style="color: #b22222;">message Bar {</span>
-<span style="color: #b22222;">//     </span><span style="color: #b22222;">uint32 x = 1;</span>
-<span style="color: #b22222;">// </span><span style="color: #b22222;">}</span>
+<pre class="src src-text">import "github.com/golang/protobuf/ptypes"
+import "github.com/golang/protobuf/proto"
+import "path/to/generated/pb"
+// message Foo {
+//     google.protobuf.Any bar = 1;
+// }
+// message Bar {
+//     uint32 x = 1;
+// }
 
-bar := &amp;<span style="color: #008b8b;">pb</span>.Bar{
+bar := &amp;pb.Bar{
   X: 1,
 }
 
-body, err := <span style="color: #008b8b;">ptypes</span>.MarshalAny(bar)
+body, err := ptypes.MarshalAny(bar)
 if err != nil {
-  <span style="color: #008b8b;">log</span>.Fatal(err)
+  log.Fatal(err)
 }
-foo := &amp;<span style="color: #008b8b;">pb</span>.Foo{
+foo := &amp;pb.Foo{
   Bar: body,
 }
 </pre>
@@ -802,8 +804,8 @@ foo := &amp;<span style="color: #008b8b;">pb</span>.Foo{
 </div>
 
 <div id="outline-container-orgab02524" class="outline-3">
-<h3 id="orgab02524">注意事项</h3>
-<div class="outline-text-3" id="text-orgab02524">
+<h3 id="orgab02524"><span class="section-number-3">21.5</span> 注意事项</h3>
+<div class="outline-text-3" id="text-21-5">
 <ul class="org-ul">
 <li>在使用proto.Unmarshal(buf, message)对消息进行反序列化时，缓冲区buf的长度应当等于消息的实际长度。否则会报告如下错误消息：</li>
 </ul>
@@ -817,99 +819,99 @@ foo := &amp;<span style="color: #008b8b;">pb</span>.Foo{
 
 
 <div id="outline-container-orgea32b3b" class="outline-2">
-<h2 id="orgea32b3b">在Java中使用protobuf</h2>
-<div class="outline-text-2" id="text-orgea32b3b">
+<h2 id="orgea32b3b"><span class="section-number-2">22</span> 在Java中使用protobuf</h2>
+<div class="outline-text-2" id="text-22">
 </div>
-<div id="outline-container-orgcbfcfa3" class="outline-3">
-<h3 id="orgcbfcfa3">示例proto</h3>
-<div class="outline-text-3" id="text-orgcbfcfa3">
+<div id="outline-container-orgb6c584d" class="outline-3">
+<h3 id="orgb6c584d"><span class="section-number-3">22.1</span> 示例proto</h3>
+<div class="outline-text-3" id="text-22-1">
 <div class="org-src-container">
-<pre class="src src-protobuf"><span style="color: #a020f0;">package</span> <span style="color: #228b22;">tutorial</span>;
+<pre class="src src-text">package tutorial;
 
-<span style="color: #a020f0;">option</span> <span style="color: #a0522d;">java_package</span> = <span style="color: #8b2252;">"com.example.tutorial"</span>;
-<span style="color: #a020f0;">option</span> <span style="color: #a0522d;">java_outer_classname</span> = <span style="color: #8b2252;">"AddressBookProtos"</span>;
+option java_package = "com.example.tutorial";
+option java_outer_classname = "AddressBookProtos";
 
-<span style="color: #a020f0;">message</span> <span style="color: #228b22;">Person</span> {
-  <span style="color: #a020f0;">required</span> <span style="color: #228b22;">string</span> <span style="color: #a0522d;">name</span> = 1;
-  <span style="color: #a020f0;">required</span> <span style="color: #228b22;">int32</span> <span style="color: #a0522d;">id</span> = 2;
-  <span style="color: #228b22;">string</span> <span style="color: #a0522d;">email</span> = 3;
+message Person {
+  required string name = 1;
+  required int32 id = 2;
+  string email = 3;
 
-  <span style="color: #a020f0;">enum</span> <span style="color: #228b22;">PhoneType</span> {
+  enum PhoneType {
     MOBILE = 0;
     HOME = 1;
     WORK = 2;
   }
 
-  <span style="color: #a020f0;">message</span> <span style="color: #228b22;">PhoneNumber</span> {
-    <span style="color: #a020f0;">required</span> <span style="color: #228b22;">string</span> <span style="color: #a0522d;">number</span> = 1;
-    <span style="color: #a020f0;">optional</span> <span style="color: #228b22;">PhoneType</span> <span style="color: #a0522d;">type</span> = 2 [<span style="color: #a020f0;">default</span> = HOME];
+  message PhoneNumber {
+    required string number = 1;
+    optional PhoneType type = 2 [default = HOME];
   }
-  <span style="color: #a020f0;">repeated</span> <span style="color: #228b22;">PhoneNumber</span> <span style="color: #a0522d;">phone</span> = 4;
+  repeated PhoneNumber phone = 4;
 }
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org8e335ee" class="outline-3">
-<h3 id="org8e335ee">生成的代码</h3>
-<div class="outline-text-3" id="text-org8e335ee">
+<div id="outline-container-org0bb8875" class="outline-3">
+<h3 id="org0bb8875"><span class="section-number-3">22.2</span> 生成的代码</h3>
+<div class="outline-text-3" id="text-22-2">
 <div class="org-src-container">
-<pre class="src src-java"><span style="color: #b22222;">// </span><span style="color: #b22222;">Person</span>
-<span style="color: #a020f0;">public</span> <span style="color: #228b22;">boolean</span> <span style="color: #0000ff;">hasName</span>();
-<span style="color: #a020f0;">public</span> <span style="color: #228b22;">String</span> <span style="color: #0000ff;">getName</span>();
+<pre class="src src-java"><span style="color: #AEAEAE; font-style: italic;">// </span><span style="color: #AEAEAE; font-style: italic;">Person</span>
+<span style="color: #FBDE2D;">public</span> <span style="color: #8DA6CE;">boolean</span> <span style="color: #FF6400;">hasName</span>();
+<span style="color: #FBDE2D;">public</span> <span style="color: #8DA6CE;">String</span> <span style="color: #FF6400;">getName</span>();
 
-<span style="color: #a020f0;">public</span> <span style="color: #228b22;">boolean</span> <span style="color: #0000ff;">hasId</span>();
-<span style="color: #a020f0;">public</span> <span style="color: #228b22;">int</span> <span style="color: #0000ff;">getId</span>();
+<span style="color: #FBDE2D;">public</span> <span style="color: #8DA6CE;">boolean</span> <span style="color: #FF6400;">hasId</span>();
+<span style="color: #FBDE2D;">public</span> <span style="color: #8DA6CE;">int</span> <span style="color: #FF6400;">getId</span>();
 
-<span style="color: #a020f0;">public</span> <span style="color: #228b22;">boolean</span> <span style="color: #0000ff;">hasEmail</span>();
-<span style="color: #a020f0;">public</span> <span style="color: #228b22;">String</span> <span style="color: #0000ff;">getEmail</span>();
+<span style="color: #FBDE2D;">public</span> <span style="color: #8DA6CE;">boolean</span> <span style="color: #FF6400;">hasEmail</span>();
+<span style="color: #FBDE2D;">public</span> <span style="color: #8DA6CE;">String</span> <span style="color: #FF6400;">getEmail</span>();
 
-<span style="color: #a020f0;">public</span> <span style="color: #228b22;">List</span>&lt;<span style="color: #228b22;">PhoneNumber</span>&gt; <span style="color: #0000ff;">getPhoneList</span>();
-<span style="color: #a020f0;">public</span> <span style="color: #228b22;">int</span> <span style="color: #0000ff;">getPhoneCount</span>();
-<span style="color: #a020f0;">public</span> <span style="color: #228b22;">PhoneNumber</span> <span style="color: #0000ff;">getPhone</span>(<span style="color: #228b22;">int</span> <span style="color: #a0522d;">index</span>);
+<span style="color: #FBDE2D;">public</span> <span style="color: #8DA6CE;">List</span>&lt;<span style="color: #8DA6CE;">PhoneNumber</span>&gt; <span style="color: #FF6400;">getPhoneList</span>();
+<span style="color: #FBDE2D;">public</span> <span style="color: #8DA6CE;">int</span> <span style="color: #FF6400;">getPhoneCount</span>();
+<span style="color: #FBDE2D;">public</span> <span style="color: #8DA6CE;">PhoneNumber</span> <span style="color: #FF6400;">getPhone</span>(<span style="color: #8DA6CE;">int</span> <span style="color: #FF6400;">index</span>);
 
-<span style="color: #b22222;">// </span><span style="color: #b22222;">Person.Builder</span>
-<span style="color: #a020f0;">public</span> <span style="color: #228b22;">boolean</span> <span style="color: #0000ff;">hasName</span>();
-<span style="color: #a020f0;">public</span> <span style="color: #008b8b;">java</span>.<span style="color: #008b8b;">lang</span>.<span style="color: #228b22;">String</span> <span style="color: #0000ff;">getName</span>();
-<span style="color: #a020f0;">public</span> <span style="color: #228b22;">Builder</span> <span style="color: #0000ff;">setName</span>(<span style="color: #228b22;">String</span> <span style="color: #a0522d;">value</span>);
-<span style="color: #a020f0;">public</span> <span style="color: #228b22;">Builder</span> <span style="color: #0000ff;">clearName</span>();
+<span style="color: #AEAEAE; font-style: italic;">// </span><span style="color: #AEAEAE; font-style: italic;">Person.Builder</span>
+<span style="color: #FBDE2D;">public</span> <span style="color: #8DA6CE;">boolean</span> <span style="color: #FF6400;">hasName</span>();
+<span style="color: #FBDE2D;">public</span> <span style="color: #D8FA3C;">java</span>.<span style="color: #D8FA3C;">lang</span>.<span style="color: #8DA6CE;">String</span> <span style="color: #FF6400;">getName</span>();
+<span style="color: #FBDE2D;">public</span> <span style="color: #8DA6CE;">Builder</span> <span style="color: #FF6400;">setName</span>(<span style="color: #8DA6CE;">String</span> <span style="color: #FF6400;">value</span>);
+<span style="color: #FBDE2D;">public</span> <span style="color: #8DA6CE;">Builder</span> <span style="color: #FF6400;">clearName</span>();
 
-<span style="color: #a020f0;">public</span> <span style="color: #228b22;">List</span>&lt;<span style="color: #228b22;">PhoneNumber</span>&gt; <span style="color: #0000ff;">getPhoneList</span>();
-<span style="color: #a020f0;">public</span> <span style="color: #228b22;">int</span> <span style="color: #0000ff;">getPhoneCount</span>();
-<span style="color: #a020f0;">public</span> <span style="color: #228b22;">PhoneNumber</span> <span style="color: #0000ff;">getPhone</span>(<span style="color: #228b22;">int</span> <span style="color: #a0522d;">index</span>);
-<span style="color: #a020f0;">public</span> <span style="color: #228b22;">Builder</span> <span style="color: #0000ff;">setPhone</span>(<span style="color: #228b22;">int</span> <span style="color: #a0522d;">index</span>, <span style="color: #228b22;">PhoneNumber</span> <span style="color: #a0522d;">value</span>);
-<span style="color: #a020f0;">public</span> <span style="color: #228b22;">Builder</span> <span style="color: #0000ff;">addPhone</span>(<span style="color: #228b22;">PhoneNumber</span> <span style="color: #a0522d;">value</span>);
-<span style="color: #a020f0;">public</span> <span style="color: #228b22;">Builder</span> <span style="color: #0000ff;">addAllPhone</span>(<span style="color: #228b22;">iterable</span>&lt;<span style="color: #228b22;">PhoneNumber</span>&gt; <span style="color: #a0522d;">value</span>);
-<span style="color: #a020f0;">public</span> <span style="color: #228b22;">Builder</span> <span style="color: #0000ff;">clearPhone</span>();
+<span style="color: #FBDE2D;">public</span> <span style="color: #8DA6CE;">List</span>&lt;<span style="color: #8DA6CE;">PhoneNumber</span>&gt; <span style="color: #FF6400;">getPhoneList</span>();
+<span style="color: #FBDE2D;">public</span> <span style="color: #8DA6CE;">int</span> <span style="color: #FF6400;">getPhoneCount</span>();
+<span style="color: #FBDE2D;">public</span> <span style="color: #8DA6CE;">PhoneNumber</span> <span style="color: #FF6400;">getPhone</span>(<span style="color: #8DA6CE;">int</span> <span style="color: #FF6400;">index</span>);
+<span style="color: #FBDE2D;">public</span> <span style="color: #8DA6CE;">Builder</span> <span style="color: #FF6400;">setPhone</span>(<span style="color: #8DA6CE;">int</span> <span style="color: #FF6400;">index</span>, <span style="color: #8DA6CE;">PhoneNumber</span> <span style="color: #FF6400;">value</span>);
+<span style="color: #FBDE2D;">public</span> <span style="color: #8DA6CE;">Builder</span> <span style="color: #FF6400;">addPhone</span>(<span style="color: #8DA6CE;">PhoneNumber</span> <span style="color: #FF6400;">value</span>);
+<span style="color: #FBDE2D;">public</span> <span style="color: #8DA6CE;">Builder</span> <span style="color: #FF6400;">addAllPhone</span>(<span style="color: #8DA6CE;">iterable</span>&lt;<span style="color: #8DA6CE;">PhoneNumber</span>&gt; <span style="color: #FF6400;">value</span>);
+<span style="color: #FBDE2D;">public</span> <span style="color: #8DA6CE;">Builder</span> <span style="color: #FF6400;">clearPhone</span>();
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org42171bd" class="outline-3">
-<h3 id="org42171bd">调用方法</h3>
-<div class="outline-text-3" id="text-org42171bd">
+<div id="outline-container-orga9db5ae" class="outline-3">
+<h3 id="orga9db5ae"><span class="section-number-3">22.3</span> 调用方法</h3>
+<div class="outline-text-3" id="text-22-3">
 <div class="org-src-container">
-<pre class="src src-java"><span style="color: #228b22;">Person</span> <span style="color: #a0522d;">john</span> = Person.newBuilder()
+<pre class="src src-java"><span style="color: #8DA6CE;">Person</span> <span style="color: #FF6400;">john</span> = Person.newBuilder()
   .setId(1234)
-  .setName(<span style="color: #8b2252;">"John"</span>)
+  .setName(<span style="color: #61CE3C;">"John"</span>)
   .addPhone(
-    <span style="color: #008b8b;">Person</span>.PhoneNumber.newBuilder()
-      .setNumber(<span style="color: #8b2252;">"555-4321"</span>)
-      .setType(<span style="color: #008b8b;">Person</span>.<span style="color: #008b8b;">PhoneType</span>.HOME))
+    <span style="color: #D8FA3C;">Person</span>.PhoneNumber.newBuilder()
+      .setNumber(<span style="color: #61CE3C;">"555-4321"</span>)
+      .setType(<span style="color: #D8FA3C;">Person</span>.<span style="color: #D8FA3C;">PhoneType</span>.HOME))
   .build();
 john.writeTo(outputStream);
 
-<span style="color: #228b22;">Person</span> <span style="color: #a0522d;">walliam</span> = Person.parseForm(inputStream);
+<span style="color: #8DA6CE;">Person</span> <span style="color: #FF6400;">walliam</span> = Person.parseForm(inputStream);
 </pre>
 </div>
 </div>
 </div>
 
 <div id="outline-container-orgf835042" class="outline-3">
-<h3 id="orgf835042">使用Gradle生成protobuf</h3>
-<div class="outline-text-3" id="text-orgf835042">
+<h3 id="orgf835042"><span class="section-number-3">22.4</span> 使用Gradle生成protobuf</h3>
+<div class="outline-text-3" id="text-22-4">
 <p>
 google提供了生成protobuf的gradle插件，名称是com.google.protobuf。在使用时，需要在build.gradle中加入：
 </p>
@@ -999,22 +1001,46 @@ sourceSets {
 </div>
 
 
+<div id="outline-container-org219fc8b" class="outline-2">
+<h2 id="org219fc8b"><span class="section-number-2">23</span> 字符串和Message对象相互转换</h2>
+<div class="outline-text-2" id="text-23">
+<p>
+从Message转换为字符串：
+</p>
+<div class="org-src-container">
+<pre class="src src-java">myMessage.toString();
+</pre>
+</div>
+
+<p>
+从字符串转换为Message：
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #8DA6CE;">TestMessage</span> <span style="color: #FF6400;">testMessage</span> = <span style="color: #FBDE2D;">new</span> TestMessage.<span style="color: #8DA6CE;">newBuilder</span>();
+<span style="color: #8DA6CE;">CharSequence</span> <span style="color: #FF6400;">myText</span> = <span style="color: #61CE3C;">"status: true\n ..."</span>;
+<span style="color: #D8FA3C;">com</span>.<span style="color: #D8FA3C;">google</span>.<span style="color: #D8FA3C;">protobuf</span>.TextFormat.getParser().merge(myText, testMessage);
+</pre>
+</div>
+</div>
+</div>
+
 <div id="outline-container-org03420a4" class="outline-2">
-<h2 id="org03420a4">参考资料</h2>
-<div class="outline-text-2" id="text-org03420a4">
+<h2 id="org03420a4"><span class="section-number-2">24</span> 参考资料</h2>
+<div class="outline-text-2" id="text-24">
 <ul class="org-ul">
 <li><a href="https://developers.google.com/protocol-buffers/docs/javatutorial">https://developers.google.com/protocol-buffers/docs/javatutorial</a></li>
 <li><a href="http://www.cnblogs.com/resentment/p/6715124.html">http://www.cnblogs.com/resentment/p/6715124.html</a></li>
 <li><a href="https://github.com/grpc/grpc-java/tree/master/compiler">https://github.com/grpc/grpc-java/tree/master/compiler</a></li>
 <li><a href="https://github.com/grpc/grpc-java">https://github.com/grpc/grpc-java</a></li>
 <li><a href="https://developers.google.com/protocol-buffers/docs/reference/java-generated">https://developers.google.com/protocol-buffers/docs/reference/java-generated</a></li>
+<li><a href="https://stackoverflow.com/questions/52151314/java-protobuf-from-string">https://stackoverflow.com/questions/52151314/java-protobuf-from-string</a></li>
 </ul>
 </div>
 </div>
 
 <div id="outline-container-org04a2ba6" class="outline-2">
-<h2 id="org04a2ba6">修订记录</h2>
-<div class="outline-text-2" id="text-org04a2ba6">
+<h2 id="org04a2ba6"><span class="section-number-2">25</span> 修订记录</h2>
+<div class="outline-text-2" id="text-25">
 <ul class="org-ul">
 <li>2016年5月3日 建立文档。</li>
 <li>2016年8月11日 修订。</li>
@@ -1029,7 +1055,7 @@ sourceSets {
 </div>
 <div id="postamble" class="status">
 <p class="date">Date: 2019年02月22日</p>
-<p class="date">Created: 2019-09-23 周一 20:55</p>
+<p class="date">Created: 2019-10-29 周二 01:28</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

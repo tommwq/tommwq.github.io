@@ -3,11 +3,12 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2019-10-29 å‘¨äºŒ 01:23 -->
+<!-- 2019-10-29 ÖÜ¶ş 01:23 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>åœ¨Linuxä¸‹ä½¿ç”¨awkè§£æiniæ–‡ä»¶çš„æ–¹æ³•</title>
+<title>GradleÊ¹ÓÃ±Ê¼Ç</title>
 <meta name="generator" content="Org mode" />
+<meta name="author" content="Wang Qian" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
   .title  { text-align: center;
@@ -229,156 +230,209 @@ for the JavaScript code in this tag.
 </head>
 <body>
 <div id="content">
-<h1 class="title">åœ¨Linuxä¸‹ä½¿ç”¨awkè§£æiniæ–‡ä»¶çš„æ–¹æ³•</h1>
+<h1 class="title">GradleÊ¹ÓÃ±Ê¼Ç</h1>
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgc2aa3fb">1. iniæ–‡ä»¶</a></li>
-<li><a href="#org25424cf">2. awkç¨‹åº</a></li>
-<li><a href="#org2e1411b">3. ä½¿ç”¨ç¤ºä¾‹</a></li>
-<li><a href="#org7ae2e03">4. iniè½¬æ¢properties</a></li>
-<li><a href="#org57b3e5b">5. ä¿®è®¢è®°å½•</a></li>
+<li><a href="#org30d9fe0">1. ÒıÓÃ²å¼ş</a></li>
+<li><a href="#orgec7083c">2. ³£ÓÃ²å¼ş</a>
+<ul>
+<li><a href="#org3481ed1">2.1. java</a></li>
+<li><a href="#org508ad54">2.2. application</a>
+<ul>
+<li><a href="#orga3ba172">2.2.1. ÉèÖÃÖ÷ÀàÃû×Ö</a></li>
+</ul>
+</li>
+<li><a href="#org6373495">2.3. com.android.application</a></li>
+<li><a href="#orge1f9892">2.4. com.android.library</a></li>
+<li><a href="#org07674c7">2.5. war</a></li>
+</ul>
+</li>
+<li><a href="#org6f3ec17">3. ÉèÖÃÔ´´úÂëÂ·¾¶</a></li>
+<li><a href="#orgbe2fc2e">4. ÉèÖÃÒÀÀµÏî</a></li>
+<li><a href="#orgde7999b">5. ÉèÖÃ°æ±¾ºÅ</a></li>
+<li><a href="#orgc7a2d24">6. ÉèÖÃ²Ö¿â</a></li>
+<li><a href="#org8db64fd">7. ÉèÖÃJVM°æ±¾</a></li>
+<li><a href="#orgbe29384">8. Ö¸¶¨Ô´´úÂëÎªUTF-8±àÂë</a></li>
+<li><a href="#orgc36d2f8">9. ĞŞ¸ÄgradleÊä³öjarÎÄ¼şµÄÃû×Ö</a></li>
+<li><a href="#orgf0b75a8">10. ÅĞ¶Ï²Ù×÷ÏµÍ³</a></li>
+<li><a href="#org98b26a0">11. ĞŞ¶©¼ÇÂ¼</a></li>
 </ul>
 </div>
 </div>
 
-
-<div id="outline-container-orgc2aa3fb" class="outline-2">
-<h2 id="orgc2aa3fb"><span class="section-number-2">1</span> iniæ–‡ä»¶</h2>
+<div id="outline-container-org30d9fe0" class="outline-2">
+<h2 id="org30d9fe0"><span class="section-number-2">1</span> ÒıÓÃ²å¼ş</h2>
 <div class="outline-text-2" id="text-1">
-<p>
-iniæ–‡ä»¶æ˜¯ä¸€äº›è½¯ä»¶ç”¨æ¥ä¿å­˜é…ç½®ä¿¡æ¯çš„æ–‡æœ¬æ–‡ä»¶ã€‚iniæ–‡ä»¶çš„ä¼˜ç‚¹æ˜¯ç®€å•å’Œçµæ´»ï¼Œç¼ºç‚¹æ˜¯æ²¡æœ‰ç»Ÿä¸€çš„æ ‡å‡†ã€‚
-</p>
-
-<p>
-ä¸‹é¢æ¥çœ‹ä¸€ä¸ªiniæ–‡ä»¶å†…å®¹ç¤ºä¾‹::
-</p>
 <div class="org-src-container">
-<pre class="src src-ini">[Master]
-Arguments = -log master.log
-LogLevel = 3
-[Client]
-Arguments = -log client.log
-LogLevel = 1
+<pre class="src src-text">apply plugin: 'java'
 </pre>
 </div>
-
-<p>
-ä»è¿™é‡Œå¯ä»¥çœ‹åˆ°ï¼Œiniæ–‡ä»¶çš„å†…å®¹å¯ä»¥æ ¹æ®[Master]ã€[Client]åˆ†ä¸ºä¸åŒçš„éƒ¨åˆ†ï¼Œæ¯ä¸ªéƒ¨åˆ†åŒ…å«äº†ä¸€ç»„é”®å€¼å¯¹ã€‚æˆ‘ä»¬å¯ä»¥å¯¹iniæ–‡ä»¶è¿›è¡Œç®€å•çš„å»ºæ¨¡ï¼š
-</p>
-
-
-<ol class="org-ol">
-<li>iniæ–‡ä»¶æ˜¯ä¸€ä¸ªæ–‡æœ¬æ–‡ä»¶ï¼Œç”±ä¸€ç»„åŸŸç»„æˆã€‚</li>
-<li>åŸŸç”±åŸŸåå­—å’Œä¸€ç³»åˆ—é”®å€¼å¯¹ç»„æˆã€‚åŸŸåå­—å’Œæ¯ä¸ªé”®å€¼å¯¹ï¼Œåˆ†åˆ«å ä¸€è¡Œã€‚</li>
-<li>åŸŸåæ‰€åœ¨è¡Œçš„æ ¼å¼ä¸ºâ€œ[åŸŸåå­—]â€ã€‚</li>
-<li>åŸŸä¸­é”®å€¼å¯¹æ‰€åœ¨è¡Œçš„æ ¼å¼ä¸ºâ€œé”®=å€¼â€ã€‚</li>
-</ol>
-
-<p>
-åŸºäºè¿™ä¸ªæ¨¡å‹å°±å¯ä»¥å¯¹iniæ–‡ä»¶è¿›è¡Œè§£æã€‚
-</p>
 </div>
 </div>
 
-<div id="outline-container-org25424cf" class="outline-2">
-<h2 id="org25424cf"><span class="section-number-2">2</span> awkç¨‹åº</h2>
+<div id="outline-container-orgec7083c" class="outline-2">
+<h2 id="orgec7083c"><span class="section-number-2">2</span> ³£ÓÃ²å¼ş</h2>
 <div class="outline-text-2" id="text-2">
-<p>
-ä¸‹é¢çš„ç¨‹åºéå†iniæ–‡ä»¶çš„æ¯ä¸€è¡Œï¼Œå°†è¯»å–åˆ°çš„é”®å€¼å¯¹ä»¥ <code>â€œexport scope_name=valueâ€</code> çš„æ ¼å¼è¾“å‡ºã€‚
-</p>
-
+</div>
+<div id="outline-container-org3481ed1" class="outline-3">
+<h3 id="org3481ed1"><span class="section-number-3">2.1</span> java</h3>
+</div>
+<div id="outline-container-org508ad54" class="outline-3">
+<h3 id="org508ad54"><span class="section-number-3">2.2</span> application</h3>
+<div class="outline-text-3" id="text-2-2">
+</div>
+<div id="outline-container-orga3ba172" class="outline-4">
+<h4 id="orga3ba172"><span class="section-number-4">2.2.1</span> ÉèÖÃÖ÷ÀàÃû×Ö</h4>
+<div class="outline-text-4" id="text-2-2-1">
 <div class="org-src-container">
-<pre class="src src-awk"><span style="color: #AEAEAE; font-style: italic;"># </span><span style="color: #AEAEAE; font-style: italic;">ini2env.awk</span>
-<span style="color: #FBDE2D;">function</span> <span style="color: #FF6400;">ltrim</span>(s) { <span style="color: #7fffd4;">sub</span>(<span style="color: #61CE3C;">/^[ \t\r\n]+/</span>, <span style="color: #61CE3C;">""</span>, s); <span style="color: #FBDE2D;">return</span> s }
-<span style="color: #FBDE2D;">function</span> <span style="color: #FF6400;">rtrim</span>(s) { <span style="color: #7fffd4;">sub</span>(<span style="color: #61CE3C;">/[ \t\r\n]+$/</span>, <span style="color: #61CE3C;">""</span>, s); <span style="color: #FBDE2D;">return</span> s }
-<span style="color: #FBDE2D;">function</span> <span style="color: #FF6400;">trim</span>(s) { <span style="color: #FBDE2D;">return</span> rtrim(ltrim(s)); }
-
-<span style="color: #FBDE2D;">BEGIN</span>{scope=<span style="color: #61CE3C;">""</span>;} {                              
-        <span style="color: #FBDE2D;">if</span> ($1 ~ <span style="color: #61CE3C;">/\[.*\]/</span>)                                                   
-                scope=trim(<span style="color: #7fffd4;">substr</span>($1,2,<span style="color: #7fffd4;">length</span>($1)-2));                             
-        <span style="color: #FBDE2D;">else</span> {                                                   
-                name=trim($1)
-                value=$2;  
-                <span style="color: #FBDE2D;">if</span> (<span style="color: #7fffd4;">length</span>(value) &gt; 0) { 
-                        <span style="color: #7fffd4;">printf</span>(<span style="color: #61CE3C;">"export %s_%s=\"%s\"\n"</span>, scope, name, value); 
-                } 
-        } 
-}
+<pre class="src src-text">mainClassName = 'com.foo.Bar'
 </pre>
 </div>
 </div>
 </div>
+</div>
+<div id="outline-container-org6373495" class="outline-3">
+<h3 id="org6373495"><span class="section-number-3">2.3</span> com.android.application</h3>
+</div>
+<div id="outline-container-orge1f9892" class="outline-3">
+<h3 id="orge1f9892"><span class="section-number-3">2.4</span> com.android.library</h3>
+</div>
+<div id="outline-container-org07674c7" class="outline-3">
+<h3 id="org07674c7"><span class="section-number-3">2.5</span> war</h3>
+</div>
+</div>
 
-
-<div id="outline-container-org2e1411b" class="outline-2">
-<h2 id="org2e1411b"><span class="section-number-2">3</span> ä½¿ç”¨ç¤ºä¾‹</h2>
+<div id="outline-container-org6f3ec17" class="outline-2">
+<h2 id="org6f3ec17"><span class="section-number-2">3</span> ÉèÖÃÔ´´úÂëÂ·¾¶</h2>
 <div class="outline-text-2" id="text-3">
 <div class="org-src-container">
-<pre class="src src-ini"># ini æ–‡ä»¶
-[app]
-arguments= --debug
-</pre>
-</div>
-
-
-<div class="org-src-container">
-<pre class="src src-shell"><span style="color: #AEAEAE; font-style: italic;"># </span><span style="color: #AEAEAE; font-style: italic;">&#23558;ini&#25991;&#20214;&#36716;&#25442;&#20026;&#20020;&#26102;&#30340;shell&#33050;&#26412;&#12290;</span>
-<span style="color: #FF6400;">tmpfile</span>=<span style="color: #fa8072;">`mktemp'</span>
-<span style="color: #fa8072;">cat app.ini | awk -F '=' -f ini2env.awk &gt;&gt; $tmpfile</span>
-<span style="color: #fa8072;"># &#21152;&#36733;sh&#33050;&#26412;&#65292;&#35774;&#32622;&#29615;&#22659;&#21464;&#37327;&#12290;</span>
-<span style="color: #fa8072;">source $tmpfile</span>
-<span style="color: #fa8072;"># &#21024;&#38500;&#20020;&#26102;&#33050;&#26412;&#12290;</span>
-<span style="color: #fa8072;">rm $tmpfile</span>
-
-<span style="color: #fa8072;"># &#21551;&#21160;&#31243;&#24207;&#65292;&#23558;ini&#21442;&#25968;&#20256;&#20837;&#12290;</span>
-<span style="color: #fa8072;">app=./a.out</span>
-<span style="color: #fa8072;">$app $app_arguments</span>
-</pre>
-</div>
-</div>
-</div>
-
-<div id="outline-container-org7ae2e03" class="outline-2">
-<h2 id="org7ae2e03"><span class="section-number-2">4</span> iniè½¬æ¢properties</h2>
-<div class="outline-text-2" id="text-4">
-<p>
-ç±»ä¼¼çš„ï¼Œå¯ä»¥å°†iniæ–‡ä»¶è½¬æ¢ä¸ºpropertiesæ–‡ä»¶ã€‚
-</p>
-<div class="org-src-container">
-<pre class="src src-bash"><span style="color: #FBDE2D;">function</span> <span style="color: #FF6400;">ltrim</span>(s) { sub(/^[ \t\r\n]+/, <span style="color: #61CE3C;">""</span>, s); <span style="color: #FBDE2D;">return</span> s }
-<span style="color: #FBDE2D;">function</span> <span style="color: #FF6400;">rtrim</span>(s) { sub(/[ \t\r\n]+$/, <span style="color: #61CE3C;">""</span>, s); <span style="color: #FBDE2D;">return</span> s }
-<span style="color: #FBDE2D;">function</span> <span style="color: #FF6400;">trim</span>(s) { <span style="color: #FBDE2D;">return</span> rtrim(ltrim(s)); }
-
-BEGIN{<span style="color: #FF6400;">scope</span>=<span style="color: #61CE3C;">""</span>;} {                              
-        <span style="color: #FBDE2D;">if</span> ($<span style="color: #FF6400;">1</span> ~ /<span style="color: #61CE3C;">\[</span>.*<span style="color: #61CE3C;">\]</span>/)                                                   
-                <span style="color: #FF6400;">scope</span>=substr($<span style="color: #FF6400;">1</span>,2,length($<span style="color: #FF6400;">1</span>)-2);                             
-        <span style="color: #FBDE2D;">else</span> {                                                   
-                <span style="color: #FF6400;">name</span>=(scope <span style="color: #61CE3C;">""</span> <span style="color: #61CE3C;">"."</span> trim($<span style="color: #FF6400;">1</span>));  
-                <span style="color: #FF6400;">value</span>=$<span style="color: #FF6400;">2</span>;  
-                <span style="color: #FBDE2D;">if</span> (length(value) &gt; 0) { 
-                        printf(<span style="color: #61CE3C;">"%s=\"%s\"\n"</span>, name, value); 
-                } 
-        } 
+<pre class="src src-text">sourceSets {
+  main {
+    java {
+      srdDir 'src'
+    }
+  }
 }
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org57b3e5b" class="outline-2">
-<h2 id="org57b3e5b"><span class="section-number-2">5</span> ä¿®è®¢è®°å½•</h2>
+<div id="outline-container-orgbe2fc2e" class="outline-2">
+<h2 id="orgbe2fc2e"><span class="section-number-2">4</span> ÉèÖÃÒÀÀµÏî</h2>
+<div class="outline-text-2" id="text-4">
+<div class="org-src-container">
+<pre class="src src-text">dependencies {
+  compile fileTree(dir: './lib', include: '*.jar')
+}
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgde7999b" class="outline-2">
+<h2 id="orgde7999b"><span class="section-number-2">5</span> ÉèÖÃ°æ±¾ºÅ</h2>
 <div class="outline-text-2" id="text-5">
+<div class="org-src-container">
+<pre class="src src-text">version = '1.0'
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgc7a2d24" class="outline-2">
+<h2 id="orgc7a2d24"><span class="section-number-2">6</span> ÉèÖÃ²Ö¿â</h2>
+<div class="outline-text-2" id="text-6">
+<div class="org-src-container">
+<pre class="src src-text">repositories {
+  mavenCentral()
+}
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org8db64fd" class="outline-2">
+<h2 id="org8db64fd"><span class="section-number-2">7</span> ÉèÖÃJVM°æ±¾</h2>
+<div class="outline-text-2" id="text-7">
+<div class="org-src-container">
+<pre class="src src-text">sourceCompatibility = 1.5
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgbe29384" class="outline-2">
+<h2 id="orgbe29384"><span class="section-number-2">8</span> Ö¸¶¨Ô´´úÂëÎªUTF-8±àÂë</h2>
+<div class="outline-text-2" id="text-8">
+<div class="org-src-container">
+<pre class="src src-text">tasks.withType(JavaCompile) {
+  options.encoding = 'UTF-8'
+}
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgc36d2f8" class="outline-2">
+<h2 id="orgc36d2f8"><span class="section-number-2">9</span> ĞŞ¸ÄgradleÊä³öjarÎÄ¼şµÄÃû×Ö</h2>
+<div class="outline-text-2" id="text-9">
+<div class="org-src-container">
+<pre class="src src-java">jar {
+    manifest{
+        attributes (<span style="color: #61CE3C;">"Fw-Version"</span> : <span style="color: #61CE3C;">"2.50.00"</span>, <span style="color: #61CE3C;">"${parent.manifestSectionName}"</span>)
+    }
+    baseName <span style="color: #ffc0cb; font-weight: bold;">'</span>abc<span style="color: #ffc0cb; font-weight: bold;">'</span>
+}
+
+archiveName <span style="color: #ffc0cb; font-weight: bold;">'</span>abc.jar<span style="color: #ffc0cb; font-weight: bold;">'</span> in your jar configuration is forcing the name to be <span style="color: #ffc0cb; font-weight: bold;">'</span>abc.jar<span style="color: #ffc0cb; font-weight: bold;">'</span>. The <span style="color: #FBDE2D;">default</span> format <span style="color: #FBDE2D;">for</span> the jar name is ${baseName}-${appendix}-${version}-${classifier}.${extension},
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgf0b75a8" class="outline-2">
+<h2 id="orgf0b75a8"><span class="section-number-2">10</span> ÅĞ¶Ï²Ù×÷ÏµÍ³</h2>
+<div class="outline-text-2" id="text-10">
+<div class="org-src-container">
+<pre class="src src-java">
+gradle&#21028;&#26029;Windows
+<span style="color: #FBDE2D;">import</span> <span style="color: #D8FA3C;">org</span>.<span style="color: #D8FA3C;">apache</span>.<span style="color: #D8FA3C;">tools</span>.<span style="color: #D8FA3C;">ant</span>.<span style="color: #D8FA3C;">taskdefs</span>.<span style="color: #D8FA3C;">condition</span>.<span style="color: #8DA6CE;">Os</span>
+
+<span style="color: #8DA6CE;">task</span> <span style="color: #FF6400;">checkWin</span>() &lt;&lt; {
+<span style="color: #FBDE2D;">if</span> (Os.siFamily(<span style="color: #D8FA3C;">Os</span>.FAMILY_WINDOWS)) { <span style="color: #AEAEAE; font-style: italic;">// </span><span style="color: #AEAEAE; font-style: italic;">_MAC, _UNIX</span>
+println <span style="color: #61CE3C;">"*** WINDOWS "</span>
+}
+}
+</pre>
+</div>
+<p>
+»ò
+</p>
+<pre class="example">
+import org.gradle.internal.os.OperatingSystem;
+
+OperatingSystem.current().isLinux(); // isMacOsX(); isWindows(); isUnix()
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org98b26a0" class="outline-2">
+<h2 id="org98b26a0"><span class="section-number-2">11</span> ĞŞ¶©¼ÇÂ¼</h2>
+<div class="outline-text-2" id="text-11">
 <ul class="org-ul">
-<li>2019å¹´09æœˆ27æ—¥ å¢åŠ iniè½¬æ¢propertieséƒ¨åˆ†ã€‚</li>
+<li>2017Äê02ÔÂ16ÈÕ ½¨Á¢ÎÄµµ¡£</li>
 </ul>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Date: 2019å¹´09æœˆ27æ—¥</p>
-<p class="date">Created: 2019-10-29 å‘¨äºŒ 01:23</p>
+<p class="date">Date: 2017-02-16</p>
+<p class="author">Author: Wang Qian</p>
+<p class="date">Created: 2019-10-29 ÖÜ¶ş 01:23</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

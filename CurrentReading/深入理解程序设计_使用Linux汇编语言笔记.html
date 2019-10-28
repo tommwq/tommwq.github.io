@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2019-10-28 周一 19:45 -->
+<!-- 2019-10-29 周二 01:15 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>《深入理解程序设计：使用Linux汇编语言》笔记</title>
@@ -179,6 +179,7 @@
   .org-svg { width: 90%; }
   /*]]>*/-->
 </style>
+<link rel=stylesheet href=/global.css type=text/css/>
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
@@ -233,39 +234,39 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org33dc537">第一章 引言</a></li>
-<li><a href="#org5f2ac2a">第二章 计算机体系结构</a></li>
-<li><a href="#org0856d90">第三章 编写第一个程序</a></li>
-<li><a href="#orgf2c6918">第四章 关于函数</a></li>
-<li><a href="#org4904653">第五章 文件处理</a></li>
-<li><a href="#orgb0dac9c">第六章 读写简单记录</a></li>
-<li><a href="#org0e8b291">第七章 开发健壮的程序</a></li>
-<li><a href="#org4b4cadd">第八章 与代码库共享程序</a></li>
-<li><a href="#org81f703c">第九章 关于中间存储器</a></li>
-<li><a href="#org7ba8c85">第十章 向计算机一样计数</a></li>
-<li><a href="#org97b93c0">第十一章 高级语言</a></li>
-<li><a href="#org5e5e5d4">第十二章 优化</a></li>
-<li><a href="#orgd9f52b1">第十三章 学无止境</a></li>
-<li><a href="#org0476c4b">附录B 通用x86指令</a></li>
-<li><a href="#org8134854">附录C 重要的系统调用</a></li>
-<li><a href="#org792021c">附录：练习</a></li>
-<li><a href="#orgd29d7c1">参考</a></li>
+<li><a href="#org33dc537">1. 第一章 引言</a></li>
+<li><a href="#org5f2ac2a">2. 第二章 计算机体系结构</a></li>
+<li><a href="#org0856d90">3. 第三章 编写第一个程序</a></li>
+<li><a href="#orgf2c6918">4. 第四章 关于函数</a></li>
+<li><a href="#org4904653">5. 第五章 文件处理</a></li>
+<li><a href="#orgb0dac9c">6. 第六章 读写简单记录</a></li>
+<li><a href="#org0e8b291">7. 第七章 开发健壮的程序</a></li>
+<li><a href="#org4b4cadd">8. 第八章 与代码库共享程序</a></li>
+<li><a href="#org81f703c">9. 第九章 关于中间存储器</a></li>
+<li><a href="#org7ba8c85">10. 第十章 向计算机一样计数</a></li>
+<li><a href="#org97b93c0">11. 第十一章 高级语言</a></li>
+<li><a href="#org5e5e5d4">12. 第十二章 优化</a></li>
+<li><a href="#orgd9f52b1">13. 第十三章 学无止境</a></li>
+<li><a href="#org0476c4b">14. 附录B 通用x86指令</a></li>
+<li><a href="#org8134854">15. 附录C 重要的系统调用</a></li>
+<li><a href="#org792021c">16. 附录：练习</a></li>
+<li><a href="#orgd29d7c1">17. 参考</a></li>
 </ul>
 </div>
 </div>
 
 <div id="outline-container-org33dc537" class="outline-2">
-<h2 id="org33dc537">第一章 引言</h2>
+<h2 id="org33dc537"><span class="section-number-2">1</span> 第一章 引言</h2>
 </div>
 
 <div id="outline-container-org5f2ac2a" class="outline-2">
-<h2 id="org5f2ac2a">第二章 计算机体系结构</h2>
-<div class="outline-text-2" id="text-org5f2ac2a">
+<h2 id="org5f2ac2a"><span class="section-number-2">2</span> 第二章 计算机体系结构</h2>
+<div class="outline-text-2" id="text-2">
 <p>
-CPU从内存中读取一条指令并执行的过程叫做指令周期。为了执行指令，CPU通常需要以下元件：
+计算机由CPU、内存（主存）、磁盘（辅助存储设备）和键盘、显示器等外部设备组成。CPU负责执行指令，它使用的指令和数据就保存在内存和磁盘中。CPU从内存中读取一条指令并执行，这个过程叫做指令周期。为了执行指令CPU通常需要以下元件：
 </p>
 <ul class="org-ul">
-<li>程序计数器。告诉CPU下一条指令从哪里读取。</li>
+<li>程序计数器。告诉CPU下一条指令从哪里读取。通常是%rip。</li>
 <li>指令解码器。解码指令。</li>
 <li>数据总线。加载指令需要的内存数据。</li>
 <li>通用寄存器。保存操作数和运算结果。</li>
@@ -273,7 +274,7 @@ CPU从内存中读取一条指令并执行的过程叫做指令周期。为了�
 </ul>
 
 <p>
-大部分指令都需要有操作数。操作数是指令的参数。加载操作数的过程叫做寻址。常见的寻址方式包括：
+大部分指令都需要操作数，操作数是指令的参数。加载操作数的过程叫做寻址。常见的寻址方式有：
 </p>
 <ul class="org-ul">
 <li>立即寻址。指令本身已经包含数据。不再需要从寄存器或内存中加载数据。</li>
@@ -287,8 +288,8 @@ CPU从内存中读取一条指令并执行的过程叫做指令周期。为了�
 </div>
 
 <div id="outline-container-org0856d90" class="outline-2">
-<h2 id="org0856d90">第三章 编写第一个程序</h2>
-<div class="outline-text-2" id="text-org0856d90">
+<h2 id="org0856d90"><span class="section-number-2">3</span> 第三章 编写第一个程序</h2>
+<div class="outline-text-2" id="text-3">
 <p>
 下面是一个汇编程序的例子：
 </p>
@@ -451,8 +452,8 @@ ld exit.o -o exit
 </div>
 
 <div id="outline-container-orgf2c6918" class="outline-2">
-<h2 id="orgf2c6918">第四章 关于函数</h2>
-<div class="outline-text-2" id="text-orgf2c6918">
+<h2 id="orgf2c6918"><span class="section-number-2">4</span> 第四章 关于函数</h2>
+<div class="outline-text-2" id="text-4">
 <p>
 在C调用约定中，参数通过栈传递，按照声明顺序倒序压栈。压栈和弹栈使用pushl和popl指令。栈的位置由%esp和%ebp决定。%esp是栈顶，%ebp是栈底。栈向下增长，每次压栈，%esp的值减去4。第一个参数保存在8(%ebp)，第二个参数是12(%ebp)，以此类推。子程序的本地对象也保存在栈上，第N本地变量的地址是-4*N(%ebp)。代码subl $8, %esp为本地对象分配了8个字节的空间。当函数执行完毕后，函数将返回值保存到%eax，然后恢复堆栈（栈平衡），最后通过ret将栈指针弹出。函数的代码如下：
 </p>
@@ -586,8 +587,8 @@ ld exit.o -o exit
 </div>
 
 <div id="outline-container-org4904653" class="outline-2">
-<h2 id="org4904653">第五章 文件处理</h2>
-<div class="outline-text-2" id="text-org4904653">
+<h2 id="org4904653"><span class="section-number-2">5</span> 第五章 文件处理</h2>
+<div class="outline-text-2" id="text-5">
 <p>
 Linux系统提供了几个操作文件的系统调用，分别是：
 </p>
@@ -810,8 +811,8 @@ Linux系统提供了几个操作文件的系统调用，分别是：
 </div>
 
 <div id="outline-container-orgb0dac9c" class="outline-2">
-<h2 id="orgb0dac9c">第六章 读写简单记录</h2>
-<div class="outline-text-2" id="text-orgb0dac9c">
+<h2 id="orgb0dac9c"><span class="section-number-2">6</span> 第六章 读写简单记录</h2>
+<div class="outline-text-2" id="text-6">
 <p>
 命令
 </p>
@@ -1063,11 +1064,11 @@ Linux系统提供了几个操作文件的系统调用，分别是：
 
 
 <div id="outline-container-org0e8b291" class="outline-2">
-<h2 id="org0e8b291">第七章 开发健壮的程序</h2>
+<h2 id="org0e8b291"><span class="section-number-2">7</span> 第七章 开发健壮的程序</h2>
 </div>
 <div id="outline-container-org4b4cadd" class="outline-2">
-<h2 id="org4b4cadd">第八章 与代码库共享程序</h2>
-<div class="outline-text-2" id="text-org4b4cadd">
+<h2 id="org4b4cadd"><span class="section-number-2">8</span> 第八章 与代码库共享程序</h2>
+<div class="outline-text-2" id="text-8">
 <p>
 下面的代码展示了如何在asm代码中使用共享库：
 </p>
@@ -1119,8 +1120,8 @@ Linux系统提供了几个操作文件的系统调用，分别是：
 </div>
 
 <div id="outline-container-org81f703c" class="outline-2">
-<h2 id="org81f703c">第九章 关于中间存储器</h2>
-<div class="outline-text-2" id="text-org81f703c">
+<h2 id="org81f703c"><span class="section-number-2">9</span> 第九章 关于中间存储器</h2>
+<div class="outline-text-2" id="text-9">
 <p>
 Linux将.text段加载到地址0x08048000，紧随其后的是.data和.bss段。Linux的栈从0xbfffffff开始，栈向上增长。这些地址都是虚拟内存地址。物理内存地址对应用程序是不可见的。Linux系统负责完成物理内存和虚拟内存之间的映射。Linux只会映射程序需要的虚拟内存，如果程序尝试访问范围之外的内存地址，Linux会报告段错误。程序可以要求Linux映射内存或者会取消映射，方法是调整program break。program break是数据段的结尾（数据段的最大虚拟内存地址）。Linux提供了brk系统调用（调用号45）来调整program break。C语言的malloc()/calloc()函数都是使用里brk调用。下面是一个简单的内存管理器示例：
 </p>
@@ -1225,8 +1226,8 @@ Linux将.text段加载到地址0x08048000，紧随其后的是.data和.bss段。
 </div>
 
 <div id="outline-container-org7ba8c85" class="outline-2">
-<h2 id="org7ba8c85">第十章 向计算机一样计数</h2>
-<div class="outline-text-2" id="text-org7ba8c85">
+<h2 id="org7ba8c85"><span class="section-number-2">10</span> 第十章 向计算机一样计数</h2>
+<div class="outline-text-2" id="text-10">
 <p>
 下面两条指令是等价的，不过第一条执行速度更快
 </p>
@@ -1253,11 +1254,11 @@ x86采用小端字节序，将最低有效字节保存在低地址。
 </div>
 
 <div id="outline-container-org97b93c0" class="outline-2">
-<h2 id="org97b93c0">第十一章 高级语言</h2>
+<h2 id="org97b93c0"><span class="section-number-2">11</span> 第十一章 高级语言</h2>
 </div>
 <div id="outline-container-org5e5e5d4" class="outline-2">
-<h2 id="org5e5e5d4">第十二章 优化</h2>
-<div class="outline-text-2" id="text-org5e5e5d4">
+<h2 id="org5e5e5d4"><span class="section-number-2">12</span> 第十二章 优化</h2>
+<div class="outline-text-2" id="text-12">
 <p>
 开发程序时必须关注以下重点：
 </p>
@@ -1282,12 +1283,12 @@ x86采用小端字节序，将最低有效字节保存在低地址。
 </div>
 
 <div id="outline-container-orgd9f52b1" class="outline-2">
-<h2 id="orgd9f52b1">第十三章 学无止境</h2>
+<h2 id="orgd9f52b1"><span class="section-number-2">13</span> 第十三章 学无止境</h2>
 </div>
 
 <div id="outline-container-org0476c4b" class="outline-2">
-<h2 id="org0476c4b">附录B 通用x86指令</h2>
-<div class="outline-text-2" id="text-org0476c4b">
+<h2 id="org0476c4b"><span class="section-number-2">14</span> 附录B 通用x86指令</h2>
+<div class="outline-text-2" id="text-14">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -1700,8 +1701,8 @@ AT&amp;T和Intel语法差异：
 </div>
 
 <div id="outline-container-org8134854" class="outline-2">
-<h2 id="org8134854">附录C 重要的系统调用</h2>
-<div class="outline-text-2" id="text-org8134854">
+<h2 id="org8134854"><span class="section-number-2">15</span> 附录C 重要的系统调用</h2>
+<div class="outline-text-2" id="text-15">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -1791,12 +1792,12 @@ AT&amp;T和Intel语法差异：
 </div>
 
 <div id="outline-container-org792021c" class="outline-2">
-<h2 id="org792021c">附录：练习</h2>
+<h2 id="org792021c"><span class="section-number-2">16</span> 附录：练习</h2>
 </div>
 
 <div id="outline-container-orgd29d7c1" class="outline-2">
-<h2 id="orgd29d7c1">参考</h2>
-<div class="outline-text-2" id="text-orgd29d7c1">
+<h2 id="orgd29d7c1"><span class="section-number-2">17</span> 参考</h2>
+<div class="outline-text-2" id="text-17">
 <p>
 <a href="https://syscalls.kernelgrok.com/">Linux系统调用</a>
 </p>
@@ -1805,7 +1806,7 @@ AT&amp;T和Intel语法差异：
 </div>
 <div id="postamble" class="status">
 <p class="date">Date: 2019年10月16日</p>
-<p class="date">Created: 2019-10-28 周一 19:45</p>
+<p class="date">Created: 2019-10-29 周二 01:15</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

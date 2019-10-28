@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2019-09-23 周一 21:13 -->
+<!-- 2019-10-29 周二 01:33 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>UML和模式应用笔记</title>
@@ -179,6 +179,7 @@
   .org-svg { width: 90%; }
   /*]]>*/-->
 </style>
+<link rel=stylesheet href=/global.css type=text/css/>
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
@@ -233,39 +234,86 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org62e5326">第一章 面向对象分析和设计</a></li>
-<li><a href="#org5dde0e7">第二章 迭代、进化和敏捷</a></li>
-<li><a href="#org2eda5f4">第三章 案例研究</a></li>
-<li><a href="#org677a0f6">第四章 初始不是需求阶段</a></li>
-<li><a href="#orgdc1aee3">第五章 进化式需求</a></li>
-<li><a href="#org18888f7">第六章 用例</a></li>
+<li><a href="#org5744c32">1. 第一部分 绪论</a>
+<ul>
+<li><a href="#org62e5326">1.1. 第一章 面向对象分析和设计</a></li>
+<li><a href="#org5dde0e7">1.2. 第二章 迭代、进化和敏捷</a></li>
+</ul>
+</li>
+<li><a href="#orgb9c23a0">2. 第二部分 初始阶段</a>
+<ul>
+<li><a href="#org2eda5f4">2.1. 第三章 案例研究</a></li>
+<li><a href="#org677a0f6">2.2. 第四章 初始不是需求阶段</a></li>
+<li><a href="#orgdc1aee3">2.3. 第五章 进化式需求</a></li>
+<li><a href="#org18888f7">2.4. 第六章 用例</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org62e5326" class="outline-2">
-<h2 id="org62e5326">第一章 面向对象分析和设计</h2>
-<div class="outline-text-2" id="text-org62e5326">
+<div id="outline-container-org5744c32" class="outline-2">
+<h2 id="org5744c32"><span class="section-number-2">1</span> 第一部分 绪论</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-org62e5326" class="outline-3">
+<h3 id="org62e5326"><span class="section-number-3">1.1</span> 第一章 面向对象分析和设计</h3>
+<div class="outline-text-3" id="text-1-1">
 <p>
-分析（analysis）是对问题和需求的调查研究。更多是从使用者的视角出发，建立一个问题模型或者业务模型。设计（design）是构建一个满足需求的概念上的解决方案，是一个抽象的方案，从逻辑上解决问题。面向对象分析（object-oriented analysis）是使用面向对象这一工具对问题进行调查研究。在分析阶段，“对象”指的是业务领域内的概念。因此面向对象分析的目的就是发现和描述业务领域内的概念（领域对象）。在面向对象设计（object-oriented design）中，“对象”的含义稍有不同。面向对象设计将业务领域内的概念映射为可实现（编码）的软件对象。因此在设计阶段，“对象”往往指软件对象，即模块、组件、类、实例等。设计工作需要在分析工作的基础上进行。由于逻辑上的关联性，在实际工作中这两类工作往往由同一个人或同一个团队完成。因此这两类工作通常放在一起，简称为OOA/D。面向对象分析的工作内容主要有两类：编写用例和建立领域模型。面向对象设计工作有：分配软件对象职责、确定软件对象协作方式和详细设计软件类。下面我们借助一个简短的示例，介绍OOA/D的内容。
+分析和设计这两个术语经常出现在一起，人们也很常常混淆二者的含义，其他它们是完全不同的概念。分析是对需求（或问题）的调查研究。设计是已经定义的问题，构造一个逻辑上的解决方案。分析让我们知道面临着什么问题，设计告诉我们要如何去解决。这样看来，分析在设计之前，设计在分析之后。实际上人们对问题和解的认识是不断细化和深入的，因此在工作中往往是分析、设计、分析、设计不断循环，直到问题和解足够的“好”。什么是“好”呢？就是得到涉众的一致认可。面向对象分析和设计就是使用面向对象这个工具进行分析和设计。对象这个词在分析和设计阶段具有不同的含义。在分析阶段，对象是业务领域内的概念。在设计阶段，对象指软件对象，如模块、组件、类等。面向对象分析就是从使用者的视角出发，发现和描述业务领域内的概念，建立一个业务模型。面向对象分析的的主要工作内容是编写用例，并通过用例发现和建立领域模型。面向对象设计将业务领域概念映射为可以编码实现的软件对象。主要的工作包括分配软件对象职责、确定软件对象协作方式和详细设计软件类。在使用面向对象这个工具时，熟练地为对象分配职责是一项非常重要的能力。
 </p>
 
+
 <p>
-这个示例是一个简单的骰子游戏。玩家掷2个骰子，如果总点数为7则玩家获得胜利，否则输掉游戏。我们先从定义用例开始。用例（use case）是用户使用系统（或解决方案）的场景和情节。
+示例：航班信息系统
+</p>
+<blockquote>
+<p>
+业务模型：
+航班信息系统包含飞机、航班、飞行员等概念。飞机有尾翼号。
 </p>
 
+
+<p>
+领域模型：
+</p>
+<pre class="example">
+public class Plane {
+    private String tailNumber;
+    public List getFlightHistory() {...}
+}
+</pre>
+</blockquote>
+
+
+<p>
+示例：骰子游戏。
+</p>
+<blockquote>
+<p>
+玩家掷2个骰子，如果总点数为7则玩家获得胜利，否则输掉游戏。我们先从定义用例开始。用例（use case）是用户使用系统（或解决方案）的场景和情节。
+</p>
+</blockquote>
+
+<p>
+下面我们用这个骰子游戏来展示如何面向对象分析和设计。我们把工作分为定义用例、定义领域模型、分配对象职责并绘制交互图和定义设计类图4个步骤。定义用例和领域模型属于分析阶段，分配对象职责并绘制交互图和设计类图是设计阶段。第一个步骤是定义用例。用例描述了使用者（利益相关者）和软件交互的场景。用例告诉我们，使用者是如何使用软件达成业务目标的。用例是捕获需求和记录需求的重要工具。下面是掷骰子游戏的一个用例：
+</p>
+<blockquote>
 <p>
 用例1：玩家请求掷骰子。系统展示结果。如果总点数是7则玩家胜，否则玩家输。
 </p>
+</blockquote>
+
 
 <p>
-用例展示了我们要解决的问题。为了解决问题，我们需要了解问题的结构，提取问题中的概念和联系，抽象成领域模型（domain model）。在我们的示例中，领域内有3个概念：玩家、骰子和游戏。玩家有名字属性，和玩游戏、掷骰子两个行为。骰子有点数属性。游戏包含一个玩家和2个骰子。
+第二个步骤是定义领域模型。这个步骤需要从用例中提取概念、属性和关联，并抽象成领域模型（domain model）。在掷骰子游戏中有3个概念，分别是玩家、骰子、游戏。三者的关联是游戏包含一个玩家和两个骰子。玩家有名字，骰子有点数，这些都是属性。这一步骤完成后，我们得到了一个领域模型，标志着面向对象分析工作结束。
 </p>
+
 
 <p>
-理清了问题结构，我们需要把领域概念映射为逻辑上的软件对象，并为软件对象分配职责和协作关系。
+下一个步骤是分配对象职责并绘制交互图。从这里我们开始进入设计阶段。前面提到过，设计阶段讨论的对象主要指软件对象。这一步骤我们主要关注如何将概念、关联以及交互映射成软件对象。通常一个概念（领域对象）对应一个软件对象，但这不是绝对的。这个步骤不会关注某个类的具体细节，而是考察各个类在软件中如何协作。下面描述了游戏中各个概念的职责和概念之间的交互：
 </p>
-
+<blockquote>
 <p>
 玩家 玩游戏
 游戏 掷骰子1
@@ -274,13 +322,28 @@ for the JavaScript code in this tag.
 游戏 获得骰子2点数
 游戏 判断并展示结果
 </p>
+</blockquote>
 
 <p>
-这里的模型和领域模型稍有不同。在领域模型中，“掷骰子”行为是“玩家”所拥有的。在设计阶段必须考虑方案的实施（编码），因此不会完全模拟现实世界，会对分析阶段得到的领域模型做一些调整。
+使用UML可以更直观的展示概念和交互，比如下面的时序图：
 </p>
 
+<div class="figure">
+<p><img src="./dice_game.png" alt="dice_game.png" />
+</p>
+</div>
+
 <p>
-为软件对象分配了职责和协作关系后，可以做更细致的设计。
+可能你已经注意到，这里的描述和领域模型稍有不同。在领域模型中，“掷骰子”行为是“玩家”所拥有的。这是因为在设计阶段必须考虑方案的实施（编码），不能简单的将领域对象直接映射为软件对象。软件设计可以从真实世界中获得灵感，但绝不是对真实世界的简单模拟。
+</p>
+
+
+<p>
+最后一个步骤是，定义设计类图。在这里对具体的类进行详细设计，以指导后续的编码工作。
+</p>
+<blockquote>
+<p>
+
 </p>
 
 <p>
@@ -296,73 +359,247 @@ for the JavaScript code in this tag.
 行为：getFaceValue(): int
 行为：roll()
 </p>
+</blockquote>
 
 <p>
-分析和设计工作的产出物可以使用任何形式来展示。业内通行的做法是将分析阶段的产物使用UML来表达。UML具有应用广泛、形象、可以提供多层次视角等优点。
+至此分析和设计工作告于段落。这里再说一点，分析和设计工作的产出物可以使用任何形式来展示。这里之所以选择UML，是因为UML具有直观形象、应用广泛、提供多层次视角等优点。
+</p>
+
+
+<p>
+一个成功的软件必须是贴合用户实际需求的。面向对象分析和设计可以帮助开发团队做到这一点，面向对象分析和设计产出的软件模型更接近领域模型。领域驱动设计是另一种提高软件价值的开发方法，在这里不做讨论。
 </p>
 </div>
 </div>
 
-<div id="outline-container-org5dde0e7" class="outline-2">
-<h2 id="org5dde0e7">第二章 迭代、进化和敏捷</h2>
-<div class="outline-text-2" id="text-org5dde0e7">
+<div id="outline-container-org5dde0e7" class="outline-3">
+<h3 id="org5dde0e7"><span class="section-number-3">1.2</span> 第二章 迭代、进化和敏捷</h3>
+<div class="outline-text-3" id="text-1-2">
 <p>
-很多研究表明，尽早对代码进行测试，可以有效提高代码质量，降低开发成本。验证一段代码是否满足设计是容易的。而设计作为概念上的解决方案，是否真正解决了用户面临的问题？很多新的研究证实，尽早验证设计的有效性，对提高软件项目成功率，降低开发成本，同样有着巨大提升作用。基于这个结论，诞生了很多新的软件开发过程，如敏捷开发、极限编程、Scrum等。这些方法常常和迭代式开发（iterative development）实践结合在一起。在迭代开发过程中，开发活动被组织为一系列小项目，每个项目都是在前一个项目基础上，产生一个经过测试和集成的可执行系统。在每个小项目中，通过一系列分析、设计、编码、测试、集成和演示的过程，产生作为整体解决方案的一部分的（子）系统。随着项目不断迭代，产出的系统越来越接近完整的解决方案。乍一看迭代式开发不过将大瀑布分成几个小瀑布。产生这种想法是由于我们还没有介绍迭代开发中最重要的一个概念：时间定量（timeboxed）。时间定量要求每个小项目的周期是固定的一小段时间。通常选择3到4周作为一个小项目周期。由于总的时间是固定的，而编码、测试、集成和演示都需要时间，这就迫使团队将目光聚焦在最重要的需求上。而什么需求才是最重要的？在迭代开始时，产品设计人员和架构师为需求分配优先级。在迭代周期结束时的客户展示阶段，可以验证需求优先级分配是否符合客户的实际期望。通常高优先级的需求具有以下3种特性：具有重要的架构意义（核心架构）、具有高业务价值、具有高风险（性能、极端情况）。由于每个项目周期都要进行需求分析，没有必要在一开始就把全部需求细节都确定下来。每个迭代周期可以选择10%的高阶用例进行细化和开发。高阶用例简单的说就是用一句话描述的用例。在细化阶段，高阶用例
-被扩展成详细的用例文档，用以指导编码。
+软件开发过程是构造、部署以及维护软件的方式。对于小的软件（比如一个人在一天之内就可以开发完成），开发过程并不重要。但是对于大型软件，由于需要多人协作开发，为了保证软件质量和软件价值，必须有一定的规范和流程进行约束。规范和流程的总和就是开发过程。高价值和高质量的软件往往是，高质量开发过程的产物。而一个低劣开发过程要想产出高质量的软件，就像彩票中奖一样机会渺茫。
+</p>
+
+
+<p>
+下面介绍的是统一过程（Unified Process，UP）。这是一种灵活的迭代式软件开发过程。迭代式开发过程将整个开发周期划分为若干个迭代周期，每个迭代周期都产出一个可交付的软件，并在周期结束时进行验证。一开始软件比较粗糙，只有主要功能。随着迭代期数的增加，软件不断完善，最终达到用户满意的状态。迭代式开发过程既不是从上到下的，也不是从下到上的，它是从粗到细的。将画家绘画一样，先勾画线稿，接着上色，最后修饰完善。迭代式开发的另一个特点是迭代周期较短且是固定的。这两个特点保证软件功能不会大幅偏离用户预期，以及项目进展不会大幅偏离计划。
+</p>
+
+
+<p>
+下面我们用一个案例来展示迭代时开发过程：
+</p>
+<blockquote>
+<p>
+开发团队决定采用迭代式开发过程，并计划采用20个迭代周期，每个周期的长度是三周。
+</p>
+
+
+<p>
+在开始迭代之前首先是召开需求工作会议。需求工作会议也是时间定量的，经讨论确定为两天。业务代表、首席架构师和开发人员都要出席。第一天上午进行高阶需求分析。首先确定用例和特性的名称，以及关键的非功能需求。将这些名称编号，加入高阶用例列表。接着咨询业务代表和首席架构师，从高阶用例列表中选择10%的列表项，加入本期用例列表。选择的标准有三点：
+</p>
+
+<ol class="org-ol">
+<li>具有重要的架构意义，比如为了实现软件必须构造的核心架构。</li>
+<li>具有高业务价值。</li>
+<li>具有高风险，比如每秒处理500个并发交易。</li>
+</ol>
+
+<p>
+在剩下的一天半里，团队针对本期用例列表中的用例进行详细分析。会议结束后，已经对10%的用例进行了详细分析，对90%的用例进行了高阶分析。
+</p>
+
+
+<p>
+接下来进入第一次迭代。首先要召开一个简短的迭代计划会议，确认本次迭代计划完成本期用例列表中的哪些子集。在开始的前两天，团队分组进行建模和设计，画出UML和其他模型的草图。接下来的时间用于开发、测试和集成。测试是非常重要的工作。在迭代中要进行大量的测试，包括单元测试、验收测试、负载均衡测试和可用性测试。在距离迭代结束的前一周，团队召开一个简短的会议确认迭代进度。如果发现无法完成迭代目标，缩小本地迭代范围，将次要功能放回到任务列表。在最后一周的星期二，冻结代码并进行测试和集成，建立迭代基线。在星期三上午，对涉众展示系统并要求反馈。在最后一周的星期三和星期四，召开第二次需求工作会议，对上次会议的材料进行复查和精细化，选择另外10%-15%的高阶用例进行详细分析。在周五上午举行下一迭代的计划会议。在第一个迭代完成的时候，大约有20%的用例完成了详细分析，80%的用例完成了高阶分析。
+</p>
+
+
+<p>
+以相同的步骤进行后续迭代。在四到五次需求会议后，大致有90%的用例完成了详细分析。并且这些分析是基于反馈的，质量远远高于纯粹的推测。至此大部分重要需求已经被捕获，后续不再需要召开需求会议了。
+</p>
+</blockquote>
+
+
+<p>
+统一过程也是采用迭代的一种开发过程。它将迭代分为四个阶段：
+</p>
+<ul class="org-ul">
+<li>初始。构想业务案例、范围，进行初步评估。</li>
+<li>细化。对需求进行更细致的分析和设计，实现核心架构。</li>
+<li>构造。对剩余部分进行实现，准备部署。</li>
+<li>移交。beta测试和部署。</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgb9c23a0" class="outline-2">
+<h2 id="orgb9c23a0"><span class="section-number-2">2</span> 第二部分 初始阶段</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-org2eda5f4" class="outline-3">
+<h3 id="org2eda5f4"><span class="section-number-3">2.1</span> 第三章 案例研究</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+本书以两个软件的开发作为例子，详细介绍迭代式开发和模式设计。这两个例子是NextGen POS系统和Monopoly游戏。
 </p>
 </div>
 </div>
 
-<div id="outline-container-org2eda5f4" class="outline-2">
-<h2 id="org2eda5f4">第三章 案例研究</h2>
+<div id="outline-container-org677a0f6" class="outline-3">
+<h3 id="org677a0f6"><span class="section-number-3">2.2</span> 第四章 初始不是需求阶段</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+初始阶段不是需求分析或设计阶段。初始阶段要预见项目的范围、设想和业务案例，这些工作可以回答一个问题，项目是否值得继续认真研究？如果大家（涉众）对项目的设想较为一致，并且都认为应该继续推进项目，这一阶段的工作就完成了。初始阶段通常持续时间较短，一般不超过一周。
+</p>
+
+
+<p>
+初始阶段通常会产出以下制品或其草稿：
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">制品</td>
+<td class="org-left">说明</td>
+</tr>
+
+<tr>
+<td class="org-left">设想和业务用例</td>
+<td class="org-left">描述高阶目标与约束、业务案例，并提供执行摘要。</td>
+</tr>
+
+<tr>
+<td class="org-left">用例模型</td>
+<td class="org-left">描述功能需求。在初始阶段只需要确定大部分用例的名称，并详细分析优先级最高的部分（如10%）用例。</td>
+</tr>
+
+<tr>
+<td class="org-left">补充性规格说明</td>
+<td class="org-left">描述非功能需求。这些需求可能会影响架构设计。</td>
+</tr>
+
+<tr>
+<td class="org-left">词汇表</td>
+<td class="org-left">关键领域术语和数据字典。</td>
+</tr>
+
+<tr>
+<td class="org-left">风险列表和风险管理计划</td>
+<td class="org-left">描述风险（业务、技术、资源和进度）及应对和缓解的方法。</td>
+</tr>
+
+<tr>
+<td class="org-left">原型和概念验证</td>
+<td class="org-left">澄清设想，验证技术思路。</td>
+</tr>
+
+<tr>
+<td class="org-left">迭代计划</td>
+<td class="org-left">描述第一个细化迭代任务。</td>
+</tr>
+
+<tr>
+<td class="org-left">阶段计划和软件开发计划</td>
+<td class="org-left">初步估计细化阶段需要的时间和工作量。</td>
+</tr>
+
+<tr>
+<td class="org-left">开发案例</td>
+<td class="org-left">描述项目特有的信息。</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+初始阶段并不要求完成全部浙西制品，可以只提供部分制品，制品本身也可以是部分完成的。后续阶段会持续细化这些制品。要记住，初始阶段的核心任务是让大家对项目设想达成一致，文档只是交流和记录的方式。
+</p>
+</div>
 </div>
 
 
-<div id="outline-container-org677a0f6" class="outline-2">
-<h2 id="org677a0f6">第四章 初始不是需求阶段</h2>
-<div class="outline-text-2" id="text-org677a0f6">
+<div id="outline-container-orgdc1aee3" class="outline-3">
+<h3 id="orgdc1aee3"><span class="section-number-3">2.3</span> 第五章 进化式需求</h3>
+<div class="outline-text-3" id="text-2-3">
 <p>
-初始阶段必须解决的问题是：涉众是否就项目设想基本达成一致？项目是否值得继续认真研究？初始阶段的工作内容就是遇见项目的范围、设想和业务案例。
+需求是系统必须提供的能力和满足的条件。通常在短时间（项目开发周期）内，用户的实际需求是不变的，但是涉众对需求的理解却是不断变化的。就像是同一块草地，在晴天和阴天时候看起来颜色不同。因此在开始编码前尝试捕获全部用例的尝试往往导致软件项目失败。统一过程考虑到了这一点，它将需求看作是不断变化的，并要求需求管理必须支持寻找、记录、组织和跟踪不断变更的需求。在这里后后面的部分，我们把“需求”看作为对“实际需求”的理解。
 </p>
 
+
 <p>
-建模的最大价值是增强理解，而不是记录细节。
+统一过程要求将需求按照FURPS+模型分为以下几类：
 </p>
+
+<ul class="org-ul">
+<li>Functional 功能。特性、功能、安全性。</li>
+<li>Usability 可用。人性化因素、帮助、文档。</li>
+<li>Reliablity 可靠。故障频率、可恢复性、可预测性。</li>
+<li>Performance 性能。响应时间、吞吐量、准确性、有效性、资源利用率。</li>
+<li>Supportability 可支持。适应性、可维护性、国际化、可配置性。</li>
+<li>Implementation 实现。资源限制、语言和工具、硬件等。</li>
+<li>Interface 接口。加强于外部系统接口之上的约束。</li>
+<li>Operation 操作。对其操作设置的系统管理。</li>
+<li>Packaging 包装。例如物理的包装盒。</li>
+<li>Legal 授权。许可证或其他方式。</li>
+</ul>
+
+
+<p>
+对于需求分析工作，统一过程提供了一些制品，这些制品也是可选的：
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">制品</td>
+<td class="org-left">说明</td>
+</tr>
+
+<tr>
+<td class="org-left">用例模型</td>
+<td class="org-left">一组使用系统的典型场景。主要拥有描述功能需求。</td>
+</tr>
+
+<tr>
+<td class="org-left">补充性规格说明</td>
+<td class="org-left">用语言描述非功能需求。</td>
+</tr>
+
+<tr>
+<td class="org-left">词汇表</td>
+<td class="org-left">重要术语的定义。</td>
+</tr>
+
+<tr>
+<td class="org-left">设想</td>
+<td class="org-left">对高阶需求的概况。</td>
+</tr>
+
+<tr>
+<td class="org-left">业务规则</td>
+<td class="org-left">软件所服务的行业内，必须遵守的法律、法规和行业规则。</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 
-<div id="outline-container-orgdc1aee3" class="outline-2">
-<h2 id="orgdc1aee3">第五章 进化式需求</h2>
-<div class="outline-text-2" id="text-orgdc1aee3">
-<p>
-需求可以按照FURPS+进行分类：
-</p>
-
-<p>
-Functional 功能性。特性、功能、安全性。
-Usability 可用性。人性化因素、帮助、文档。
-Reliablity 可靠性。故障频率、可恢复性、可预测性。
-Performance 性能。响应时间、吞吐量、准确性、有效性、资源利用率。
-Supportability 可支持性。适应性、可维护性、国际化、可配置性。
-</p>
-
-<p>
-\+表示辅助性和次要因素，如：
-</p>
-
-<p>
-Implementation 实现。资源限制、语言和工具、硬件等。
-Interface 接口。加强于外部系统接口之上的约束。
-Operation 操作。对其操作设置的系统管理。
-Packaging 包装。例如物理的包装盒。
-Legal 授权。许可证或其他方式。
-</p>
-</div>
-</div>
-
-<div id="outline-container-org18888f7" class="outline-2">
-<h2 id="org18888f7">第六章 用例</h2>
-<div class="outline-text-2" id="text-org18888f7">
+<div id="outline-container-org18888f7" class="outline-3">
+<h3 id="org18888f7"><span class="section-number-3">2.4</span> 第六章 用例</h3>
+<div class="outline-text-3" id="text-2-4">
 <p>
 用例是文本形式的情节描述。用例包含参与者和场景。参与者（actor）是具有行为的人或其他系统（比如时钟）。场景（scenario）是参与者和系统（System under Discussion，SuD）之间的一系列特定的活动和交互，也叫做用例实例（use case instance）。用例（use case）就是一组相关的成功和失败场景集合。参与者分为3类：主要参与者（primary actor）、协助参与者（supporting actor）和幕后参与者（offstage actor）。主要参与者是驱动用例的用户目标，是使用SuD完成服务的对象。对于收银系统，收银员就是主要参与者。协助参与者为SuD提供服务。协助参与者通常是外部计算机系统。幕后参与者在用例中具有影响或利益，但不是协助参与者。比如收银系统中，税务部门就是幕后参与者。
 </p>
@@ -761,8 +998,9 @@ GRASP是通用职责分配软件模式（General Responsibility Assignment Softw
 </div>
 </div>
 </div>
+</div>
 <div id="postamble" class="status">
-<p class="date">Created: 2019-09-23 周一 21:13</p>
+<p class="date">Created: 2019-10-29 周二 01:33</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

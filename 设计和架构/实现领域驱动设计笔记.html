@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2019-09-23 周一 21:13 -->
+<!-- 2019-10-29 周二 01:33 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>&lrm;</title>
@@ -179,6 +179,7 @@
   .org-svg { width: 90%; }
   /*]]>*/-->
 </style>
+<link rel=stylesheet href=/global.css type=text/css/>
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
@@ -232,21 +233,21 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org36299e1">DDD入门</a></li>
-<li><a href="#org743ed78">领域、子域和限界上下文</a></li>
-<li><a href="#orge1fab87">上下文映射图</a></li>
-<li><a href="#org92ad2ba">架构</a></li>
-<li><a href="#org1750332">实体</a></li>
-<li><a href="#orgdc86501">值对象</a></li>
-<li><a href="#orgd2c278e">领域服务</a></li>
-<li><a href="#org629448a">领域事件</a></li>
-<li><a href="#org8199602">模块</a></li>
-<li><a href="#org7696c2b">聚合</a></li>
-<li><a href="#orgc45fa78">工厂</a></li>
-<li><a href="#org1ff3f44">资源库</a></li>
-<li><a href="#orged8ef74">集成限界上下文</a></li>
-<li><a href="#org3896420">应用程序</a></li>
-<li><a href="#org47d6395">聚合与事件源：A+ES</a></li>
+<li><a href="#org36299e1">1. DDD入门</a></li>
+<li><a href="#org743ed78">2. 领域、子域和限界上下文</a></li>
+<li><a href="#orge1fab87">3. 上下文映射图</a></li>
+<li><a href="#org92ad2ba">4. 架构</a></li>
+<li><a href="#org1750332">5. 实体</a></li>
+<li><a href="#orgdc86501">6. 值对象</a></li>
+<li><a href="#orgd2c278e">7. 领域服务</a></li>
+<li><a href="#org629448a">8. 领域事件</a></li>
+<li><a href="#org8199602">9. 模块</a></li>
+<li><a href="#org7696c2b">10. 聚合</a></li>
+<li><a href="#orgc45fa78">11. 工厂</a></li>
+<li><a href="#org1ff3f44">12. 资源库</a></li>
+<li><a href="#orged8ef74">13. 集成限界上下文</a></li>
+<li><a href="#org3896420">14. 应用程序</a></li>
+<li><a href="#org47d6395">15. 聚合与事件源：A+ES</a></li>
 </ul>
 </div>
 </div>
@@ -255,8 +256,8 @@ for the JavaScript code in this tag.
 </p>
 
 <div id="outline-container-org36299e1" class="outline-2">
-<h2 id="org36299e1">DDD入门</h2>
-<div class="outline-text-2" id="text-org36299e1">
+<h2 id="org36299e1"><span class="section-number-2">1</span> DDD入门</h2>
+<div class="outline-text-2" id="text-1">
 <p>
 DDD方法的目标是设计出准确表达业务意图的软件。为了更好的实现业务，我们需要将具体业务抽象成一个模型，这个模型就叫做领域模型。
 领域模型包含数据和行为，并且表达了准确的业务含义。为了得到高质量的领域模型，DDD要求开发团队中引入领域专家的角色。
@@ -296,7 +297,7 @@ DDD给出的方案是：将领域专家和开发人员聚集到一起，让软�
 版本1：随便写代码就行。 
 </p>
 <div class="org-src-container">
-<pre class="src src-java">patient.setShotType(<span style="color: #008b8b;">ShotTypes</span>.<span style="color: #228b22;">TYPE_FLU</span>);
+<pre class="src src-java">patient.setShotType(<span style="color: #D8FA3C;">ShotTypes</span>.<span style="color: #8DA6CE;">TYPE_FLU</span>);
 patient.setDose(dose);
 patient.setNurse(nurse);
 </pre>
@@ -314,7 +315,7 @@ patient.setNurse(nurse);
 版本3：护士给病人注射标准计量的流感疫苗。
 </p>
 <div class="org-src-container">
-<pre class="src src-java"><span style="color: #228b22;">Vaccine</span> <span style="color: #a0522d;">vaccine</span> = vaccines.standardAdultFluDose();
+<pre class="src src-java"><span style="color: #8DA6CE;">Vaccine</span> <span style="color: #FF6400;">vaccine</span> = vaccines.standardAdultFluDose();
 nurse.administerFluVaccine(patient, vaccine);
 </pre>
 </div>
@@ -324,52 +325,64 @@ nurse.administerFluVaccine(patient, vaccine);
 贫血模型的另一个缺陷是将业务逻辑泄漏到客户代码，导致软件的可维护性降低。关于这一点，可以考察下面的例子：
 </p>
 <div class="org-src-container">
-<pre class="src src-java"><span style="color: #b22222;">// </span><span style="color: #b22222;">&#36139;&#34880;&#27169;&#22411;</span>
-<span style="color: #a020f0;">public</span> <span style="color: #a020f0;">class</span> <span style="color: #228b22;">BacklongItem</span> <span style="color: #a020f0;">extends</span> <span style="color: #228b22;">Entity</span> {
-    <span style="color: #a020f0;">private</span> <span style="color: #228b22;">SprintId</span> <span style="color: #a0522d;">sprintId</span>;
-    <span style="color: #a020f0;">private</span> <span style="color: #228b22;">BacklogItemStatusType</span> <span style="color: #a0522d;">status</span>;
+<pre class="src src-java"><span style="color: #AEAEAE; font-style: italic;">// </span><span style="color: #AEAEAE; font-style: italic;">&#36139;&#34880;&#27169;&#22411;</span>
+<span style="color: #FBDE2D;">public</span> <span style="color: #FBDE2D;">class</span> <span style="color: #8DA6CE;">BacklongItem</span> <span style="color: #FBDE2D;">extends</span> <span style="color: #8DA6CE;">Entity</span> {
+        <span style="color: #FBDE2D;">private</span> <span style="color: #8DA6CE;">SprintId</span> <span style="color: #FF6400;">sprintId</span>;
+        <span style="color: #FBDE2D;">private</span> <span style="color: #8DA6CE;">BacklogItemStatusType</span> <span style="color: #FF6400;">status</span>;
 
-    <span style="color: #a020f0;">public</span> <span style="color: #228b22;">void</span> <span style="color: #0000ff;">setSprintId</span>(<span style="color: #228b22;">SprintId</span> <span style="color: #a0522d;">sprintId</span>) {
-        <span style="color: #a020f0;">this</span>.sprintId = sprintId;
-    }
-
-    <span style="color: #a020f0;">public</span> <span style="color: #228b22;">void</span> <span style="color: #0000ff;">setStatus</span>(<span style="color: #228b22;">BacklogItemStatusType</span> <span style="color: #a0522d;">status</span>) {
-        <span style="color: #a020f0;">this</span>.status = status;
-    }
-}
-
-<span style="color: #b22222;">// </span><span style="color: #b22222;">&#23458;&#25143;&#20195;&#30721;</span>
-backlogItem.setSprintId(sprintId);
-backlogItem.setStatus(<span style="color: #008b8b;">BacklogItemStatusType</span>.COMMITTED);
-
-<span style="color: #b22222;">// </span><span style="color: #b22222;">&#39046;&#22495;&#27169;&#22411;</span>
-<span style="color: #a020f0;">public</span> <span style="color: #a020f0;">class</span> <span style="color: #228b22;">BacklogItem</span> <span style="color: #a020f0;">extends</span> <span style="color: #228b22;">Entity</span> {
-    <span style="color: #a020f0;">private</span> <span style="color: #228b22;">SprintId</span> <span style="color: #a0522d;">sprintId</span>;
-    <span style="color: #a020f0;">private</span> <span style="color: #228b22;">BacklogItemStatusType</span> <span style="color: #a0522d;">status</span>;
-
-    <span style="color: #a020f0;">public</span> <span style="color: #228b22;">void</span> <span style="color: #0000ff;">commitTo</span>(<span style="color: #228b22;">Sprint</span> <span style="color: #a0522d;">aSprint</span>) {
-        <span style="color: #a020f0;">if</span> (!<span style="color: #a020f0;">this</span>.isScheduledForRelease()) {
-            <span style="color: #a020f0;">throw</span> <span style="color: #a020f0;">new</span> <span style="color: #228b22;">IllegalStateException</span>(<span style="color: #8b2252;">"Must be scheduled for release to commit to sprint."</span>);
+        <span style="color: #FBDE2D;">public</span> <span style="color: #8DA6CE;">void</span> <span style="color: #FF6400;">setSprintId</span>(<span style="color: #8DA6CE;">SprintId</span> <span style="color: #FF6400;">sprintId</span>) {
+                <span style="color: #FBDE2D;">this</span>.sprintId = sprintId;
         }
 
-        <span style="color: #a020f0;">if</span> (<span style="color: #a020f0;">this</span>.isComittedToSprint()) {
-            <span style="color: #a020f0;">if</span> (!aSprint.sprintId().equals(<span style="color: #a020f0;">this</span>.sprintId())) {
-                <span style="color: #a020f0;">this</span>.uncommitFromSprint();
-            }
+        <span style="color: #FBDE2D;">public</span> <span style="color: #8DA6CE;">void</span> <span style="color: #FF6400;">setStatus</span>(<span style="color: #8DA6CE;">BacklogItemStatusType</span> <span style="color: #FF6400;">status</span>) {
+                <span style="color: #FBDE2D;">this</span>.status = status;
         }
-
-        <span style="color: #a020f0;">this</span>.elevateStatusWith(<span style="color: #008b8b;">BacklogItemStatus</span>.COMMITTED);
-        <span style="color: #a020f0;">this</span>.setSprintId(aSprintId.sprintId());
-        DomainEventPublisher
-            .instance()
-            .<span style="color: #a020f0;">public</span>(<span style="color: #a020f0;">new</span> <span style="color: #228b22;">BacklogItemCommitted</span>(
-                                             <span style="color: #a020f0;">this</span>.tenant(),
-                                             <span style="color: #a020f0;">this</span>.backlogItemId(),
-                                             <span style="color: #a020f0;">this</span>.sprintId()));
-    }
 }
 
-<span style="color: #b22222;">// </span><span style="color: #b22222;">&#23458;&#25143;&#20195;&#30721;</span>
+<span style="color: #AEAEAE; font-style: italic;">// </span><span style="color: #AEAEAE; font-style: italic;">&#23458;&#25143;&#20195;&#30721;</span>
+<span style="color: #FBDE2D;">if</span> (blocklogItem.isScheduedForRelease()) {
+        <span style="color: #FBDE2D;">throw</span> <span style="color: #FBDE2D;">new</span> <span style="color: #8DA6CE;">IllegalStateException</span>(<span style="color: #61CE3C;">"Must be scheduled for release to commit to sprint."</span>);
+}
+
+<span style="color: #FBDE2D;">if</span> (blocklogItem.isComittedToSprint()) {
+        <span style="color: #8DA6CE;">Sprint</span> <span style="color: #FF6400;">currentSprint</span> = blocklogItem.getSprint();
+        <span style="color: #FBDE2D;">if</span> (!currentSprint.equals(sprint)) {
+                currentSprint.removeBacklogItem(backlogItem);
+        }
+}
+
+backlogItem.setSprintId(sprint.getSprintId());
+backlogItem.setStatus(<span style="color: #D8FA3C;">BacklogItemStatusType</span>.COMMITTED);
+DomainEventPublisher.instance().publish(<span style="color: #FBDE2D;">new</span> <span style="color: #8DA6CE;">BacklogItemCommitted</span>(blocklogItem.tenant(),
+                                                                 blocklogItem.backlogItemId(),
+                                                                 blocklogItem.sprintId()));
+
+<span style="color: #AEAEAE; font-style: italic;">// </span><span style="color: #AEAEAE; font-style: italic;">&#39046;&#22495;&#27169;&#22411;</span>
+<span style="color: #FBDE2D;">public</span> <span style="color: #FBDE2D;">class</span> <span style="color: #8DA6CE;">BacklogItem</span> <span style="color: #FBDE2D;">extends</span> <span style="color: #8DA6CE;">Entity</span> {
+        <span style="color: #FBDE2D;">private</span> <span style="color: #8DA6CE;">SprintId</span> <span style="color: #FF6400;">sprintId</span>;
+        <span style="color: #FBDE2D;">private</span> <span style="color: #8DA6CE;">BacklogItemStatusType</span> <span style="color: #FF6400;">status</span>;
+
+        <span style="color: #FBDE2D;">public</span> <span style="color: #8DA6CE;">void</span> <span style="color: #FF6400;">commitTo</span>(<span style="color: #8DA6CE;">Sprint</span> <span style="color: #FF6400;">aSprint</span>) {
+                <span style="color: #FBDE2D;">if</span> (!<span style="color: #FBDE2D;">this</span>.isScheduledForRelease()) {
+                        <span style="color: #FBDE2D;">throw</span> <span style="color: #FBDE2D;">new</span> <span style="color: #8DA6CE;">IllegalStateException</span>(<span style="color: #61CE3C;">"Must be scheduled for release to commit to sprint."</span>);
+                }
+
+                <span style="color: #FBDE2D;">if</span> (<span style="color: #FBDE2D;">this</span>.isComittedToSprint()) {
+                        <span style="color: #FBDE2D;">if</span> (!aSprint.sprintId().equals(<span style="color: #FBDE2D;">this</span>.sprintId())) {
+                                <span style="color: #FBDE2D;">this</span>.uncommitFromSprint();
+                        }
+                }
+
+                <span style="color: #FBDE2D;">this</span>.elevateStatusWith(<span style="color: #D8FA3C;">BacklogItemStatus</span>.COMMITTED);
+                <span style="color: #FBDE2D;">this</span>.setSprintId(aSprintId.sprintId());
+                DomainEventPublisher.instance()
+                        .<span style="color: #FBDE2D;">public</span>(<span style="color: #FBDE2D;">new</span> <span style="color: #8DA6CE;">BacklogItemCommitted</span>(<span style="color: #FBDE2D;">this</span>.tenant(),
+                                                         <span style="color: #FBDE2D;">this</span>.backlogItemId(),
+                                                         <span style="color: #FBDE2D;">this</span>.sprintId()));
+        }
+}
+
+<span style="color: #AEAEAE; font-style: italic;">// </span><span style="color: #AEAEAE; font-style: italic;">&#23458;&#25143;&#20195;&#30721;</span>
 backlogItem.commitTo(sprint);
 </pre>
 </div>
@@ -377,8 +390,8 @@ backlogItem.commitTo(sprint);
 </div>
 
 <div id="outline-container-org743ed78" class="outline-2">
-<h2 id="org743ed78">领域、子域和限界上下文</h2>
-<div class="outline-text-2" id="text-org743ed78">
+<h2 id="org743ed78"><span class="section-number-2">2</span> 领域、子域和限界上下文</h2>
+<div class="outline-text-2" id="text-2">
 <p>
 从广义上讲，领域是一个组织所做的事情以及其中所包含的一切。在DDD中，领域被划分为几个子域。其中起着决定性作用叫核心域。非核心域的重要子域叫支撑子域。
 如果一个子域被应用到整个业务系统，它叫做通用子域。每个子域具有自己独立的限界上下文，领域模型在限界上下文中完成开发。
@@ -405,8 +418,8 @@ backlogItem.commitTo(sprint);
 </div>
 
 <div id="outline-container-orge1fab87" class="outline-2">
-<h2 id="orge1fab87">上下文映射图</h2>
-<div class="outline-text-2" id="text-orge1fab87">
+<h2 id="orge1fab87"><span class="section-number-2">3</span> 上下文映射图</h2>
+<div class="outline-text-2" id="text-3">
 <p>
 不同上下文中的领域模型需要相互配合协作，这就产生了限界上下文之间的映射关系。这些关系的集合叫做上下文映射图（context map）。两个上下文之间的关系有：
 </p>
@@ -473,8 +486,8 @@ backlogItem.commitTo(sprint);
 </div>
 
 <div id="outline-container-org92ad2ba" class="outline-2">
-<h2 id="org92ad2ba">架构</h2>
-<div class="outline-text-2" id="text-org92ad2ba">
+<h2 id="org92ad2ba"><span class="section-number-2">4</span> 架构</h2>
+<div class="outline-text-2" id="text-4">
 <p>
 DDD的一个优势是没有对软件架构进行限制。以分层架构为例，通常，一个采用DDD的分层架构分为4层：用户接口层、应用层、领域层和基础设施层。
 每层都可以和位于其下的各层交互。用户界面层处理用户显示和用户请求。用户界面需要对用户输入进行验证，这种验证和对领域模型的验证是不同的。
@@ -711,22 +724,22 @@ Thomas Erl为面向服务架构（Service-Oriented Architecture, SOA）定义了
 </div>
 
 <div id="outline-container-org1750332" class="outline-2">
-<h2 id="org1750332">实体</h2>
-<div class="outline-text-2" id="text-org1750332">
+<h2 id="org1750332"><span class="section-number-2">5</span> 实体</h2>
+<div class="outline-text-2" id="text-5">
 <p>
 实体是一个唯一的东西，并且在相当长的一段时间内持续变化。唯一身份标识和可变性将实体和值对象区分开来。在设计实体时，首先要考虑的是实体的唯一标识和
 对实体的查找，以及在生命周期内的唯一性。唯一标识可以保存在值对象中。大部分情况下需要保护实体标识的不变性，这一点可以通过setter方法实现：
 </p>
 <div class="org-src-container">
-<pre class="src src-java"><span style="color: #a020f0;">public</span> <span style="color: #a020f0;">class</span> <span style="color: #228b22;">User</span> <span style="color: #a020f0;">extends</span> <span style="color: #228b22;">Entity</span> {
-    <span style="color: #a020f0;">protected</span> <span style="color: #228b22;">void</span> <span style="color: #0000ff;">setUsername</span>(<span style="color: #228b22;">String</span> <span style="color: #a0522d;">aUsername</span>) {
-        <span style="color: #a020f0;">if</span> (<span style="color: #a020f0;">this</span>.username != <span style="color: #008b8b;">null</span>) {
-            <span style="color: #a020f0;">throw</span> <span style="color: #a020f0;">new</span> <span style="color: #228b22;">IllegalStateException</span>(<span style="color: #8b2252;">"The username may not be changed."</span>);
+<pre class="src src-java"><span style="color: #FBDE2D;">public</span> <span style="color: #FBDE2D;">class</span> <span style="color: #8DA6CE;">User</span> <span style="color: #FBDE2D;">extends</span> <span style="color: #8DA6CE;">Entity</span> {
+    <span style="color: #FBDE2D;">protected</span> <span style="color: #8DA6CE;">void</span> <span style="color: #FF6400;">setUsername</span>(<span style="color: #8DA6CE;">String</span> <span style="color: #FF6400;">aUsername</span>) {
+        <span style="color: #FBDE2D;">if</span> (<span style="color: #FBDE2D;">this</span>.username != <span style="color: #D8FA3C;">null</span>) {
+            <span style="color: #FBDE2D;">throw</span> <span style="color: #FBDE2D;">new</span> <span style="color: #8DA6CE;">IllegalStateException</span>(<span style="color: #61CE3C;">"The username may not be changed."</span>);
         }
-        <span style="color: #a020f0;">if</span> (aUsername == <span style="color: #008b8b;">null</span>) {
-            <span style="color: #a020f0;">throw</span> <span style="color: #a020f0;">new</span> <span style="color: #228b22;">IllegalArgumentException</span>(<span style="color: #8b2252;">"The username may not be set to null."</span>);
+        <span style="color: #FBDE2D;">if</span> (aUsername == <span style="color: #D8FA3C;">null</span>) {
+            <span style="color: #FBDE2D;">throw</span> <span style="color: #FBDE2D;">new</span> <span style="color: #8DA6CE;">IllegalArgumentException</span>(<span style="color: #61CE3C;">"The username may not be set to null."</span>);
         }
-        <span style="color: #a020f0;">this</span>.username = aUsername;
+        <span style="color: #FBDE2D;">this</span>.username = aUsername;
     }
 }
 </pre>
@@ -739,8 +752,8 @@ Thomas Erl为面向服务架构（Service-Oriented Architecture, SOA）定义了
 
 
 <div id="outline-container-orgdc86501" class="outline-2">
-<h2 id="orgdc86501">值对象</h2>
-<div class="outline-text-2" id="text-orgdc86501">
+<h2 id="orgdc86501"><span class="section-number-2">6</span> 值对象</h2>
+<div class="outline-text-2" id="text-6">
 <p>
 值类型用于度量和描述事务。在进行领域建模时，应当优先考虑值对象，值对象可以很方便的进行创建、使用、优化和维护。
 如果你只关心某个对象的属性，它应该被设计成值对象。值对象是不变的，没有身份标识。如果一个领域概念具有以下特征，
@@ -762,13 +775,13 @@ Thomas Erl为面向服务架构（Service-Oriented Architecture, SOA）定义了
 构造成一个值对象。比如一件物品的价格是5000美元，这里的价格包含了两个部分：数量和货币单位：
 </p>
 <div class="org-src-container">
-<pre class="src src-java"><span style="color: #a020f0;">public</span> <span style="color: #a020f0;">class</span> <span style="color: #228b22;">Price</span> {
-    <span style="color: #228b22;">Currency</span> <span style="color: #a0522d;">currency</span>;
-    <span style="color: #228b22;">BigDecimal</span> <span style="color: #a0522d;">amount</span>;
+<pre class="src src-java"><span style="color: #FBDE2D;">public</span> <span style="color: #FBDE2D;">class</span> <span style="color: #8DA6CE;">Price</span> {
+    <span style="color: #8DA6CE;">Currency</span> <span style="color: #FF6400;">currency</span>;
+    <span style="color: #8DA6CE;">BigDecimal</span> <span style="color: #FF6400;">amount</span>;
 }
 
-<span style="color: #a020f0;">public</span> <span style="color: #a020f0;">class</span> <span style="color: #228b22;">Thing</span> {
-    <span style="color: #a020f0;">private</span> <span style="color: #228b22;">Price</span> <span style="color: #a0522d;">price</span>;
+<span style="color: #FBDE2D;">public</span> <span style="color: #FBDE2D;">class</span> <span style="color: #8DA6CE;">Thing</span> {
+    <span style="color: #FBDE2D;">private</span> <span style="color: #8DA6CE;">Price</span> <span style="color: #FF6400;">price</span>;
 }
 </pre>
 </div>
@@ -778,28 +791,28 @@ Thomas Erl为面向服务架构（Service-Oriented Architecture, SOA）定义了
 在值对象中使用无副作用函数的方法很简单。如果你希望改变某个属性，可以让值对象的无副作用函数返回一个新的值对象实例：
 </p>
 <div class="org-src-container">
-<pre class="src src-java"><span style="color: #a020f0;">public</span> <span style="color: #a020f0;">class</span> <span style="color: #228b22;">FullName</span> {
-    <span style="color: #a020f0;">public</span> <span style="color: #0000ff;">FullName</span>(<span style="color: #228b22;">String</span> <span style="color: #a0522d;">firstName</span>, <span style="color: #228b22;">String</span> <span style="color: #a0522d;">lastName</span>) { <span style="color: #b22222;">/*</span><span style="color: #b22222;">...*/</span> }
-    <span style="color: #a020f0;">public</span> <span style="color: #0000ff;">FullName</span>(<span style="color: #228b22;">String</span> <span style="color: #a0522d;">firstName</span>, <span style="color: #228b22;">String</span> <span style="color: #a0522d;">middleName</span>, <span style="color: #228b22;">String</span> <span style="color: #a0522d;">lastName</span>) { <span style="color: #b22222;">/*</span><span style="color: #b22222;">...*/</span> }
-    <span style="color: #b22222;">// </span><span style="color: #b22222;">...    </span>
-    <span style="color: #a020f0;">public</span> <span style="color: #228b22;">FullName</span> <span style="color: #0000ff;">withMiddleInitial</span>(<span style="color: #228b22;">String</span> <span style="color: #a0522d;">middleNameOrInitial</span>) {
-        <span style="color: #a020f0;">if</span> (middle == <span style="color: #008b8b;">null</span>) {
-            <span style="color: #a020f0;">throw</span> <span style="color: #a020f0;">new</span> <span style="color: #228b22;">IllegalArgumentException</span>(<span style="color: #8b2252;">"must provide a middle name or initial"</span>);
+<pre class="src src-java"><span style="color: #FBDE2D;">public</span> <span style="color: #FBDE2D;">class</span> <span style="color: #8DA6CE;">FullName</span> {
+    <span style="color: #FBDE2D;">public</span> <span style="color: #FF6400;">FullName</span>(<span style="color: #8DA6CE;">String</span> <span style="color: #FF6400;">firstName</span>, <span style="color: #8DA6CE;">String</span> <span style="color: #FF6400;">lastName</span>) { <span style="color: #AEAEAE; font-style: italic;">/*</span><span style="color: #AEAEAE; font-style: italic;">...*/</span> }
+    <span style="color: #FBDE2D;">public</span> <span style="color: #FF6400;">FullName</span>(<span style="color: #8DA6CE;">String</span> <span style="color: #FF6400;">firstName</span>, <span style="color: #8DA6CE;">String</span> <span style="color: #FF6400;">middleName</span>, <span style="color: #8DA6CE;">String</span> <span style="color: #FF6400;">lastName</span>) { <span style="color: #AEAEAE; font-style: italic;">/*</span><span style="color: #AEAEAE; font-style: italic;">...*/</span> }
+    <span style="color: #AEAEAE; font-style: italic;">// </span><span style="color: #AEAEAE; font-style: italic;">...    </span>
+    <span style="color: #FBDE2D;">public</span> <span style="color: #8DA6CE;">FullName</span> <span style="color: #FF6400;">withMiddleInitial</span>(<span style="color: #8DA6CE;">String</span> <span style="color: #FF6400;">middleNameOrInitial</span>) {
+        <span style="color: #FBDE2D;">if</span> (middle == <span style="color: #D8FA3C;">null</span>) {
+            <span style="color: #FBDE2D;">throw</span> <span style="color: #FBDE2D;">new</span> <span style="color: #8DA6CE;">IllegalArgumentException</span>(<span style="color: #61CE3C;">"must provide a middle name or initial"</span>);
         }
 
-        <span style="color: #228b22;">String</span> <span style="color: #a0522d;">middle</span> = middleNameOrInitial.trim();
-        <span style="color: #a020f0;">if</span> (middle.isEmpty()) {
-            <span style="color: #a020f0;">throw</span> <span style="color: #a020f0;">new</span> <span style="color: #228b22;">IllegalArgumentException</span>(<span style="color: #8b2252;">"must provide a middle name or initial"</span>);
+        <span style="color: #8DA6CE;">String</span> <span style="color: #FF6400;">middle</span> = middleNameOrInitial.trim();
+        <span style="color: #FBDE2D;">if</span> (middle.isEmpty()) {
+            <span style="color: #FBDE2D;">throw</span> <span style="color: #FBDE2D;">new</span> <span style="color: #8DA6CE;">IllegalArgumentException</span>(<span style="color: #61CE3C;">"must provide a middle name or initial"</span>);
         }
 
-        <span style="color: #a020f0;">return</span> <span style="color: #a020f0;">new</span> <span style="color: #228b22;">FullName</span>(<span style="color: #a020f0;">this</span>.firstName(),
+        <span style="color: #FBDE2D;">return</span> <span style="color: #FBDE2D;">new</span> <span style="color: #8DA6CE;">FullName</span>(<span style="color: #FBDE2D;">this</span>.firstName(),
                             middle.substring(0, 1).toUpperCase(),
-                            <span style="color: #a020f0;">this</span>.lastName());
+                            <span style="color: #FBDE2D;">this</span>.lastName());
     }
 }
 
-<span style="color: #228b22;">FullName</span> <span style="color: #a0522d;">name</span> = <span style="color: #a020f0;">new</span> <span style="color: #228b22;">FullName</span>(<span style="color: #8b2252;">"Vaughn"</span>, <span style="color: #8b2252;">"Vernon"</span>);
-name = name.withMiddleInitial(<span style="color: #8b2252;">"L"</span>);
+<span style="color: #8DA6CE;">FullName</span> <span style="color: #FF6400;">name</span> = <span style="color: #FBDE2D;">new</span> <span style="color: #8DA6CE;">FullName</span>(<span style="color: #61CE3C;">"Vaughn"</span>, <span style="color: #61CE3C;">"Vernon"</span>);
+name = name.withMiddleInitial(<span style="color: #61CE3C;">"L"</span>);
 </pre>
 </div>
 
@@ -813,8 +826,8 @@ name = name.withMiddleInitial(<span style="color: #8b2252;">"L"</span>);
 </div>
 
 <div id="outline-container-orgd2c278e" class="outline-2">
-<h2 id="orgd2c278e">领域服务</h2>
-<div class="outline-text-2" id="text-orgd2c278e">
+<h2 id="orgd2c278e"><span class="section-number-2">7</span> 领域服务</h2>
+<div class="outline-text-2" id="text-7">
 <p>
 如果领域内存在一个无状态的操作，又不适合放到聚合或值对象上，这个操作就是领域服务。领域服务执行业务逻辑操作，这正是区分应用服务
 和领域服务的地方：应用服务不会处理业务逻辑。通常，领域服务负责：
@@ -832,15 +845,15 @@ name = name.withMiddleInitial(<span style="color: #8b2252;">"L"</span>);
 </div>
 </div>
 <div id="outline-container-org629448a" class="outline-2">
-<h2 id="org629448a">领域事件</h2>
-<div class="outline-text-2" id="text-org629448a">
+<h2 id="org629448a"><span class="section-number-2">8</span> 领域事件</h2>
+<div class="outline-text-2" id="text-8">
 <p>
 领域事件记录了领域内发生的重要事情。领域事件的命名应当使用通用语言，采用名词+动词过去式的形式，
 并和操作相对应。比如：
 </p>
 <div class="org-src-container">
-<pre class="src src-java">BacklogItem.commitTo(<span style="color: #228b22;">Sprint</span> <span style="color: #a0522d;">aSprint</span>); <span style="color: #b22222;">// </span><span style="color: #b22222;">&#25805;&#20316;&#21517;</span>
-BacklogItemCommitted; <span style="color: #b22222;">// </span><span style="color: #b22222;">&#20107;&#20214;&#21517;</span>
+<pre class="src src-java">BacklogItem.commitTo(<span style="color: #8DA6CE;">Sprint</span> <span style="color: #FF6400;">aSprint</span>); <span style="color: #AEAEAE; font-style: italic;">// </span><span style="color: #AEAEAE; font-style: italic;">&#25805;&#20316;&#21517;</span>
+BacklogItemCommitted; <span style="color: #AEAEAE; font-style: italic;">// </span><span style="color: #AEAEAE; font-style: italic;">&#20107;&#20214;&#21517;</span>
 </pre>
 </div>
 
@@ -864,8 +877,8 @@ BacklogItemCommitted; <span style="color: #b22222;">// </span><span style="color
 
 
 <div id="outline-container-org8199602" class="outline-2">
-<h2 id="org8199602">模块</h2>
-<div class="outline-text-2" id="text-org8199602">
+<h2 id="org8199602"><span class="section-number-2">9</span> 模块</h2>
+<div class="outline-text-2" id="text-9">
 <p>
 在设计领域模型时，模块应当受到与实体、值对象、领域服务和领域事件同样的重视。在命名模块时，也要使用通用语言。
 </p>
@@ -877,8 +890,8 @@ BacklogItemCommitted; <span style="color: #b22222;">// </span><span style="color
 
 
 <div id="outline-container-org7696c2b" class="outline-2">
-<h2 id="org7696c2b">聚合</h2>
-<div class="outline-text-2" id="text-org7696c2b">
+<h2 id="org7696c2b"><span class="section-number-2">10</span> 聚合</h2>
+<div class="outline-text-2" id="text-10">
 <p>
 将实体和值对象组合在某个一致性边界之内可以得到聚合（Aggregate）。在设计聚集时，要避免为了方便组合对象而将聚合设计的过大，
 又要避免将聚合设计得过于贫瘠而没有保护好不变性。聚合构成了一个一致性的边界。
@@ -891,8 +904,8 @@ BacklogItemCommitted; <span style="color: #b22222;">// </span><span style="color
 
 
 <div id="outline-container-orgc45fa78" class="outline-2">
-<h2 id="orgc45fa78">工厂</h2>
-<div class="outline-text-2" id="text-orgc45fa78">
+<h2 id="orgc45fa78"><span class="section-number-2">11</span> 工厂</h2>
+<div class="outline-text-2" id="text-11">
 <p>
 工厂的职责是创建对象，除此以外，工厂不再承担任何责任。工厂可以是领域服务，或者是聚合根的成员方法。
 </p>
@@ -903,8 +916,8 @@ BacklogItemCommitted; <span style="color: #b22222;">// </span><span style="color
 
 
 <div id="outline-container-org1ff3f44" class="outline-2">
-<h2 id="org1ff3f44">资源库</h2>
-<div class="outline-text-2" id="text-org1ff3f44">
+<h2 id="org1ff3f44"><span class="section-number-2">12</span> 资源库</h2>
+<div class="outline-text-2" id="text-12">
 <p>
 存取聚合实例是通过资源库完成的。通常来说，聚合类型与资源库是1-1对应关系。偶尔也会出现多个聚合类型使用同一个资源库的情况。在设计资源库时存在两种思路面向集合（collection-oriented）以及面向持久化（persistence-oriented）。面向集合是传统的设计思路。
 逻辑层通过一组类似集合的接口存取对象。持久化机制对逻辑层是透明的。事务的管理通常放在应用服务中，领域模型和领域层的操作粒度较细，不适合管理事务。
@@ -914,8 +927,8 @@ BacklogItemCommitted; <span style="color: #b22222;">// </span><span style="color
 
 
 <div id="outline-container-orged8ef74" class="outline-2">
-<h2 id="orged8ef74">集成限界上下文</h2>
-<div class="outline-text-2" id="text-orged8ef74">
+<h2 id="orged8ef74"><span class="section-number-2">13</span> 集成限界上下文</h2>
+<div class="outline-text-2" id="text-13">
 <p>
 限界上下文的集成方法主要有三类。一是远程过程调用，一方开发程序编程接口，另一方面通过远程过程调用获取服务。二是消息机制。通过消息队列或发布-订阅将消息主动发送给下游上下文。三是使用RESTful HTTP。这种方式类似于远程过程调用，区别在于RESTful HTTP不包含远程过程调用使用的参数，每个资源的URI都是唯一的。此外也可以通过共享文件或数据库的方式进行集成。正常情况下不应该选择这两种方法，除非遇到特定的约束限制。
 </p>
@@ -945,8 +958,8 @@ BacklogItemCommitted; <span style="color: #b22222;">// </span><span style="color
 
 
 <div id="outline-container-org3896420" class="outline-2">
-<h2 id="org3896420">应用程序</h2>
-<div class="outline-text-2" id="text-org3896420">
+<h2 id="org3896420"><span class="section-number-2">14</span> 应用程序</h2>
+<div class="outline-text-2" id="text-14">
 <p>
 领域模型通常位于应用程序的中心位置。应用程序通过用户界面向外展示领域模型概念，并允许用户在模型上执行各种操作。用户界面使用应用服务来协调用例任务，管理事务，执行一些必要的安全授权。
 </p>
@@ -970,8 +983,8 @@ BacklogItemCommitted; <span style="color: #b22222;">// </span><span style="color
 
 
 <div id="outline-container-org47d6395" class="outline-2">
-<h2 id="org47d6395">聚合与事件源：A+ES</h2>
-<div class="outline-text-2" id="text-org47d6395">
+<h2 id="org47d6395"><span class="section-number-2">15</span> 聚合与事件源：A+ES</h2>
+<div class="outline-text-2" id="text-15">
 <p>
 事件源（Event Sourcing）通过一些列事件来表示一个聚合的完整状态。通过按照顺序重放事件，可以重建任意时刻聚合的状态。重建一个聚合状态的事件位于一个事件流（Event Stream）中中。所有的事件都持久化到事件存储中。区分事件流的方法通常是使用根实体的唯一标识。A+ES是Aggregate + Event Sourcing的缩写，表示这种使用事件源来维护聚合状态的方法。A+ES的优点有：
 </p>
@@ -1360,7 +1373,7 @@ A+ES对测试是友好的，可以用简单的Given-When-Expect方式建立测�
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Created: 2019-09-23 周一 21:13</p>
+<p class="date">Created: 2019-10-29 周二 01:33</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
