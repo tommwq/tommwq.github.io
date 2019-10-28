@@ -3,10 +3,10 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2019-09-23 周一 18:45 -->
+<!-- 2019-10-28 周一 19:45 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>&lrm;</title>
+<title>SQLite笔记</title>
 <meta name="generator" content="Org mode" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
@@ -228,6 +228,7 @@ for the JavaScript code in this tag.
 </head>
 <body>
 <div id="content">
+<h1 class="title">SQLite笔记</h1>
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
@@ -246,13 +247,23 @@ for the JavaScript code in this tag.
 </ul>
 </li>
 <li><a href="#orgebfbe48">查询数据表是否存在。</a></li>
+<li><a href="#org0f6a405">在程序占用判断SQLiite中表是否存在的方法：</a></li>
 <li><a href="#org5335e51">建立数据表。</a></li>
 <li><a href="#orga129dde">插入数据。</a></li>
 <li><a href="#org0c69a92">查询数据。</a></li>
 <li><a href="#org99b4e9b">多线程。</a></li>
+<li><a href="#orgd3d190c">主键</a></li>
+<li><a href="#orgb5e8f01">常见问题</a>
+<ul>
+<li><a href="#orgb71a7ae">slqite-jdbc不支持prepared statement。</a></li>
+</ul>
+</li>
+<li><a href="#orga0c3624">修订记录</a></li>
 </ul>
 </div>
 </div>
+
+
 <div id="outline-container-orge3ca19b" class="outline-2">
 <h2 id="orge3ca19b">SQLite的构建和安装。</h2>
 <div class="outline-text-2" id="text-orge3ca19b">
@@ -317,41 +328,41 @@ sudo make install
 <h3 id="org14a69d2">源代码</h3>
 <div class="outline-text-3" id="text-org14a69d2">
 <div class="org-src-container">
-<pre class="src src-c"><span style="color: #b22222;">// </span><span style="color: #b22222;">a.c</span>
-<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
-<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;sqlite3.h&gt;</span>
+<pre class="src src-c"><span style="color: #AEAEAE; font-style: italic;">// </span><span style="color: #AEAEAE; font-style: italic;">a.c</span>
+<span style="color: #7fffd4;">#include</span> <span style="color: #61CE3C;">&lt;stdio.h&gt;</span>
+<span style="color: #7fffd4;">#include</span> <span style="color: #61CE3C;">&lt;sqlite3.h&gt;</span>
 
-<span style="color: #a020f0;">static</span> <span style="color: #228b22;">int</span> <span style="color: #0000ff;">callback</span>(<span style="color: #228b22;">void</span> *<span style="color: #a0522d;">NotUsed</span>, <span style="color: #228b22;">int</span> <span style="color: #a0522d;">argc</span>, <span style="color: #228b22;">char</span> **<span style="color: #a0522d;">argv</span>, <span style="color: #228b22;">char</span> **<span style="color: #a0522d;">azColName</span>){
-  <span style="color: #228b22;">int</span> <span style="color: #a0522d;">i</span>;
-  <span style="color: #a020f0;">for</span>(i=0; i&lt;argc; i++){
-    printf(<span style="color: #8b2252;">"%s = %s\n"</span>, azColName[i], argv[i] ? argv[i] : <span style="color: #8b2252;">"NULL"</span>);
+<span style="color: #FBDE2D;">static</span> <span style="color: #8DA6CE;">int</span> <span style="color: #FF6400;">callback</span>(<span style="color: #8DA6CE;">void</span> *<span style="color: #FF6400;">NotUsed</span>, <span style="color: #8DA6CE;">int</span> <span style="color: #FF6400;">argc</span>, <span style="color: #8DA6CE;">char</span> **<span style="color: #FF6400;">argv</span>, <span style="color: #8DA6CE;">char</span> **<span style="color: #FF6400;">azColName</span>){
+  <span style="color: #8DA6CE;">int</span> <span style="color: #FF6400;">i</span>;
+  <span style="color: #FBDE2D;">for</span>(i=0; i&lt;argc; i++){
+    printf(<span style="color: #61CE3C;">"%s = %s\n"</span>, azColName[i], argv[i] ? argv[i] : <span style="color: #61CE3C;">"NULL"</span>);
   }
-  printf(<span style="color: #8b2252;">"\n"</span>);
-  <span style="color: #a020f0;">return</span> 0;
+  printf(<span style="color: #61CE3C;">"\n"</span>);
+  <span style="color: #FBDE2D;">return</span> 0;
 }
 
-<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>(<span style="color: #228b22;">int</span> <span style="color: #a0522d;">argc</span>, <span style="color: #228b22;">char</span> **<span style="color: #a0522d;">argv</span>){
-  <span style="color: #228b22;">sqlite3</span> *<span style="color: #a0522d;">db</span>;
-  <span style="color: #228b22;">char</span> *<span style="color: #a0522d;">zErrMsg</span> = 0;
-  <span style="color: #228b22;">int</span> <span style="color: #a0522d;">rc</span>;
+<span style="color: #8DA6CE;">int</span> <span style="color: #FF6400;">main</span>(<span style="color: #8DA6CE;">int</span> <span style="color: #FF6400;">argc</span>, <span style="color: #8DA6CE;">char</span> **<span style="color: #FF6400;">argv</span>){
+  <span style="color: #8DA6CE;">sqlite3</span> *<span style="color: #FF6400;">db</span>;
+  <span style="color: #8DA6CE;">char</span> *<span style="color: #FF6400;">zErrMsg</span> = 0;
+  <span style="color: #8DA6CE;">int</span> <span style="color: #FF6400;">rc</span>;
 
-  <span style="color: #a020f0;">if</span>( argc!=3 ){
-    fprintf(stderr, <span style="color: #8b2252;">"Usage: %s DATABASE SQL-STATEMENT\n"</span>, argv[0]);
-    <span style="color: #a020f0;">return</span>(1);
+  <span style="color: #FBDE2D;">if</span>( argc!=3 ){
+    fprintf(stderr, <span style="color: #61CE3C;">"Usage: %s DATABASE SQL-STATEMENT\n"</span>, argv[0]);
+    <span style="color: #FBDE2D;">return</span>(1);
   }
   rc = sqlite3_open(argv[1], &amp;db);
-  <span style="color: #a020f0;">if</span>( rc ){
-    fprintf(stderr, <span style="color: #8b2252;">"Can't open database: %s\n"</span>, sqlite3_errmsg(db));
+  <span style="color: #FBDE2D;">if</span>( rc ){
+    fprintf(stderr, <span style="color: #61CE3C;">"Can't open database: %s\n"</span>, sqlite3_errmsg(db));
     sqlite3_close(db);
-    <span style="color: #a020f0;">return</span>(1);
+    <span style="color: #FBDE2D;">return</span>(1);
   }
   rc = sqlite3_exec(db, argv[2], callback, 0, &amp;zErrMsg);
-  <span style="color: #a020f0;">if</span>( rc!=SQLITE_OK ){
-    fprintf(stderr, <span style="color: #8b2252;">"SQL error: %s\n"</span>, zErrMsg);
+  <span style="color: #FBDE2D;">if</span>( rc!=SQLITE_OK ){
+    fprintf(stderr, <span style="color: #61CE3C;">"SQL error: %s\n"</span>, zErrMsg);
     sqlite3_free(zErrMsg);
   }
   sqlite3_close(db);
-  <span style="color: #a020f0;">return</span> 0;
+  <span style="color: #FBDE2D;">return</span> 0;
 }
 </pre>
 </div>
@@ -372,7 +383,7 @@ sudo make install
 <h3 id="orgd84348d">运行</h3>
 <div class="outline-text-3" id="text-orgd84348d">
 <div class="org-src-container">
-<pre class="src src-bash">./a.out &lt;db_file&gt; <span style="color: #8b2252;">"SELECT * FROM tbl"</span>
+<pre class="src src-bash">./a.out &lt;db_file&gt; <span style="color: #61CE3C;">"SELECT * FROM tbl"</span>
 </pre>
 </div>
 </div>
@@ -383,7 +394,7 @@ sudo make install
 <h2 id="orgebfbe48">查询数据表是否存在。</h2>
 <div class="outline-text-2" id="text-orgebfbe48">
 <div class="org-src-container">
-<pre class="src src-sql">PRAGMA table_info(<span style="color: #8b2252;">'table_name'</span>);
+<pre class="src src-sql">PRAGMA table_info(<span style="color: #61CE3C;">'table_name'</span>);
 </pre>
 </div>
 <p>
@@ -392,11 +403,44 @@ sudo make install
 </div>
 </div>
 
+<div id="outline-container-org0f6a405" class="outline-2">
+<h2 id="org0f6a405">在程序占用判断SQLiite中表是否存在的方法：</h2>
+<div class="outline-text-2" id="text-org0f6a405">
+<p>
+ sqlite会自动维护一个系统表sqlite_master，该表存储了我们所创建的各个table, view, trigger等等信息。
+</p>
+
+<p>
+sqlite_master表数据字段：
+</p>
+
+<p>
+type:  类型，取值一般为table, view
+name:    
+tbl_name:   表名
+rootpage：
+sql：创建表或者视图的sql语句，可以从该sql语句中判断某字段是否存在
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #FBDE2D;">CREATE</span> <span style="color: #FBDE2D;">TABLE</span> <span style="color: #FF6400;">sqlite_master</span> (   
+<span style="color: #FBDE2D;">type</span> TEXT,   
+<span style="color: #FBDE2D;">name</span> TEXT,   
+tbl_name TEXT,   
+rootpage <span style="color: #8DA6CE;">INTEGER</span>,   
+<span style="color: #FBDE2D;">sql</span> TEXT   
+);
+</pre>
+</div>
+</div>
+</div>
+
+
 <div id="outline-container-org5335e51" class="outline-2">
 <h2 id="org5335e51">建立数据表。</h2>
 <div class="outline-text-2" id="text-org5335e51">
 <div class="org-src-container">
-<pre class="src src-sql"><span style="color: #a020f0;">CREATE</span> <span style="color: #a020f0;">TABLE</span> IF <span style="color: #a020f0;">NOT</span> <span style="color: #a020f0;">EXISTS</span> <span style="color: #0000ff;">test</span> (<span style="color: #a020f0;">value</span> <span style="color: #228b22;">INT</span>);
+<pre class="src src-sql"><span style="color: #FBDE2D;">CREATE</span> <span style="color: #FBDE2D;">TABLE</span> IF <span style="color: #FBDE2D;">NOT</span> <span style="color: #FBDE2D;">EXISTS</span> <span style="color: #FF6400;">test</span> (<span style="color: #FBDE2D;">value</span> <span style="color: #8DA6CE;">INT</span>);
 </pre>
 </div>
 </div>
@@ -406,7 +450,7 @@ sudo make install
 <h2 id="orga129dde">插入数据。</h2>
 <div class="outline-text-2" id="text-orga129dde">
 <div class="org-src-container">
-<pre class="src src-sql"><span style="color: #a020f0;">INSERT</span> <span style="color: #a020f0;">INTO</span> test (<span style="color: #a020f0;">value</span>) <span style="color: #a020f0;">VALUES</span> (1),(2);
+<pre class="src src-sql"><span style="color: #FBDE2D;">INSERT</span> <span style="color: #FBDE2D;">INTO</span> test (<span style="color: #FBDE2D;">value</span>) <span style="color: #FBDE2D;">VALUES</span> (1),(2);
 </pre>
 </div>
 </div>
@@ -416,7 +460,7 @@ sudo make install
 <h2 id="org0c69a92">查询数据。</h2>
 <div class="outline-text-2" id="text-org0c69a92">
 <div class="org-src-container">
-<pre class="src src-sql"><span style="color: #a020f0;">SELECT</span> <span style="color: #a020f0;">value</span> <span style="color: #a020f0;">FROM</span> test;
+<pre class="src src-sql"><span style="color: #FBDE2D;">SELECT</span> <span style="color: #FBDE2D;">value</span> <span style="color: #FBDE2D;">FROM</span> test;
 </pre>
 </div>
 </div>
@@ -426,13 +470,45 @@ sudo make install
 <h2 id="org99b4e9b">多线程。</h2>
 <div class="outline-text-2" id="text-org99b4e9b">
 <p>
-多线程访问SQLite数据库时要注意SQLITE<sub>BUSY和SQLITE</sub><sub>LOCKED异常</sub>。
+多线程访问SQLite数据库时要注意SQLITE_BUSY和SQLITE_LOCKED异常。
 </p>
+</div>
+</div>
+
+
+
+<div id="outline-container-orgd3d190c" class="outline-2">
+<h2 id="orgd3d190c">主键</h2>
+<div class="outline-text-2" id="text-orgd3d190c">
+<p>
+SQLITE中必须大写。
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-orgb5e8f01" class="outline-2">
+<h2 id="orgb5e8f01">常见问题</h2>
+<div class="outline-text-2" id="text-orgb5e8f01">
+</div>
+<div id="outline-container-orgb71a7ae" class="outline-3">
+<h3 id="orgb71a7ae">slqite-jdbc不支持prepared statement。</h3>
+</div>
+</div>
+
+<div id="outline-container-orga0c3624" class="outline-2">
+<h2 id="orga0c3624">修订记录</h2>
+<div class="outline-text-2" id="text-orga0c3624">
+<ul class="org-ul">
+<li>2019年09月27日 增加常见问题。</li>
+</ul>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Created: 2019-09-23 周一 18:45</p>
+<p class="date">Date: 2019年09月27日</p>
+<p class="date">Created: 2019-10-28 周一 19:45</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

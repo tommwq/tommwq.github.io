@@ -1,0 +1,555 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2019-10-28 周一 19:45 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Emacs笔记</title>
+<meta name="generator" content="Org mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Emacs笔记</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org24e0555">在Win7下emacs中英文同时显示时非常卡顿</a></li>
+<li><a href="#org76c1a49">排查Emacs运行慢的方法</a></li>
+<li><a href="#org0b6a647">查看Emacs启动文件</a></li>
+<li><a href="#orgce3fd44">在匹配括号之前跳转</a></li>
+<li><a href="#org4fa8b1f">删除空白行</a></li>
+<li><a href="#org644916a">行排序</a></li>
+<li><a href="#orgfa9dbd3">行排序（逆序）</a></li>
+<li><a href="#org9b97d2d">org模式</a>
+<ul>
+<li><a href="#orgb61aa52">org todo</a></li>
+</ul>
+</li>
+<li><a href="#org82c5342">Parent</a>
+<ul>
+<li><a href="#org04430e7">TODO a</a></li>
+<li><a href="#orgf8fa71d">TODO b, needs to wait for (a)</a></li>
+<li><a href="#org4a46beb">TODO c, needs to wait for (a) and (b)</a></li>
+</ul>
+</li>
+<li><a href="#org2ea6bac">CD collection</a>
+<ul>
+<li><a href="#orgff939aa">Classic</a>
+<ul>
+<li><a href="#orgc8b794a">Glodberg Variations</a></li>
+<li><a href="#org978898b">TODO write article about the Earth for the Guide</a></li>
+<li><a href="#org7a9c7d7">TODO Call Trillian for a date on New Years Eve.</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org713ba34">Organize Party <code>[%]</code></a>
+<ul>
+<li><a href="#org82cc813">TODO Call people <code>[/]</code></a>
+<ul>
+<li><a href="#org5036cf4">TODO peter</a></li>
+<li><a href="#orgb0a4093">TODO Sarah</a></li>
+</ul>
+</li>
+<li><a href="#org3c99f01">TODO Buy fool</a></li>
+<li><a href="#org8034b8e">DONE Talk to neighbor</a></li>
+</ul>
+</li>
+<li><a href="#org284b351">ABC</a></li>
+<li><a href="#org7972462">修订记录</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org24e0555" class="outline-2">
+<h2 id="org24e0555">在Win7下emacs中英文同时显示时非常卡顿</h2>
+<div class="outline-text-2" id="text-org24e0555">
+<p>
+需要设置了语言环境：
+</p>
+<div class="org-src-container">
+<pre class="src src-elisp">(set-language-environment <span style="color: #61CE3C;">"UTF-8"</span>)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org76c1a49" class="outline-2">
+<h2 id="org76c1a49">排查Emacs运行慢的方法</h2>
+<div class="outline-text-2" id="text-org76c1a49">
+<p>
+执行profile-start，执行命令，然后再输入profiler-report，查看call stack。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org0b6a647" class="outline-2">
+<h2 id="org0b6a647">查看Emacs启动文件</h2>
+<div class="outline-text-2" id="text-org0b6a647">
+<div class="org-src-container">
+<pre class="src src-text">C-h v user-init-file
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgce3fd44" class="outline-2">
+<h2 id="orgce3fd44">在匹配括号之前跳转</h2>
+<div class="outline-text-2" id="text-orgce3fd44">
+<div class="org-src-container">
+<pre class="src src-text">C-M-f/b
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org4fa8b1f" class="outline-2">
+<h2 id="org4fa8b1f">删除空白行</h2>
+<div class="outline-text-2" id="text-org4fa8b1f">
+<div class="org-src-container">
+<pre class="src src-text">M-x flush-lines
+Flush lines containing match for regexp:^$
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org644916a" class="outline-2">
+<h2 id="org644916a">行排序</h2>
+<div class="outline-text-2" id="text-org644916a">
+<p>
+选中需要排序的区域，输入：
+</p>
+<div class="org-src-container">
+<pre class="src src-text">M-x sort-lines
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgfa9dbd3" class="outline-2">
+<h2 id="orgfa9dbd3">行排序（逆序）</h2>
+<div class="outline-text-2" id="text-orgfa9dbd3">
+<div class="org-src-container">
+<pre class="src src-text">M-x reverse-region
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org9b97d2d" class="outline-2">
+<h2 id="org9b97d2d">org模式</h2>
+<div class="outline-text-2" id="text-org9b97d2d">
+</div>
+<div id="outline-container-orgb61aa52" class="outline-3">
+<h3 id="orgb61aa52">org todo</h3>
+<div class="outline-text-3" id="text-orgb61aa52">
+<p>
+C-c C-t  (org-todo) 切换TODO状态。
+C-c a t (org-todo-list) 展示全局todo清单
+S-M-RET org-insert-todo-heading 插入TODO条目
+定义工作流状态：
+(setq org-todo-keywords '((sequence "TODO" "FEEDBACK" "VERIFY" "|" "DONE" "DELEGATED")))
+定义状态颜色：
+(setq org-todo-keyword-faces
+      '(("TODO" . org-warning)
+      ("STARTED" ."yellow")
+      ("CANCELED" .(:foreground "blue" :weight bold))))
+</p>
+
+<p>
+任务依赖
+#+BEGIN_SRC text
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org82c5342" class="outline-2">
+<h2 id="org82c5342">Parent</h2>
+<div class="outline-text-2" id="text-org82c5342">
+</div>
+<div id="outline-container-org04430e7" class="outline-3">
+<h3 id="org04430e7">TODO a</h3>
+</div>
+<div id="outline-container-orgf8fa71d" class="outline-3">
+<h3 id="orgf8fa71d">TODO b, needs to wait for (a)</h3>
+</div>
+<div id="outline-container-org4a46beb" class="outline-3">
+<h3 id="org4a46beb">TODO c, needs to wait for (a) and (b)</h3>
+<div class="outline-text-3" id="text-org4a46beb">
+<p>
+#+END_SRC
+</p>
+
+<p>
+为条目定义属性
+#+BEGIN_SRC text
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org2ea6bac" class="outline-2">
+<h2 id="org2ea6bac">CD collection</h2>
+<div class="outline-text-2" id="text-org2ea6bac">
+</div>
+<div id="outline-container-orgff939aa" class="outline-3">
+<h3 id="orgff939aa">Classic</h3>
+<div class="outline-text-3" id="text-orgff939aa">
+</div>
+<div id="outline-container-orgc8b794a" class="outline-4">
+<h4 id="orgc8b794a">Glodberg Variations</h4>
+<div class="outline-text-4" id="text-orgc8b794a">
+<p>
+#+END_SRC
+</p>
+
+<p>
+特殊属性：
+priority
+item
+deadline
+closed
+scheduled
+todo
+category
+blocked
+</p>
+
+<p>
+调度
+#+BEGIN_SRC text
+</p>
+</div>
+</div>
+<div id="outline-container-org978898b" class="outline-4">
+<h4 id="org978898b">TODO write article about the Earth for the Guide</h4>
+<div class="outline-text-4" id="text-org978898b">
+</div>
+</div>
+<div id="outline-container-org7a9c7d7" class="outline-4">
+<h4 id="org7a9c7d7">TODO Call Trillian for a date on New Years Eve.</h4>
+<div class="outline-text-4" id="text-org7a9c7d7">
+<p>
+SCHEDULED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2004-12-25 周六 -2d&gt;</span></span>
+#+END_SRC
+循环任务
+</p>
+<div class="org-src-container">
+<pre class="src src-text">DEADLINE: &lt;2005-10-01 Sat +1m -3d&gt;
+</pre>
+</div>
+
+<p>
+C-c C-d org-deadline
+C-c C-s org-schedule
+C-c / d org-check-deadline
+C-c / b org-check-before-date
+C-c / a org-check-after-date
+</p>
+
+<p>
+显示子任务进度。在父条目上添加<code>[/]</code>或<code>[%]</code>。
+#+BEGIN_SRC text
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org713ba34" class="outline-2">
+<h2 id="org713ba34">Organize Party <code>[%]</code></h2>
+<div class="outline-text-2" id="text-org713ba34">
+</div>
+<div id="outline-container-org82cc813" class="outline-3">
+<h3 id="org82cc813">TODO Call people <code>[/]</code></h3>
+<div class="outline-text-3" id="text-org82cc813">
+</div>
+<div id="outline-container-org5036cf4" class="outline-4">
+<h4 id="org5036cf4">TODO peter</h4>
+</div>
+<div id="outline-container-orgb0a4093" class="outline-4">
+<h4 id="orgb0a4093">TODO Sarah</h4>
+</div>
+</div>
+<div id="outline-container-org3c99f01" class="outline-3">
+<h3 id="org3c99f01">TODO Buy fool</h3>
+</div>
+<div id="outline-container-org8034b8e" class="outline-3">
+<h3 id="org8034b8e">DONE Talk to neighbor</h3>
+<div class="outline-text-3" id="text-org8034b8e">
+<p>
+#+END_SRC
+</p>
+
+<p>
+自动将父条目表标记为done
+</p>
+<div class="org-src-container">
+<pre class="src src-elisp">(<span style="color: #FBDE2D;">defun</span> <span style="color: #FF6400;">org-summary-todo</span> (n-done n-not-done)
+  <span style="color: #61CE3C;">"Switch entry to DONE when all subentries are done, to TODO otherwise."</span>
+  (<span style="color: #FBDE2D;">let</span> (org-log-done org-log-states)   <span style="color: #AEAEAE; font-style: italic;">; </span><span style="color: #AEAEAE; font-style: italic;">turn off logging</span>
+    (org-todo (<span style="color: #FBDE2D;">if</span> (= n-not-done 0) <span style="color: #61CE3C;">"DONE"</span> <span style="color: #61CE3C;">"TODO"</span>))))
+
+(add-hook 'org-after-todo-statistics-hook 'org-summary-todo)
+</pre>
+</div>
+
+<p>
+#+BEGIN_SRC text
+checkbox
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org284b351" class="outline-2">
+<h2 id="org284b351">ABC</h2>
+<div class="outline-text-2" id="text-org284b351">
+<ul class="org-ul">
+<li>[] foo</li>
+<li>bar</li>
+</ul>
+<p>
+#+END_SRC
+</p>
+
+<p>
+C-c C-x C-b org-toggle-checkbox
+</p>
+</div>
+</div>
+
+<div id="outline-container-org7972462" class="outline-2">
+<h2 id="org7972462">修订记录</h2>
+<div class="outline-text-2" id="text-org7972462">
+<ul class="org-ul">
+<li>2019年09月27日 增加org部分内容。</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: 2019年09月27日</p>
+<p class="date">Created: 2019-10-28 周一 19:45</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

@@ -1,0 +1,1812 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2019-10-28 周一 19:45 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>《深入理解程序设计：使用Linux汇编语言》笔记</title>
+<meta name="generator" content="Org mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">《深入理解程序设计：使用Linux汇编语言》笔记</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org33dc537">第一章 引言</a></li>
+<li><a href="#org5f2ac2a">第二章 计算机体系结构</a></li>
+<li><a href="#org0856d90">第三章 编写第一个程序</a></li>
+<li><a href="#orgf2c6918">第四章 关于函数</a></li>
+<li><a href="#org4904653">第五章 文件处理</a></li>
+<li><a href="#orgb0dac9c">第六章 读写简单记录</a></li>
+<li><a href="#org0e8b291">第七章 开发健壮的程序</a></li>
+<li><a href="#org4b4cadd">第八章 与代码库共享程序</a></li>
+<li><a href="#org81f703c">第九章 关于中间存储器</a></li>
+<li><a href="#org7ba8c85">第十章 向计算机一样计数</a></li>
+<li><a href="#org97b93c0">第十一章 高级语言</a></li>
+<li><a href="#org5e5e5d4">第十二章 优化</a></li>
+<li><a href="#orgd9f52b1">第十三章 学无止境</a></li>
+<li><a href="#org0476c4b">附录B 通用x86指令</a></li>
+<li><a href="#org8134854">附录C 重要的系统调用</a></li>
+<li><a href="#org792021c">附录：练习</a></li>
+<li><a href="#orgd29d7c1">参考</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org33dc537" class="outline-2">
+<h2 id="org33dc537">第一章 引言</h2>
+</div>
+
+<div id="outline-container-org5f2ac2a" class="outline-2">
+<h2 id="org5f2ac2a">第二章 计算机体系结构</h2>
+<div class="outline-text-2" id="text-org5f2ac2a">
+<p>
+CPU从内存中读取一条指令并执行的过程叫做指令周期。为了执行指令，CPU通常需要以下元件：
+</p>
+<ul class="org-ul">
+<li>程序计数器。告诉CPU下一条指令从哪里读取。</li>
+<li>指令解码器。解码指令。</li>
+<li>数据总线。加载指令需要的内存数据。</li>
+<li>通用寄存器。保存操作数和运算结果。</li>
+<li>算术逻辑单元。进行算术运算。</li>
+</ul>
+
+<p>
+大部分指令都需要有操作数。操作数是指令的参数。加载操作数的过程叫做寻址。常见的寻址方式包括：
+</p>
+<ul class="org-ul">
+<li>立即寻址。指令本身已经包含数据。不再需要从寄存器或内存中加载数据。</li>
+<li>寄存器寻址。从寄存器中加载数据。</li>
+<li>直接寻址。指令包含一个内存地址，从内存中加载数据。</li>
+<li>变址寻址。指令包含一个内存地址和一个寄存器，将寄存器中的值和内存地址结合生成实际的内存地址。</li>
+<li>间接寻址。指令包含一个寄存器，寄存器记录了内存地址。</li>
+<li>基址寻址。指令包含一个寄存器和一个偏移量，将寄存器的值加上偏移量得到内存地址。</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org0856d90" class="outline-2">
+<h2 id="org0856d90">第三章 编写第一个程序</h2>
+<div class="outline-text-2" id="text-org0856d90">
+<p>
+下面是一个汇编程序的例子：
+</p>
+<div class="org-src-container">
+<pre class="src src-asm"># exit.s
+# as exit.s -o exit.o
+# ld exit.o -o exit
+# ./exit
+<span style="color: #FBDE2D;">.section</span> .data
+<span style="color: #FBDE2D;">.section</span> .text
+<span style="color: #FBDE2D;">.globl</span> _start
+<span style="color: #FF6400;">_start</span>:
+    <span style="color: #FBDE2D;">movl</span> $1, <span style="color: #FF6400;">%eax</span>
+    <span style="color: #FBDE2D;">movl</span> $0, <span style="color: #FF6400;">%ebx</span>
+    <span style="color: #FBDE2D;">int</span> $0x80
+</pre>
+</div>
+
+<p>
+从汇编代码到可执行的程序还需要经过汇编和链接两个步骤：
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">as exit.s -o exit.o
+ld exit.o -o exit
+</pre>
+</div>
+
+<p>
+下面对这个例子进行介绍。以点“.”开头代码不会生成机器指令。这些代码是由汇编程序处理的。.section用来声明段，如：
+</p>
+<div class="org-src-container">
+<pre class="src src-asm"><span style="color: #FBDE2D;">.section</span> .data
+# &#25968;&#25454;&#27573;
+<span style="color: #FBDE2D;">.section</span> .text
+# &#20195;&#30721;&#27573;
+</pre>
+</div>
+
+<p>
+.globl用来声明全局符号。非全局符号在链接时是不可见的。_start是一个特殊符号，它是链接程序ld默认的入口函数。代码
+</p>
+<div class="org-src-container">
+<pre class="src src-asm"><span style="color: #FF6400;">movl</span> <span style="color: #FBDE2D;">$1</span>, <span style="color: #FF6400;">%eax</span>
+</pre>
+</div>
+<p>
+表示用立即数1的值保存到寄存器%eax中。movl是指令，$1和%eax是操作数。不同指令需要不同数量的操作数。想addl、subl、imull、idivl这些指令都需要两个操作数。这行代码使用了寄存器%eax。在x86系统上有下列寄存器：
+</p>
+<ul class="org-ul">
+<li>%eax/%rax</li>
+<li>%ebx/%rbx</li>
+<li>%ecx/%rcx</li>
+<li>%edx/%rdx</li>
+<li>%edi/%rdi</li>
+<li>%esi/%rsi</li>
+<li>%ebp/%rbp</li>
+<li>%esp/%rsp</li>
+<li>%eip/%rip</li>
+<li>%eflags</li>
+</ul>
+
+<p>
+代码里的$1表示立即数1。int $0x80表示调用$0x80中断。这是Linux系统中断。在调用Linux系统终端之前需要将调用号保存到%eax中。这里使用了1号调用，即exit调用。exit调用退出程序，并将%ebx的值作为程序执行状态返回。
+</p>
+
+
+<p>
+下面是一个查找最大数的例子：
+</p>
+<div class="org-src-container">
+<pre class="src src-asm"># maximum.s
+<span style="color: #FBDE2D;">.section</span> .data
+<span style="color: #FF6400;">data_items</span>:
+  <span style="color: #FBDE2D;">.long</span> 3,67,34,222,45,75,54,34,44,33,22,11,66,0
+<span style="color: #FBDE2D;">.section</span> .text
+<span style="color: #FBDE2D;">.globl</span> _start
+<span style="color: #FF6400;">_start</span>:
+    <span style="color: #FBDE2D;">movl</span> $0, <span style="color: #FF6400;">%edi</span>
+    <span style="color: #FBDE2D;">movl</span> data_items(,<span style="color: #FF6400;">%edi</span>,4), <span style="color: #FF6400;">%eax</span>
+    <span style="color: #FBDE2D;">movl</span> <span style="color: #FF6400;">%eax</span>, <span style="color: #FF6400;">%ebx</span>
+<span style="color: #FF6400;">start_loop</span>:
+    <span style="color: #FBDE2D;">cmpl</span> $0, <span style="color: #FF6400;">%eax</span>
+    <span style="color: #FBDE2D;">je</span> loop_exit
+    <span style="color: #FBDE2D;">incl</span> <span style="color: #FF6400;">%edi</span>
+    <span style="color: #FBDE2D;">movl</span> data_items(,<span style="color: #FF6400;">%edi</span>,4), <span style="color: #FF6400;">%eax</span>
+    <span style="color: #FBDE2D;">cmpl</span> <span style="color: #FF6400;">%ebx</span>, <span style="color: #FF6400;">%eax</span>
+    <span style="color: #FBDE2D;">jle</span> start_loop
+    <span style="color: #FBDE2D;">movl</span> <span style="color: #FF6400;">%eax</span>, <span style="color: #FF6400;">%ebx</span>
+    <span style="color: #FBDE2D;">jmp</span> start_loop
+<span style="color: #FF6400;">loop_exit</span>:
+    <span style="color: #FBDE2D;">movl</span> $1, <span style="color: #FF6400;">%eax</span>
+    <span style="color: #FBDE2D;">int</span> $0x80
+</pre>
+</div>
+
+<p>
+这段代码中出现了.long，它用来声明数据占4个字节。这样的命令有：
+</p>
+<ul class="org-ul">
+<li>.byte 1字节</li>
+<li>.int 2字节</li>
+<li>.long 4字节</li>
+<li>.ascii 字符串，每个字符占1字节</li>
+</ul>
+
+<p>
+代码
+</p>
+<div class="org-src-container">
+<pre class="src src-asm"><span style="color: #FF6400;">movl</span> <span style="color: #FBDE2D;">data</span>_items(,<span style="color: #FF6400;">%edi</span>,4), <span style="color: #FF6400;">%eax</span>
+</pre>
+</div>
+
+<p>
+表示将数组data_items的第%edi个元素复制到寄存器%eax，每个元组占4字节。这里的数组下标从0开始。
+</p>
+
+<p>
+代码
+</p>
+<div class="org-src-container">
+<pre class="src src-asm"><span style="color: #FF6400;">cmpl</span> <span style="color: #FBDE2D;">$0</span>, <span style="color: #FF6400;">%eax</span>
+</pre>
+</div>
+<p>
+会比较%eax和$0的值。可以简单理解为%eax - $0。根据比较结果，CPU会更新%eflags寄存器中的标志位。指令je会检查%eflags寄存器，如果发现相等标志位被设置，则进行跳转。常用的跳转指令有：
+</p>
+<ul class="org-ul">
+<li>je 相等时跳转。</li>
+<li>jg 大于时跳转。</li>
+<li>jge 大于等于时跳转。</li>
+<li>jl 小于时跳转。</li>
+<li>jle 小于等于时跳转。</li>
+<li>jmp 无条件跳转。</li>
+</ul>
+
+<p>
+代码
+</p>
+<div class="org-src-container">
+<pre class="src src-asm"><span style="color: #FF6400;">incl</span> <span style="color: #FBDE2D;">%edi</span>
+</pre>
+</div>
+<p>
+将%edi的值加1。
+</p>
+
+<p>
+下面是几种寻址对应的代码：
+</p>
+
+<ul class="org-ul">
+<li>直接寻址 movl ADDRESS, %eax</li>
+<li>索引寻址 movl array(,%ecx,1), %eax</li>
+<li>间接寻址 movl (%eax), %ebx 将%eax指向的内存写入%ebx</li>
+<li>基址寻址 movl 4(%ea), %ebx 将%eax+4指向的内存写入%ebx</li>
+<li>寄存器寻址 movl %eax, %ebx; movb %ah, %bh</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgf2c6918" class="outline-2">
+<h2 id="orgf2c6918">第四章 关于函数</h2>
+<div class="outline-text-2" id="text-orgf2c6918">
+<p>
+在C调用约定中，参数通过栈传递，按照声明顺序倒序压栈。压栈和弹栈使用pushl和popl指令。栈的位置由%esp和%ebp决定。%esp是栈顶，%ebp是栈底。栈向下增长，每次压栈，%esp的值减去4。第一个参数保存在8(%ebp)，第二个参数是12(%ebp)，以此类推。子程序的本地对象也保存在栈上，第N本地变量的地址是-4*N(%ebp)。代码subl $8, %esp为本地对象分配了8个字节的空间。当函数执行完毕后，函数将返回值保存到%eax，然后恢复堆栈（栈平衡），最后通过ret将栈指针弹出。函数的代码如下：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-asm"><span style="color: #FF6400;">pushl</span> <span style="color: #FBDE2D;">%ebp</span>
+<span style="color: #FF6400;">movl</span> <span style="color: #FBDE2D;">%esp</span>, <span style="color: #FF6400;">%ebp</span>
+<span style="color: #FF6400;">subl</span> <span style="color: #FBDE2D;">$12</span>, <span style="color: #FF6400;">%esp</span>
+# ....
+<span style="color: #FF6400;">movl</span> <span style="color: #FBDE2D;">%ebp</span>, <span style="color: #FF6400;">%esp</span>
+<span style="color: #FF6400;">popl</span> <span style="color: #FBDE2D;">%ebp</span>
+<span style="color: #FF6400;">ret</span>
+</pre>
+</div>
+
+<p>
+之所以使用%ebp定位参数和本地变量，是因为%ebp在函数执行过程中是不变的，而%esp会随着pushl/popl指令而改变。实际上，call ADDRESS指令等价于
+</p>
+<div class="org-src-container">
+<pre class="src src-asm"><span style="color: #FF6400;">pushl</span> <span style="color: #FBDE2D;">%eip</span>
+<span style="color: #FF6400;">movl</span> <span style="color: #FBDE2D;">$ADDERSS</span>, <span style="color: #FF6400;">%eip</span>
+</pre>
+</div>
+<p>
+同样的，ret等价于
+</p>
+<div class="org-src-container">
+<pre class="src src-asm"><span style="color: #FF6400;">popl</span> <span style="color: #FBDE2D;">%eip</span>
+</pre>
+</div>
+
+
+<p>
+下面是计算两个方幂之和的例子：
+</p>
+<div class="org-src-container">
+<pre class="src src-asm">        <span style="color: #FBDE2D;">.section</span> .data
+
+        <span style="color: #FBDE2D;">.section</span> .text
+
+        <span style="color: #FBDE2D;">.globl</span> _start
+
+<span style="color: #FF6400;">_start</span>:
+        <span style="color: #FBDE2D;">pushl</span> $3
+        <span style="color: #FBDE2D;">pushl</span> $2
+        <span style="color: #FBDE2D;">call</span> power
+        <span style="color: #FBDE2D;">addl</span> $8, <span style="color: #FF6400;">%esp</span>
+        <span style="color: #FBDE2D;">pushl</span> <span style="color: #FF6400;">%eax</span>
+
+        <span style="color: #FBDE2D;">pushl</span> $2
+        <span style="color: #FBDE2D;">pushl</span> $5
+        <span style="color: #FBDE2D;">call</span> power
+        <span style="color: #FBDE2D;">addl</span> $8, <span style="color: #FF6400;">%esp</span>
+        <span style="color: #FBDE2D;">popl</span> <span style="color: #FF6400;">%ebx</span>
+
+        <span style="color: #FBDE2D;">addl</span> <span style="color: #FF6400;">%eax</span>, <span style="color: #FF6400;">%ebx</span>
+        <span style="color: #FBDE2D;">movl</span> $1, <span style="color: #FF6400;">%eax</span>
+        <span style="color: #FBDE2D;">int</span> $0x80
+
+        <span style="color: #FBDE2D;">.type</span> power, @function
+<span style="color: #FF6400;">power</span>:
+        <span style="color: #FBDE2D;">pushl</span> <span style="color: #FF6400;">%ebp</span>
+        <span style="color: #FBDE2D;">movl</span> <span style="color: #FF6400;">%esp</span>, <span style="color: #FF6400;">%ebp</span>
+        <span style="color: #FBDE2D;">subl</span> $4, <span style="color: #FF6400;">%esp</span>
+        <span style="color: #FBDE2D;">movl</span> 8(<span style="color: #FF6400;">%ebp</span>), <span style="color: #FF6400;">%ebx</span>
+        <span style="color: #FBDE2D;">movl</span> 12(<span style="color: #FF6400;">%ebp</span>), <span style="color: #FF6400;">%ecx</span>
+        <span style="color: #FBDE2D;">movl</span> <span style="color: #FF6400;">%ebx</span>, -4(<span style="color: #FF6400;">%ebp</span>) # &#23384;&#20648;&#24403;&#21069;&#32467;&#26524;
+<span style="color: #FF6400;">power_loop_start</span>:
+        <span style="color: #FBDE2D;">cmpl</span> $1, <span style="color: #FF6400;">%ecx</span>
+        <span style="color: #FBDE2D;">je</span> end_power
+        <span style="color: #FBDE2D;">movl</span> -4(<span style="color: #FF6400;">%ebp</span>), <span style="color: #FF6400;">%eax</span>
+        <span style="color: #FBDE2D;">imull</span> <span style="color: #FF6400;">%ebx</span>, <span style="color: #FF6400;">%eax</span>
+        <span style="color: #FBDE2D;">movl</span> <span style="color: #FF6400;">%eax</span>, -4(<span style="color: #FF6400;">%ebp</span>)
+        <span style="color: #FBDE2D;">decl</span> <span style="color: #FF6400;">%ecx</span>
+        <span style="color: #FBDE2D;">jmp</span> power_loop_start
+
+<span style="color: #FF6400;">end_power</span>:
+        <span style="color: #FBDE2D;">movl</span> -4(<span style="color: #FF6400;">%ebp</span>), <span style="color: #FF6400;">%eax</span>
+        <span style="color: #FBDE2D;">movl</span> <span style="color: #FF6400;">%ebp</span>, <span style="color: #FF6400;">%esp</span>
+        <span style="color: #FBDE2D;">popl</span> <span style="color: #FF6400;">%ebp</span>
+        <span style="color: #FBDE2D;">ret</span>
+</pre>
+</div>
+
+<p>
+这里的伪指令.type power, @funciton告诉连接器，power是一个函数。
+</p>
+
+
+<p>
+下面是递归调用示例：
+</p>
+<div class="org-src-container">
+<pre class="src src-asm">        <span style="color: #FBDE2D;">.section</span> .data
+        <span style="color: #FBDE2D;">.section</span> .text
+
+        <span style="color: #FBDE2D;">.globl</span> _start
+        <span style="color: #FBDE2D;">.globl</span> factorial
+
+<span style="color: #FF6400;">_start</span>:
+        <span style="color: #FBDE2D;">pushl</span> $4
+        <span style="color: #FBDE2D;">call</span> factorial
+        <span style="color: #FBDE2D;">addl</span> $4, <span style="color: #FF6400;">%esp</span>
+        <span style="color: #FBDE2D;">movl</span> <span style="color: #FF6400;">%eax</span>, <span style="color: #FF6400;">%ebx</span>
+        <span style="color: #FBDE2D;">movl</span> $1, <span style="color: #FF6400;">%eax</span>
+        <span style="color: #FBDE2D;">int</span> $0x80
+
+        <span style="color: #FBDE2D;">.type</span> factorial,@function
+<span style="color: #FF6400;">factorial</span>:
+        <span style="color: #FBDE2D;">pushl</span> <span style="color: #FF6400;">%ebp</span>
+        <span style="color: #FBDE2D;">movl</span> <span style="color: #FF6400;">%esp</span>, <span style="color: #FF6400;">%ebp</span>
+        <span style="color: #FBDE2D;">movl</span> 8(<span style="color: #FF6400;">%ebp</span>), <span style="color: #FF6400;">%eax</span>
+        <span style="color: #FBDE2D;">cmpl</span> $1, <span style="color: #FF6400;">%eax</span>
+        <span style="color: #FBDE2D;">je</span> end_factorial
+        <span style="color: #FBDE2D;">decl</span> <span style="color: #FF6400;">%eax</span>
+        <span style="color: #FBDE2D;">pushl</span> <span style="color: #FF6400;">%eax</span>
+        <span style="color: #FBDE2D;">call</span> factorial
+        <span style="color: #FBDE2D;">movl</span> 8(<span style="color: #FF6400;">%ebp</span>), <span style="color: #FF6400;">%ebx</span>
+        <span style="color: #FBDE2D;">imull</span> <span style="color: #FF6400;">%ebx</span>, <span style="color: #FF6400;">%eax</span>
+<span style="color: #FF6400;">end_factorial</span>:
+        <span style="color: #FBDE2D;">movl</span> <span style="color: #FF6400;">%ebp</span>, <span style="color: #FF6400;">%esp</span>
+        <span style="color: #FBDE2D;">popl</span> <span style="color: #FF6400;">%ebp</span>
+        <span style="color: #FBDE2D;">ret</span>
+</pre>
+</div>
+
+<p>
+系统提供的基础函数叫做原语。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org4904653" class="outline-2">
+<h2 id="org4904653">第五章 文件处理</h2>
+<div class="outline-text-2" id="text-org4904653">
+<p>
+Linux系统提供了几个操作文件的系统调用，分别是：
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">名字</td>
+<td class="org-right">调用号</td>
+<td class="org-left">参数</td>
+<td class="org-left">返回值</td>
+</tr>
+
+<tr>
+<td class="org-left">read</td>
+<td class="org-right">3</td>
+<td class="org-left">%ebx 文件描述符 %ecx 缓冲区地址 %edx 缓冲区大小</td>
+<td class="org-left">%eax 读取长度</td>
+</tr>
+
+<tr>
+<td class="org-left">write</td>
+<td class="org-right">4</td>
+<td class="org-left">%ebx 文件描述符 %ecx 缓冲区地址 %edx 缓冲区大小</td>
+<td class="org-left">%eax 写入长度</td>
+</tr>
+
+<tr>
+<td class="org-left">open</td>
+<td class="org-right">5</td>
+<td class="org-left">%ebx 文件名缓冲区 %ecx 读写模式</td>
+<td class="org-left">%eax 文件描述符</td>
+</tr>
+
+<tr>
+<td class="org-left">close</td>
+<td class="org-right">6</td>
+<td class="org-left">%ebx 文件描述符</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>
+下面的代码在bss段分配了一个500字节的缓冲区：
+</p>
+<div class="org-src-container">
+<pre class="src src-asm"><span style="color: #FBDE2D;">.section</span> .bss
+<span style="color: #FBDE2D;">.lcomm</span> my_buffer, 500
+<span style="color: #FF6400;">movl</span> <span style="color: #FBDE2D;">$my</span>_buffer, <span style="color: #FF6400;">%ecx</span>
+</pre>
+</div>
+
+
+<p>
+.equ类似C语言的define：
+</p>
+<div class="org-src-container">
+<pre class="src src-asm"><span style="color: #FBDE2D;">.equ</span> SYSCALL, 0x80
+<span style="color: #FF6400;">int</span> <span style="color: #FBDE2D;">$SYSCALL</span>
+</pre>
+</div>
+
+<p>
+下面是大小写转换程序例子：
+</p>
+<div class="org-src-container">
+<pre class="src src-asm"># ./toupper in.txt out.txt
+        <span style="color: #FBDE2D;">.section</span> .data
+
+        <span style="color: #FBDE2D;">.equ</span> SYS_EXIT, 1
+        <span style="color: #FBDE2D;">.equ</span> SYS_READ, 3
+        <span style="color: #FBDE2D;">.equ</span> SYS_WRITE, 4
+        <span style="color: #FBDE2D;">.equ</span> SYS_OPEN, 5
+        <span style="color: #FBDE2D;">.equ</span> SYS_CLOSE, 6
+
+        <span style="color: #FBDE2D;">.equ</span> O_RDONLY, 0
+        <span style="color: #FBDE2D;">.equ</span> O_CREAT_WRONLY_TRUNC, 03101
+
+        <span style="color: #FBDE2D;">.equ</span> STDIN, 0
+        <span style="color: #FBDE2D;">.equ</span> STDOUT, 1
+        <span style="color: #FBDE2D;">.equ</span> STDERR, 2
+
+        <span style="color: #FBDE2D;">.equ</span> LINUX_SYSCALL, 0x80
+
+        <span style="color: #FBDE2D;">.equ</span> END_OF_FILE, 0
+        <span style="color: #FBDE2D;">.equ</span> NUMBER_ARGUMENTS, 2
+
+        <span style="color: #FBDE2D;">.section</span> .bss
+        <span style="color: #FBDE2D;">.equ</span> BUFFER_SIZE, 500
+        <span style="color: #FBDE2D;">.lcomm</span> BUFFER_DATA, BUFFER_SIZE
+
+        <span style="color: #FBDE2D;">.section</span> .text
+
+        <span style="color: #FBDE2D;">.equ</span> ST_SIZE_RESERVE, 8
+        <span style="color: #FBDE2D;">.equ</span> ST_FD_IN, -4
+        <span style="color: #FBDE2D;">.equ</span> ST_FD_OUT, -8
+        <span style="color: #FBDE2D;">.equ</span> ST_ARGC, 0
+        <span style="color: #FBDE2D;">.equ</span> ST_ARGV_0, 4
+        <span style="color: #FBDE2D;">.equ</span> ST_ARGV_1, 8
+        <span style="color: #FBDE2D;">.equ</span> ST_ARGV_2, 12
+
+        <span style="color: #FBDE2D;">.globl</span> _start
+<span style="color: #FF6400;">_start</span>:
+        <span style="color: #FBDE2D;">movl</span> <span style="color: #FF6400;">%esp</span>, <span style="color: #FF6400;">%ebp</span>
+        <span style="color: #FBDE2D;">subl</span> $8, <span style="color: #FF6400;">%esp</span>
+
+<span style="color: #FF6400;">open_files</span>:
+<span style="color: #FF6400;">open_fd_in</span>:
+        <span style="color: #FBDE2D;">movl</span> $SYS_OPEN, <span style="color: #FF6400;">%eax</span>
+        <span style="color: #FBDE2D;">movl</span> ST_ARGV_1(<span style="color: #FF6400;">%ebp</span>), <span style="color: #FF6400;">%ebx</span>
+        <span style="color: #FBDE2D;">movl</span> $O_RDONLY, <span style="color: #FF6400;">%ecx</span>
+        <span style="color: #FBDE2D;">movl</span> $0666, <span style="color: #FF6400;">%edx</span>
+        <span style="color: #FBDE2D;">int</span> $LINUX_SYSCALL
+
+<span style="color: #FF6400;">store_fd_in</span>:
+        <span style="color: #FBDE2D;">movl</span> <span style="color: #FF6400;">%eax</span>, ST_FD_IN(<span style="color: #FF6400;">%ebp</span>)
+
+<span style="color: #FF6400;">open_fd_out</span>:
+        <span style="color: #FBDE2D;">movl</span> $SYS_OPEN, <span style="color: #FF6400;">%eax</span>
+        <span style="color: #FBDE2D;">movl</span> ST_ARGV_2(<span style="color: #FF6400;">%ebp</span>), <span style="color: #FF6400;">%ebx</span>
+        <span style="color: #FBDE2D;">movl</span> $O_CREAT_WRONLY_TRUNC, <span style="color: #FF6400;">%ecx</span>
+        <span style="color: #FBDE2D;">movl</span> $0666, <span style="color: #FF6400;">%edx</span>
+        <span style="color: #FBDE2D;">int</span> $LINUX_SYSCALL
+
+<span style="color: #FF6400;">store_fd_out</span>:
+        <span style="color: #FBDE2D;">movl</span> <span style="color: #FF6400;">%eax</span>, ST_FD_OUT(<span style="color: #FF6400;">%ebp</span>)
+        #movl $1, ST_FD_OUT(<span style="color: #FF6400;">%ebp</span>)
+
+<span style="color: #FF6400;">read_loop_begin</span>:
+        <span style="color: #FBDE2D;">movl</span> $SYS_READ, <span style="color: #FF6400;">%eax</span>
+        <span style="color: #FBDE2D;">movl</span> ST_FD_IN(<span style="color: #FF6400;">%ebp</span>), <span style="color: #FF6400;">%ebx</span>
+        <span style="color: #FBDE2D;">movl</span> $BUFFER_DATA, <span style="color: #FF6400;">%ecx</span>
+        <span style="color: #FBDE2D;">movl</span> $BUFFER_SIZE, <span style="color: #FF6400;">%edx</span>
+        <span style="color: #FBDE2D;">int</span> $LINUX_SYSCALL
+
+        <span style="color: #FBDE2D;">cmpl</span> $END_OF_FILE, <span style="color: #FF6400;">%eax</span>
+        <span style="color: #FBDE2D;">jle</span> end_loop
+
+<span style="color: #FF6400;">continue_read_loop</span>:
+        <span style="color: #FBDE2D;">pushl</span> $BUFFER_DATA
+        <span style="color: #FBDE2D;">pushl</span> <span style="color: #FF6400;">%eax</span>
+        <span style="color: #FBDE2D;">call</span> convert_to_upper
+        <span style="color: #FBDE2D;">popl</span> <span style="color: #FF6400;">%eax</span>
+        <span style="color: #FBDE2D;">addl</span> $4, <span style="color: #FF6400;">%esp</span>
+
+        <span style="color: #FBDE2D;">movl</span> <span style="color: #FF6400;">%eax</span>, <span style="color: #FF6400;">%edx</span>
+        <span style="color: #FBDE2D;">movl</span> $SYS_WRITE, <span style="color: #FF6400;">%eax</span>
+        <span style="color: #FBDE2D;">movl</span> ST_FD_OUT(<span style="color: #FF6400;">%ebp</span>), <span style="color: #FF6400;">%ebx</span>
+        <span style="color: #FBDE2D;">movl</span> $BUFFER_DATA, <span style="color: #FF6400;">%ecx</span>
+        <span style="color: #FBDE2D;">int</span> $LINUX_SYSCALL
+        <span style="color: #FBDE2D;">jmp</span> read_loop_begin
+
+<span style="color: #FF6400;">end_loop</span>:
+        <span style="color: #FBDE2D;">movl</span> $SYS_CLOSE, <span style="color: #FF6400;">%eax</span>
+        <span style="color: #FBDE2D;">movl</span> ST_FD_OUT(<span style="color: #FF6400;">%ebp</span>), <span style="color: #FF6400;">%ebx</span>
+        <span style="color: #FBDE2D;">int</span> $LINUX_SYSCALL
+
+        <span style="color: #FBDE2D;">movl</span> $SYS_CLOSE, <span style="color: #FF6400;">%eax</span>
+        <span style="color: #FBDE2D;">movl</span> ST_FD_IN(<span style="color: #FF6400;">%ebp</span>), <span style="color: #FF6400;">%ebx</span>
+        <span style="color: #FBDE2D;">int</span> $LINUX_SYSCALL
+
+        <span style="color: #FBDE2D;">movl</span> $SYS_EXIT, <span style="color: #FF6400;">%eax</span>
+        <span style="color: #FBDE2D;">movl</span> $0, <span style="color: #FF6400;">%ebx</span>
+        <span style="color: #FBDE2D;">int</span> $LINUX_SYSCALL
+
+        <span style="color: #FBDE2D;">.equ</span> LOWERCASE_A, 'a'
+        <span style="color: #FBDE2D;">.equ</span> LOWERCASE_Z, 'z'
+        <span style="color: #FBDE2D;">.equ</span> UPPER_CONVERSION, 'A' - 'a'
+
+        <span style="color: #FBDE2D;">.equ</span> ST_BUFFER_LEN, 8
+        <span style="color: #FBDE2D;">.equ</span> ST_BUFFER, 12
+
+<span style="color: #FF6400;">convert_to_upper</span>:
+        <span style="color: #FBDE2D;">pushl</span> <span style="color: #FF6400;">%ebp</span>
+        <span style="color: #FBDE2D;">movl</span> <span style="color: #FF6400;">%esp</span>, <span style="color: #FF6400;">%ebp</span>
+
+        <span style="color: #FBDE2D;">movl</span> ST_BUFFER(<span style="color: #FF6400;">%ebp</span>), <span style="color: #FF6400;">%eax</span>
+        <span style="color: #FBDE2D;">movl</span> ST_BUFFER_LEN(<span style="color: #FF6400;">%ebp</span>), <span style="color: #FF6400;">%ebx</span>
+        <span style="color: #FBDE2D;">movl</span> $0, <span style="color: #FF6400;">%edi</span>
+        <span style="color: #FBDE2D;">cmpl</span> $0, <span style="color: #FF6400;">%ebx</span>
+        <span style="color: #FBDE2D;">je</span> end_convert_loop
+
+<span style="color: #FF6400;">convert_loop</span>:
+        <span style="color: #FBDE2D;">movb</span> (<span style="color: #FF6400;">%eax</span>, <span style="color: #FF6400;">%edi</span>, 1), <span style="color: #FF6400;">%cl</span>
+        <span style="color: #FBDE2D;">cmpb</span> $LOWERCASE_A, <span style="color: #FF6400;">%cl</span>
+        <span style="color: #FBDE2D;">jl</span> next_byte
+        <span style="color: #FBDE2D;">cmpb</span> $LOWERCASE_Z, <span style="color: #FF6400;">%cl</span>
+        <span style="color: #FBDE2D;">jg</span> next_byte
+        <span style="color: #FBDE2D;">addb</span> $UPPER_CONVERSION, <span style="color: #FF6400;">%cl</span>
+        <span style="color: #FBDE2D;">movb</span> <span style="color: #FF6400;">%cl</span>, (<span style="color: #FF6400;">%eax</span>, <span style="color: #FF6400;">%edi</span>, 1)
+
+<span style="color: #FF6400;">next_byte</span>:
+        <span style="color: #FBDE2D;">incl</span> <span style="color: #FF6400;">%edi</span>
+        <span style="color: #FBDE2D;">cmpl</span> <span style="color: #FF6400;">%edi</span>, <span style="color: #FF6400;">%ebx</span>
+        <span style="color: #FBDE2D;">jne</span> convert_loop
+
+<span style="color: #FF6400;">end_convert_loop</span>:
+        <span style="color: #FBDE2D;">movl</span> <span style="color: #FF6400;">%ebp</span>, <span style="color: #FF6400;">%esp</span>
+        <span style="color: #FBDE2D;">popl</span> <span style="color: #FF6400;">%ebp</span>
+        <span style="color: #FBDE2D;">ret</span>
+</pre>
+</div>
+
+<p>
+当Linux启动一个程序时，命令行参数的数量保存在(%esp)，程序名保存在4(%esp)指向的指针中，第N个参数保存在4+N*4(%esp)指向的指针中。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgb0dac9c" class="outline-2">
+<h2 id="orgb0dac9c">第六章 读写简单记录</h2>
+<div class="outline-text-2" id="text-orgb0dac9c">
+<p>
+命令
+</p>
+<div class="org-src-container">
+<pre class="src src-asm"><span style="color: #FBDE2D;">.include</span> <span style="color: #61CE3C;">"a.s"</span>
+</pre>
+</div>
+<p>
+可以将文件a.s包含到当前文件中。
+</p>
+
+<p>
+命令
+</p>
+<div class="org-src-container">
+<pre class="src src-asm"><span style="color: #FBDE2D;">.rept</span> 32
+<span style="color: #FBDE2D;">.byte</span> 0
+<span style="color: #FBDE2D;">.endr</span>
+</pre>
+</div>
+<p>
+会重复生成32个字节，每个字节的值都是0。
+</p>
+
+<div class="org-src-container">
+<pre class="src src-asm"># write.s
+        <span style="color: #FBDE2D;">.equ</span> record_firstname, 0
+        <span style="color: #FBDE2D;">.equ</span> record_lastname, 40
+        <span style="color: #FBDE2D;">.equ</span> record_address, 80
+        <span style="color: #FBDE2D;">.equ</span> record_age, 320
+        <span style="color: #FBDE2D;">.equ</span> record_size, 324
+
+        <span style="color: #FBDE2D;">.equ</span> sys_exit, 1
+        <span style="color: #FBDE2D;">.equ</span> sys_read, 3
+        <span style="color: #FBDE2D;">.equ</span> sys_write, 4
+        <span style="color: #FBDE2D;">.equ</span> sys_open, 5
+        <span style="color: #FBDE2D;">.equ</span> sys_close, 6
+        <span style="color: #FBDE2D;">.equ</span> sys_brk, 45
+
+        <span style="color: #FBDE2D;">.equ</span> linux_syscall, 0x80
+
+        <span style="color: #FBDE2D;">.equ</span> stdin, 0
+        <span style="color: #FBDE2D;">.equ</span> stdout, 1
+        <span style="color: #FBDE2D;">.equ</span> stderr, 2
+
+        <span style="color: #FBDE2D;">.equ</span> end_of_file, 0
+
+        <span style="color: #FBDE2D;">.equ</span> st_read_buffer, 8
+        <span style="color: #FBDE2D;">.equ</span> st_write_buffer, 8
+        <span style="color: #FBDE2D;">.equ</span> st_filedes, 12
+
+        <span style="color: #FBDE2D;">.equ</span> st_file_descriptor, -4
+
+        <span style="color: #FBDE2D;">.section</span> .data
+
+<span style="color: #FF6400;">record1</span>:
+        <span style="color: #FBDE2D;">.ascii</span> <span style="color: #61CE3C;">"Fredrick\0"</span>
+        <span style="color: #FBDE2D;">.rept</span> 31
+        <span style="color: #FBDE2D;">.byte</span> 0
+        <span style="color: #FBDE2D;">.endr</span>
+
+        <span style="color: #FBDE2D;">.ascii</span> <span style="color: #61CE3C;">"Bartlett\0"</span>
+        <span style="color: #FBDE2D;">.rept</span> 31
+        <span style="color: #FBDE2D;">.byte</span> 0
+        <span style="color: #FBDE2D;">.endr</span>
+
+        <span style="color: #FBDE2D;">.ascii</span> <span style="color: #61CE3C;">"4242 S Prairie\nTulsa, OK 55555\0"</span>
+        <span style="color: #FBDE2D;">.rept</span> 209
+        <span style="color: #FBDE2D;">.byte</span> 0
+        <span style="color: #FBDE2D;">.endr</span>
+
+        <span style="color: #FBDE2D;">.long</span> 45
+
+<span style="color: #FF6400;">record2</span>:
+        <span style="color: #FBDE2D;">.ascii</span> <span style="color: #61CE3C;">"Marilyn\0"</span>
+        <span style="color: #FBDE2D;">.rept</span> 32
+        <span style="color: #FBDE2D;">.byte</span> 0
+        <span style="color: #FBDE2D;">.endr</span>
+
+        <span style="color: #FBDE2D;">.ascii</span> <span style="color: #61CE3C;">"Taylor\0"</span>
+        <span style="color: #FBDE2D;">.rept</span> 33
+        <span style="color: #FBDE2D;">.byte</span> 0
+        <span style="color: #FBDE2D;">.endr</span>
+
+        <span style="color: #FBDE2D;">.ascii</span> <span style="color: #61CE3C;">"2224 S Johannan St\nChicago, IL 12345\0"</span>
+        <span style="color: #FBDE2D;">.rept</span> 203
+        <span style="color: #FBDE2D;">.byte</span> 0
+        <span style="color: #FBDE2D;">.endr</span>
+
+        <span style="color: #FBDE2D;">.long</span> 29
+
+<span style="color: #FF6400;">filename</span>:
+        <span style="color: #FBDE2D;">.ascii</span> <span style="color: #61CE3C;">"test.dat\0"</span>
+
+
+        <span style="color: #FBDE2D;">.section</span> .text 
+        <span style="color: #FBDE2D;">.globl</span> read_record, write_record, _start
+
+
+        # void read_record(buffer, fd)
+        <span style="color: #FBDE2D;">.type</span> read_record, @function
+<span style="color: #FF6400;">read_record</span>:
+        <span style="color: #FBDE2D;">pushl</span> <span style="color: #FF6400;">%ebp</span>
+        <span style="color: #FBDE2D;">movl</span> <span style="color: #FF6400;">%esp</span>, <span style="color: #FF6400;">%ebp</span>
+        <span style="color: #FBDE2D;">pushl</span> <span style="color: #FF6400;">%ebx</span>
+        <span style="color: #FBDE2D;">movl</span> st_filedes(<span style="color: #FF6400;">%ebp</span>), <span style="color: #FF6400;">%ebx</span>
+        <span style="color: #FBDE2D;">movl</span> st_read_buffer(<span style="color: #FF6400;">%ebp</span>), <span style="color: #FF6400;">%ecx</span>
+        <span style="color: #FBDE2D;">movl</span> $record_size, <span style="color: #FF6400;">%edx</span>
+        <span style="color: #FBDE2D;">movl</span> $sys_read, <span style="color: #FF6400;">%eax</span>
+        <span style="color: #FBDE2D;">int</span> $linux_syscall
+        <span style="color: #FBDE2D;">popl</span> <span style="color: #FF6400;">%ebx</span>
+        <span style="color: #FBDE2D;">movl</span> <span style="color: #FF6400;">%ebp</span>, <span style="color: #FF6400;">%esp</span>
+        <span style="color: #FBDE2D;">popl</span> <span style="color: #FF6400;">%ebp</span>
+        <span style="color: #FBDE2D;">ret</span>
+
+<span style="color: #FF6400;">write_record</span>:
+        <span style="color: #FBDE2D;">pushl</span> <span style="color: #FF6400;">%ebp</span>
+        <span style="color: #FBDE2D;">movl</span> <span style="color: #FF6400;">%esp</span>, <span style="color: #FF6400;">%ebp</span>
+        <span style="color: #FBDE2D;">pushl</span> <span style="color: #FF6400;">%ebx</span>
+        <span style="color: #FBDE2D;">movl</span> $sys_write, <span style="color: #FF6400;">%eax</span>
+        <span style="color: #FBDE2D;">movl</span> st_filedes(<span style="color: #FF6400;">%ebp</span>), <span style="color: #FF6400;">%ebx</span>
+        <span style="color: #FBDE2D;">movl</span> st_write_buffer(<span style="color: #FF6400;">%ebp</span>), <span style="color: #FF6400;">%ecx</span>
+        <span style="color: #FBDE2D;">movl</span> $record_size, <span style="color: #FF6400;">%edx</span>
+        <span style="color: #FBDE2D;">int</span> $linux_syscall
+        <span style="color: #FBDE2D;">popl</span> <span style="color: #FF6400;">%ebx</span>
+        <span style="color: #FBDE2D;">movl</span> <span style="color: #FF6400;">%ebp</span>, <span style="color: #FF6400;">%esp</span>
+        <span style="color: #FBDE2D;">popl</span> <span style="color: #FF6400;">%ebp</span>
+        <span style="color: #FBDE2D;">ret</span>
+
+
+
+<span style="color: #FF6400;">_start</span>:
+        <span style="color: #FBDE2D;">movl</span> <span style="color: #FF6400;">%esp</span>, <span style="color: #FF6400;">%ebp</span>
+        <span style="color: #FBDE2D;">subl</span> $4, <span style="color: #FF6400;">%esp</span>
+
+        <span style="color: #FBDE2D;">movl</span> $sys_open, <span style="color: #FF6400;">%eax</span>
+        <span style="color: #FBDE2D;">movl</span> $file_name, <span style="color: #FF6400;">%ebx</span>
+        <span style="color: #FBDE2D;">movl</span> $0101, <span style="color: #FF6400;">%ecx</span>
+        <span style="color: #FBDE2D;">movl</span> $0666, <span style="color: #FF6400;">%edx</span>
+        <span style="color: #FBDE2D;">int</span> $linux_syscall
+
+        <span style="color: #FBDE2D;">movl</span> <span style="color: #FF6400;">%eax</span>, st_file_descriptor(<span style="color: #FF6400;">%ebp</span>)
+
+        <span style="color: #FBDE2D;">pushl</span> st_file_descriptor(<span style="color: #FF6400;">%ebp</span>)
+        <span style="color: #FBDE2D;">pushl</span> $record1
+        <span style="color: #FBDE2D;">call</span> write_record
+        <span style="color: #FBDE2D;">addl</span> $8, <span style="color: #FF6400;">%esp</span>
+
+        <span style="color: #FBDE2D;">pushl</span> st_file_descriptor(<span style="color: #FF6400;">%ebp</span>)
+        <span style="color: #FBDE2D;">pushl</span> $record2
+        <span style="color: #FBDE2D;">call</span> write_record
+        <span style="color: #FBDE2D;">addl</span> $8, <span style="color: #FF6400;">%esp</span>
+
+        <span style="color: #FBDE2D;">movl</span> $sys_close, <span style="color: #FF6400;">%eax</span>
+        <span style="color: #FBDE2D;">movl</span> st_file_descriptor(<span style="color: #FF6400;">%ebp</span>), <span style="color: #FF6400;">%ebx</span>
+        <span style="color: #FBDE2D;">int</span> $linux_syscall
+
+        <span style="color: #FBDE2D;">movl</span> $sys_exit, <span style="color: #FF6400;">%eax</span>
+        <span style="color: #FBDE2D;">movl</span> $0, <span style="color: #FF6400;">%ebx</span>
+        <span style="color: #FBDE2D;">int</span> $linux_syscall        
+###############################################################################
+        <span style="color: #FBDE2D;">.equ</span> st_string_start_address, 8
+        <span style="color: #FBDE2D;">.equ</span> st_filedes, 8
+        <span style="color: #FBDE2D;">.equ</span> st_input_descriptor, -4
+        <span style="color: #FBDE2D;">.equ</span> st_output_descriptor, -8
+
+        <span style="color: #FBDE2D;">.section</span> .bss
+        <span style="color: #FBDE2D;">.lcomm</span> record_buffer, RECORD_SIZE
+
+        <span style="color: #FBDE2D;">.section</span> .data
+<span style="color: #FF6400;">newline</span>:
+        <span style="color: #FBDE2D;">.ascii</span> <span style="color: #61CE3C;">"\n"</span>
+<span style="color: #FF6400;">file_name</span>:
+        <span style="color: #FBDE2D;">.ascii</span> <span style="color: #61CE3C;">"test.dat\0"</span>
+
+        <span style="color: #FBDE2D;">.section</span> .text
+
+        <span style="color: #FBDE2D;">.globl</span> count_chars, write_newline
+
+        <span style="color: #FBDE2D;">.type</span> count_chars, @function
+<span style="color: #FF6400;">count_chars</span>:
+        <span style="color: #FBDE2D;">pushl</span> <span style="color: #FF6400;">%ebp</span>
+        <span style="color: #FBDE2D;">movl</span> <span style="color: #FF6400;">%esp</span>, <span style="color: #FF6400;">%ebp</span>
+
+        <span style="color: #FBDE2D;">movl</span> $0, <span style="color: #FF6400;">%ecx</span>
+        <span style="color: #FBDE2D;">movl</span> st_string_start_address(<span style="color: #FF6400;">%ebp</span>), <span style="color: #FF6400;">%edx</span>
+<span style="color: #FF6400;">count_loop_begin</span>:
+        <span style="color: #FBDE2D;">movb</span> (<span style="color: #FF6400;">%edx</span>), <span style="color: #FF6400;">%al</span>
+        <span style="color: #FBDE2D;">cmpb</span> $0, <span style="color: #FF6400;">%al</span>
+        <span style="color: #FBDE2D;">je</span> count_loop_end
+        <span style="color: #FBDE2D;">incl</span> <span style="color: #FF6400;">%ecx</span>
+        <span style="color: #FBDE2D;">incl</span> <span style="color: #FF6400;">%edx</span>
+        <span style="color: #FBDE2D;">jmp</span> count_loop_begin
+<span style="color: #FF6400;">count_loop_end</span>:
+        <span style="color: #FBDE2D;">movl</span> <span style="color: #FF6400;">%ecx</span>, <span style="color: #FF6400;">%eax</span>
+        <span style="color: #FBDE2D;">popl</span> <span style="color: #FF6400;">%ebp</span>
+        <span style="color: #FBDE2D;">ret</span>
+
+<span style="color: #FF6400;">write_newline</span>:
+        <span style="color: #FBDE2D;">pushl</span> <span style="color: #FF6400;">%ebp</span>
+        <span style="color: #FBDE2D;">movl</span> <span style="color: #FF6400;">%esp</span>, <span style="color: #FF6400;">%ebp</span>
+        <span style="color: #FBDE2D;">movl</span> $sys_write, <span style="color: #FF6400;">%eax</span>
+        <span style="color: #FBDE2D;">movl</span> st_filedes(<span style="color: #FF6400;">%ebp</span>), <span style="color: #FF6400;">%ebx</span>
+        <span style="color: #FBDE2D;">movl</span> $newline, <span style="color: #FF6400;">%ecx</span>
+        <span style="color: #FBDE2D;">movl</span> $1, <span style="color: #FF6400;">%edx</span>
+        <span style="color: #FBDE2D;">int</span> $linux_syscall
+        <span style="color: #FBDE2D;">movl</span> <span style="color: #FF6400;">%ebp</span>, <span style="color: #FF6400;">%esp</span>
+        <span style="color: #FBDE2D;">popl</span> <span style="color: #FF6400;">%ebp</span>
+        <span style="color: #FBDE2D;">ret</span>
+
+<span style="color: #FF6400;">_start</span>:
+        <span style="color: #FBDE2D;">movl</span> <span style="color: #FF6400;">%esp</span>, <span style="color: #FF6400;">%ebp</span>
+        <span style="color: #FBDE2D;">subl</span> $8, <span style="color: #FF6400;">%esp</span>
+        <span style="color: #FBDE2D;">movl</span> $sys_open, <span style="color: #FF6400;">%eax</span>
+        <span style="color: #FBDE2D;">movl</span> $file_name, <span style="color: #FF6400;">%ebx</span>
+        <span style="color: #FBDE2D;">movl</span> $0, <span style="color: #FF6400;">%ecx</span>
+        <span style="color: #FBDE2D;">movl</span> $0666, <span style="color: #FF6400;">%edx</span>
+        <span style="color: #FBDE2D;">int</span> $linux_syscall
+        <span style="color: #FBDE2D;">movl</span> <span style="color: #FF6400;">%eax</span>, st_input_descriptor(<span style="color: #FF6400;">%ebp</span>)
+        <span style="color: #FBDE2D;">movl</span> $stdout, st_output_descriptor(<span style="color: #FF6400;">%ebp</span>)
+<span style="color: #FF6400;">record_read_loop</span>:
+        <span style="color: #FBDE2D;">pushl</span> st_input_descriptor(<span style="color: #FF6400;">%ebp</span>)
+        <span style="color: #FBDE2D;">pushl</span> $record_buffer
+        <span style="color: #FBDE2D;">call</span> read_record
+        <span style="color: #FBDE2D;">addl</span> $8, <span style="color: #FF6400;">%esp</span>
+        <span style="color: #FBDE2D;">cmpl</span> $record_size, <span style="color: #FF6400;">%eax</span>
+        <span style="color: #FBDE2D;">jne</span> finished_reading
+        <span style="color: #FBDE2D;">pushl</span> $record_firstname + record_buffer
+        <span style="color: #FBDE2D;">call</span> count_chars
+        <span style="color: #FBDE2D;">addl</span> $4, <span style="color: #FF6400;">%esp</span>
+        <span style="color: #FBDE2D;">movl</span> <span style="color: #FF6400;">%eax</span>, <span style="color: #FF6400;">%edx</span>
+        <span style="color: #FBDE2D;">movl</span> st_output_descriptor(<span style="color: #FF6400;">%ebp</span>), <span style="color: #FF6400;">%ebx</span>
+        <span style="color: #FBDE2D;">movl</span> $sys_write, <span style="color: #FF6400;">%eax</span>
+        <span style="color: #FBDE2D;">movl</span> $record_firstname + record_buffer, <span style="color: #FF6400;">%ecx</span>
+        <span style="color: #FBDE2D;">int</span> $linux_syscall
+        <span style="color: #FBDE2D;">pushl</span> st_output_descriptor(<span style="color: #FF6400;">%ebp</span>)
+        <span style="color: #FBDE2D;">call</span> write_newline
+        <span style="color: #FBDE2D;">addl</span> $4, <span style="color: #FF6400;">%esp</span>
+        <span style="color: #FBDE2D;">jmp</span> record_read_loop
+<span style="color: #FF6400;">finished_reading</span>:
+        <span style="color: #FBDE2D;">movl</span> $sys_exit, <span style="color: #FF6400;">%eax</span>
+        <span style="color: #FBDE2D;">movl</span> $0, <span style="color: #FF6400;">%ebx</span>
+        <span style="color: #FBDE2D;">int</span> $linux_syscall
+
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org0e8b291" class="outline-2">
+<h2 id="org0e8b291">第七章 开发健壮的程序</h2>
+</div>
+<div id="outline-container-org4b4cadd" class="outline-2">
+<h2 id="org4b4cadd">第八章 与代码库共享程序</h2>
+<div class="outline-text-2" id="text-org4b4cadd">
+<p>
+下面的代码展示了如何在asm代码中使用共享库：
+</p>
+<div class="org-src-container">
+<pre class="src src-asm">        # as hello.s -o hello.o
+        # ld -dynamic-linker /lib/ld-linux.so.2 -o hello hello.o -lc
+        <span style="color: #FBDE2D;">.section</span> .data
+<span style="color: #FF6400;">helloworld</span>:
+        <span style="color: #FBDE2D;">.ascii</span> <span style="color: #61CE3C;">"hello world\n\0"</span>
+
+        <span style="color: #FBDE2D;">.section</span> .text
+        <span style="color: #FBDE2D;">.globl</span> _start
+<span style="color: #FF6400;">_start</span>:
+        <span style="color: #FBDE2D;">pushl</span> $helloworld
+        <span style="color: #FBDE2D;">call</span> printf
+
+        <span style="color: #FBDE2D;">push</span> $0
+        <span style="color: #FBDE2D;">call</span> exit
+</pre>
+</div>
+
+<p>
+下面的命令可以从.o文件建立一个共享库：
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">ld -dynamic-linker /lib/ld-linux.so.2 -o mylib mylib.o -lc
+</pre>
+</div>
+<p>
+参数-dynamic-linker指定了动态链接器的位置，-lc表示链接c库，即libc.so。链接分为动态链接和静态连接，二者的区别在于静态连接会将库的代码合并到程序中，而动态链接在链接时只会检查符号是否在库中声明，真正加载库代码是在程序的运行阶段。程序运行时，首先加载文件/lib/ld-linux.so.2，后者从/etc/ld.so.conf和LD_LIBRARY_PATH中找到所需的库并加载到内存，然后将库和程序链接。
+</p>
+
+
+<p>
+如果要构建一个共享库，可以用下面的命令
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">ld -shared a.o b.o c.o -o libmy.so
+</pre>
+</div>
+<p>
+在链接时，可以使用
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">ld -L /path/to/libmy.so -dynamic-linker /lib/ld-linux.so.2 -o a.out -lmy a.o
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org81f703c" class="outline-2">
+<h2 id="org81f703c">第九章 关于中间存储器</h2>
+<div class="outline-text-2" id="text-org81f703c">
+<p>
+Linux将.text段加载到地址0x08048000，紧随其后的是.data和.bss段。Linux的栈从0xbfffffff开始，栈向上增长。这些地址都是虚拟内存地址。物理内存地址对应用程序是不可见的。Linux系统负责完成物理内存和虚拟内存之间的映射。Linux只会映射程序需要的虚拟内存，如果程序尝试访问范围之外的内存地址，Linux会报告段错误。程序可以要求Linux映射内存或者会取消映射，方法是调整program break。program break是数据段的结尾（数据段的最大虚拟内存地址）。Linux提供了brk系统调用（调用号45）来调整program break。C语言的malloc()/calloc()函数都是使用里brk调用。下面是一个简单的内存管理器示例：
+</p>
+<div class="org-src-container">
+<pre class="src src-asm">        <span style="color: #FBDE2D;">.section</span> .data
+
+<span style="color: #FF6400;">heap_begin</span>:
+        <span style="color: #FBDE2D;">.long</span> 0
+
+<span style="color: #FF6400;">current_break</span>:
+        <span style="color: #FBDE2D;">.long</span> 0
+
+        <span style="color: #FBDE2D;">.equ</span> HEADER_SIZE, 8
+        <span style="color: #FBDE2D;">.equ</span> HDR_AVAIL_OFFSET, 0
+        <span style="color: #FBDE2D;">.equ</span> HDR_SIZE_OFFSET, 4
+        <span style="color: #FBDE2D;">.equ</span> UNAVAILABEL, 0
+        <span style="color: #FBDE2D;">.equ</span> AVAILABLE, 1
+        <span style="color: #FBDE2D;">.equ</span> SYS_BRK, 45
+        <span style="color: #FBDE2D;">.equ</span> LINUX_SYSCALL, 0x80
+
+        <span style="color: #FBDE2D;">.section</span> .text
+        <span style="color: #FBDE2D;">.globl</span> allocate_init
+        <span style="color: #FBDE2D;">.type</span> allocate_init,@function
+<span style="color: #FF6400;">allocate_init</span>:
+        # void allocate_init()<span style="color: #AEAEAE; font-style: italic;">;</span>
+        <span style="color: #FBDE2D;">pushl</span> <span style="color: #FF6400;">%ebp</span>
+        <span style="color: #FBDE2D;">movl</span> <span style="color: #FF6400;">%esp</span>, <span style="color: #FF6400;">%ebp</span>
+        <span style="color: #FBDE2D;">movl</span> $SYS_BRK, <span style="color: #FF6400;">%eax</span>
+        <span style="color: #FBDE2D;">movl</span> $0, <span style="color: #FF6400;">%eax</span>
+        <span style="color: #FBDE2D;">int</span> $LINUX_SYSCALL
+        <span style="color: #FBDE2D;">incl</span> <span style="color: #FF6400;">%eax</span>
+        <span style="color: #FBDE2D;">movl</span> <span style="color: #FF6400;">%eax</span>, current_break
+        <span style="color: #FBDE2D;">movl</span> <span style="color: #FF6400;">%eax</span>, heap_begin
+        <span style="color: #FBDE2D;">movl</span> <span style="color: #FF6400;">%ebp</span>, <span style="color: #FF6400;">%esp</span>
+        <span style="color: #FBDE2D;">popl</span> <span style="color: #FF6400;">%ebp</span>
+        <span style="color: #FBDE2D;">ret</span>
+
+        <span style="color: #FBDE2D;">.globl</span> allocate
+        <span style="color: #FBDE2D;">.type</span> allocate,@function
+        <span style="color: #FBDE2D;">.equ</span> ST_MEM_SIZE, 8
+<span style="color: #FF6400;">allocate</span>:
+        <span style="color: #FBDE2D;">pushl</span> <span style="color: #FF6400;">%ebp</span>
+        <span style="color: #FBDE2D;">movl</span> <span style="color: #FF6400;">%esp</span>, <span style="color: #FF6400;">%ebp</span>
+        <span style="color: #FBDE2D;">movl</span> ST_MEM_SIZE(<span style="color: #FF6400;">%ebp</span>), <span style="color: #FF6400;">%ecx</span>
+        <span style="color: #FBDE2D;">movl</span> heap_begin, <span style="color: #FF6400;">%eax</span>
+        <span style="color: #FBDE2D;">movl</span> current_break, <span style="color: #FF6400;">%ebx</span>
+<span style="color: #FF6400;">alloc_loop_begin</span>:
+        <span style="color: #FBDE2D;">cmpl</span> <span style="color: #FF6400;">%ebx</span>, <span style="color: #FF6400;">%eax</span>
+        <span style="color: #FBDE2D;">je</span> move_break
+        <span style="color: #FBDE2D;">movl</span> HDR_SIZE_OFFSET(<span style="color: #FF6400;">%eax</span>), <span style="color: #FF6400;">%edx</span>
+        <span style="color: #FBDE2D;">cmpl</span> $UNAVAILABLE, HDR_AVAIL_OFFSET(<span style="color: #FF6400;">%eax</span>)
+        <span style="color: #FBDE2D;">je</span> next_location
+        <span style="color: #FBDE2D;">cmpl</span> <span style="color: #FF6400;">%edx</span>, <span style="color: #FF6400;">%ecx</span>
+        <span style="color: #FBDE2D;">jle</span> allocate_here
+<span style="color: #FF6400;">next_location</span>:
+        <span style="color: #FBDE2D;">addl</span> $HEADER_SIZE, <span style="color: #FF6400;">%eax</span>
+        <span style="color: #FBDE2D;">addl</span> <span style="color: #FF6400;">%edx</span>, <span style="color: #FF6400;">%eax</span>
+        <span style="color: #FBDE2D;">jmp</span> alloc_loop_begin
+<span style="color: #FF6400;">allocate_here</span>:
+        <span style="color: #FBDE2D;">movl</span> $UNAVAILABLE, HDR_AVAIL_OFFSET(<span style="color: #FF6400;">%eax</span>)
+        <span style="color: #FBDE2D;">addl</span> $HEADER_SIZE, <span style="color: #FF6400;">%eax</span>
+        <span style="color: #FBDE2D;">movl</span> <span style="color: #FF6400;">%ebp</span>, <span style="color: #FF6400;">%esp</span>
+        <span style="color: #FBDE2D;">popl</span> <span style="color: #FF6400;">%ebp</span>
+        <span style="color: #FBDE2D;">ret</span>
+<span style="color: #FF6400;">move_break</span>:
+        <span style="color: #FBDE2D;">addl</span> $HEADER_SIZE, <span style="color: #FF6400;">%ebx</span>
+        <span style="color: #FBDE2D;">addl</span> $ecx, <span style="color: #FF6400;">%ebx</span>
+        <span style="color: #FBDE2D;">pushl</span> <span style="color: #FF6400;">%eax</span>
+        <span style="color: #FBDE2D;">pushl</span> <span style="color: #FF6400;">%ecx</span>
+        <span style="color: #FBDE2D;">pushl</span> <span style="color: #FF6400;">%ebx</span>
+        <span style="color: #FBDE2D;">movl</span> $SYS_BRK, <span style="color: #FF6400;">%eax</span>
+        <span style="color: #FBDE2D;">int</span> $LINUX_SYSCALL
+        <span style="color: #FBDE2D;">cmpl</span> $0, <span style="color: #FF6400;">%eax</span>
+        <span style="color: #FBDE2D;">je</span> error
+        <span style="color: #FBDE2D;">popl</span> <span style="color: #FF6400;">%ebx</span>
+        <span style="color: #FBDE2D;">popl</span> <span style="color: #FF6400;">%ecx</span>
+        <span style="color: #FBDE2D;">popl</span> <span style="color: #FF6400;">%eax</span>
+        <span style="color: #FBDE2D;">movl</span> $UNAVAILABLE, HDR_AVAIL_OFFSET(<span style="color: #FF6400;">%eax</span>)
+        <span style="color: #FBDE2D;">movl</span> <span style="color: #FF6400;">%ecx</span>, HDR_SIZE_OFFSET(<span style="color: #FF6400;">%eax</span>)
+        <span style="color: #FBDE2D;">addl</span> $HEADER_SIZE, <span style="color: #FF6400;">%eax</span>
+        <span style="color: #FBDE2D;">movl</span> <span style="color: #FF6400;">%ebx</span>, current_break
+        <span style="color: #FBDE2D;">movl</span> <span style="color: #FF6400;">%ebp</span>, <span style="color: #FF6400;">%esp</span>
+        <span style="color: #FBDE2D;">popl</span> <span style="color: #FF6400;">%ebp</span>
+        <span style="color: #FBDE2D;">ret</span>
+<span style="color: #FF6400;">error</span>:
+        <span style="color: #FBDE2D;">movl</span> $0, <span style="color: #FF6400;">%eax</span>
+        <span style="color: #FBDE2D;">movl</span> <span style="color: #FF6400;">%ebp</span>, <span style="color: #FF6400;">%esp</span>
+        <span style="color: #FBDE2D;">popl</span> <span style="color: #FF6400;">%ebp</span>
+        <span style="color: #FBDE2D;">ret</span>
+
+        <span style="color: #FBDE2D;">.globl</span> deallocate
+        <span style="color: #FBDE2D;">.type</span> deallocate,@function
+        <span style="color: #FBDE2D;">.equ</span> ST_MEMORY_SEG, 4
+<span style="color: #FF6400;">deallocate</span>:
+        <span style="color: #FBDE2D;">movl</span> ST_MEMORY_SEG(<span style="color: #FF6400;">%esp</span>), <span style="color: #FF6400;">%eax</span>
+        <span style="color: #FBDE2D;">subl</span> $HEADER_SIZE, <span style="color: #FF6400;">%eax</span>
+        <span style="color: #FBDE2D;">movl</span> $AVAILABLE, HDR_AVAIL_OFFSET(<span style="color: #FF6400;">%eax</span>)
+        <span style="color: #FBDE2D;">ret</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org7ba8c85" class="outline-2">
+<h2 id="org7ba8c85">第十章 向计算机一样计数</h2>
+<div class="outline-text-2" id="text-org7ba8c85">
+<p>
+下面两条指令是等价的，不过第一条执行速度更快
+</p>
+<div class="org-src-container">
+<pre class="src src-asm"><span style="color: #FF6400;">xorl</span> <span style="color: #FBDE2D;">%eax</span>, <span style="color: #FF6400;">%eax</span>
+<span style="color: #FF6400;">movl</span> <span style="color: #FBDE2D;">$0</span>, <span style="color: #FF6400;">%eax</span>
+</pre>
+</div>
+
+<p>
+在计算机中，浮点数是以固定精度存储的。浮点数分为指数部分和尾数部分。比如12345.2的指数是4，尾数是1.23452。数字1被存储为1.00000*10^0。
+</p>
+
+
+<p>
+负数采用补码表示。补码的计算方法如下：首先对正数进行二进制not运算，然后对结果加1。补码的优点在于可以直接和正数进行相加。
+</p>
+
+
+<p>
+x86采用小端字节序，将最低有效字节保存在低地址。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org97b93c0" class="outline-2">
+<h2 id="org97b93c0">第十一章 高级语言</h2>
+</div>
+<div id="outline-container-org5e5e5d4" class="outline-2">
+<h2 id="org5e5e5d4">第十二章 优化</h2>
+<div class="outline-text-2" id="text-org5e5e5d4">
+<p>
+开发程序时必须关注以下重点：
+</p>
+<ul class="org-ul">
+<li>对所有事做好文档记录。</li>
+<li>确保每一件事情都是按文档记录完成。</li>
+<li>代码以模块的形式编写，易于修改。</li>
+</ul>
+
+<p>
+优化的常用手段有：
+</p>
+<ul class="org-ul">
+<li>预先计算。</li>
+<li>保存计算结果。</li>
+<li>局部性原理。对数据进行小批量处理。</li>
+<li>使用寄存器。</li>
+<li>内联函数。可以避免栈平衡和跳转开下。</li>
+<li>优化指令。</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgd9f52b1" class="outline-2">
+<h2 id="orgd9f52b1">第十三章 学无止境</h2>
+</div>
+
+<div id="outline-container-org0476c4b" class="outline-2">
+<h2 id="org0476c4b">附录B 通用x86指令</h2>
+<div class="outline-text-2" id="text-org0476c4b">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">指令</td>
+<td class="org-left">说明</td>
+</tr>
+
+<tr>
+<td class="org-left">movl</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">movb</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">leal</td>
+<td class="org-left">leal的操作数与movl相同，但是leal不会加载内存数据，而是将内存地址本身加载到寄存器中。</td>
+</tr>
+
+<tr>
+<td class="org-left">popl</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">pushl</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">xchgl</td>
+<td class="org-left">交互数值</td>
+</tr>
+
+<tr>
+<td class="org-left">adcl</td>
+<td class="org-left">带进位加法</td>
+</tr>
+
+<tr>
+<td class="org-left">addl</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">cdq</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">cmpl</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">decl</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">divl</td>
+<td class="org-left">无符号除法。用%edx:%eax除以指定寄存器或内存中的值，将商保存到%eax，余数保存到%edx。</td>
+</tr>
+
+<tr>
+<td class="org-left">idivl</td>
+<td class="org-left">有符号除法。</td>
+</tr>
+
+<tr>
+<td class="org-left">imull</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">incl</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">mull</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">negl</td>
+<td class="org-left">求补。</td>
+</tr>
+
+<tr>
+<td class="org-left">sbbl</td>
+<td class="org-left">借位减法</td>
+</tr>
+
+<tr>
+<td class="org-left">subl</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">andl</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">notl</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">orl</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">rcll</td>
+<td class="org-left">左循环位移。</td>
+</tr>
+
+<tr>
+<td class="org-left">rcrl</td>
+<td class="org-left">右循环位移。</td>
+</tr>
+
+<tr>
+<td class="org-left">roll</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">rorl</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">sall</td>
+<td class="org-left">算术左移。</td>
+</tr>
+
+<tr>
+<td class="org-left">sarl</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">shll</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">shrl</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">testl</td>
+<td class="org-left">将操作数进行逻辑与，舍弃结果，但会设置标志位。</td>
+</tr>
+
+<tr>
+<td class="org-left">xorl</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">call</td>
+<td class="org-left">将%eip指向的下一个值压栈，并跳转到目的地址。</td>
+</tr>
+
+<tr>
+<td class="org-left">int</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">ja</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">jae</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">jb</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">jbe</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">je</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">jz</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">jg</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">jge</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">jl</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">jle</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">jc</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">jo</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">jp</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">js</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">jna</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">jnae</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">jnb</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">jnbe</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">jne</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">jnz</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">jng</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">jnge</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">jnl</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">jnle</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">jnc</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">jno</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">jnp</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">jns</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">jecxz</td>
+<td class="org-left">%ecx为0时跳转</td>
+</tr>
+
+<tr>
+<td class="org-left">jmp</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">ret</td>
+<td class="org-left">从栈中弹出%eip。</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+汇编器指令
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">.ascii</td>
+</tr>
+
+<tr>
+<td class="org-left">.byte</td>
+</tr>
+
+<tr>
+<td class="org-left">.endr</td>
+</tr>
+
+<tr>
+<td class="org-left">.equ</td>
+</tr>
+
+<tr>
+<td class="org-left">.globl</td>
+</tr>
+
+<tr>
+<td class="org-left">.include</td>
+</tr>
+
+<tr>
+<td class="org-left">.lcomm</td>
+</tr>
+
+<tr>
+<td class="org-left">.long</td>
+</tr>
+
+<tr>
+<td class="org-left">.rept</td>
+</tr>
+
+<tr>
+<td class="org-left">.section</td>
+</tr>
+
+<tr>
+<td class="org-left">.type</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+AT&amp;T和Intel语法差异：
+</p>
+<ul class="org-ul">
+<li>操作数顺序相反。在Intel语法中，首先列出目的操作数，再列出源操作数。</li>
+<li>Intel语法中寄存器不带前缀百分号（%）。</li>
+<li>Intel语法中，立即寻址不带前缀美元符号（$）。</li>
+<li>Intel语法中，非立即寻址在地址前后加方括号（[]）。</li>
+<li>Intel语法中，指令名不包含数据大小后缀，而是在指令后指定数据大小为byte、word或dword。</li>
+<li>AT&amp;T指令 movl %eax, 8(%ebx,%edi,4)对应的Intel语法是 mov [8 + ebx + 1 * edi], eax。</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org8134854" class="outline-2">
+<h2 id="org8134854">附录C 重要的系统调用</h2>
+<div class="outline-text-2" id="text-org8134854">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-right">调用号</td>
+<td class="org-left">名字</td>
+</tr>
+
+<tr>
+<td class="org-right">1</td>
+<td class="org-left">exit</td>
+</tr>
+
+<tr>
+<td class="org-right">3</td>
+<td class="org-left">read</td>
+</tr>
+
+<tr>
+<td class="org-right">4</td>
+<td class="org-left">write</td>
+</tr>
+
+<tr>
+<td class="org-right">5</td>
+<td class="org-left">open</td>
+</tr>
+
+<tr>
+<td class="org-right">6</td>
+<td class="org-left">close</td>
+</tr>
+
+<tr>
+<td class="org-right">12</td>
+<td class="org-left">chdir</td>
+</tr>
+
+<tr>
+<td class="org-right">19</td>
+<td class="org-left">lseek</td>
+</tr>
+
+<tr>
+<td class="org-right">20</td>
+<td class="org-left">getpid</td>
+</tr>
+
+<tr>
+<td class="org-right">39</td>
+<td class="org-left">mkdir</td>
+</tr>
+
+<tr>
+<td class="org-right">40</td>
+<td class="org-left">rmdir</td>
+</tr>
+
+<tr>
+<td class="org-right">41</td>
+<td class="org-left">dup</td>
+</tr>
+
+<tr>
+<td class="org-right">42</td>
+<td class="org-left">pipe</td>
+</tr>
+
+<tr>
+<td class="org-right">45</td>
+<td class="org-left">brk</td>
+</tr>
+
+<tr>
+<td class="org-right">54</td>
+<td class="org-left">ioctl</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org792021c" class="outline-2">
+<h2 id="org792021c">附录：练习</h2>
+</div>
+
+<div id="outline-container-orgd29d7c1" class="outline-2">
+<h2 id="orgd29d7c1">参考</h2>
+<div class="outline-text-2" id="text-orgd29d7c1">
+<p>
+<a href="https://syscalls.kernelgrok.com/">Linux系统调用</a>
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: 2019年10月16日</p>
+<p class="date">Created: 2019-10-28 周一 19:45</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

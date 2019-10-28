@@ -3,10 +3,10 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2019-10-28 周一 20:04 -->
+<!-- 2019-10-28 周一 19:45 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>火星人敏捷开发手册笔记</title>
+<title>Write Your Own Toy Operating System</title>
 <meta name="generator" content="Org mode" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
@@ -228,106 +228,392 @@ for the JavaScript code in this tag.
 </head>
 <body>
 <div id="content">
-<h1 class="title">火星人敏捷开发手册笔记</h1>
-<div id="table-of-contents">
-<h2>Table of Contents</h2>
-<div id="text-table-of-contents">
-<ul>
-<li><a href="#orgb9dd938">Scrum敏捷开发方法</a></li>
-<li><a href="#org80d0a46">Scrum中的工作产出物</a></li>
-<li><a href="#orgac7314e">Scrum中的角色</a></li>
-<li><a href="#orga990ec3">Scrum实施中的一些细节</a></li>
-<li><a href="#org1eaeace">用户建模</a></li>
-<li><a href="#org7b86219">编辑记录</a></li>
-</ul>
-</div>
-</div>
-
-<div id="outline-container-orgb9dd938" class="outline-2">
-<h2 id="orgb9dd938">Scrum敏捷开发方法</h2>
-<div class="outline-text-2" id="text-orgb9dd938">
+<h1 class="title">Write Your Own Toy Operating System</h1>
 <p>
-Scrum敏捷开发过程由多个冲刺（sprint）组成，每个冲刺表示一次迭代，周期通常是2-4周。在进入冲刺之前，产品负责人（product owner）需要提供一个产品待开发项（product backlog），这是一份从客户价值理解和描述的产品功能条目。开始冲刺后，第一天要召开冲刺计划会议（sprint planning meeting）。产品负责人按照优先级逐一对功能进行讲解，开发团队就需求细节和完成标准进行询问，估算任务量，然后加入冲刺待开发项（sprint backlog）。当任务量饱和时，迭代计划会结束。在冲刺内，任务不会发生大的变化。开始冲刺后，开发团队决定任务分配和技术选型，并逐一完成任务。每天开发团队进行一个简短的每日立会（daily stand-up meeting），沟通当前进度、下一步任务和遇到的问题。开发团队还维护一张燃烧图（burn down chart），以观察和预测工作进度。在冲刺的最后一天，开发团队召集评审会（review meeting），请产品负责人对已完成的产品功能条目进行评审，后者给出改进反馈。然后开发团队召开反思会（retrospective meeting），总结本次冲刺中的成功和不足，在后续冲刺中改进。
+<a href="http://www.independent-software.com/operating-system-development.html">http://www.independent-software.com/operating-system-development.html</a>
+</p>
+
+<p>
+计算机复位后首先执行POST（power-on self test）。然后根据CMOS记录的启动顺序，依次从启动设备中加载第一个扇区（512字节）到0:0x7c00位置。然后根据结尾是否是0xaa55来判断这个扇区是否是启动扇区。找到启动扇区后，计算机将设备号保存到寄存器DL，跳转到0:0x7c00，把控制权交给启动扇区。通常启动扇区需要执行以下操作：
+</p>
+<ul class="org-ul">
+<li>重置磁盘。</li>
+<li>在磁盘中找到内核，将其加载到内存中。</li>
+<li>启用A20跳线。</li>
+<li>设置IDT和GDT。</li>
+<li>进入保护模式。</li>
+<li>清理CPU指令缓存。</li>
+<li>设置386寄存器，包括ds、es、gs、fs、ss和esp。</li>
+<li>将控制权交给内核。</li>
+</ul>
+
+<p>
+descriptor有64位，结构如下
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-right">0-15</td>
+<td class="org-left">limit 0-15</td>
+</tr>
+
+<tr>
+<td class="org-right">16-31</td>
+<td class="org-left">base 0-15</td>
+</tr>
+
+<tr>
+<td class="org-right">32-39</td>
+<td class="org-left">base 16-23</td>
+</tr>
+
+<tr>
+<td class="org-right">40-47</td>
+<td class="org-left">access byte</td>
+</tr>
+
+<tr>
+<td class="org-right">48-51</td>
+<td class="org-left">limit 16-19</td>
+</tr>
+
+<tr>
+<td class="org-right">52-55</td>
+<td class="org-left">flags</td>
+</tr>
+
+<tr>
+<td class="org-right">56-63</td>
+<td class="org-left">base 24-31</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+access byte的各位如下
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-right">0</td>
+<td class="org-left">Ac</td>
+<td class="org-left">accessed 是否访问过</td>
+</tr>
+
+<tr>
+<td class="org-right">1</td>
+<td class="org-left">RW</td>
+<td class="org-left">writable 是否可写</td>
+</tr>
+
+<tr>
+<td class="org-right">2</td>
+<td class="org-left">DC</td>
+<td class="org-left">conforming 1 向下增长 0 向上增长</td>
+</tr>
+
+<tr>
+<td class="org-right">3</td>
+<td class="org-left">Ex</td>
+<td class="org-left">executable 是否可执行</td>
+</tr>
+
+<tr>
+<td class="org-right">4</td>
+<td class="org-left">1</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">5-6</td>
+<td class="org-left">Privl</td>
+<td class="org-left">特权等级</td>
+</tr>
+
+<tr>
+<td class="org-right">7</td>
+<td class="org-left">Pr</td>
+<td class="org-left">是否在内存中</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+flags有4位：
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-right">0</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">1</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">2</td>
+<td class="org-left">Sz</td>
+<td class="org-left">0 16位 1 32位</td>
+</tr>
+
+<tr>
+<td class="org-right">3</td>
+<td class="org-left">Gr</td>
+<td class="org-left">granularity 0 bytes 1 KB</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+简单的操作系统只需要3个descriptor，一个空descriptor，一个代码descriptor，一个数据descriptor。代码descriptor的数据如下：
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-right" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">base address</td>
+<td class="org-right">0x00</td>
+</tr>
+
+<tr>
+<td class="org-left">limit</td>
+<td class="org-right">0xffff</td>
+</tr>
+
+<tr>
+<td class="org-left">present</td>
+<td class="org-right">1</td>
+</tr>
+
+<tr>
+<td class="org-left">privilege level</td>
+<td class="org-right">0</td>
+</tr>
+
+<tr>
+<td class="org-left">executable</td>
+<td class="org-right">1</td>
+</tr>
+
+<tr>
+<td class="org-left">direction</td>
+<td class="org-right">0</td>
+</tr>
+
+<tr>
+<td class="org-left">readable</td>
+<td class="org-right">1</td>
+</tr>
+
+<tr>
+<td class="org-left">granularity</td>
+<td class="org-right">1</td>
+</tr>
+
+<tr>
+<td class="org-left">size</td>
+<td class="org-right">1</td>
+</tr>
+
+<tr>
+<td class="org-left">access byte</td>
+<td class="org-right">0x9a</td>
+</tr>
+
+<tr>
+<td class="org-left">flags</td>
+<td class="org-right">0xcf</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+数据descriptor的数据如下
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-right" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">access byte</td>
+<td class="org-right">0x92</td>
+</tr>
+
+<tr>
+<td class="org-left">flags</td>
+<td class="org-right">0xcf</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+加载gdt
+</p>
+<pre class="example">
+lgdt [gdt pointer]
+</pre>
+
+<p>
+中断描述符占8字节，结构如下：
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-right">偏移</td>
+<td class="org-right">长度（字节）</td>
+<td class="org-left">名称</td>
+<td class="org-left">描述</td>
+</tr>
+
+<tr>
+<td class="org-right">0</td>
+<td class="org-right">2</td>
+<td class="org-left">offset_low</td>
+<td class="org-left">中断处理函数偏移量低地址</td>
+</tr>
+
+<tr>
+<td class="org-right">2</td>
+<td class="org-right">2</td>
+<td class="org-left">selector</td>
+<td class="org-left">代码段选择子</td>
+</tr>
+
+<tr>
+<td class="org-right">4</td>
+<td class="org-right">1</td>
+<td class="org-left">0</td>
+<td class="org-left">未使用</td>
+</tr>
+
+<tr>
+<td class="org-right">5</td>
+<td class="org-right">1</td>
+<td class="org-left">flags</td>
+<td class="org-left">属性</td>
+</tr>
+
+<tr>
+<td class="org-right">6</td>
+<td class="org-right">2</td>
+<td class="org-left">offset_high</td>
+<td class="org-left">中断处理函数偏移量高地址</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+flags的各位如下：
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-right">位</td>
+<td class="org-left">代码</td>
+<td class="org-left">描述</td>
+</tr>
+
+<tr>
+<td class="org-right">0..3</td>
+<td class="org-left">Gate type</td>
+<td class="org-left">IDT gate type</td>
+</tr>
+
+<tr>
+<td class="org-right">4</td>
+<td class="org-left">storage segment</td>
+<td class="org-left">必须设置为0</td>
+</tr>
+
+<tr>
+<td class="org-right">5..6</td>
+<td class="org-left">privilege level</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">7</td>
+<td class="org-left">present</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+系统支持256中断，每个中断描述符占8字节，因此IDT表占2048个字节。
+</p>
+<div class="org-src-container">
+<pre class="src src-asm"><span style="color: #FF6400;">lidt</span> <span style="color: #FBDE2D;">idt</span>
+</pre>
+</div>
+<p>
+idt的结构也是6字节，低2位是IDT表的字节数，高4位是IDT表线性地址。
 </p>
 </div>
-</div>
-
-
-<div id="outline-container-org80d0a46" class="outline-2">
-<h2 id="org80d0a46">Scrum中的工作产出物</h2>
-<div class="outline-text-2" id="text-org80d0a46">
-<ul class="org-ul">
-<li>产品待开发项。从客户价值角度理解的产品功能列表。功能、缺陷、增强都可以是待开发项，重点描述使用方法，以客户价值为优先级排序。通常每个条目的工作量在0.5-10人天。</li>
-<li>冲刺待开发项。从开发技术角度理解的迭代开发任务。</li>
-<li>可工作软件（working software）。可交付的软件产品。产品负责人、客户代表根据可工作软件进行评审。“差不多完成了”的产品不应被视为可交付。</li>
-</ul>
-</div>
-</div>
-
-
-<div id="outline-container-orgac7314e" class="outline-2">
-<h2 id="orgac7314e">Scrum中的角色</h2>
-<div class="outline-text-2" id="text-orgac7314e">
-<ul class="org-ul">
-<li>产品负责人。负责产品需求的提炼、条目化、优先级排序。</li>
-<li>Scrum大师。负责维护Scrum方法的秩序，协助解决非技术问题。</li>
-<li>团队（Team）。以扁平方式组织和管理，完成开发工作。团队是“自组织”的。</li>
-</ul>
-</div>
-</div>
-
-
-<div id="outline-container-orga990ec3" class="outline-2">
-<h2 id="orga990ec3">Scrum实施中的一些细节</h2>
-<div class="outline-text-2" id="text-orga990ec3">
-<ul class="org-ul">
-<li>产品待开发项怎么写。产品待开发项要包含角色、功能、价值三个要素。角色是用户在该场景下的身份，功能是角色执行的操作，价值是操作完成后，角色得到的利益。比如：作为一个观众（角色），可以查看电子节目单（功能），以了解一周以内所有电视频道的节目日程（价值）。要注意的是，角色必须明确，不能用模糊的“用户”替代。</li>
-<li>有了文档为什么还要迭代计划会。文档类似电影剧本，迭代计划会类似导言说戏。让开发者对迭代任务和用户价值有更全面和深入的理解。</li>
-<li>如何判断任务量饱和。通常开发者只有70%的时间可以投入到开发工作，因此每个人月安排15人天左右即为包和。对于新团队，可能低至10人天。</li>
-<li>任务量估算。采用共同估算的方式。在估算前不应指定承担任务的开发者，而是以团队为单位进行估算，每个人提出自己的看法，综合起来。共同估算的目的是用集体智慧和知识对“做什么、怎么做”达成共识。产品负责人必须全程参与估算过程，产品复制人需要解答团队提出的“做什么，做到什么程度”的问题。</li>
-<li>扑克牌估算（planning poker）。产品负责人向团队进行讲解后，团队中每个人独立进行估算，选择对应的扑克牌，扣着放在桌上。所有人都完成估算后，进行开牌。如果估算结果较为接近，以平均数作为团队估算结果。否则让估算数值最大和最小的人进行PK，其他人也可以参与讨论。讨论结束后，重新估算和开牌。</li>
-<li>每日立会时长。每日立会通常10-15分钟。</li>
-<li>燃烧图怎么画。燃烧图的横坐标是时间，纵坐标是冲刺待开发项的剩余时间。</li>
-<li>如何处理延期。敏捷开发采用时间盒（time boxing），即限定时间，而非限定范围。因此迭代不会延期。对于无法完成的待开发项，放弃这个任务。</li>
-<li>评审的标准。评审的标准是产品功能是否达到可交付标准。“差一点”不能算是可交付。可交付标准在冲刺计划会上，有产品负责人和团队沟通确认。</li>
-<li>反思会如何召开。反思会应当每次仅就关键的1-3个问题提出可行的解决方案。可行在这里是指：
-<ul class="org-ul">
-<li>一、方法简单、影响面小、见效快。</li>
-<li>二、目标不要激进，要现实可行，积少成多。必要时，反思会可以执行领导回避制度，即具有管理职能的人回避。</li>
-</ul></li>
-<li>如何分配任务。任务由开发者认领。</li>
-</ul>
-</div>
-</div>
-
-<div id="outline-container-org1eaeace" class="outline-2">
-<h2 id="org1eaeace">用户建模</h2>
-<div class="outline-text-2" id="text-org1eaeace">
-<ul class="org-ul">
-<li>用户建模的目的。理解哪些用户，为解决哪些问题或达成哪些目的而使用该产品。</li>
-<li>用户建模的步骤。
-<ul class="org-ul">
-<li>一、列出尽可能多的用户。</li>
-<li>二、识别关键用户，即购买决策者和主要使用者。</li>
-<li>三、合并次要用户。</li>
-<li>四、面向关键用户编写用户故事。</li>
-</ul></li>
-</ul>
-</div>
-</div>
-
-<div id="outline-container-org7b86219" class="outline-2">
-<h2 id="org7b86219">编辑记录</h2>
-<div class="outline-text-2" id="text-org7b86219">
-<ul class="org-ul">
-<li>2019年8月27日 建立文档。</li>
-<li>2019年10月28日 修改格式。</li>
-</ul>
-</div>
-</div>
-</div>
 <div id="postamble" class="status">
-<p class="date">Created: 2019-10-28 周一 20:04</p>
+<p class="date">Date: 2019年10月06日</p>
+<p class="date">Created: 2019-10-28 周一 19:45</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
