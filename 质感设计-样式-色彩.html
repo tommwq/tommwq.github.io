@@ -1,0 +1,854 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2023-08-27 周日 14:15 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>质感设计-样式-色彩</title>
+<meta name="author" content="tommwq" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<style>body {font-family:SimHei,monospace;line-height:1.5em;font-size:large;}</style>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">质感设计-样式-色彩</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org9681f46">1. 色彩</a>
+<ul>
+<li><a href="#org95e9bff">1.1. 关键色彩</a></li>
+<li><a href="#org2d5ecf9">1.2. 色彩空间和记号</a></li>
+<li><a href="#org08450cf">1.3. 色彩职能</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org9681f46" class="outline-2">
+<h2 id="org9681f46"><span class="section-number-2">1.</span> 色彩</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+色彩（Color）可以表达意义、信息层级和状态。质感设计以5种关键色彩为基础，衍生出20余种色彩职能。
+</p>
+</div>
+<div id="outline-container-org95e9bff" class="outline-3">
+<h3 id="org95e9bff"><span class="section-number-3">1.1.</span> 关键色彩</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+质感设计以5种关键色彩（key color）为基础：
+</p>
+<ul class="org-ul">
+<li>显著色彩（Accent color）
+<ul class="org-ul">
+<li>主关键色彩（Primary key color）用于浮动按钮、主要按钮、主要状态等需要用户特别关注的组件。</li>
+<li>次关键色彩（Secondary key color）用于显著程度稍弱一些的组件。</li>
+<li>第三关键色彩（Tertiary key color）用于平衡主关键色彩和次关键色彩。</li>
+</ul></li>
+<li>中性色彩（Neutral color）
+<ul class="org-ul">
+<li>中性色彩用于背景（background）的表层色彩（surface color）。</li>
+<li>中性色彩变体（Neutral color variant）用于中等强调级别的文本、图标和组件边框（Outline）。</li>
+</ul></li>
+</ul>
+<p>
+除此以外，质感设计提供了警示色彩（error color）。它是一种附加色彩（additional color）。
+</p>
+</div>
+</div>
+<div id="outline-container-org2d5ecf9" class="outline-3">
+<h3 id="org2d5ecf9"><span class="section-number-3">1.2.</span> 色彩空间和记号</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+质感设计采用HCT色彩空间。HCT表示色相（Hue）、饱和度（Chroma）和色调（Tone）。质感设计通过调整关键色彩的色调生成不同职能的色彩。色调描述色彩的亮度，0是最暗的黑色，100是最亮的白色。质感设计采用名字加色调值来表示衍生色彩。比如tertiary40表示将第三关键色彩的色调设定为40而产生的色彩。
+</p>
+</div>
+</div>
+<div id="outline-container-org08450cf" class="outline-3">
+<h3 id="org08450cf"><span class="section-number-3">1.3.</span> 色彩职能</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+每种显著色彩可以衍生出4种色彩职能。以主关键色彩为例：
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="all" frame="border" align="center">
+<caption class="t-above"><span class="table-number">Table 1:</span> 主关键色彩衍生出的4种色彩职能</caption>
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">色彩职能</th>
+<th scope="col" class="org-left">说明</th>
+<th scope="col" class="org-left">色彩值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">主色彩（Primary）</td>
+<td class="org-left">基础色彩</td>
+<td class="org-left">primary40</td>
+</tr>
+
+<tr>
+<td class="org-left">主上层色彩（On-Primary）</td>
+<td class="org-left">用于主色彩上层的文本和图标等</td>
+<td class="org-left">primary100</td>
+</tr>
+
+<tr>
+<td class="org-left">主容器色彩（Primary container）</td>
+<td class="org-left">用于强调程度弱于主色彩的元素</td>
+<td class="org-left">primary90</td>
+</tr>
+
+<tr>
+<td class="org-left">主容器上层色彩（On-Primary container）</td>
+<td class="org-left">用于主容器色彩上层的文本、图标等</td>
+<td class="org-left">primary10</td>
+</tr>
+</tbody>
+</table>
+<p>
+表层色彩（Surface color）用于将一个区域与屏幕背景或其他区域隔离。表层色彩有5种职能。
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="all" frame="border" align="center">
+<caption class="t-above"><span class="table-number">Table 2:</span> 表层色彩职能</caption>
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">色彩职能</th>
+<th scope="col" class="org-left">说明</th>
+<th scope="col" class="org-left">色彩值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">暗表层色彩（Surface dim）</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">neutral87</td>
+</tr>
+
+<tr>
+<td class="org-left">表层色彩（Surface）</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">neutral98</td>
+</tr>
+
+<tr>
+<td class="org-left">亮表层色彩（Surface bright）</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">neutral98</td>
+</tr>
+
+<tr>
+<td class="org-left">最低表层容器色彩（Surface container lowest）</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">neutral100</td>
+</tr>
+
+<tr>
+<td class="org-left">低表层容器色彩（Surface container low）</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">neutral96</td>
+</tr>
+
+<tr>
+<td class="org-left">表层容器色彩（Surface container）</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">neutral94</td>
+</tr>
+
+<tr>
+<td class="org-left">高表层容器色彩（Surface container high）</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">neutral92</td>
+</tr>
+
+<tr>
+<td class="org-left">最高表层容器色彩（Surface container highest）</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">neutral90</td>
+</tr>
+
+<tr>
+<td class="org-left">表层上层色彩（On surface）</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">neutral10</td>
+</tr>
+
+<tr>
+<td class="org-left">表层上层色彩变体（On surface variant）</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">neutralVariant30</td>
+</tr>
+</tbody>
+</table>
+<p>
+边框色彩（Outline color）用于绘制元素边框。
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="all" frame="border" align="center">
+<caption class="t-above"><span class="table-number">Table 3:</span> 边框色彩职能</caption>
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">色彩职能</th>
+<th scope="col" class="org-left">色彩值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">边框色彩（Outline）</td>
+<td class="org-left">neutralVariant50</td>
+</tr>
+
+<tr>
+<td class="org-left">边框色彩变体（Outline variant）</td>
+<td class="org-left">neutralVariant80</td>
+</tr>
+</tbody>
+</table>
+<table border="2" cellspacing="0" cellpadding="6" rules="all" frame="border" align="center">
+<caption class="t-above"><span class="table-number">Table 4:</span> 附加色彩职能</caption>
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">色彩职能</th>
+<th scope="col" class="org-left">色彩值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">表层翻转色彩（Inverse surface）</td>
+<td class="org-left">neutral20</td>
+</tr>
+
+<tr>
+<td class="org-left">表层上层翻转色彩（Inverse on surface）</td>
+<td class="org-left">neutral95</td>
+</tr>
+
+<tr>
+<td class="org-left">主翻转色彩（Inverse primary）</td>
+<td class="org-left">primary80</td>
+</tr>
+
+<tr>
+<td class="org-left">主固定色彩（Primary fixed）</td>
+<td class="org-left">primary90</td>
+</tr>
+
+<tr>
+<td class="org-left">暗主固定色彩（Primary fixed dim）</td>
+<td class="org-left">primary80</td>
+</tr>
+
+<tr>
+<td class="org-left">第二固定色彩（Secondary fixed）</td>
+<td class="org-left">secondary90</td>
+</tr>
+
+<tr>
+<td class="org-left">暗第二固定色彩（Secondary fixed dim）</td>
+<td class="org-left">secondary80</td>
+</tr>
+
+<tr>
+<td class="org-left">第三固定色彩（Tertiary fixed）</td>
+<td class="org-left">tertiary90</td>
+</tr>
+
+<tr>
+<td class="org-left">暗第三固定色彩（Tertiary fixed dim）</td>
+<td class="org-left">tertiary80</td>
+</tr>
+</tbody>
+</table>
+<table border="2" cellspacing="0" cellpadding="6" rules="all" frame="border" align="center">
+<caption class="t-above"><span class="table-number">Table 5:</span> 质感设计色彩职能</caption>
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">颜色职能</th>
+<th scope="col" class="org-left">系统变量</th>
+<th scope="col" class="org-left">引用变量</th>
+<th scope="col" class="org-left">暗黑模式引用变量</th>
+<th scope="col" class="org-left">默认值</th>
+<th scope="col" class="org-left">暗黑模式默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">主色彩</td>
+<td class="org-left">md.sys.color.primary</td>
+<td class="org-left">md.ref.palette.primary40</td>
+<td class="org-left">md.ref.palette.primary80</td>
+<td class="org-left">6750A4</td>
+<td class="org-left">D0BCFF</td>
+</tr>
+
+<tr>
+<td class="org-left">主容器色彩</td>
+<td class="org-left">md.sys.color.primary-container</td>
+<td class="org-left">md.ref.palette.primary90</td>
+<td class="org-left">md.ref.palette.primary30</td>
+<td class="org-left">EADDFF</td>
+<td class="org-left">4F378B</td>
+</tr>
+
+<tr>
+<td class="org-left">主上层色彩</td>
+<td class="org-left">md.sys.color.on-primary</td>
+<td class="org-left">md.ref.palette.primary100</td>
+<td class="org-left">md.ref.palette.primary20</td>
+<td class="org-left">FFFFFF</td>
+<td class="org-left">371E73</td>
+</tr>
+
+<tr>
+<td class="org-left">主容器上层色彩</td>
+<td class="org-left">md.sys.color.on-primary-container</td>
+<td class="org-left">md.ref.palette.primary10</td>
+<td class="org-left">md.ref.palette.primary90</td>
+<td class="org-left">21005E</td>
+<td class="org-left">EADDFF</td>
+</tr>
+
+<tr>
+<td class="org-left">主翻转色彩</td>
+<td class="org-left">md.sys.color.inverse-primary</td>
+<td class="org-left">md.ref.palette.primary80</td>
+<td class="org-left">md.ref.palette.primary40</td>
+<td class="org-left">D0BCFF</td>
+<td class="org-left">6750A4</td>
+</tr>
+
+<tr>
+<td class="org-left">第二色彩</td>
+<td class="org-left">md.sys.color.secondary</td>
+<td class="org-left">md.ref.palette.secondary40</td>
+<td class="org-left">md.ref.palette.secondary80</td>
+<td class="org-left">625B71</td>
+<td class="org-left">CCC2DC</td>
+</tr>
+
+<tr>
+<td class="org-left">第二容器色彩</td>
+<td class="org-left">md.sys.color.secondary-container</td>
+<td class="org-left">md.ref.palette.secondary90</td>
+<td class="org-left">md.ref.palette.secondary30</td>
+<td class="org-left">E8DEF8</td>
+<td class="org-left">4A4458</td>
+</tr>
+
+<tr>
+<td class="org-left">第二上层色彩</td>
+<td class="org-left">md.sys.color.on-secondary</td>
+<td class="org-left">md.ref.palette.secondary100</td>
+<td class="org-left">md.ref.palette.secondary20</td>
+<td class="org-left">FFFFFF</td>
+<td class="org-left">332D41</td>
+</tr>
+
+<tr>
+<td class="org-left">第二容器上层色彩</td>
+<td class="org-left">md.sys.color.on-secondary-container</td>
+<td class="org-left">md.ref.palette.secondary10</td>
+<td class="org-left">md.ref.palette.secondary90</td>
+<td class="org-left">1E192B</td>
+<td class="org-left">E8DEF8</td>
+</tr>
+
+<tr>
+<td class="org-left">第三色彩</td>
+<td class="org-left">md.sys.color.tertiary</td>
+<td class="org-left">md.ref.palette.tertiary40</td>
+<td class="org-left">md.ref.palette.tertiary80</td>
+<td class="org-left">7D5260</td>
+<td class="org-left">EFB8C8</td>
+</tr>
+
+<tr>
+<td class="org-left">第三容器色彩</td>
+<td class="org-left">md.sys.color.tertiary-container</td>
+<td class="org-left">md.ref.palette.tertiary90</td>
+<td class="org-left">md.ref.palette.tertiary30</td>
+<td class="org-left">FFD8E4</td>
+<td class="org-left">633B48</td>
+</tr>
+
+<tr>
+<td class="org-left">第三上层色彩</td>
+<td class="org-left">md.sys.color.on-tertiary</td>
+<td class="org-left">md.ref.palette.tertiary100</td>
+<td class="org-left">md.ref.palette.tertiary20</td>
+<td class="org-left">FFFFFF</td>
+<td class="org-left">492532</td>
+</tr>
+
+<tr>
+<td class="org-left">第三容器上层色彩</td>
+<td class="org-left">md.sys.color.on-tertiary-container</td>
+<td class="org-left">md.ref.palette.tertiary10</td>
+<td class="org-left">md.ref.palette.tertiary90</td>
+<td class="org-left">370B1E</td>
+<td class="org-left">FFD8E4</td>
+</tr>
+
+<tr>
+<td class="org-left">表层色彩</td>
+<td class="org-left">md.sys.color.surface</td>
+<td class="org-left">md.ref.palette.neutral98</td>
+<td class="org-left">md.ref.palette.neutral6</td>
+<td class="org-left">FEF7FF</td>
+<td class="org-left">141218</td>
+</tr>
+
+<tr>
+<td class="org-left">暗表层色彩</td>
+<td class="org-left">md.sys.color.surface-dim</td>
+<td class="org-left">md.ref.palette.neutral87</td>
+<td class="org-left">md.ref.palette.neutral6</td>
+<td class="org-left">DED8E1</td>
+<td class="org-left">141218</td>
+</tr>
+
+<tr>
+<td class="org-left">亮表层色彩</td>
+<td class="org-left">md.sys.color.surface-bright</td>
+<td class="org-left">md.ref.palette.neutral98</td>
+<td class="org-left">md.ref.palette.neutral24</td>
+<td class="org-left">FEF7FF</td>
+<td class="org-left">3B383E</td>
+</tr>
+
+<tr>
+<td class="org-left">最低表层容器色彩</td>
+<td class="org-left">md.sys.color.surface-container-lowest</td>
+<td class="org-left">md.ref.palette.neutral100</td>
+<td class="org-left">md.ref.palette.neutral4</td>
+<td class="org-left">FFFFFF</td>
+<td class="org-left">0F0D13</td>
+</tr>
+
+<tr>
+<td class="org-left">低表层容器色彩</td>
+<td class="org-left">md.sys.color.surface-container-low</td>
+<td class="org-left">md.ref.palette.neutral96</td>
+<td class="org-left">md.ref.palette.neutral10</td>
+<td class="org-left">F7F2FA</td>
+<td class="org-left">1D1B20</td>
+</tr>
+
+<tr>
+<td class="org-left">表层容器色彩</td>
+<td class="org-left">md.sys.color.surface-container</td>
+<td class="org-left">md.ref.palette.neutral94</td>
+<td class="org-left">md.ref.palette.neutral12</td>
+<td class="org-left">F3EDF7</td>
+<td class="org-left">211F26</td>
+</tr>
+
+<tr>
+<td class="org-left">高表层容器色彩</td>
+<td class="org-left">md.sys.color.surface-container-high</td>
+<td class="org-left">md.ref.palette.neutral92</td>
+<td class="org-left">md.ref.palette.neutral17</td>
+<td class="org-left">ECE6F0</td>
+<td class="org-left">2B2930</td>
+</tr>
+
+<tr>
+<td class="org-left">最高表层容器色彩</td>
+<td class="org-left">md.sys.color.surface-container-highest</td>
+<td class="org-left">md.ref.palette.neutral90</td>
+<td class="org-left">md.ref.palette.neutral22</td>
+<td class="org-left">E6E0E9</td>
+<td class="org-left">36343B</td>
+</tr>
+
+<tr>
+<td class="org-left">表层色彩变体</td>
+<td class="org-left">md.sys.color.surface-variant</td>
+<td class="org-left">md.ref.palette.neutral-variant90</td>
+<td class="org-left">md.ref.palette.neutral-variant30</td>
+<td class="org-left">E7E0EC</td>
+<td class="org-left">49454F</td>
+</tr>
+
+<tr>
+<td class="org-left">表层上层色彩</td>
+<td class="org-left">md.sys.color.on-surface</td>
+<td class="org-left">md.ref.palette.neutral10</td>
+<td class="org-left">md.ref.palette.neutral90</td>
+<td class="org-left">1C1B1F</td>
+<td class="org-left">E6E1E5</td>
+</tr>
+
+<tr>
+<td class="org-left">表层上层色彩变体</td>
+<td class="org-left">md.sys.color.on-surface-variant</td>
+<td class="org-left">md.ref.palette.neutral-variant30</td>
+<td class="org-left">md.ref.palette.neutral-variant80</td>
+<td class="org-left">49454E</td>
+<td class="org-left">CAC4D0</td>
+</tr>
+
+<tr>
+<td class="org-left">表层翻转色彩</td>
+<td class="org-left">md.sys.color.inverse-surface</td>
+<td class="org-left">md.ref.palette.neutral20</td>
+<td class="org-left">md.ref.palette.neutral90</td>
+<td class="org-left">313033</td>
+<td class="org-left">E6E1E5</td>
+</tr>
+
+<tr>
+<td class="org-left">表层上层翻转色彩</td>
+<td class="org-left">md.sys.color.inverse-on-surface</td>
+<td class="org-left">md.ref.palette.neutral95</td>
+<td class="org-left">md.ref.palette.neutral20</td>
+<td class="org-left">F4EFF4</td>
+<td class="org-left">313033</td>
+</tr>
+
+<tr>
+<td class="org-left">背景色彩</td>
+<td class="org-left">md.sys.color.background</td>
+<td class="org-left">md.ref.palette.neutral98</td>
+<td class="org-left">md.ref.palette.neutral6</td>
+<td class="org-left">FEF7FF</td>
+<td class="org-left">141218</td>
+</tr>
+
+<tr>
+<td class="org-left">背景上层色彩</td>
+<td class="org-left">md.sys.color.on-background</td>
+<td class="org-left">md.ref.palette.neutral10</td>
+<td class="org-left">md.ref.palette.neutral90</td>
+<td class="org-left">1C1B1F</td>
+<td class="org-left">E6E1E5</td>
+</tr>
+
+<tr>
+<td class="org-left">警示色彩</td>
+<td class="org-left">md.sys.color.error</td>
+<td class="org-left">md.ref.palette.error40</td>
+<td class="org-left">md.ref.palette.error80</td>
+<td class="org-left">B3261E</td>
+<td class="org-left">F2B8B5</td>
+</tr>
+
+<tr>
+<td class="org-left">警示容器色彩</td>
+<td class="org-left">md.sys.color.error-container</td>
+<td class="org-left">md.ref.palette.error90</td>
+<td class="org-left">md.ref.palette.error30</td>
+<td class="org-left">F9DEDC</td>
+<td class="org-left">8C1D18</td>
+</tr>
+
+<tr>
+<td class="org-left">警示上层色彩</td>
+<td class="org-left">md.sys.color.on-error</td>
+<td class="org-left">md.ref.palette.error100</td>
+<td class="org-left">md.ref.palette.error20</td>
+<td class="org-left">FFFFFF</td>
+<td class="org-left">601410</td>
+</tr>
+
+<tr>
+<td class="org-left">警示容器上层色彩</td>
+<td class="org-left">md.sys.color.on-error-container</td>
+<td class="org-left">md.ref.palette.error10</td>
+<td class="org-left">md.ref.palette.error90</td>
+<td class="org-left">410E0B</td>
+<td class="org-left">F9DEDC</td>
+</tr>
+
+<tr>
+<td class="org-left">边框色彩</td>
+<td class="org-left">md.sys.color.outline</td>
+<td class="org-left">md.ref.palette.neutral-variant50</td>
+<td class="org-left">md.ref.palette.neutral-variant60</td>
+<td class="org-left">79747E</td>
+<td class="org-left">938F99</td>
+</tr>
+
+<tr>
+<td class="org-left">边框色彩变体</td>
+<td class="org-left">md.sys.color.outline-variant</td>
+<td class="org-left">md.ref.palette.neutral-variant80</td>
+<td class="org-left">md.ref.palette.neutral-variant30</td>
+<td class="org-left">C4C7C5</td>
+<td class="org-left">444746</td>
+</tr>
+
+<tr>
+<td class="org-left">阴影色彩</td>
+<td class="org-left">md.sys.color.shadow</td>
+<td class="org-left">md.ref.palette.neutral0</td>
+<td class="org-left">md.ref.palette.neutral0</td>
+<td class="org-left">000000</td>
+<td class="org-left">000000</td>
+</tr>
+
+<tr>
+<td class="org-left">表层浅色</td>
+<td class="org-left">md.sys.color.surface-tint-color</td>
+<td class="org-left">md.sys.color.primary</td>
+<td class="org-left">md.sys.color.primary</td>
+<td class="org-left">6750A4</td>
+<td class="org-left">D0BCFF</td>
+</tr>
+
+<tr>
+<td class="org-left">蒙层色彩</td>
+<td class="org-left">md.sys.color.scrim</td>
+<td class="org-left">md.ref.palette.neutral0</td>
+<td class="org-left">md.ref.palette.neutral0</td>
+<td class="org-left">000000</td>
+<td class="org-left">000000</td>
+</tr>
+</tbody>
+</table>
+
+
+<div id="org9d2999e" class="figure">
+<p><img src="色彩职能.png" alt="色彩职能.png" width="1000" />
+</p>
+<p><span class="figure-number">Figure 1: </span>色彩职能</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: 2023年08月22日</p>
+<p class="author">Author: tommwq</p>
+<p class="date">Created: 2023-08-27 周日 14:15</p>
+<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.6.1)</p>
+</div>
+</body>
+</html>

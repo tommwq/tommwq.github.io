@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2023-08-27 周日 14:15 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>质感设计-基础-布局</title>
+<meta name="author" content="tommwq" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<style>body {font-family:Microsoft YaHei,monospace;line-height:1.5em;font-size:large;background-color:#fffff0;}</style>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">质感设计-基础-布局</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org1ab9997">1. 布局</a>
+<ul>
+<li><a href="#orgffd5138">1.1. 布局属性</a></li>
+<li><a href="#orgb0b3888">1.2. 布局工具</a></li>
+<li><a href="#orge6c6c60">1.3. 布局区域</a>
+<ul>
+<li><a href="#org5e77d56">1.3.1. 导航区域</a></li>
+</ul>
+</li>
+<li><a href="#orge323798">1.4. 内容区域</a></li>
+<li><a href="#org06f478c">1.5. 窗口尺寸分类</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org1ab9997" class="outline-2">
+<h2 id="org1ab9997"><span class="section-number-2">1.</span> 布局</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+布局（Layout）是屏幕上视觉元素的排列。布局可以引导用户聚焦想要执行的动作。为了提供一致的体验，布局应当考虑适配紧凑、适中、宽大等多类窗口尺寸。
+</p>
+</div>
+<div id="outline-container-orgffd5138" class="outline-3">
+<h3 id="orgffd5138"><span class="section-number-3">1.1.</span> 布局属性</h3>
+<div class="outline-text-3" id="text-1-1">
+
+<div id="org432bdad" class="figure">
+<p><img src="布局术语.png" alt="布局术语.png" width="1000" />
+</p>
+<p><span class="figure-number">Figure 1: </span>布局术语</p>
+</div>
+
+<ol class="org-ol">
+<li>列（Column）。面板中一个或多个垂直的块。</li>
+<li>折叠区（Fold）。可折叠设备或双屏设备上将两个显示区域分隔开的可折叠部分。</li>
+<li>外边距（Margin）。屏幕边缘和可视元素之间的距离。</li>
+<li>面板（Pane）。包含其他组件或元素的布局容器。</li>
+<li>间隔（Spacer）。两个面板之间的空间。</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgb0b3888" class="outline-3">
+<h3 id="orgb0b3888"><span class="section-number-3">1.2.</span> 布局工具</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+布局常用的工具有：
+</p>
+<ul class="org-ul">
+<li>分组（Grouping）将共享相同上下文的元素联系在一起。
+<ul class="org-ul">
+<li>显著分组（Explicit grouping）使用诸如边框（outline）、分隔符（divider）或阴影（shadow）等边界将元素包围起来。比如卡片是显著分组。</li>
+<li>隐含分组（Implicit grouping）将临近元素关联起来。元素之间没有线或阴影，而是使用开放空间分隔。比如轮播（Carousel）是隐含分组。</li>
+</ul></li>
+<li>外边距（Margin）是窗口边缘和元素之间的距离。</li>
+<li>间隔（Spacer）是两个面板之间的空间，宽度24dp。</li>
+<li>内边距（Padding）是两个元素之间的距离，分为垂直内边距和水平内边距。内边距是4dp的整数倍。</li>
+<li>像素密度（Pixel density）是屏幕上每英尺长度内的像素数。</li>
+<li>密度无关像素（Density-independent pixel）是在像素密度为160的屏幕上的物理像素。</li>
+<li>信息密度（Information density）受到布局的空间维度（外边距、内边距、间隔宽度等）的影响。高信息密度有助于客户快速浏览或对比信息。提高信息密度可以让列表、表格和长表单在屏幕上显示更多的内容。但信息密度过高可能导致交互元素过小，引发误操作。</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orge6c6c60" class="outline-3">
+<h3 id="orge6c6c60"><span class="section-number-3">1.3.</span> 布局区域</h3>
+<div class="outline-text-3" id="text-1-3">
+</div>
+<div id="outline-container-org5e77d56" class="outline-4">
+<h4 id="org5e77d56"><span class="section-number-4">1.3.1.</span> 导航区域</h4>
+<div class="outline-text-4" id="text-1-3-1">
+
+<div id="org12f8ca9" class="figure">
+<p><img src="两区域布局.png" alt="两区域布局.png" width="1000" />
+</p>
+<p><span class="figure-number">Figure 2: </span>两区域布局</p>
+</div>
+
+<p>
+大部分布局分为导航区域和内容区域。导航区域帮助用户在各目标页面之间跳转。导航区域常用的组件有导航抽屉（Navigation drawer）、导航导轨（Navigation rail）或导航栏（Navigation bar）。
+</p>
+
+
+<div id="org99f63c8" class="figure">
+<p><img src="三种导航组件.png" alt="三种导航组件.png" width="1000" />
+</p>
+<p><span class="figure-number">Figure 3: </span>三种导航组件</p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orge323798" class="outline-3">
+<h3 id="orge323798"><span class="section-number-3">1.4.</span> 内容区域</h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+内容区域（Body region）是展示应用主要内容的区域。这些内容包括：图片、文字、列表、卡片、按钮、应用栏、搜索栏等。内容区域通常被划分为一个或多个面板。面板是内容区域中一组相关的内容。根据面板尺寸的约束，面板可以分为固定尺寸（Fixed）或自适应（Flexible）的。布局区域和面板的尺寸和相对位置应当由设备窗口尺寸的类型决定。
+</p>
+<dl class="org-dl">
+<dt>紧凑窗口</dt><dd>1个面板。</dd>
+<dt>适中窗口</dt><dd>1个或2个面板。</dd>
+<dt>宽大窗口</dt><dd>2个或1个面板。</dd>
+</dl>
+<p>
+面板是包含应用的框架，这一点和窗口不同。多窗口视图是系统界面的特性，用来同时显示多个应用。单一面板布局通常使用自适应尺寸。两面板布局通常使用一个固定尺寸面板和一个自适应尺寸面板，或者使用两个尺寸对称的自适应尺寸面板。面板可以包含一个顶部应用栏（Top app bar）和一个底部应用栏（Bottom app bar）。应用栏中动作按钮应当在紧凑窗口中折叠显示，在宽大窗口中展开显示。
+</p>
+</div>
+</div>
+<div id="outline-container-org06f478c" class="outline-3">
+<h3 id="org06f478c"><span class="section-number-3">1.5.</span> 窗口尺寸分类</h3>
+<div class="outline-text-3" id="text-1-5">
+
+<div id="org06b4f18" class="figure">
+<p><img src="窗口尺寸分类.png" alt="窗口尺寸分类.png" width="1000" />
+</p>
+<p><span class="figure-number">Figure 4: </span>窗口尺寸分类</p>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="all" frame="border">
+<caption class="t-above"><span class="table-number">Table 1:</span> 窗口尺寸分类</caption>
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">窗口尺寸分类</th>
+<th scope="col" class="org-left">宽度（dp）</th>
+<th scope="col" class="org-left">示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">紧凑（Compact）</td>
+<td class="org-left">&lt; 600</td>
+<td class="org-left">手机（竖屏）</td>
+</tr>
+
+<tr>
+<td class="org-left">适中（Medium）</td>
+<td class="org-left">600 - 840</td>
+<td class="org-left">平板电脑（竖屏）、可折叠手机（竖屏展开）</td>
+</tr>
+
+<tr>
+<td class="org-left">宽大（Expanded）</td>
+<td class="org-left">&gt; 840</td>
+<td class="org-left">手机（横屏）、平板电脑（横屏）、可折叠手机（横屏展开）、电脑</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+产品应当为三种不同窗口尺寸分类设计不同的布局。
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="all" frame="border">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">窗口尺寸分类</th>
+<th scope="col" class="org-left">面板数量</th>
+<th scope="col" class="org-left">导航</th>
+<th scope="col" class="org-left">信息控件</th>
+<th scope="col" class="org-left">动作控件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">紧凑</td>
+<td class="org-left">1</td>
+<td class="org-left">导航栏、模态导航抽屉</td>
+<td class="org-left">简单对话框、全屏对话框</td>
+<td class="org-left">bottom sheet</td>
+</tr>
+
+<tr>
+<td class="org-left">适中</td>
+<td class="org-left">1个或2个</td>
+<td class="org-left">导航导轨、模态导航抽屉</td>
+<td class="org-left">简单对话框</td>
+<td class="org-left">菜单</td>
+</tr>
+
+<tr>
+<td class="org-left">宽大</td>
+<td class="org-left">2个或1个</td>
+<td class="org-left">导航导轨、模态或标准导航抽屉</td>
+<td class="org-left">简单对话框</td>
+<td class="org-left">菜单</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: 2023年08月26日</p>
+<p class="author">Author: tommwq</p>
+<p class="date">Created: 2023-08-27 周日 14:15</p>
+<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.6.1)</p>
+</div>
+</body>
+</html>

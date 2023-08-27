@@ -1,0 +1,2370 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2023-08-27 周日 14:15 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>质感设计</title>
+<meta name="author" content="tommwq" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<style>body {font-family:Microsoft YaHei;font-size:x-large;}</style>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">质感设计</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org378a53d">1. 基础</a>
+<ul>
+<li><a href="#org8616b11">1.1. 可访问性</a></li>
+<li><a href="#orgdbb37e4">1.2. 内容设计</a></li>
+<li><a href="#orgc426f5f">1.3. 设计变量</a></li>
+<li><a href="#orgfb5868f">1.4. 交互</a></li>
+<li><a href="#orgfd9b32a">1.5. 布局</a>
+<ul>
+<li><a href="#org009fc5c">1.5.1. 布局属性</a></li>
+<li><a href="#orgc9f97bf">1.5.2. 布局工具</a></li>
+<li><a href="#org08442cc">1.5.3. 布局区域</a></li>
+<li><a href="#org196da5c">1.5.4. 内容区域</a></li>
+<li><a href="#org3da8240">1.5.5. 窗口尺寸分类</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org67a24a0">2. 样式</a>
+<ul>
+<li><a href="#orgb13e738">2.1. 色彩</a>
+<ul>
+<li><a href="#org988b5b0">2.1.1. 关键色彩</a></li>
+<li><a href="#org65f9ef0">2.1.2. 色彩空间和记号</a></li>
+<li><a href="#org2262c7d">2.1.3. 色彩职能</a></li>
+</ul>
+</li>
+<li><a href="#orgc2eaf62">2.2. 层叠高度</a></li>
+<li><a href="#org4775767">2.3. 图标</a></li>
+<li><a href="#org793cb95">2.4. 动作</a></li>
+<li><a href="#org58332a6">2.5. 形状</a></li>
+<li><a href="#org313531d">2.6. 版面设计</a></li>
+</ul>
+</li>
+<li><a href="#org42f756d">3. 组件</a>
+<ul>
+<li><a href="#org8e17ccb">3.1. 动作组件</a>
+<ul>
+<li><a href="#orgf32758a">3.1.1. 按钮</a></li>
+</ul>
+</li>
+<li><a href="#org7c596d7">3.2. 信息组件</a></li>
+<li><a href="#orgbb80e4f">3.3. 聚合组件</a>
+<ul>
+<li><a href="#org5bed612">3.3.1. bottom sheets</a></li>
+<li><a href="#orga4a4d5a">3.3.2. 卡片</a></li>
+<li><a href="#org1b96583">3.3.3. carousel</a></li>
+<li><a href="#orgab48872">3.3.4. 对话框</a></li>
+<li><a href="#org72773bb">3.3.5. 分隔符</a></li>
+<li><a href="#orge2cdbed">3.3.6. 列表</a></li>
+<li><a href="#org8c1f091">3.3.7. side sheet</a></li>
+<li><a href="#org5492639">3.3.8. tooltips</a></li>
+</ul>
+</li>
+<li><a href="#org31ff4c6">3.4. 导航组件</a></li>
+<li><a href="#org486690e">3.5. 选择组件</a></li>
+<li><a href="#orgefcf047">3.6. 文本输入组件</a></li>
+</ul>
+</li>
+<li><a href="#org7673224">4. 附录</a>
+<ul>
+<li><a href="#orgf01436e">4.1. 附录：Material Design色彩和Android属性对比</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org378a53d" class="outline-2">
+<h2 id="org378a53d"><span class="section-number-2">1.</span> 基础</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-org8616b11" class="outline-3">
+<h3 id="org8616b11"><span class="section-number-3">1.1.</span> 可访问性</h3>
+</div>
+<div id="outline-container-orgdbb37e4" class="outline-3">
+<h3 id="orgdbb37e4"><span class="section-number-3">1.2.</span> 内容设计</h3>
+</div>
+<div id="outline-container-orgc426f5f" class="outline-3">
+<h3 id="orgc426f5f"><span class="section-number-3">1.3.</span> 设计变量</h3>
+</div>
+<div id="outline-container-orgfb5868f" class="outline-3">
+<h3 id="orgfb5868f"><span class="section-number-3">1.4.</span> 交互</h3>
+</div>
+<div id="outline-container-orgfd9b32a" class="outline-3">
+<h3 id="orgfd9b32a"><span class="section-number-3">1.5.</span> 布局</h3>
+<div class="outline-text-3" id="text-1-5">
+<p>
+布局（Layout）是屏幕上视觉元素的排列。布局可以引导用户聚焦想要执行的动作。为了提供一致的体验，布局应当考虑适配紧凑、适中、宽大等多类窗口尺寸。
+</p>
+</div>
+<div id="outline-container-org009fc5c" class="outline-4">
+<h4 id="org009fc5c"><span class="section-number-4">1.5.1.</span> 布局属性</h4>
+<div class="outline-text-4" id="text-1-5-1">
+
+<div id="org3e8bbbf" class="figure">
+<p><img src="布局术语.png" alt="布局术语.png" width="1000" />
+</p>
+<p><span class="figure-number">Figure 1: </span>布局术语</p>
+</div>
+
+<ol class="org-ol">
+<li>列（Column）。面板中一个或多个垂直的块。</li>
+<li>折叠区（Fold）。可折叠设备或双屏设备上将两个显示区域分隔开的可折叠部分。</li>
+<li>外边距（Margin）。屏幕边缘和可视元素之间的距离。</li>
+<li>面板（Pane）。包含其他组件或元素的布局容器。</li>
+<li>间隔（Spacer）。两个面板之间的空间。</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgc9f97bf" class="outline-4">
+<h4 id="orgc9f97bf"><span class="section-number-4">1.5.2.</span> 布局工具</h4>
+<div class="outline-text-4" id="text-1-5-2">
+<p>
+布局常用的工具有：
+</p>
+<ul class="org-ul">
+<li>分组（Grouping）将共享相同上下文的元素联系在一起。
+<ul class="org-ul">
+<li>显著分组（Explicit grouping）使用诸如边框（outline）、分隔符（divider）或阴影（shadow）等边界将元素包围起来。比如卡片是显著分组。</li>
+<li>隐含分组（Implicit grouping）将临近元素关联起来。元素之间没有线或阴影，而是使用开放空间分隔。比如轮播（Carousel）是隐含分组。</li>
+</ul></li>
+<li>外边距（Margin）是窗口边缘和元素之间的距离。</li>
+<li>间隔（Spacer）是两个面板之间的空间，宽度24dp。</li>
+<li>内边距（Padding）是两个元素之间的距离，分为垂直内边距和水平内边距。内边距是4dp的整数倍。</li>
+<li>像素密度（Pixel density）是屏幕上每英尺长度内的像素数。</li>
+<li>密度无关像素（Density-independent pixel）是在像素密度为160的屏幕上的物理像素。</li>
+<li>信息密度（Information density）受到布局的空间维度（外边距、内边距、间隔宽度等）的影响。高信息密度有助于客户快速浏览或对比信息。提高信息密度可以让列表、表格和长表单在屏幕上显示更多的内容。但信息密度过高可能导致交互元素过小，引发误操作。</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org08442cc" class="outline-4">
+<h4 id="org08442cc"><span class="section-number-4">1.5.3.</span> 布局区域</h4>
+<div class="outline-text-4" id="text-1-5-3">
+</div>
+<ol class="org-ol">
+<li><a id="orge835f4a"></a>导航区域<br />
+<div class="outline-text-5" id="text-1-5-3-1">
+
+<div id="orgba1e0c3" class="figure">
+<p><img src="两区域布局.png" alt="两区域布局.png" width="1000" />
+</p>
+<p><span class="figure-number">Figure 2: </span>两区域布局</p>
+</div>
+
+<p>
+大部分布局分为导航区域和内容区域。导航区域帮助用户在各目标页面之间跳转。导航区域常用的组件有导航抽屉（Navigation drawer）、导航导轨（Navigation rail）或导航栏（Navigation bar）。
+</p>
+
+
+<div id="org5828c6a" class="figure">
+<p><img src="三种导航组件.png" alt="三种导航组件.png" width="1000" />
+</p>
+<p><span class="figure-number">Figure 3: </span>三种导航组件</p>
+</div>
+</div>
+</li>
+</ol>
+</div>
+
+<div id="outline-container-org196da5c" class="outline-4">
+<h4 id="org196da5c"><span class="section-number-4">1.5.4.</span> 内容区域</h4>
+<div class="outline-text-4" id="text-1-5-4">
+<p>
+内容区域（Body region）是展示应用主要内容的区域。这些内容包括：图片、文字、列表、卡片、按钮、应用栏、搜索栏等。内容区域通常被划分为一个或多个面板。面板是内容区域中一组相关的内容。根据面板尺寸的约束，面板可以分为固定尺寸（Fixed）或自适应（Flexible）的。布局区域和面板的尺寸和相对位置应当由设备窗口尺寸的类型决定。
+</p>
+<dl class="org-dl">
+<dt>紧凑窗口</dt><dd>1个面板。</dd>
+<dt>适中窗口</dt><dd>1个或2个面板。</dd>
+<dt>宽大窗口</dt><dd>2个或1个面板。</dd>
+</dl>
+<p>
+面板是包含应用的框架，这一点和窗口不同。多窗口视图是系统界面的特性，用来同时显示多个应用。单一面板布局通常使用自适应尺寸。两面板布局通常使用一个固定尺寸面板和一个自适应尺寸面板，或者使用两个尺寸对称的自适应尺寸面板。面板可以包含一个顶部应用栏（Top app bar）和一个底部应用栏（Bottom app bar）。应用栏中动作按钮应当在紧凑窗口中折叠显示，在宽大窗口中展开显示。
+</p>
+</div>
+</div>
+<div id="outline-container-org3da8240" class="outline-4">
+<h4 id="org3da8240"><span class="section-number-4">1.5.5.</span> 窗口尺寸分类</h4>
+<div class="outline-text-4" id="text-1-5-5">
+
+<div id="orgbeac86f" class="figure">
+<p><img src="窗口尺寸分类.png" alt="窗口尺寸分类.png" width="1000" />
+</p>
+<p><span class="figure-number">Figure 4: </span>窗口尺寸分类</p>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="all" frame="border">
+<caption class="t-above"><span class="table-number">Table 1:</span> 窗口尺寸分类</caption>
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">窗口尺寸分类</th>
+<th scope="col" class="org-left">宽度（dp）</th>
+<th scope="col" class="org-left">示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">紧凑（Compact）</td>
+<td class="org-left">&lt; 600</td>
+<td class="org-left">手机（竖屏）</td>
+</tr>
+
+<tr>
+<td class="org-left">适中（Medium）</td>
+<td class="org-left">600 - 840</td>
+<td class="org-left">平板电脑（竖屏）、可折叠手机（竖屏展开）</td>
+</tr>
+
+<tr>
+<td class="org-left">宽大（Expanded）</td>
+<td class="org-left">&gt; 840</td>
+<td class="org-left">手机（横屏）、平板电脑（横屏）、可折叠手机（横屏展开）、电脑</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+产品应当为三种不同窗口尺寸分类设计不同的布局。
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="all" frame="border">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">窗口尺寸分类</th>
+<th scope="col" class="org-left">面板数量</th>
+<th scope="col" class="org-left">导航</th>
+<th scope="col" class="org-left">信息控件</th>
+<th scope="col" class="org-left">动作控件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">紧凑</td>
+<td class="org-left">1</td>
+<td class="org-left">导航栏、模态导航抽屉</td>
+<td class="org-left">简单对话框、全屏对话框</td>
+<td class="org-left">bottom sheet</td>
+</tr>
+
+<tr>
+<td class="org-left">适中</td>
+<td class="org-left">1个或2个</td>
+<td class="org-left">导航导轨、模态导航抽屉</td>
+<td class="org-left">简单对话框</td>
+<td class="org-left">菜单</td>
+</tr>
+
+<tr>
+<td class="org-left">宽大</td>
+<td class="org-left">2个或1个</td>
+<td class="org-left">导航导轨、模态或标准导航抽屉</td>
+<td class="org-left">简单对话框</td>
+<td class="org-left">菜单</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org67a24a0" class="outline-2">
+<h2 id="org67a24a0"><span class="section-number-2">2.</span> 样式</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-orgb13e738" class="outline-3">
+<h3 id="orgb13e738"><span class="section-number-3">2.1.</span> 色彩</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+色彩（Color）可以表达意义、信息层级和状态。质感设计以5种关键色彩为基础，衍生出20余种色彩职能。
+</p>
+</div>
+<div id="outline-container-org988b5b0" class="outline-4">
+<h4 id="org988b5b0"><span class="section-number-4">2.1.1.</span> 关键色彩</h4>
+<div class="outline-text-4" id="text-2-1-1">
+<p>
+质感设计以5种关键色彩（key color）为基础：
+</p>
+<ul class="org-ul">
+<li>显著色彩（Accent color）
+<ul class="org-ul">
+<li>主关键色彩（Primary key color）用于浮动按钮、主要按钮、主要状态等需要用户特别关注的组件。</li>
+<li>次关键色彩（Secondary key color）用于显著程度稍弱一些的组件。</li>
+<li>第三关键色彩（Tertiary key color）用于平衡主关键色彩和次关键色彩。</li>
+</ul></li>
+<li>中性色彩（Neutral color）
+<ul class="org-ul">
+<li>中性色彩用于背景（background）的表层色彩（surface color）。</li>
+<li>中性色彩变体（Neutral color variant）用于中等强调级别的文本、图标和组件边框（Outline）。</li>
+</ul></li>
+</ul>
+<p>
+除此以外，质感设计提供了警示色彩（error color）。它是一种附加色彩（additional color）。
+</p>
+</div>
+</div>
+<div id="outline-container-org65f9ef0" class="outline-4">
+<h4 id="org65f9ef0"><span class="section-number-4">2.1.2.</span> 色彩空间和记号</h4>
+<div class="outline-text-4" id="text-2-1-2">
+<p>
+质感设计采用HCT色彩空间。HCT表示色相（Hue）、饱和度（Chroma）和色调（Tone）。质感设计通过调整关键色彩的色调生成不同职能的色彩。色调描述色彩的亮度，0是最暗的黑色，100是最亮的白色。质感设计采用名字加色调值来表示衍生色彩。比如tertiary40表示将第三关键色彩的色调设定为40而产生的色彩。
+</p>
+</div>
+</div>
+<div id="outline-container-org2262c7d" class="outline-4">
+<h4 id="org2262c7d"><span class="section-number-4">2.1.3.</span> 色彩职能</h4>
+<div class="outline-text-4" id="text-2-1-3">
+<p>
+每种显著色彩可以衍生出4种色彩职能。以主关键色彩为例：
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="all" frame="border" align="center">
+<caption class="t-above"><span class="table-number">Table 2:</span> 主关键色彩衍生出的4种色彩职能</caption>
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">色彩职能</th>
+<th scope="col" class="org-left">说明</th>
+<th scope="col" class="org-left">色彩值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">主色彩（Primary）</td>
+<td class="org-left">基础色彩</td>
+<td class="org-left">primary40</td>
+</tr>
+
+<tr>
+<td class="org-left">主上层色彩（On-Primary）</td>
+<td class="org-left">用于主色彩上层的文本和图标等</td>
+<td class="org-left">primary100</td>
+</tr>
+
+<tr>
+<td class="org-left">主容器色彩（Primary container）</td>
+<td class="org-left">用于强调程度弱于主色彩的元素</td>
+<td class="org-left">primary90</td>
+</tr>
+
+<tr>
+<td class="org-left">主容器上层色彩（On-Primary container）</td>
+<td class="org-left">用于主容器色彩上层的文本、图标等</td>
+<td class="org-left">primary10</td>
+</tr>
+</tbody>
+</table>
+<p>
+表层色彩（Surface color）用于将一个区域与屏幕背景或其他区域隔离。表层色彩有5种职能。
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="all" frame="border" align="center">
+<caption class="t-above"><span class="table-number">Table 3:</span> 表层色彩职能</caption>
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">色彩职能</th>
+<th scope="col" class="org-left">说明</th>
+<th scope="col" class="org-left">色彩值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">暗表层色彩（Surface dim）</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">neutral87</td>
+</tr>
+
+<tr>
+<td class="org-left">表层色彩（Surface）</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">neutral98</td>
+</tr>
+
+<tr>
+<td class="org-left">亮表层色彩（Surface bright）</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">neutral98</td>
+</tr>
+
+<tr>
+<td class="org-left">最低表层容器色彩（Surface container lowest）</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">neutral100</td>
+</tr>
+
+<tr>
+<td class="org-left">低表层容器色彩（Surface container low）</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">neutral96</td>
+</tr>
+
+<tr>
+<td class="org-left">表层容器色彩（Surface container）</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">neutral94</td>
+</tr>
+
+<tr>
+<td class="org-left">高表层容器色彩（Surface container high）</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">neutral92</td>
+</tr>
+
+<tr>
+<td class="org-left">最高表层容器色彩（Surface container highest）</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">neutral90</td>
+</tr>
+
+<tr>
+<td class="org-left">表层上层色彩（On surface）</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">neutral10</td>
+</tr>
+
+<tr>
+<td class="org-left">表层上层色彩变体（On surface variant）</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">neutralVariant30</td>
+</tr>
+</tbody>
+</table>
+<p>
+边框色彩（Outline color）用于绘制元素边框。
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="all" frame="border" align="center">
+<caption class="t-above"><span class="table-number">Table 4:</span> 边框色彩职能</caption>
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">色彩职能</th>
+<th scope="col" class="org-left">色彩值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">边框色彩（Outline）</td>
+<td class="org-left">neutralVariant50</td>
+</tr>
+
+<tr>
+<td class="org-left">边框色彩变体（Outline variant）</td>
+<td class="org-left">neutralVariant80</td>
+</tr>
+</tbody>
+</table>
+<table border="2" cellspacing="0" cellpadding="6" rules="all" frame="border" align="center">
+<caption class="t-above"><span class="table-number">Table 5:</span> 附加色彩职能</caption>
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">色彩职能</th>
+<th scope="col" class="org-left">色彩值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">表层翻转色彩（Inverse surface）</td>
+<td class="org-left">neutral20</td>
+</tr>
+
+<tr>
+<td class="org-left">表层上层翻转色彩（Inverse on surface）</td>
+<td class="org-left">neutral95</td>
+</tr>
+
+<tr>
+<td class="org-left">主翻转色彩（Inverse primary）</td>
+<td class="org-left">primary80</td>
+</tr>
+
+<tr>
+<td class="org-left">主固定色彩（Primary fixed）</td>
+<td class="org-left">primary90</td>
+</tr>
+
+<tr>
+<td class="org-left">暗主固定色彩（Primary fixed dim）</td>
+<td class="org-left">primary80</td>
+</tr>
+
+<tr>
+<td class="org-left">第二固定色彩（Secondary fixed）</td>
+<td class="org-left">secondary90</td>
+</tr>
+
+<tr>
+<td class="org-left">暗第二固定色彩（Secondary fixed dim）</td>
+<td class="org-left">secondary80</td>
+</tr>
+
+<tr>
+<td class="org-left">第三固定色彩（Tertiary fixed）</td>
+<td class="org-left">tertiary90</td>
+</tr>
+
+<tr>
+<td class="org-left">暗第三固定色彩（Tertiary fixed dim）</td>
+<td class="org-left">tertiary80</td>
+</tr>
+</tbody>
+</table>
+<table border="2" cellspacing="0" cellpadding="6" rules="all" frame="border" align="center">
+<caption class="t-above"><span class="table-number">Table 6:</span> 质感设计色彩职能</caption>
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">颜色职能</th>
+<th scope="col" class="org-left">系统变量</th>
+<th scope="col" class="org-left">引用变量</th>
+<th scope="col" class="org-left">暗黑模式引用变量</th>
+<th scope="col" class="org-left">默认值</th>
+<th scope="col" class="org-left">暗黑模式默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">主色彩</td>
+<td class="org-left">md.sys.color.primary</td>
+<td class="org-left">md.ref.palette.primary40</td>
+<td class="org-left">md.ref.palette.primary80</td>
+<td class="org-left">6750A4</td>
+<td class="org-left">D0BCFF</td>
+</tr>
+
+<tr>
+<td class="org-left">主容器色彩</td>
+<td class="org-left">md.sys.color.primary-container</td>
+<td class="org-left">md.ref.palette.primary90</td>
+<td class="org-left">md.ref.palette.primary30</td>
+<td class="org-left">EADDFF</td>
+<td class="org-left">4F378B</td>
+</tr>
+
+<tr>
+<td class="org-left">主上层色彩</td>
+<td class="org-left">md.sys.color.on-primary</td>
+<td class="org-left">md.ref.palette.primary100</td>
+<td class="org-left">md.ref.palette.primary20</td>
+<td class="org-left">FFFFFF</td>
+<td class="org-left">371E73</td>
+</tr>
+
+<tr>
+<td class="org-left">主容器上层色彩</td>
+<td class="org-left">md.sys.color.on-primary-container</td>
+<td class="org-left">md.ref.palette.primary10</td>
+<td class="org-left">md.ref.palette.primary90</td>
+<td class="org-left">21005E</td>
+<td class="org-left">EADDFF</td>
+</tr>
+
+<tr>
+<td class="org-left">主翻转色彩</td>
+<td class="org-left">md.sys.color.inverse-primary</td>
+<td class="org-left">md.ref.palette.primary80</td>
+<td class="org-left">md.ref.palette.primary40</td>
+<td class="org-left">D0BCFF</td>
+<td class="org-left">6750A4</td>
+</tr>
+
+<tr>
+<td class="org-left">第二色彩</td>
+<td class="org-left">md.sys.color.secondary</td>
+<td class="org-left">md.ref.palette.secondary40</td>
+<td class="org-left">md.ref.palette.secondary80</td>
+<td class="org-left">625B71</td>
+<td class="org-left">CCC2DC</td>
+</tr>
+
+<tr>
+<td class="org-left">第二容器色彩</td>
+<td class="org-left">md.sys.color.secondary-container</td>
+<td class="org-left">md.ref.palette.secondary90</td>
+<td class="org-left">md.ref.palette.secondary30</td>
+<td class="org-left">E8DEF8</td>
+<td class="org-left">4A4458</td>
+</tr>
+
+<tr>
+<td class="org-left">第二上层色彩</td>
+<td class="org-left">md.sys.color.on-secondary</td>
+<td class="org-left">md.ref.palette.secondary100</td>
+<td class="org-left">md.ref.palette.secondary20</td>
+<td class="org-left">FFFFFF</td>
+<td class="org-left">332D41</td>
+</tr>
+
+<tr>
+<td class="org-left">第二容器上层色彩</td>
+<td class="org-left">md.sys.color.on-secondary-container</td>
+<td class="org-left">md.ref.palette.secondary10</td>
+<td class="org-left">md.ref.palette.secondary90</td>
+<td class="org-left">1E192B</td>
+<td class="org-left">E8DEF8</td>
+</tr>
+
+<tr>
+<td class="org-left">第三色彩</td>
+<td class="org-left">md.sys.color.tertiary</td>
+<td class="org-left">md.ref.palette.tertiary40</td>
+<td class="org-left">md.ref.palette.tertiary80</td>
+<td class="org-left">7D5260</td>
+<td class="org-left">EFB8C8</td>
+</tr>
+
+<tr>
+<td class="org-left">第三容器色彩</td>
+<td class="org-left">md.sys.color.tertiary-container</td>
+<td class="org-left">md.ref.palette.tertiary90</td>
+<td class="org-left">md.ref.palette.tertiary30</td>
+<td class="org-left">FFD8E4</td>
+<td class="org-left">633B48</td>
+</tr>
+
+<tr>
+<td class="org-left">第三上层色彩</td>
+<td class="org-left">md.sys.color.on-tertiary</td>
+<td class="org-left">md.ref.palette.tertiary100</td>
+<td class="org-left">md.ref.palette.tertiary20</td>
+<td class="org-left">FFFFFF</td>
+<td class="org-left">492532</td>
+</tr>
+
+<tr>
+<td class="org-left">第三容器上层色彩</td>
+<td class="org-left">md.sys.color.on-tertiary-container</td>
+<td class="org-left">md.ref.palette.tertiary10</td>
+<td class="org-left">md.ref.palette.tertiary90</td>
+<td class="org-left">370B1E</td>
+<td class="org-left">FFD8E4</td>
+</tr>
+
+<tr>
+<td class="org-left">表层色彩</td>
+<td class="org-left">md.sys.color.surface</td>
+<td class="org-left">md.ref.palette.neutral98</td>
+<td class="org-left">md.ref.palette.neutral6</td>
+<td class="org-left">FEF7FF</td>
+<td class="org-left">141218</td>
+</tr>
+
+<tr>
+<td class="org-left">暗表层色彩</td>
+<td class="org-left">md.sys.color.surface-dim</td>
+<td class="org-left">md.ref.palette.neutral87</td>
+<td class="org-left">md.ref.palette.neutral6</td>
+<td class="org-left">DED8E1</td>
+<td class="org-left">141218</td>
+</tr>
+
+<tr>
+<td class="org-left">亮表层色彩</td>
+<td class="org-left">md.sys.color.surface-bright</td>
+<td class="org-left">md.ref.palette.neutral98</td>
+<td class="org-left">md.ref.palette.neutral24</td>
+<td class="org-left">FEF7FF</td>
+<td class="org-left">3B383E</td>
+</tr>
+
+<tr>
+<td class="org-left">最低表层容器色彩</td>
+<td class="org-left">md.sys.color.surface-container-lowest</td>
+<td class="org-left">md.ref.palette.neutral100</td>
+<td class="org-left">md.ref.palette.neutral4</td>
+<td class="org-left">FFFFFF</td>
+<td class="org-left">0F0D13</td>
+</tr>
+
+<tr>
+<td class="org-left">低表层容器色彩</td>
+<td class="org-left">md.sys.color.surface-container-low</td>
+<td class="org-left">md.ref.palette.neutral96</td>
+<td class="org-left">md.ref.palette.neutral10</td>
+<td class="org-left">F7F2FA</td>
+<td class="org-left">1D1B20</td>
+</tr>
+
+<tr>
+<td class="org-left">表层容器色彩</td>
+<td class="org-left">md.sys.color.surface-container</td>
+<td class="org-left">md.ref.palette.neutral94</td>
+<td class="org-left">md.ref.palette.neutral12</td>
+<td class="org-left">F3EDF7</td>
+<td class="org-left">211F26</td>
+</tr>
+
+<tr>
+<td class="org-left">高表层容器色彩</td>
+<td class="org-left">md.sys.color.surface-container-high</td>
+<td class="org-left">md.ref.palette.neutral92</td>
+<td class="org-left">md.ref.palette.neutral17</td>
+<td class="org-left">ECE6F0</td>
+<td class="org-left">2B2930</td>
+</tr>
+
+<tr>
+<td class="org-left">最高表层容器色彩</td>
+<td class="org-left">md.sys.color.surface-container-highest</td>
+<td class="org-left">md.ref.palette.neutral90</td>
+<td class="org-left">md.ref.palette.neutral22</td>
+<td class="org-left">E6E0E9</td>
+<td class="org-left">36343B</td>
+</tr>
+
+<tr>
+<td class="org-left">表层色彩变体</td>
+<td class="org-left">md.sys.color.surface-variant</td>
+<td class="org-left">md.ref.palette.neutral-variant90</td>
+<td class="org-left">md.ref.palette.neutral-variant30</td>
+<td class="org-left">E7E0EC</td>
+<td class="org-left">49454F</td>
+</tr>
+
+<tr>
+<td class="org-left">表层上层色彩</td>
+<td class="org-left">md.sys.color.on-surface</td>
+<td class="org-left">md.ref.palette.neutral10</td>
+<td class="org-left">md.ref.palette.neutral90</td>
+<td class="org-left">1C1B1F</td>
+<td class="org-left">E6E1E5</td>
+</tr>
+
+<tr>
+<td class="org-left">表层上层色彩变体</td>
+<td class="org-left">md.sys.color.on-surface-variant</td>
+<td class="org-left">md.ref.palette.neutral-variant30</td>
+<td class="org-left">md.ref.palette.neutral-variant80</td>
+<td class="org-left">49454E</td>
+<td class="org-left">CAC4D0</td>
+</tr>
+
+<tr>
+<td class="org-left">表层翻转色彩</td>
+<td class="org-left">md.sys.color.inverse-surface</td>
+<td class="org-left">md.ref.palette.neutral20</td>
+<td class="org-left">md.ref.palette.neutral90</td>
+<td class="org-left">313033</td>
+<td class="org-left">E6E1E5</td>
+</tr>
+
+<tr>
+<td class="org-left">表层上层翻转色彩</td>
+<td class="org-left">md.sys.color.inverse-on-surface</td>
+<td class="org-left">md.ref.palette.neutral95</td>
+<td class="org-left">md.ref.palette.neutral20</td>
+<td class="org-left">F4EFF4</td>
+<td class="org-left">313033</td>
+</tr>
+
+<tr>
+<td class="org-left">背景色彩</td>
+<td class="org-left">md.sys.color.background</td>
+<td class="org-left">md.ref.palette.neutral98</td>
+<td class="org-left">md.ref.palette.neutral6</td>
+<td class="org-left">FEF7FF</td>
+<td class="org-left">141218</td>
+</tr>
+
+<tr>
+<td class="org-left">背景上层色彩</td>
+<td class="org-left">md.sys.color.on-background</td>
+<td class="org-left">md.ref.palette.neutral10</td>
+<td class="org-left">md.ref.palette.neutral90</td>
+<td class="org-left">1C1B1F</td>
+<td class="org-left">E6E1E5</td>
+</tr>
+
+<tr>
+<td class="org-left">警示色彩</td>
+<td class="org-left">md.sys.color.error</td>
+<td class="org-left">md.ref.palette.error40</td>
+<td class="org-left">md.ref.palette.error80</td>
+<td class="org-left">B3261E</td>
+<td class="org-left">F2B8B5</td>
+</tr>
+
+<tr>
+<td class="org-left">警示容器色彩</td>
+<td class="org-left">md.sys.color.error-container</td>
+<td class="org-left">md.ref.palette.error90</td>
+<td class="org-left">md.ref.palette.error30</td>
+<td class="org-left">F9DEDC</td>
+<td class="org-left">8C1D18</td>
+</tr>
+
+<tr>
+<td class="org-left">警示上层色彩</td>
+<td class="org-left">md.sys.color.on-error</td>
+<td class="org-left">md.ref.palette.error100</td>
+<td class="org-left">md.ref.palette.error20</td>
+<td class="org-left">FFFFFF</td>
+<td class="org-left">601410</td>
+</tr>
+
+<tr>
+<td class="org-left">警示容器上层色彩</td>
+<td class="org-left">md.sys.color.on-error-container</td>
+<td class="org-left">md.ref.palette.error10</td>
+<td class="org-left">md.ref.palette.error90</td>
+<td class="org-left">410E0B</td>
+<td class="org-left">F9DEDC</td>
+</tr>
+
+<tr>
+<td class="org-left">边框色彩</td>
+<td class="org-left">md.sys.color.outline</td>
+<td class="org-left">md.ref.palette.neutral-variant50</td>
+<td class="org-left">md.ref.palette.neutral-variant60</td>
+<td class="org-left">79747E</td>
+<td class="org-left">938F99</td>
+</tr>
+
+<tr>
+<td class="org-left">边框色彩变体</td>
+<td class="org-left">md.sys.color.outline-variant</td>
+<td class="org-left">md.ref.palette.neutral-variant80</td>
+<td class="org-left">md.ref.palette.neutral-variant30</td>
+<td class="org-left">C4C7C5</td>
+<td class="org-left">444746</td>
+</tr>
+
+<tr>
+<td class="org-left">阴影色彩</td>
+<td class="org-left">md.sys.color.shadow</td>
+<td class="org-left">md.ref.palette.neutral0</td>
+<td class="org-left">md.ref.palette.neutral0</td>
+<td class="org-left">000000</td>
+<td class="org-left">000000</td>
+</tr>
+
+<tr>
+<td class="org-left">表层浅色</td>
+<td class="org-left">md.sys.color.surface-tint-color</td>
+<td class="org-left">md.sys.color.primary</td>
+<td class="org-left">md.sys.color.primary</td>
+<td class="org-left">6750A4</td>
+<td class="org-left">D0BCFF</td>
+</tr>
+
+<tr>
+<td class="org-left">蒙层色彩</td>
+<td class="org-left">md.sys.color.scrim</td>
+<td class="org-left">md.ref.palette.neutral0</td>
+<td class="org-left">md.ref.palette.neutral0</td>
+<td class="org-left">000000</td>
+<td class="org-left">000000</td>
+</tr>
+</tbody>
+</table>
+
+
+<div id="org70303ad" class="figure">
+<p><img src="色彩职能.png" alt="色彩职能.png" width="1000" />
+</p>
+<p><span class="figure-number">Figure 5: </span>色彩职能</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgc2eaf62" class="outline-3">
+<h3 id="orgc2eaf62"><span class="section-number-3">2.2.</span> 层叠高度</h3>
+</div>
+<div id="outline-container-org4775767" class="outline-3">
+<h3 id="org4775767"><span class="section-number-3">2.3.</span> 图标</h3>
+</div>
+<div id="outline-container-org793cb95" class="outline-3">
+<h3 id="org793cb95"><span class="section-number-3">2.4.</span> 动作</h3>
+</div>
+<div id="outline-container-org58332a6" class="outline-3">
+<h3 id="org58332a6"><span class="section-number-3">2.5.</span> 形状</h3>
+</div>
+<div id="outline-container-org313531d" class="outline-3">
+<h3 id="org313531d"><span class="section-number-3">2.6.</span> 版面设计</h3>
+<div class="outline-text-3" id="text-2-6">
+<p>
+版面设计让文字清晰美观。排版风格包括展示（Display）、头条（Headline）、标题（Title）、正文（Body）和标签（Label）。每种风格分为大号、中号、小号3个缩放级别。展示用于简短的、重要的文字和数字。
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="all" frame="border" align="center">
+<caption class="t-above"><span class="table-number">Table 7:</span> 版面风格</caption>
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">职能</th>
+<th scope="col" class="org-left">设计变量</th>
+<th scope="col" class="org-right">默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">大号展示</td>
+<td class="org-left">md.sys.typescale.display-large.font</td>
+<td class="org-right">Roboto</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">md.sys.typescale.display-large.line-height</td>
+<td class="org-right">64</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">md.sys.typescale.display-large.size</td>
+<td class="org-right">57</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">md.sys.typescale.display-large.tracking</td>
+<td class="org-right">-0.25</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">md.sys.typescale.display-large.weight</td>
+<td class="org-right">400</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">中号展示</td>
+<td class="org-left">md.sys.typescale.display-medium.font</td>
+<td class="org-right">Roboto</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">md.sys.typescale.display-medium.line-height</td>
+<td class="org-right">52</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">md.sys.typescale.display-medium.size</td>
+<td class="org-right">45</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">md.sys.typescale.display-medium.tracking</td>
+<td class="org-right">0</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">md.sys.typescale.display-medium.weight</td>
+<td class="org-right">400</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">小号展示</td>
+<td class="org-left">md.sys.typescale.display-small.font</td>
+<td class="org-right">Roboto</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">md.sys.typescale.display-small.line-height</td>
+<td class="org-right">44</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">md.sys.typescale.display-small.size</td>
+<td class="org-right">36</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">md.sys.typescale.display-small.tracking</td>
+<td class="org-right">0</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">md.sys.typescale.display-small.weight</td>
+<td class="org-right">400</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">大号头条</td>
+<td class="org-left">md.sys.typescale.headline-large.font</td>
+<td class="org-right">Roboto</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">md.sys.typescale.headline-large.line-height</td>
+<td class="org-right">40</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">md.sys.typescale.headline-large.size</td>
+<td class="org-right">32</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">md.sys.typescale.headline-large.tracking</td>
+<td class="org-right">0</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">md.sys.typescale.headline-large.weight</td>
+<td class="org-right">400</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">中号头条</td>
+<td class="org-left">md.sys.typescale.headline-medium.font</td>
+<td class="org-right">Roboto</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">md.sys.typescale.headline-medium.line-height</td>
+<td class="org-right">36</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">md.sys.typescale.headline-medium.size</td>
+<td class="org-right">28</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">md.sys.typescale.headline-medium.tracking</td>
+<td class="org-right">0</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">md.sys.typescale.headline-medium.weight</td>
+<td class="org-right">400</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">小号头条</td>
+<td class="org-left">md.sys.typescale.headline-small.font</td>
+<td class="org-right">Roboto</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">md.sys.typescale.headline-small.line-height</td>
+<td class="org-right">32</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">md.sys.typescale.headline-small.size</td>
+<td class="org-right">24</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">md.sys.typescale.headline-small.tracking</td>
+<td class="org-right">0</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">md.sys.typescale.headline-small.weight</td>
+<td class="org-right">400</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">大号标题</td>
+<td class="org-left">md.sys.typescale.title-large.font</td>
+<td class="org-right">Roboto</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">md.sys.typescale.title-large.line-height</td>
+<td class="org-right">28</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">md.sys.typescale.title-large.size</td>
+<td class="org-right">22</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">md.sys.typescale.title-large.tracking</td>
+<td class="org-right">0</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">md.sys.typescale.title-large.weight</td>
+<td class="org-right">400</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">中号标题</td>
+<td class="org-left">md.sys.typescale.title-medium.font</td>
+<td class="org-right">Roboto</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">md.sys.typescale.title-medium.line-height</td>
+<td class="org-right">24</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">md.sys.typescale.title-medium.size</td>
+<td class="org-right">16</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">md.sys.typescale.title-medium.tracking</td>
+<td class="org-right">0.15</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">md.sys.typescale.title-medium.weight</td>
+<td class="org-right">500</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">小号标题</td>
+<td class="org-left">md.sys.typescale.title-small.font</td>
+<td class="org-right">Roboto</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">md.sys.typescale.title-small.line-height</td>
+<td class="org-right">20</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">md.sys.typescale.title-small.size</td>
+<td class="org-right">14</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">md.sys.typescale.title-small.tracking</td>
+<td class="org-right">0.1</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">md.sys.typescale.title-small.weight</td>
+<td class="org-right">500</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">大号正文</td>
+<td class="org-left">md.sys.typescale.body-large.font</td>
+<td class="org-right">Roboto</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">md.sys.typescale.body-large.line-height</td>
+<td class="org-right">24</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">md.sys.typescale.body-large.size</td>
+<td class="org-right">16</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">md.sys.typescale.body-large.tracking</td>
+<td class="org-right">0.5</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">md.sys.typescale.body-large.weight</td>
+<td class="org-right">400</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">中号正文</td>
+<td class="org-left">md.sys.typescale.body-medium.font</td>
+<td class="org-right">Roboto</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">md.sys.typescale.body-medium.line-height</td>
+<td class="org-right">20</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">md.sys.typescale.body-medium.size</td>
+<td class="org-right">14</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">md.sys.typescale.body-medium.tracking</td>
+<td class="org-right">0.25</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">md.sys.typescale.body-medium.weight</td>
+<td class="org-right">400</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">小号正文</td>
+<td class="org-left">md.sys.typescale.body-small.font</td>
+<td class="org-right">Roboto</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">md.sys.typescale.body-small.line-height</td>
+<td class="org-right">16</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">md.sys.typescale.body-small.size</td>
+<td class="org-right">12</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">md.sys.typescale.body-small.tracking</td>
+<td class="org-right">0.4</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">md.sys.typescale.body-small.weight</td>
+<td class="org-right">400</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">大号标签</td>
+<td class="org-left">md.sys.typescale.label-large.font</td>
+<td class="org-right">Roboto</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">md.sys.typescale.label-large.line-height</td>
+<td class="org-right">20</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">md.sys.typescale.label-large.size</td>
+<td class="org-right">14</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">md.sys.typescale.label-large.tracking</td>
+<td class="org-right">0.1</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">md.sys.typescale.label-large.weight</td>
+<td class="org-right">500</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">中号标签</td>
+<td class="org-left">md.sys.typescale.label-medium.font</td>
+<td class="org-right">Roboto</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">md.sys.typescale.label-medium.line-height</td>
+<td class="org-right">16</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">md.sys.typescale.label-medium.size</td>
+<td class="org-right">12</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">md.sys.typescale.label-medium.tracking</td>
+<td class="org-right">0.5</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">md.sys.typescale.label-medium.weight</td>
+<td class="org-right">500</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">小号标签</td>
+<td class="org-left">md.sys.typescale.label-small.font</td>
+<td class="org-right">Roboto</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">md.sys.typescale.label-small.line-height</td>
+<td class="org-right">16</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">md.sys.typescale.label-small.size</td>
+<td class="org-right">11</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">md.sys.typescale.label-small.tracking</td>
+<td class="org-right">0.5</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">md.sys.typescale.label-small.weight</td>
+<td class="org-right">500</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="outline-container-org42f756d" class="outline-2">
+<h2 id="org42f756d"><span class="section-number-2">3.</span> 组件</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+组件可以分为动作、信息、聚合、导航、选择、文字输入几种类别。动作控件（如按钮）帮助用户达成某个目标。信息控件（如进度条、消息栏）提供有用信息。聚合控件将一组相关控件组合在一起。导航控件帮助用户在界面之间跳转。选择控件（如开关、日期选择器）帮助用户处理非文本输入。文本输入控件用于输入文本。
+</p>
+</div>
+<div id="outline-container-org8e17ccb" class="outline-3">
+<h3 id="org8e17ccb"><span class="section-number-3">3.1.</span> 动作组件</h3>
+<div class="outline-text-3" id="text-3-1">
+</div>
+<div id="outline-container-orgf32758a" class="outline-4">
+<h4 id="orgf32758a"><span class="section-number-4">3.1.1.</span> 按钮</h4>
+<div class="outline-text-4" id="text-3-1-1">
+<p>
+按钮是动作控件，允许用户通过一次点击执行操作或进行选择。质感设计提供了9种按钮类型，分别是
+</p>
+
+
+<div id="orgd8263ef" class="figure">
+<p><img src="按钮.png" alt="按钮.png" width="1000" />
+</p>
+</div>
+
+<ol class="org-ol">
+<li>层叠按钮（Elevated button）</li>
+<li>色彩填充按钮（Filled button）</li>
+<li>Filled tonal button</li>
+<li>描边按钮（Outlined button）</li>
+<li>文本按钮（Text button）</li>
+<li>图标按钮（Icon button）</li>
+<li>分段按钮（Segmented button）</li>
+<li>浮动按钮（Floating action button，FAB）</li>
+<li>宽浮动按钮（Extended FAB）</li>
+</ol>
+<p>
+这9种类型又划分为高、中、低3种强调级别。
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="all" frame="border" align="center">
+<caption class="t-above"><span class="table-number">Table 8:</span> 按钮类型选择建议</caption>
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">强调级别</th>
+<th scope="col" class="org-left">控件</th>
+<th scope="col" class="org-left">选择理由</th>
+<th scope="col" class="org-left">动作示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">高</td>
+<td class="org-left">宽浮动按钮</td>
+<td class="org-left">如果在大屏幕上FAB显得过小，应当使用宽浮动按钮。</td>
+<td class="org-left">新建</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">浮动按钮</td>
+<td class="org-left">屏幕上的主要动作控件，有大中小3种尺寸。</td>
+<td class="org-left">新建</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">色彩填充按钮</td>
+<td class="org-left">显著性仅次于浮动按钮，用于操作流程中的终端或非阻塞步骤。</td>
+<td class="org-left">保存、确认</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">中</td>
+<td class="org-left">Filled tonal button</td>
+<td class="org-left">背景色较色彩填充按钮更浅，文字色彩更深。用途与色彩填充按钮类似，但强调性更弱。</td>
+<td class="org-left">保存、确认</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">层叠按钮</td>
+<td class="org-left">背景色较色彩填充按钮更浅，并增加了阴影。用于需要和背景区分开的场景。</td>
+<td class="org-left">回复、加入购物车</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">描边按钮</td>
+<td class="org-left">需要引起注意的非主要动作。</td>
+<td class="org-left">回复、加入购物车</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">低</td>
+<td class="org-left">文本按钮</td>
+<td class="org-left">强调性低的替代选项</td>
+<td class="org-left">查看更多</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">分段按钮</td>
+<td class="org-left">强调性高于Icon button。</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">图标按钮</td>
+<td class="org-left">可选的辅助性动作。</td>
+<td class="org-left">标记、推荐</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+每个屏幕应当为主操作设置单一的显著按钮。对于相同级别的操作，按钮应当水平排列。可以通过调整按钮的强调级别突出引导某个操作。
+</p>
+
+<p>
+层叠按钮、色彩填充按钮、Filled tonal button、描边按钮和文本按钮称作普通按钮（Common button）。这些按钮可以包含一个前导图标，图标的高和宽是18dp。按钮的形状是全圆角（fully rounded corner），文字首字母大写。
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="all" frame="border" align="center">
+<caption class="t-above"><span class="table-number">Table 9:</span> 层叠按钮规范</caption>
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">元素</th>
+<th scope="col" class="org-left">设计属性</th>
+<th scope="col" class="org-left">角色</th>
+<th scope="col" class="org-left">设计变量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">容器</td>
+<td class="org-left">色彩</td>
+<td class="org-left">surface container low</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">阴影色</td>
+<td class="org-left">阴影</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">Elevation</td>
+<td class="org-left">级别1</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org7c596d7" class="outline-3">
+<h3 id="org7c596d7"><span class="section-number-3">3.2.</span> 信息组件</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+徽章
+进度条
+snackbar
+</p>
+</div>
+</div>
+<div id="outline-container-orgbb80e4f" class="outline-3">
+<h3 id="orgbb80e4f"><span class="section-number-3">3.3.</span> 聚合组件</h3>
+<div class="outline-text-3" id="text-3-3">
+</div>
+<div id="outline-container-org5bed612" class="outline-4">
+<h4 id="org5bed612"><span class="section-number-4">3.3.1.</span> bottom sheets</h4>
+</div>
+<div id="outline-container-orga4a4d5a" class="outline-4">
+<h4 id="orga4a4d5a"><span class="section-number-4">3.3.2.</span> 卡片</h4>
+</div>
+<div id="outline-container-org1b96583" class="outline-4">
+<h4 id="org1b96583"><span class="section-number-4">3.3.3.</span> carousel</h4>
+</div>
+<div id="outline-container-orgab48872" class="outline-4">
+<h4 id="orgab48872"><span class="section-number-4">3.3.4.</span> 对话框</h4>
+</div>
+<div id="outline-container-org72773bb" class="outline-4">
+<h4 id="org72773bb"><span class="section-number-4">3.3.5.</span> 分隔符</h4>
+</div>
+<div id="outline-container-orge2cdbed" class="outline-4">
+<h4 id="orge2cdbed"><span class="section-number-4">3.3.6.</span> 列表</h4>
+<div class="outline-text-4" id="text-3-3-6">
+<p>
+列表（List）是连续的、垂直的、带有索引的文本和图片。列表可以帮助用户快速找到特定条目，施加动作。列表条目要按照逻辑顺序，比如字典序或数字顺序排列。按照列表条目中文字行数划分，列表可以分为单行列表、两行列表和三行列表。列表中的图标、文字和按钮应当按照一致的风格进行设计。
+</p>
+</div>
+<ol class="org-ol">
+<li><a id="org5009200"></a>列表属性<br />
+<div class="outline-text-5" id="text-3-3-6-1">
+
+<div id="org041bcd8" class="figure">
+<p><img src="列表.png" alt="列表.png" width="1000" />
+</p>
+<p><span class="figure-number">Figure 6: </span>列表结构</p>
+</div>
+
+<ol class="org-ol">
+<li>容器（Container）</li>
+<li>头条（Headline）</li>
+<li>辅助文本（Supporting text）</li>
+<li>后置辅助文本（Trailing supporting text）</li>
+<li>后置图标（Trailing icon）</li>
+<li>分隔符（Divider）</li>
+<li>前置肖像容器（Leading avater container）</li>
+<li>前置肖像标签（Leading avater label text）</li>
+<li>前置图标（Leading icon）</li>
+<li>前置视频预览图（Leading video thumbnail）</li>
+</ol>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="all" frame="border" align="center">
+<caption class="t-above"><span class="table-number">Table 10:</span> 列表属性</caption>
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">元素</th>
+<th scope="col" class="org-left">设计属性</th>
+<th scope="col" class="org-left">职责</th>
+<th scope="col" class="org-left">值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">容器</td>
+<td class="org-left">色彩</td>
+<td class="org-left">表层色彩</td>
+<td class="org-left">md.sys.color.surface</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">形状</td>
+<td class="org-left">无</td>
+<td class="org-left">md.sys.shape.corner.none</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">层叠高度</td>
+<td class="org-left">0级</td>
+<td class="org-left">md.sys.elevation.level0</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">单行容器</td>
+<td class="org-left">高度</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">56dp</td>
+</tr>
+
+<tr>
+<td class="org-left">两行容器</td>
+<td class="org-left">高度</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">72dp</td>
+</tr>
+
+<tr>
+<td class="org-left">三行容器</td>
+<td class="org-left">高度</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">88dp</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">头条</td>
+<td class="org-left">色彩</td>
+<td class="org-left">表层上层色彩</td>
+<td class="org-left">md.sys.color.on-surface</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">字体</td>
+<td class="org-left">大号正文</td>
+<td class="org-left">md.sys.typescale.body-large.font</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">行高</td>
+<td class="org-left">大号正文</td>
+<td class="org-left">md.sys.typescale.body-large.line-height</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">尺寸</td>
+<td class="org-left">大号正文</td>
+<td class="org-left">md.sys.typescale.body-large.size</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">字间距</td>
+<td class="org-left">大号正文</td>
+<td class="org-left">md.sys.typescale.body-large.tracking</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">字重</td>
+<td class="org-left">大号正文</td>
+<td class="org-left">md.sys.typescale.body-large.weight</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">辅助文本</td>
+<td class="org-left">色彩</td>
+<td class="org-left">表层上层色彩变体</td>
+<td class="org-left">md.sys.color.on-surface-variant</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">字体</td>
+<td class="org-left">中号正文</td>
+<td class="org-left">md.sys.typescale.body-medium.font</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">行高</td>
+<td class="org-left">中号正文</td>
+<td class="org-left">md.sys.typescale.body-medium.line-height</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">尺寸</td>
+<td class="org-left">中号正文</td>
+<td class="org-left">md.sys.typescale.body-medium.size</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">字间距</td>
+<td class="org-left">中号正文</td>
+<td class="org-left">md.sys.typescale.body-medium.tracking</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">字重</td>
+<td class="org-left">中号正文</td>
+<td class="org-left">md.sys.typescale.body-medium.weight</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">后置辅助文字</td>
+<td class="org-left">色彩</td>
+<td class="org-left">表层上层色彩变体</td>
+<td class="org-left">md.sys.color.on-surface-variant</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">字体</td>
+<td class="org-left">小号标签</td>
+<td class="org-left">md.sys.typescale.label-small.font</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">行高</td>
+<td class="org-left">小号标签</td>
+<td class="org-left">md.sys.typescale.label-small.line-height</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">尺寸</td>
+<td class="org-left">小号标签</td>
+<td class="org-left">md.sys.typescale.label-small.size</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">字间距</td>
+<td class="org-left">小号标签</td>
+<td class="org-left">md.sys.typescale.label-small.tracking</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">字重</td>
+<td class="org-left">小号标签</td>
+<td class="org-left">md.sys.typescale.label-small.weight</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">后置图标</td>
+<td class="org-left">色彩</td>
+<td class="org-left">表层上层色彩变体</td>
+<td class="org-left">md.sys.color.on-surface-variant</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">尺寸</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">24dp</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">色彩（选中）</td>
+<td class="org-left">主色彩</td>
+<td class="org-left">md.sys.color.primary</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">色彩（未选中）</td>
+<td class="org-left">表层上层色彩</td>
+<td class="org-left">md.sys.color.on-surface</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">分隔符</td>
+<td class="org-left">色彩</td>
+<td class="org-left">表层色彩变体</td>
+<td class="org-left">md.sys.color.surface-variant</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">高度</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">1dp</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">前置肖像容器</td>
+<td class="org-left">色彩</td>
+<td class="org-left">主容器色彩</td>
+<td class="org-left">md.sys.color.primary-container</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">形状</td>
+<td class="org-left">全圆角</td>
+<td class="org-left">md.sys.shape.corner.full</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">尺寸</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">40dp</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">前置肖像标签</td>
+<td class="org-left">色彩</td>
+<td class="org-left">主容器上层色彩</td>
+<td class="org-left">md.sys.color.on-primary-container</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">字体</td>
+<td class="org-left">中号标题</td>
+<td class="org-left">md.sys.typescale.title-medium.font</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">行高</td>
+<td class="org-left">中号标题</td>
+<td class="org-left">md.sys.typescale.title-medium.line-height</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">尺寸</td>
+<td class="org-left">中号标题</td>
+<td class="org-left">md.sys.typescale.title-medium.size</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">字间距</td>
+<td class="org-left">中号标题</td>
+<td class="org-left">md.sys.typescale.title-medium.tracking</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">字重</td>
+<td class="org-left">中号标题</td>
+<td class="org-left">md.sys.typescale.title-medium.weight</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">前置图标</td>
+<td class="org-left">色彩</td>
+<td class="org-left">表层上层色彩变体</td>
+<td class="org-left">md.sys.color.on-surface-variant</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">尺寸</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">18dp</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">形状</td>
+<td class="org-left">无</td>
+<td class="org-left">md.sys.corner.none</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">前置视频预览图</td>
+<td class="org-left">宽度</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">114dp</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">高度</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">64dp</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">前置图像</td>
+<td class="org-left">宽度</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">56dp</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">高度</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">56dp</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">形状</td>
+<td class="org-left">无</td>
+<td class="org-left">md.sys.shape.corner.none</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+<li><a id="org8bac72f"></a>列表色彩<br />
+<div class="outline-text-5" id="text-3-3-6-2">
+
+<div id="orge98aba1" class="figure">
+<p><img src="列表色彩.png" alt="列表色彩.png" width="1000" />
+</p>
+<p><span class="figure-number">Figure 7: </span>列表色彩</p>
+</div>
+
+<ol class="org-ol">
+<li>表层色彩</li>
+<li>表层上层色彩</li>
+<li>表层上层色彩变体</li>
+<li>表层上层色彩变体</li>
+<li>表层上层色彩变体</li>
+<li>表层色彩变体</li>
+<li>主容器色彩</li>
+<li>主容器上层色彩</li>
+<li>表层上层色彩变体</li>
+<li>表层上层色彩变体</li>
+</ol>
+</div>
+</li>
+<li><a id="org458b1a9"></a>列表规范<br />
+<div class="outline-text-5" id="text-3-3-6-3">
+
+<div id="org55a5728" class="figure">
+<p><img src="列表-单行列表1.png" alt="列表-单行列表1.png" width="1000" />
+</p>
+<p><span class="figure-number">Figure 8: </span>单行列表规范1</p>
+</div>
+
+
+<div id="orgaf7ad8a" class="figure">
+<p><img src="列表-单行列表2.png" alt="列表-单行列表2.png" width="1000" />
+</p>
+<p><span class="figure-number">Figure 9: </span>单行列表规范2</p>
+</div>
+
+
+<div id="org11a049d" class="figure">
+<p><img src="列表-两行列表1.png" alt="列表-两行列表1.png" width="1000" />
+</p>
+<p><span class="figure-number">Figure 10: </span>两行列表规范1</p>
+</div>
+
+
+<div id="org64f36a0" class="figure">
+<p><img src="列表-两行列表2.png" alt="列表-两行列表2.png" width="1000" />
+</p>
+<p><span class="figure-number">Figure 11: </span>两行列表规范2</p>
+</div>
+
+
+<div id="orgbb3d936" class="figure">
+<p><img src="列表-三行列表1.png" alt="列表-三行列表1.png" width="1000" />
+</p>
+<p><span class="figure-number">Figure 12: </span>三行列表规范1</p>
+</div>
+
+
+<div id="orga59bc04" class="figure">
+<p><img src="列表-三行列表2.png" alt="列表-三行列表2.png" width="1000" />
+</p>
+<p><span class="figure-number">Figure 13: </span>三行列表规范2</p>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div id="outline-container-org8c1f091" class="outline-4">
+<h4 id="org8c1f091"><span class="section-number-4">3.3.7.</span> side sheet</h4>
+</div>
+<div id="outline-container-org5492639" class="outline-4">
+<h4 id="org5492639"><span class="section-number-4">3.3.8.</span> tooltips</h4>
+</div>
+</div>
+<div id="outline-container-org31ff4c6" class="outline-3">
+<h3 id="org31ff4c6"><span class="section-number-3">3.4.</span> 导航组件</h3>
+<div class="outline-text-3" id="text-3-4">
+<p>
+bottom app bar
+navigation bar
+navigation drawer
+navigation rail 
+search bar
+tabs
+top app bar
+</p>
+</div>
+</div>
+<div id="outline-container-org486690e" class="outline-3">
+<h3 id="org486690e"><span class="section-number-3">3.5.</span> 选择组件</h3>
+<div class="outline-text-3" id="text-3-5">
+<p>
+checkbox
+chip
+datepicker/timepicker
+menu
+radio button
+slides
+switch
+</p>
+</div>
+</div>
+<div id="outline-container-orgefcf047" class="outline-3">
+<h3 id="orgefcf047"><span class="section-number-3">3.6.</span> 文本输入组件</h3>
+<div class="outline-text-3" id="text-3-6">
+</div>
+<ol class="org-ol">
+<li><a id="orgf9f5b24"></a>文本框（Text fields）<br /></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org7673224" class="outline-2">
+<h2 id="org7673224"><span class="section-number-2">4.</span> 附录</h2>
+<div class="outline-text-2" id="text-4">
+</div>
+<div id="outline-container-orgf01436e" class="outline-3">
+<h3 id="orgf01436e"><span class="section-number-3">4.1.</span> 附录：Material Design色彩和Android属性对比</h3>
+<div class="outline-text-3" id="text-4-1">
+<p>
+<a href="https://github.com/material-components/material-components-android/blob/master/docs/theming/Color.md">https://github.com/material-components/material-components-android/blob/master/docs/theming/Color.md</a>
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: 2023年08月14日</p>
+<p class="author">Author: tommwq</p>
+<p class="date">Created: 2023-08-27 周日 14:15</p>
+<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.6.1)</p>
+</div>
+</body>
+</html>
